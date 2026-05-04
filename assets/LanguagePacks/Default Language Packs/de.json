@@ -1,0 +1,352 @@
+{
+    "data": {
+        "user_statuses": {
+            "active": "Aktiv",
+            "inactive": "Inaktiv",
+            "sick": "Krank",
+            "injured": "Verletzt",
+            "on_vacation": "Im Urlaub"
+        },
+        "workout_types": {
+            "liss": "LISS",
+            "cardio": "Cardio",
+            "crossfit": "CrossFit",
+            "bodybuilding": "Bodybuilding",
+            "hiit": "HIIT",
+            "cycling": "Radfahren",
+            "aerobics": "Aerobic",
+            "martial_arts": "Kampfsport",
+            "yoga": "Yoga",
+            "full_body": "Ganzkörper",
+            "powerlifting": "Kraftdreikampf",
+            "calisthenics": "Calisthenics",
+            "strength": "Krafttraining",
+            "endurance": "Ausdauer",
+            "flexibility": "Flexibilität",
+            "recovery": "Erholung",
+            "swimming": "Schwimmen",
+            "running": "Laufen"
+        },
+        "workout_statuses": {
+            "scheduled": "Geplant",
+            "overcompleted": "Übererfüllt",
+            "completed": "Abgeschlossen",
+            "cancelled": "Abgesagt",
+            "in_progress": "Laufend",
+            "skipped": "Übersprungen",
+            "partially_completed": "Abgeschlossen (Teilweise)"
+        },
+        "hypertrophy_types": {
+            "sarcoplasmic": "Sarkoplasmatische Hypertrophie",
+            "myofibrillar": "Myofibrilläre Hypertrophie",
+            "mixed": "Gemischt",
+            "neural": "Neurale Anpassung"
+        },
+        "agonists": {
+            "pectoralis_major": "Brustmuskel Groß",
+            "pectoralis_minor": "Brustmuskel Klein",
+            "latissimus_dorsi": "Breiter Rückenmuskel",
+            "trapezius_muscle": "Trapezmuskel",
+            "rhomboid_muscle": "Rautenmuskel",
+            "teres_major": "Großer Rundmuskel",
+            "teres_minor": "Kleiner Rundmuskel",
+            "infraspinatus": "Untergrätenmuskel",
+            "supraspinatus": "Übergrätenmuskel",
+            "subscapularis": "Unterscapularis",
+            "anterior_deltoid": "Vorderer Deltamuskel",
+            "lateral_deltoid": "Seitlicher Deltamuskel",
+            "posterior_deltoid": "Hinterer Deltamuskel",
+            "biceps_brachii": "Bizeps",
+            "triceps_brachii": "Trizeps",
+            "brachialis": "Oberarmmuskel",
+            "coracobrachialis": "Coracobrachialis",
+            "brachioradialis": "Oberarmspeichenmuskel",
+            "flexor_carpi_radialis": "Radialer Handbeuger",
+            "flexor_carpi_ulnaris": "Ulnarer Handbeuger",
+            "palmaris_longus": "Langer Handflächenmuskel",
+            "extensor_digitorum": "Fingerstrecker",
+            "rectus_abdominis": "Gerader Bauchmuskel",
+            "external_oblique": "Äußerer schräger Bauchmuskel",
+            "internal_oblique": "Innerer schräger Bauchmuskel",
+            "transversus_abdominis": "Querer Bauchmuskel",
+            "iliopsoas": "Iliopsoas",
+            "gluteus_maximus": "Großer Gesäßmuskel",
+            "gluteus_medius": "Mittlerer Gesäßmuskel",
+            "gluteus_minimus": "Kleiner Gesäßmuskel",
+            "piriformis": "Birnenmuskel",
+            "tensor_fasciae_latae": "Spanner der Faszia lata",
+            "quadratus_femoris": "Viereckiger Oberschenkelmuskel",
+            "sartorius": "Schneidermuskel",
+            "adductor_magnus": "Großer Adduktor",
+            "adductor_longus": "Langer Adduktor",
+            "adductor_brevis": "Kurzer Adduktor",
+            "gracilis": "Schlanker Muskel",
+            "biceps_femoris": "Bizeps Femoris",
+            "semitendinosus": "Semimembranosus",
+            "semimembranosus": "Semimembranosus",
+            "quadriceps_femoris": "Quadriceps",
+            "rectus_femoris": "Gerader Oberschenkelmuskel",
+            "gastrocnemius": "Zwillingswadenmuskel",
+            "soleus": "Schollenmuskel",
+            "tibialis_anterior": "Vorderer Schienbeinmuskel",
+            "fibularis_longus": "Langer Wadenbeinmuskel",
+            "fibularis_brevis": "Kurzer Wadenbeinmuskel",
+            "sternocleidomastoid": "Kopfwender",
+            "scalene_muscles": "Skalenusmuskeln"
+        },
+        "exercises": {
+            "barbell_squat": "Kniebeugen mit Langhantel",
+            "bench_press": "Bankdrücken",
+            "burpee": "Burpee",
+            "deadlift": "Kreuzheben",
+            "pull_ups": "Klimmzüge",
+            "dips": "Dips",
+            "overhead_press": "Schulterdrücken",
+            "bent_over_row": "Langhantelrudern vorgebeugt",
+            "skull_crusher": "French Press",
+            "barbell_curl": "Langhantel-Curl",
+            "incline_dumbbell_press": "Schrägbankdrücken mit Kurzhanteln",
+            "lat_pulldown": "Latzug",
+            "leg_extension": "Beinstrecken",
+            "leg_curl": "Beinbeuger",
+            "lunges": "Ausfallschritte",
+            "calf_raise": "Wadenheben",
+            "plank": "Plank",
+            "crunches": "Crunches",
+            "seated_cable_row": "Kabelrudern sitzend",
+            "lateral_raise": "Seitenheben",
+            "leg_press": "Beinpresse",
+            "romanian_deadlift": "Rumänisches Kreuzheben",
+            "hyperextension": "Hyperextension",
+            "one_arm_dumbbell_row": "Einarmiges Kurzhantelrudern",
+            "seated_dumbbell_press": "Schulterdrücken sitzend",
+            "dumbbell_fly": "Kurzhantel-Flyes",
+            "dumbbell_curl": "Kurzhantel-Curl",
+            "glute_bridge": "Gesäßbrücke",
+            "side_plank": "Seitplank",
+            "triceps_pushdown": "Trizeps-Drücken am Kabel"
+        },
+        "workout_templates": {
+            "powerlifting_heavy_squat_day": "Powerlifting - Schwerer Kniebeugen-Tag",
+            "powerlifting_heavy_bench_day": "Powerlifting - Schwerer Bankdrück-Tag",
+            "powerlifting_heavy_deadlift_day": "Powerlifting - Schwerer Kreuzhebe-Tag",
+            "bodybuilding_chest_triceps": "Bodybuilding - Brust & Trizeps",
+            "bodybuilding_back_biceps": "Bodybuilding - Rücken & Bizeps",
+            "bodybuilding_legs_shoulders": "Bodybuilding - Beine & Schultern",
+            "full_body_general_fitness": "Ganzkörper - Allgemeines Fitness",
+            "cardio_endurance_session": "Cardio - Ausdauereinheit",
+            "calisthenics_upper_body": "Calisthenics - Oberkörper",
+            "liss_recovery_walk": "LISS - Erholungsspaziergang"
+        },
+        "microcycle_templates": {
+            "week_1_foundation": "Woche 1 - Grundlage",
+            "week_2_volume_build": "Woche 2 - Volumenaufbau",
+            "week_3_intensity_peak": "Woche 3 - Intensitätsspitze",
+            "week_4_deload": "Woche 4 - Entlastung",
+            "5x5_strength_cycle": "5x5 Kraftzyklus",
+            "hypertrophy_block_a": "Hypertrophie Block A",
+            "hypertrophy_block_b": "Hypertrophie Block B",
+            "powerlifting_meet_prep": "Powerlifting Wettkampfvorbereitung",
+            "general_fitness_week": "Allgemeine Fitness Woche",
+            "active_recovery_week": "Aktive Erholungswoche"
+        }
+    },
+    "settings": {
+        "trainer_mode": "Trainer-Modus",
+        "theme_mode": "App-Thema"
+    },
+    "classes": {
+        "training_process": {
+            "exercise_title": "Übung",
+            "exercise_repetitions": "Wdh.",
+            "exercise_weight": "Gewicht"
+        },
+        "app_colors": {
+            "color_themes": {
+                "Aurora Borealis": "Nordlicht",
+                "Arabian Night": "Arabische Nacht",
+                "Space Cream": "Weltraum-Creme",
+                "The last breath of a Jacquot": "Der Letzte Atemzug eines Jacquot",
+                "Sakura": "Sakura",
+                "Sunset in the Wasteland": "Sonnenuntergang im Ödland",
+                "Frog in satin pajamas": "Frosch im Satin-Schlafanzug"
+            }
+        }
+    },
+    "ui": {
+        "components": {
+            "exercise_set": {
+                "set_name": "Übung",
+                "set_count": "Sätze",
+                "set_repetitions": "Wdh.",
+                "set_weight": "Gewicht"
+            },
+            "manager_dialog": {
+                "delete_succes": "Erfolgreich gelöscht!"
+            },
+            "navigation_menu": {
+                "dashboard_screen": {
+                    "label": "Training",
+                    "tooltip": "Aktueller Mikrozyklus"
+                },
+                "planning_screen": {
+                    "label": "Plan",
+                    "tooltip": "Trainingsplanung"
+                },
+                "reference_information_screen": {
+                    "label": "Info",
+                    "tooltip": "Referenzinformationen"
+                },
+                "settings_screen": {
+                    "label": "Einstellungen",
+                    "tooltip": "App-Einstellungen"
+                }
+            },
+            "records_list": {
+                "no_data": "Keine Daten",
+                "imposible_delete_last_user": "Löschen abgebrochen.\nMindestens 1 Benutzer muss im System existieren.",
+                "imposible_change_the_record": "Dieser Datensatz kann nicht geändert werden"
+            },
+            "invalid_data_alert_dialog": {
+                "check_data": "Speicherfehler. Überprüfen Sie die eingegebenen Daten."
+            }
+        },
+        "screens": {
+            "setup_wizard": {
+                "language_screen": {
+                    "title": "Willkommen!",
+                    "choose_language": "Sprache wählen:"
+                },
+                "user_screen": {
+                    "insert_username": "Ihr Name:"
+                },
+                "initial_data_screen": {
+                    "main_label": "Daten zum Laden auswählen:",
+                    "insert_agonists": "Agonisten-Muskeln",
+                    "insert_exercises": "Übungen"
+                },
+                "finish_screen": {
+                    "main_label": "Einrichtung abgeschlossen!",
+                    "secondary_label": "Genießen Sie die App.",
+                    "button_label": "Starten!"
+                }
+            },
+            "dashboard_screen": {
+                "user_popup_menu_button_tooltip": "Aktueller Benutzer",
+                "is_unloading_microcycle_title": "Entlastungswoche",
+                "no_planned_mesocycles": "Sie haben keine geplanten Mesocycles",
+                "no_planned_workouts": "Sie haben keine geplanten Trainings",
+                "no_workouts_today": "Heute kein Training."
+            },
+            "planning_screen": {
+                "workout_template_menu": "Trainingsvorlagen",
+                "microcycle_template_menu": "Mikrozyklus-Vorlagen",
+                "mesocycle_menu": "Mesocycles",
+                "macrocycle_menu": "Macrocyclus"
+            },
+            "reference_information_screen": {
+                "user_information": "Benutzerinformationen",
+                "workout_statuses": "Trainingsstatus",
+                "workout_types": "Trainingsarten",
+                "hypertrophy_types": "Hypertrophie-Typen",
+                "exercises": "Übungen",
+                "agonists": "Agonisten"
+            },
+            "settings_screen": {
+                "language": "App-Sprache",
+                "trainer_mode_switch": "Trainer-Modus",
+                "active_user_statuses": "Aktive Benutzerstatus",
+                "app_color_themes": "App-Farbthema"
+            },
+            "workout_template_menu": {
+                "no_data": "Sie haben keine Vorlagen.",
+                "loading": "Daten laden..."
+            },
+            "workout_template_screen": {
+                "save_button": "Speichern",
+                "save_error": "Speichern nicht möglich.\nÜberprüfen Sie die eingegebenen Daten."
+            },
+            "microcycle_template_menu": {
+                "no_data": "Sie haben keine Vorlagen.",
+                "loading": "Daten laden..."
+            },
+            "microcycle_template_screen": {
+                "save_button": "Speichern",
+                "save_error": "Speichern nicht möglich.\nÜberprüfen Sie die eingegebenen Daten.",
+                "set_name": "Übung",
+                "set_count": "Sätze"
+            },
+            "mesocycle_menu": {
+                "no_data": "Sie haben keine Mesocycles.",
+                "loading": "Daten laden...",
+                "mesocycle_no_data": "Keine Daten",
+                "no_user": "Wählen Sie zuerst einen Benutzer"
+            },
+            "mesocycle_screen": {
+                "save_button": "Speichern",
+                "is_unloading_checkbox": "Entlastungswoche"
+            },
+            "macrocycle_menu": {
+                "no_data": "Sie haben keine Macrocyclus.",
+                "loading": "Daten laden...",
+                "macrocycle_no_data": "Keine Daten",
+                "no_user": "Wählen Sie zuerst einen Benutzer"
+            },
+            "macrocycle_screen": {
+                "no_data": "Keine Mesocycles in diesem Macrocycle enthalten",
+                "invalid_mesocycle_data": "Planen Sie zuerst den Mesocycle"
+            },
+            "workout_screen": {
+                "save_button": "Speichern",
+                "start_workout": "Training Starten",
+                "end_workout": "Training Beenden"
+            },
+            "user_information_screen": {
+                "users": "Benutzer",
+                "user_statuses": "Benutzerstatus"
+            },
+            "users_screen": {
+                "no_data": "Keine Benutzer"
+            },
+            "user_statuses_screen": {
+                "no_data": "Keine Benutzerstatus"
+            },
+            "workout_statuses_screen": {
+                "no_data": "Keine Trainingsstatus"
+            },
+            "workout_types_screen": {
+                "no_data": "Keine Trainingsarten"
+            },
+            "hypertrophy_types_screen": {
+                "no_data": "Keine Hypertrophie-Typen"
+            },
+            "exercises_screen": {
+                "no_data": "Keine Übungen"
+            },
+            "agonists_screen": {
+                "no_data": "Keine Agonisten"
+            },
+            "universal_record_management_screen": {
+                "title_helper_text": "Titel",
+                "save_button": "Speichern"
+            },
+            "user_management_screen": {
+                "username_field_helper_text": "Name",
+                "phone_field_helper_text": "Telefon",
+                "status_dropdown_helper_text": "Status",
+                "save_button": "Speichern"
+            },
+            "exercise_management_screen": {
+                "title_helper_text": "Titel",
+                "agonists_helper_text": "Agonisten",
+                "save_button": "Speichern"
+            },
+            "agonist_management_screen": {
+                "title_helper_text": "Titel",
+                "workout_types_helper_text": "Trainingsarten",
+                "save_button": "Speichern"
+            },
+            "app_color_themes_screen": {}
+        }
+    }
+}

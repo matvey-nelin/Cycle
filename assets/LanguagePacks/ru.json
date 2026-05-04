@@ -1,0 +1,358 @@
+{
+    "data": {
+        "user_statuses": {
+            "active": "Активен",
+            "inactive": "Неактивен",
+            "sick": "Болеет",
+            "injured": "Травмирован",
+            "on_vacation": "В отпуске",
+            "novyj_status_pol_zovatelja": "Новый статус пользователя"
+        },
+        "workout_types": {
+            "cardio": "Кардио",
+            "crossfit": "CrossFit",
+            "bodybuilding": "Бодибилдинг",
+            "hiit": "HIIT",
+            "cycling": "Велоспорт",
+            "aerobics": "Аэробика",
+            "martial_arts": "Боевые искусства",
+            "yoga": "Йога",
+            "full_body": "Фулбоди",
+            "powerlifting": "Пауэрлифтинг",
+            "calisthenics": "Калистеника",
+            "strength": "Силовая тренировка",
+            "endurance": "На выносливость",
+            "flexibility": "Растяжка",
+            "recovery": "Восстановительная",
+            "swimming": "Плавание",
+            "running": "Бег"
+        },
+        "workout_statuses": {
+            "scheduled": "Запланировано",
+            "overcompleted": "Перевыполнено",
+            "completed": "Выполнено",
+            "cancelled": "Отменено",
+            "in_progress": "В процессе",
+            "skipped": "Пропущено",
+            "partially_completed": "Выполнено (частично)",
+            "novyj_status_trenirovki": "Новый статус тренировки"
+        },
+        "hypertrophy_types": {
+            "sarcoplasmic": "Саркоплазматическая гипертрофия",
+            "myofibrillar": "Миофибриллярная гипертрофия",
+            "mixed": "Смешанная",
+            "neural": "Нейральная адаптация",
+            "novyj_tip_gipertrofii": "Новый тип гипертрофии"
+        },
+        "agonists": {
+            "pectoralis_major": "Большая грудная мышца",
+            "pectoralis_minor": "Малая грудная мышца",
+            "latissimus_dorsi": "Широчайшая мышца спины",
+            "trapezius_muscle": "Трапециевидная мышца",
+            "rhomboid_muscle": "Ромбовидная мышца",
+            "teres_major": "Большая круглая мышца",
+            "teres_minor": "Малая круглая мышца",
+            "infraspinatus": "Подостная мышца",
+            "supraspinatus": "Надостная мышца",
+            "subscapularis": "Подлопаточная мышца",
+            "anterior_deltoid": "Передняя дельтовидная мышца",
+            "lateral_deltoid": "Средняя дельтовидная мышца",
+            "posterior_deltoid": "Задняя дельтовидная мышца",
+            "biceps_brachii": "Двуглавая мышца плеча",
+            "triceps_brachii": "Трехглавая мышца плеча",
+            "brachialis": "Плечевая мышца",
+            "coracobrachialis": "Клювовидно-плечевая мышца",
+            "brachioradialis": "Плечелучевая мышца",
+            "flexor_carpi_radialis": "Лучевой сгибатель запястья",
+            "flexor_carpi_ulnaris": "Локтевой сгибатель запястья",
+            "palmaris_longus": "Длинная ладонная мышца",
+            "extensor_digitorum": "Разгибатель пальцев",
+            "rectus_abdominis": "Прямая мышца живота",
+            "external_oblique": "Наружная косая мышца живота",
+            "internal_oblique": "Внутренняя косая мышца живота",
+            "transversus_abdominis": "Поперечная мышца живота",
+            "iliopsoas": "Подвздошно-поясничная мышца",
+            "gluteus_maximus": "Большая ягодичная мышца",
+            "gluteus_medius": "Средняя ягодичная мышца",
+            "gluteus_minimus": "Малая ягодичная мышца",
+            "piriformis": "Грушевидная мышца",
+            "tensor_fasciae_latae": "Напрягатель широкой фасции бедра",
+            "quadratus_femoris": "Квадратная мышца бедра",
+            "sartorius": "Портняжная мышца",
+            "adductor_magnus": "Большая приводящая мышца бедра",
+            "adductor_longus": "Длинная приводящая мышца бедра",
+            "adductor_brevis": "Короткая приводящая мышца бедра",
+            "gracilis": "Тонкая мышца бедра",
+            "biceps_femoris": "Двуглавая мышца бедра",
+            "semitendinosus": "Полусухожильная мышца",
+            "semimembranosus": "Полуперепончатая мышца",
+            "quadriceps_femoris": "Квадрицепс бедра",
+            "rectus_femoris": "Прямая мышца бедра",
+            "gastrocnemius": "Икроножная мышца",
+            "soleus": "Камбаловидная мышца",
+            "tibialis_anterior": "Передняя большеберцовая мышца",
+            "fibularis_longus": "Длинная малоберцовая мышца",
+            "fibularis_brevis": "Короткая малоберцовая мышца",
+            "sternocleidomastoid": "Грудино-ключично-сосцевидная мышца",
+            "scalene_muscles": "Лестничные мышцы",
+            "novyj_agonist": "Новый агонист"
+        },
+        "exercises": {
+            "barbell_squat": "Приседания со штангой",
+            "bench_press": "Жим лежа",
+            "burpee": "Берпи",
+            "deadlift": "Становая тяга",
+            "pull_ups": "Подтягивания",
+            "dips": "Отжимания на брусьях",
+            "overhead_press": "Армейский жим",
+            "bent_over_row": "Тяга штанги в наклоне",
+            "skull_crusher": "Французский жим",
+            "barbell_curl": "Подъем штанги на бицепс",
+            "incline_dumbbell_press": "Жим гантелей под углом",
+            "lat_pulldown": "Тяга верхнего блока",
+            "leg_extension": "Разгибание ног",
+            "leg_curl": "Сгибание ног",
+            "lunges": "Выпады",
+            "calf_raise": "Подъем на носки",
+            "plank": "Планка",
+            "crunches": "Скручивания",
+            "seated_cable_row": "Тяга горизонтального блока",
+            "lateral_raise": "Махи гантелями в стороны",
+            "leg_press": "Жим ногами",
+            "romanian_deadlift": "Румынская тяга",
+            "hyperextension": "Гиперэкстензия",
+            "one_arm_dumbbell_row": "Тяга гантели в наклоне",
+            "seated_dumbbell_press": "Жим гантелей сидя",
+            "dumbbell_fly": "Разведение гантелей лежа",
+            "dumbbell_curl": "Подъем гантелей на бицепс",
+            "glute_bridge": "Ягодичный мостик",
+            "side_plank": "Боковая планка",
+            "triceps_pushdown": "Разгибание рук на блоке",
+            "novoe_uprazhnenie": "Новое упражнение"
+        },
+        "workout_templates": {
+            "powerlifting_heavy_squat_day": "Пауэрлифтинг - День тяжелых приседаний",
+            "powerlifting_heavy_bench_day": "Пауэрлифтинг - День жима лежа с большим весом",
+            "powerlifting_heavy_deadlift_day": "Пауэрлифтинг - День тяжелой становой тяги",
+            "bodybuilding_chest_triceps": "Бодибилдинг - Грудь и трицепс",
+            "bodybuilding_back_biceps": "Бодибилдинг - Спина и бицепс",
+            "bodybuilding_legs_shoulders": "Бодибилдинг - ноги и плечи",
+            "full_body_general_fitness": "Фуллбоди - общая физическая подготовка",
+            "cardio_endurance_session": "Кардио-тренировка на выносливость",
+            "calisthenics_upper_body": "Калистеника - верх тела",
+            "liss_recovery_walk": "LISS - Восстановительная прогулка",
+            "novyj_shablon_trenirovki": "Новый шаблон тренировки"
+        },
+        "microcycle_templates": {
+            "week_1_foundation": "Неделя 1 - Основы",
+            "week_2_volume_build": "Неделя 2 - Наращивание объема",
+            "week_3_intensity_peak": "Неделя 3 - Пик интенсивности",
+            "week_4_deload": "Неделя 4 - Разгрузка",
+            "5x5_strength_cycle": "Силовой цикл 5х5",
+            "hypertrophy_block_a": "Блок гипертрофии А",
+            "hypertrophy_block_b": "Блок гипертрофии Б",
+            "powerlifting_meet_prep": "Подготовка к соревнованиям по пауэрлифтингу",
+            "general_fitness_week": "Общая неделя фитнеса",
+            "active_recovery_week": "Неделя активного восстановления",
+            "novyj_shablon_mikrotsikla": "Новый шаблон микроцикла"
+        }
+    },
+    "settings": {
+        "trainer_mode": "Режим тренера",
+        "theme_mode": "Тема приложения"
+    },
+    "classes": {
+        "training_process": {
+            "exercise_title": "Упражнение",
+            "exercise_repetitions": "Повт.",
+            "exercise_weight": "Вес"
+        },
+        "app_colors": {
+            "color_themes": {
+                "Aurora Borealis": "Северное сияние",
+                "Arabian Night": "Арабская ночь",
+                "Space Cream": "Космические сливки",
+                "The last breath of a Jacquot": "Последний вздох жако",
+                "Sakura": "Сакура",
+                "Sunset in the Wasteland": "Закат в Пустоши",
+                "Frog in satin pajamas": "Лягушка в атласной пижаме"
+            }
+        }
+    },
+    "ui": {
+        "components": {
+            "exercise_set": {
+                "set_name": "Упражнение",
+                "set_count": "Подходы",
+                "set_repetitions": "Повт.",
+                "set_weight": "Вес"
+            },
+            "manager_dialog": {
+                "delete_succes": "Успешно удалено!"
+            },
+            "navigation_menu": {
+                "dashboard_screen": {
+                    "label": "Тренировки",
+                    "tooltip": "Текущий микроцикл"
+                },
+                "planning_screen": {
+                    "label": "План",
+                    "tooltip": "Планирование тренировок"
+                },
+                "reference_information_screen": {
+                    "label": "Инфо",
+                    "tooltip": "Справочная информация"
+                },
+                "settings_screen": {
+                    "label": "Настройки",
+                    "tooltip": "Настройки приложения"
+                }
+            },
+            "records_list": {
+                "no_data": "Нет данных",
+                "imposible_delete_last_user": "Удаление отменено.\nВ системе должен быть хотя бы 1 пользователь.",
+                "imposible_change_the_record": "Эту запись нельзя изменить"
+            },
+            "invalid_data_alert_dialog": {
+                "check_data": "Ошибка сохранения. Проверьте введенные данные."
+            }
+        },
+        "screens": {
+            "setup_wizard": {
+                "language_screen": {
+                    "title": "Добро пожаловать!",
+                    "choose_language": "Выберите язык:"
+                },
+                "user_screen": {
+                    "insert_username": "Ваше имя:"
+                },
+                "initial_data_screen": {
+                    "main_label": "Выберите данные для загрузки:",
+                    "insert_agonists": "Мышцы-агонисты",
+                    "insert_exercises": "Упражнения"
+                },
+                "finish_screen": {
+                    "main_label": "Настройка завершена!",
+                    "secondary_label": "Наслаждайтесь приложением.",
+                    "button_label": "Начать!"
+                }
+            },
+            "dashboard_screen": {
+                "user_popup_menu_button_tooltip": "Текущий пользователь",
+                "is_unloading_microcycle_title": "Разгрузочная неделя",
+                "no_planned_mesocycles": "У вас нет запланированных мезоциклов",
+                "no_planned_workouts": "У вас нет запланированных тренировок",
+                "no_workouts_today": "На сегодня тренировок нет."
+            },
+            "planning_screen": {
+                "workout_template_menu": "Шаблоны тренировок",
+                "microcycle_template_menu": "Шаблоны микроциклов",
+                "mesocycle_menu": "Мезоциклы",
+                "macrocycle_menu": "Макроциклы"
+            },
+            "reference_information_screen": {
+                "user_information": "Пользовательская информация",
+                "workout_statuses": "Статусы тренировок",
+                "workout_types": "Типы тренировок",
+                "hypertrophy_types": "Типы гипертрофии",
+                "exercises": "Упражнения",
+                "agonists": "Агонисты"
+            },
+            "settings_screen": {
+                "language": "Язык приложения",
+                "trainer_mode_switch": "Режим тренера",
+                "active_user_statuses": "Активные статусы пользователей",
+                "app_color_themes": "Цветовая тема приложения"
+            },
+            "workout_template_menu": {
+                "no_data": "У вас нет ни одного шаблона.",
+                "loading": "Загрузка данных..."
+            },
+            "workout_template_screen": {
+                "save_button": "Сохранить",
+                "save_error": "Невозможно сохранить.\nПроверьте введенные данные."
+            },
+            "microcycle_template_menu": {
+                "no_data": "У вас нет ни одного шаблона.",
+                "loading": "Загрузка данных..."
+            },
+            "microcycle_template_screen": {
+                "save_button": "Сохранить",
+                "save_error": "Невозможно сохранить.\nПроверьте введенные данные.",
+                "set_name": "Упражнение",
+                "set_count": "Подходы"
+            },
+            "mesocycle_menu": {
+                "no_data": "У вас нет ни одного мезоцикла.",
+                "loading": "Загрузка данных...",
+                "mesocycle_no_data": "Нет данных",
+                "no_user": "Сначала выберите пользователя"
+            },
+            "mesocycle_screen": {
+                "save_button": "Сохранить",
+                "is_unloading_checkbox": "Разгрузочная неделя"
+            },
+            "macrocycle_menu": {
+                "no_data": "У вас нет ни одного макроцикла.",
+                "loading": "Загрузка данных...",
+                "macrocycle_no_data": "Нет данных",
+                "no_user": "Сначала выберите пользователя"
+            },
+            "macrocycle_screen": {
+                "no_data": "В данный макроцикл не включен ни один мезоцикл",
+                "invalid_mesocycle_data": "Сначала проведите планирование мезоцикла"
+            },
+            "workout_screen": {
+                "save_button": "Сохранить",
+                "start_workout": "Начать тренировку",
+                "end_workout": "Закончить тренировку"
+            },
+            "user_information_screen": {
+                "users": "Пользователи",
+                "user_statuses": "Cтатусы пользователей"
+            },
+            "users_screen": {
+                "no_data": "Нет пользователей"
+            },
+            "user_statuses_screen": {
+                "no_data": "Нет статусов пользователей"
+            },
+            "workout_statuses_screen": {
+                "no_data": "Нет статусов тренировок"
+            },
+            "workout_types_screen": {
+                "no_data": "Нет типов тренировок"
+            },
+            "hypertrophy_types_screen": {
+                "no_data": "Нет типов гипертрофии"
+            },
+            "exercises_screen": {
+                "no_data": "Нет упражнений"
+            },
+            "agonists_screen": {
+                "no_data": "Нет агонистов"
+            },
+            "universal_record_management_screen": {
+                "title_helper_text": "Название",
+                "save_button": "Сохранить"
+            },
+            "user_management_screen": {
+                "username_field_helper_text": "Имя",
+                "phone_field_helper_text": "Телефон",
+                "status_dropdown_helper_text": "Статус",
+                "save_button": "Сохранить"
+            },
+            "exercise_management_screen": {
+                "title_helper_text": "Название",
+                "agonists_helper_text": "Агонисты",
+                "save_button": "Сохранить"
+            },
+            "agonist_management_screen": {
+                "title_helper_text": "Название",
+                "workout_types_helper_text": "Типы тренировок",
+                "save_button": "Сохранить"
+            },
+            "app_color_themes_screen": {}
+        }
+    }
+}

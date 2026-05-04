@@ -1,0 +1,352 @@
+{
+    "data": {
+        "user_statuses": {
+            "active": "活跃",
+            "inactive": "不活跃",
+            "sick": "生病",
+            "injured": "受伤",
+            "on_vacation": "休假"
+        },
+        "workout_types": {
+            "liss": "LISS",
+            "cardio": "有氧",
+            "crossfit": "CrossFit",
+            "bodybuilding": "健美",
+            "hiit": "HIIT",
+            "cycling": "骑行",
+            "aerobics": "有氧操",
+            "martial_arts": "武术",
+            "yoga": "瑜伽",
+            "full_body": "全身",
+            "powerlifting": "力量举",
+            "calisthenics": "街头健身",
+            "strength": "力量训练",
+            "endurance": "耐力",
+            "flexibility": "柔韧性",
+            "recovery": "恢复",
+            "swimming": "游泳",
+            "running": "跑步"
+        },
+        "workout_statuses": {
+            "scheduled": "已计划",
+            "overcompleted": "超额完成",
+            "completed": "已完成",
+            "cancelled": "已取消",
+            "in_progress": "进行中",
+            "skipped": "已跳过",
+            "partially_completed": "已完成 (部分)"
+        },
+        "hypertrophy_types": {
+            "sarcoplasmic": "肌浆肥大",
+            "myofibrillar": "肌原纤维肥大",
+            "mixed": "混合",
+            "neural": "神经适应"
+        },
+        "agonists": {
+            "pectoralis_major": "胸大肌",
+            "pectoralis_minor": "胸小肌",
+            "latissimus_dorsi": "背阔肌",
+            "trapezius_muscle": "斜方肌",
+            "rhomboid_muscle": "菱形肌",
+            "teres_major": "大圆肌",
+            "teres_minor": "小圆肌",
+            "infraspinatus": "冈下肌",
+            "supraspinatus": "冈上肌",
+            "subscapularis": "肩胛下肌",
+            "anterior_deltoid": "三角肌前束",
+            "lateral_deltoid": "三角肌中束",
+            "posterior_deltoid": "三角肌后束",
+            "biceps_brachii": "肱二头肌",
+            "triceps_brachii": "肱三头肌",
+            "brachialis": "肱肌",
+            "coracobrachialis": "喙肱肌",
+            "brachioradialis": "肱桡肌",
+            "flexor_carpi_radialis": "桡侧腕屈肌",
+            "flexor_carpi_ulnaris": "尺侧腕屈肌",
+            "palmaris_longus": "掌长肌",
+            "extensor_digitorum": "指伸肌",
+            "rectus_abdominis": "腹直肌",
+            "external_oblique": "腹外斜肌",
+            "internal_oblique": "腹内斜肌",
+            "transversus_abdominis": "腹横肌",
+            "iliopsoas": "髂腰肌",
+            "gluteus_maximus": "臀大肌",
+            "gluteus_medius": "臀中肌",
+            "gluteus_minimus": "臀小肌",
+            "piriformis": "梨状肌",
+            "tensor_fasciae_latae": "阔筋膜张肌",
+            "quadratus_femoris": "股方肌",
+            "sartorius": "缝匠肌",
+            "adductor_magnus": "大收肌",
+            "adductor_longus": "长收肌",
+            "adductor_brevis": "短收肌",
+            "gracilis": "股薄肌",
+            "biceps_femoris": "股二头肌",
+            "semitendinosus": "半腱肌",
+            "semimembranosus": "半膜肌",
+            "quadriceps_femoris": "股四头肌",
+            "rectus_femoris": "股直肌",
+            "gastrocnemius": "腓肠肌",
+            "soleus": "比目鱼肌",
+            "tibialis_anterior": "胫骨前肌",
+            "fibularis_longus": "腓骨长肌",
+            "fibularis_brevis": "腓骨短肌",
+            "sternocleidomastoid": "胸锁乳突肌",
+            "scalene_muscles": "斜角肌"
+        },
+        "exercises": {
+            "barbell_squat": "杠铃深蹲",
+            "bench_press": "卧推",
+            "burpee": "波比跳",
+            "deadlift": "硬拉",
+            "pull_ups": "引体向上",
+            "dips": "双杠臂屈伸",
+            "overhead_press": "推举",
+            "bent_over_row": "俯身划船",
+            "skull_crusher": "仰卧臂屈伸",
+            "barbell_curl": "杠铃弯举",
+            "incline_dumbbell_press": "上斜哑铃卧推",
+            "lat_pulldown": "高位下拉",
+            "leg_extension": "腿屈伸",
+            "leg_curl": "腿弯举",
+            "lunges": "弓步蹲",
+            "calf_raise": "提踵",
+            "plank": "平板支撑",
+            "crunches": "卷腹",
+            "seated_cable_row": "坐姿划船",
+            "lateral_raise": "侧平举",
+            "leg_press": "腿举",
+            "romanian_deadlift": "罗马尼亚硬拉",
+            "hyperextension": "背屈伸",
+            "one_arm_dumbbell_row": "单臂哑铃划船",
+            "seated_dumbbell_press": "坐姿哑铃推举",
+            "dumbbell_fly": "哑铃飞鸟",
+            "dumbbell_curl": "哑铃弯举",
+            "glute_bridge": "臀桥",
+            "side_plank": "侧平板支撑",
+            "triceps_pushdown": "绳索下压"
+        },
+        "workout_templates": {
+            "powerlifting_heavy_squat_day": "力量举 - 大重量深蹲日",
+            "powerlifting_heavy_bench_day": "力量举 - 大重量卧推日",
+            "powerlifting_heavy_deadlift_day": "力量举 - 大重量硬拉日",
+            "bodybuilding_chest_triceps": "健美 - 胸与三头",
+            "bodybuilding_back_biceps": "健美 - 背与二头",
+            "bodybuilding_legs_shoulders": "健美 - 腿与肩",
+            "full_body_general_fitness": "全身 - 综合健身",
+            "cardio_endurance_session": "有氧 - 耐力训练",
+            "calisthenics_upper_body": "街头健身 - 上半身",
+            "liss_recovery_walk": "LISS - 恢复 walk"
+        },
+        "microcycle_templates": {
+            "week_1_foundation": "第 1 周 - 基础",
+            "week_2_volume_build": "第 2 周 - 容量构建",
+            "week_3_intensity_peak": "第 3 周 - 强度峰值",
+            "week_4_deload": "第 4 周 - 减负",
+            "5x5_strength_cycle": "5x5 力量周期",
+            "hypertrophy_block_a": "肥大块 A",
+            "hypertrophy_block_b": "肥大块 B",
+            "powerlifting_meet_prep": "力量举比赛准备",
+            "general_fitness_week": "综合健身周",
+            "active_recovery_week": "主动恢复周"
+        }
+    },
+    "settings": {
+        "trainer_mode": "教练模式",
+        "theme_mode": "应用主题"
+    },
+    "classes": {
+        "training_process": {
+            "exercise_title": "动作",
+            "exercise_repetitions": "次数",
+            "exercise_weight": "重量"
+        },
+        "app_colors": {
+            "color_themes": {
+                "Aurora Borealis": "极光",
+                "Arabian Night": "阿拉伯之夜",
+                "Space Cream": "太空奶油",
+                "The last breath of a Jacquot": "贾科特的最后一口气",
+                "Sakura": "樱花",
+                "Sunset in the Wasteland": "荒野日落",
+                "Frog in satin pajamas": "穿缎面睡衣的青蛙"
+            }
+        }
+    },
+    "ui": {
+        "components": {
+            "exercise_set": {
+                "set_name": "动作",
+                "set_count": "组数",
+                "set_repetitions": "次数",
+                "set_weight": "重量"
+            },
+            "manager_dialog": {
+                "delete_succes": "删除成功！"
+            },
+            "navigation_menu": {
+                "dashboard_screen": {
+                    "label": "训练",
+                    "tooltip": "当前微周期"
+                },
+                "planning_screen": {
+                    "label": "计划",
+                    "tooltip": "训练计划"
+                },
+                "reference_information_screen": {
+                    "label": "信息",
+                    "tooltip": "参考信息"
+                },
+                "settings_screen": {
+                    "label": "设置",
+                    "tooltip": "应用设置"
+                }
+            },
+            "records_list": {
+                "no_data": "无数据",
+                "imposible_delete_last_user": "删除取消。\n系统中必须至少存在 1 个用户。",
+                "imposible_change_the_record": "此记录无法更改"
+            },
+            "invalid_data_alert_dialog": {
+                "check_data": "保存错误。请检查输入的数据。"
+            }
+        },
+        "screens": {
+            "setup_wizard": {
+                "language_screen": {
+                    "title": "欢迎！",
+                    "choose_language": "选择语言："
+                },
+                "user_screen": {
+                    "insert_username": "您的名字："
+                },
+                "initial_data_screen": {
+                    "main_label": "选择要加载的数据：",
+                    "insert_agonists": "主动肌",
+                    "insert_exercises": "动作"
+                },
+                "finish_screen": {
+                    "main_label": "设置完成！",
+                    "secondary_label": "享受应用。",
+                    "button_label": "开始！"
+                }
+            },
+            "dashboard_screen": {
+                "user_popup_menu_button_tooltip": "当前用户",
+                "is_unloading_microcycle_title": "减负周",
+                "no_planned_mesocycles": "您没有计划的中周期",
+                "no_planned_workouts": "您没有计划的训练",
+                "no_workouts_today": "今天没有训练。"
+            },
+            "planning_screen": {
+                "workout_template_menu": "训练模板",
+                "microcycle_template_menu": "微周期模板",
+                "mesocycle_menu": "中周期",
+                "macrocycle_menu": "宏周期"
+            },
+            "reference_information_screen": {
+                "user_information": "用户信息",
+                "workout_statuses": "训练状态",
+                "workout_types": "训练类型",
+                "hypertrophy_types": "肥大类型",
+                "exercises": "动作",
+                "agonists": "主动肌"
+            },
+            "settings_screen": {
+                "language": "应用语言",
+                "trainer_mode_switch": "教练模式",
+                "active_user_statuses": "活跃用户状态",
+                "app_color_themes": "应用颜色主题"
+            },
+            "workout_template_menu": {
+                "no_data": "您没有任何模板。",
+                "loading": "加载数据..."
+            },
+            "workout_template_screen": {
+                "save_button": "保存",
+                "save_error": "无法保存。\n请检查输入的数据。"
+            },
+            "microcycle_template_menu": {
+                "no_data": "您没有任何模板。",
+                "loading": "加载数据..."
+            },
+            "microcycle_template_screen": {
+                "save_button": "保存",
+                "save_error": "无法保存。\n请检查输入的数据。",
+                "set_name": "动作",
+                "set_count": "组数"
+            },
+            "mesocycle_menu": {
+                "no_data": "您没有任何中周期。",
+                "loading": "加载数据...",
+                "mesocycle_no_data": "无数据",
+                "no_user": "请先选择用户"
+            },
+            "mesocycle_screen": {
+                "save_button": "保存",
+                "is_unloading_checkbox": "减负周"
+            },
+            "macrocycle_menu": {
+                "no_data": "您没有任何宏周期。",
+                "loading": "加载数据...",
+                "macrocycle_no_data": "无数据",
+                "no_user": "请先选择用户"
+            },
+            "macrocycle_screen": {
+                "no_data": "此宏周期中未包含任何中周期",
+                "invalid_mesocycle_data": "请先计划中周期"
+            },
+            "workout_screen": {
+                "save_button": "保存",
+                "start_workout": "开始训练",
+                "end_workout": "结束训练"
+            },
+            "user_information_screen": {
+                "users": "用户",
+                "user_statuses": "用户状态"
+            },
+            "users_screen": {
+                "no_data": "无用户"
+            },
+            "user_statuses_screen": {
+                "no_data": "无用户状态"
+            },
+            "workout_statuses_screen": {
+                "no_data": "无训练状态"
+            },
+            "workout_types_screen": {
+                "no_data": "无训练类型"
+            },
+            "hypertrophy_types_screen": {
+                "no_data": "无肥大类型"
+            },
+            "exercises_screen": {
+                "no_data": "无动作"
+            },
+            "agonists_screen": {
+                "no_data": "无主动肌"
+            },
+            "universal_record_management_screen": {
+                "title_helper_text": "标题",
+                "save_button": "保存"
+            },
+            "user_management_screen": {
+                "username_field_helper_text": "姓名",
+                "phone_field_helper_text": "电话",
+                "status_dropdown_helper_text": "状态",
+                "save_button": "保存"
+            },
+            "exercise_management_screen": {
+                "title_helper_text": "标题",
+                "agonists_helper_text": "主动肌",
+                "save_button": "保存"
+            },
+            "agonist_management_screen": {
+                "title_helper_text": "标题",
+                "workout_types_helper_text": "训练类型",
+                "save_button": "保存"
+            },
+            "app_color_themes_screen": {}
+        }
+    }
+}

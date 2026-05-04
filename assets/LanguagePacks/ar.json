@@ -1,0 +1,358 @@
+{
+    "data": {
+        "user_statuses": {
+            "active": "نشط",
+            "inactive": "غير نشط",
+            "sick": "مريض",
+            "injured": "مصاب",
+            "on_vacation": "في إجازة",
+            "novyj_status_pol_zovatelja": "Новый статус пользователя"
+        },
+        "workout_types": {
+            "cardio": "كارديو",
+            "crossfit": "CrossFit",
+            "bodybuilding": "كمال أجسام",
+            "hiit": "HIIT",
+            "cycling": "ركوب الدراجات",
+            "aerobics": "أيروبيك",
+            "martial_arts": "فنون قتالية",
+            "yoga": "يوغا",
+            "full_body": "الجسم كامل",
+            "powerlifting": "رفع أثقال",
+            "calisthenics": "كاليسثينيكس",
+            "strength": "تدريب القوة",
+            "endurance": "تحمل",
+            "flexibility": "مرونة",
+            "recovery": "استشفاء",
+            "swimming": "سباحة",
+            "running": "جري"
+        },
+        "workout_statuses": {
+            "scheduled": "مجدول",
+            "overcompleted": "تم التجاوز",
+            "completed": "مكتمل",
+            "cancelled": "ملغى",
+            "in_progress": "قيد التنفيذ",
+            "skipped": "تم تخطيه",
+            "partially_completed": "مكتمل (جزئياً)",
+            "novyj_status_trenirovki": "Новый статус тренировки"
+        },
+        "hypertrophy_types": {
+            "sarcoplasmic": "تضخم ساركوبلازمي",
+            "myofibrillar": "تضخم ليفي عضلي",
+            "mixed": "مختلط",
+            "neural": "تكيف عصبي",
+            "novyj_tip_gipertrofii": "Новый тип гипертрофии"
+        },
+        "agonists": {
+            "pectoralis_major": "العضلة الصدرية الكبرى",
+            "pectoralis_minor": "العضلة الصدرية الصغرى",
+            "latissimus_dorsi": "العضلة الظهرية العريضة",
+            "trapezius_muscle": "العضلة شبه المنحرفة",
+            "rhomboid_muscle": "العضلة المعينية",
+            "teres_major": "العضلة المدورة الكبيرة",
+            "teres_minor": "العضلة المدورة الصغيرة",
+            "infraspinatus": "تحت الشوكة",
+            "supraspinatus": "فوق الشوكة",
+            "subscapularis": "تحت الكتف",
+            "anterior_deltoid": "الدالية الأمامية",
+            "lateral_deltoid": "الدالية الجانبية",
+            "posterior_deltoid": "الدالية الخلفية",
+            "biceps_brachii": "ذو الرأسين العضدي",
+            "triceps_brachii": "ذو الثلاثة رؤوس العضدي",
+            "brachialis": "العضلة العضدية",
+            "coracobrachialis": "العضلة الغرابية العضدية",
+            "brachioradialis": "العضلة العضدية الكعبرية",
+            "flexor_carpi_radialis": "الثني الكعبري للرسغ",
+            "flexor_carpi_ulnaris": "الثني الزندي للرسغ",
+            "palmaris_longus": "العضلة الراحية الطويلة",
+            "extensor_digitorum": "باسط الأصابع",
+            "rectus_abdominis": "العضلة المستقيمة البطنية",
+            "external_oblique": "المائلة الخارجية",
+            "internal_oblique": "المائلة الداخلية",
+            "transversus_abdominis": "المستعرضة البطنية",
+            "iliopsoas": "الحرقفية القطنية",
+            "gluteus_maximus": "الألية الكبرى",
+            "gluteus_medius": "الألية المتوسطة",
+            "gluteus_minimus": "الألية الصغرى",
+            "piriformis": "الكمثرية",
+            "tensor_fasciae_latae": "موتر اللفافة العريضة",
+            "quadratus_femoris": "مربع الفخذ",
+            "sartorius": "الخياط",
+            "adductor_magnus": "المقرب الكبير",
+            "adductor_longus": "المقرب الطويل",
+            "adductor_brevis": "المقرب القصير",
+            "gracilis": "الرشيقة",
+            "biceps_femoris": "ذو الرأسين الفخذي",
+            "semitendinosus": "نصف الوترية",
+            "semimembranosus": "نصف الغشائية",
+            "quadriceps_femoris": "رباعية الرؤوس الفخذية",
+            "rectus_femoris": "المستقيمة الفخذية",
+            "gastrocnemius": "التوأمية",
+            "soleus": "النعلية",
+            "tibialis_anterior": "الظنبوبية الأمامية",
+            "fibularis_longus": "الشظوية الطويلة",
+            "fibularis_brevis": "الشظوية القصيرة",
+            "sternocleidomastoid": "القصية الترقوية الخشائية",
+            "scalene_muscles": "العضلات السلمية",
+            "novyj_agonist": "Новый агонист"
+        },
+        "exercises": {
+            "barbell_squat": "القرفصاء بالبار",
+            "bench_press": "ضغط البنش",
+            "burpee": "بربي",
+            "deadlift": "رفعة ميتة",
+            "pull_ups": "تمرين العقلة",
+            "dips": "تمرين المتوازي",
+            "overhead_press": "ضغط علوي",
+            "bent_over_row": "تجديف بظهر منحني",
+            "skull_crusher": "ساحق الجمجمة",
+            "barbell_curl": "تمرين الذراع بالبار",
+            "incline_dumbbell_press": "ضغط دمبل مائل",
+            "lat_pulldown": "سحب عالي",
+            "leg_extension": "مد الرجل",
+            "leg_curl": "ثني الرجل",
+            "lunges": "طعنات",
+            "calf_raise": "رفع الساق",
+            "plank": "بلانك",
+            "crunches": "كرنش",
+            "seated_cable_row": "تجديف كابل جالس",
+            "lateral_raise": "رفع جانبي",
+            "leg_press": "ضغط الرجل",
+            "romanian_deadlift": "رفعة ميتة رومانية",
+            "hyperextension": "فرط التمدد",
+            "one_arm_dumbbell_row": "تجديف دمبل بذراع واحد",
+            "seated_dumbbell_press": "ضغط دمبل جالس",
+            "dumbbell_fly": "طيران دمبل",
+            "dumbbell_curl": "كرنچ دمبل",
+            "glute_bridge": "جسر الغلوت",
+            "side_plank": "بلانك جانبي",
+            "triceps_pushdown": "دفع التراي",
+            "novoe_uprazhnenie": "Новое упражнение"
+        },
+        "workout_templates": {
+            "powerlifting_heavy_squat_day": "رفع أثقال - يوم سكوات ثقيل",
+            "powerlifting_heavy_bench_day": "رفع أثقال - يوم بنش ثقيل",
+            "powerlifting_heavy_deadlift_day": "رفع أثقال - يوم رفعة ميتة ثقيلة",
+            "bodybuilding_chest_triceps": "كمال أجسام - صدر و تراي",
+            "bodybuilding_back_biceps": "كمال أجسام - ظهر و باي",
+            "bodybuilding_legs_shoulders": "كمال أجسام - أرجل و أكتاف",
+            "full_body_general_fitness": "الجسم كامل - لياقة عامة",
+            "cardio_endurance_session": "كارديو - جلسة تحمل",
+            "calisthenics_upper_body": "كاليسثينيكس - الجزء العلوي",
+            "liss_recovery_walk": "LISS - مشي استشفاء",
+            "novyj_shablon_trenirovki": "Новый шаблон тренировки"
+        },
+        "microcycle_templates": {
+            "week_1_foundation": "الأسبوع 1 - الأساس",
+            "week_2_volume_build": "الأسبوع 2 - بناء الحجم",
+            "week_3_intensity_peak": "الأسبوع 3 - ذروة الكثافة",
+            "week_4_deload": "الأسبوع 4 - تخفيف الحمل",
+            "5x5_strength_cycle": "دورة قوة 5x5",
+            "hypertrophy_block_a": "كتلة تضخم أ",
+            "hypertrophy_block_b": "كتلة تضخم ب",
+            "powerlifting_meet_prep": "تحضير مسابقة رفع أثقال",
+            "general_fitness_week": "أسبوع لياقة عام",
+            "active_recovery_week": "أسبوع استشفاء نشط",
+            "novyj_shablon_mikrotsikla": "Новый шаблон микроцикла"
+        }
+    },
+    "settings": {
+        "trainer_mode": "وضع المدرب",
+        "theme_mode": "موضوع التطبيق"
+    },
+    "classes": {
+        "training_process": {
+            "exercise_title": "تمرين",
+            "exercise_repetitions": "تكرارات",
+            "exercise_weight": "وزن"
+        },
+        "app_colors": {
+            "color_themes": {
+                "Aurora Borealis": "الأورورا بوريليس",
+                "Arabian Night": "ليلة عربية",
+                "Space Cream": "كريم الفضاء",
+                "The last breath of a Jacquot": "آخر نفس لجاكوت",
+                "Sakura": "ساكورا",
+                "Sunset in the Wasteland": "غروب الشمس في الأرض القاحلة",
+                "Frog in satin pajamas": "ضفدع في بيجاما ساتان"
+            }
+        }
+    },
+    "ui": {
+        "components": {
+            "exercise_set": {
+                "set_name": "تمرين",
+                "set_count": "مجموعات",
+                "set_repetitions": "تكرارات",
+                "set_weight": "وزن"
+            },
+            "manager_dialog": {
+                "delete_succes": "تم الحذف بنجاح!"
+            },
+            "navigation_menu": {
+                "dashboard_screen": {
+                    "label": "تدريبات",
+                    "tooltip": "الدورة الدقيقة الحالية"
+                },
+                "planning_screen": {
+                    "label": "خطة",
+                    "tooltip": "تخطيط التدريبات"
+                },
+                "reference_information_screen": {
+                    "label": "معلومات",
+                    "tooltip": "معلومات مرجعية"
+                },
+                "settings_screen": {
+                    "label": "إعدادات",
+                    "tooltip": "إعدادات التطبيق"
+                }
+            },
+            "records_list": {
+                "no_data": "لا توجد بيانات",
+                "imposible_delete_last_user": "تم إلغاء الحذف.\nيجب أن يكون هناك مستخدم واحد على الأقل في النظام.",
+                "imposible_change_the_record": "لا يمكن تغيير هذا السجل"
+            },
+            "invalid_data_alert_dialog": {
+                "check_data": "خطأ في الحفظ. تحقق من البيانات المدخلة."
+            }
+        },
+        "screens": {
+            "setup_wizard": {
+                "language_screen": {
+                    "title": "مرحباً!",
+                    "choose_language": "اختر اللغة:"
+                },
+                "user_screen": {
+                    "insert_username": "اسمك:"
+                },
+                "initial_data_screen": {
+                    "main_label": "اختر البيانات للتحميل:",
+                    "insert_agonists": "عضلات agonists",
+                    "insert_exercises": "تمارين"
+                },
+                "finish_screen": {
+                    "main_label": "تم الإعداد!",
+                    "secondary_label": "استمتع بالتطبيق.",
+                    "button_label": "ابدأ!"
+                }
+            },
+            "dashboard_screen": {
+                "user_popup_menu_button_tooltip": "المستخدم الحالي",
+                "is_unloading_microcycle_title": "أسبوع تخفيف الحمل",
+                "no_planned_mesocycles": "ليس لديك دورات متوسطة مخططة",
+                "no_planned_workouts": "ليس لديك تدريبات مخططة",
+                "no_workouts_today": "لا توجد تدريبات لليوم."
+            },
+            "planning_screen": {
+                "workout_template_menu": "قوالب التدريب",
+                "microcycle_template_menu": "قوالب الدورة الدقيقة",
+                "mesocycle_menu": "دورات متوسطة",
+                "macrocycle_menu": "دورات كبرى"
+            },
+            "reference_information_screen": {
+                "user_information": "معلومات المستخدم",
+                "workout_statuses": "حالات التدريب",
+                "workout_types": "أنواع التدريب",
+                "hypertrophy_types": "أنواع التضخم",
+                "exercises": "تمارين",
+                "agonists": "Agonists"
+            },
+            "settings_screen": {
+                "language": "لغة التطبيق",
+                "trainer_mode_switch": "وضع المدرب",
+                "active_user_statuses": "حالات المستخدم النشطة",
+                "app_color_themes": "موضوع لون التطبيق"
+            },
+            "workout_template_menu": {
+                "no_data": "ليس لديك أي قوالب.",
+                "loading": "جاري تحميل البيانات..."
+            },
+            "workout_template_screen": {
+                "save_button": "حفظ",
+                "save_error": "لا يمكن الحفظ.\nتحقق من البيانات المدخلة."
+            },
+            "microcycle_template_menu": {
+                "no_data": "ليس لديك أي قوالب.",
+                "loading": "جاري تحميل البيانات..."
+            },
+            "microcycle_template_screen": {
+                "save_button": "حفظ",
+                "save_error": "لا يمكن الحفظ.\nتحقق من البيانات المدخلة.",
+                "set_name": "تمرين",
+                "set_count": "مجموعات"
+            },
+            "mesocycle_menu": {
+                "no_data": "ليس لديك أي دورات متوسطة.",
+                "loading": "جاري تحميل البيانات...",
+                "mesocycle_no_data": "لا توجد بيانات",
+                "no_user": "اختر مستخدمًا أولاً"
+            },
+            "mesocycle_screen": {
+                "save_button": "حفظ",
+                "is_unloading_checkbox": "أسبوع تخفيف الحمل"
+            },
+            "macrocycle_menu": {
+                "no_data": "ليس لديك أي دورات كبرى.",
+                "loading": "جاري تحميل البيانات...",
+                "macrocycle_no_data": "لا توجد بيانات",
+                "no_user": "اختر مستخدمًا أولاً"
+            },
+            "macrocycle_screen": {
+                "no_data": "لا توجد دورات متوسطةضمنة في هذه الدورة الكبرى",
+                "invalid_mesocycle_data": "قم بتخطيط الدورة المتوسطة أولاً"
+            },
+            "workout_screen": {
+                "save_button": "حفظ",
+                "start_workout": "ابدأ التدريب",
+                "end_workout": "إنهاء التدريب"
+            },
+            "user_information_screen": {
+                "users": "مستخدمون",
+                "user_statuses": "حالات المستخدم"
+            },
+            "users_screen": {
+                "no_data": "لا يوجد مستخدمون"
+            },
+            "user_statuses_screen": {
+                "no_data": "لا توجد حالات مستخدم"
+            },
+            "workout_statuses_screen": {
+                "no_data": "لا توجد حالات تدريب"
+            },
+            "workout_types_screen": {
+                "no_data": "لا توجد أنواع تدريب"
+            },
+            "hypertrophy_types_screen": {
+                "no_data": "لا توجد أنواع تضخم"
+            },
+            "exercises_screen": {
+                "no_data": "لا توجد تمارين"
+            },
+            "agonists_screen": {
+                "no_data": "لا توجد agonists"
+            },
+            "universal_record_management_screen": {
+                "title_helper_text": "عنوان",
+                "save_button": "حفظ"
+            },
+            "user_management_screen": {
+                "username_field_helper_text": "اسم",
+                "phone_field_helper_text": "هاتف",
+                "status_dropdown_helper_text": "حالة",
+                "save_button": "حفظ"
+            },
+            "exercise_management_screen": {
+                "title_helper_text": "عنوان",
+                "agonists_helper_text": "Agonists",
+                "save_button": "حفظ"
+            },
+            "agonist_management_screen": {
+                "title_helper_text": "عنوان",
+                "workout_types_helper_text": "أنواع التدريب",
+                "save_button": "حفظ"
+            },
+            "app_color_themes_screen": {}
+        }
+    }
+}

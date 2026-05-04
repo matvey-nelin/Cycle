@@ -1,0 +1,352 @@
+{
+    "data": {
+        "user_statuses": {
+            "active": "Aktif",
+            "inactive": "İnaktif",
+            "sick": "Hasta",
+            "injured": "Sakat",
+            "on_vacation": "İzinde"
+        },
+        "workout_types": {
+            "liss": "LISS",
+            "cardio": "Kardiyo",
+            "crossfit": "CrossFit",
+            "bodybuilding": "Vücut Geliştirme",
+            "hiit": "HIIT",
+            "cycling": "Bisiklet",
+            "aerobics": "Aerobik",
+            "martial_arts": "Dövüş Sanatları",
+            "yoga": "Yoga",
+            "full_body": "Tüm Vücut",
+            "powerlifting": "Powerlifting",
+            "calisthenics": "Calisthenics",
+            "strength": "Güç Antrenmanı",
+            "endurance": "Dayanıklılık",
+            "flexibility": "Esneklik",
+            "recovery": "Toparlanma",
+            "swimming": "Yüzme",
+            "running": "Koşu"
+        },
+        "workout_statuses": {
+            "scheduled": "Planlandı",
+            "overcompleted": "Aşıldı",
+            "completed": "Tamamlandı",
+            "cancelled": "İptal Edildi",
+            "in_progress": "Devam Ediyor",
+            "skipped": "Atlandı",
+            "partially_completed": "Tamamlandı (Kısmen)"
+        },
+        "hypertrophy_types": {
+            "sarcoplasmic": "Sarkoplazmik Hipertrofi",
+            "myofibrillar": "Miyofibriler Hipertrofi",
+            "mixed": "Karışık",
+            "neural": "Nöral Adaptasyon"
+        },
+        "agonists": {
+            "pectoralis_major": "Büyük Göğüs Kası",
+            "pectoralis_minor": "Küçük Göğüs Kası",
+            "latissimus_dorsi": "Latissimus Dorsi",
+            "trapezius_muscle": "Trapez Kası",
+            "rhomboid_muscle": "Romboide Kası",
+            "teres_major": "Teres Major",
+            "teres_minor": "Teres Minor",
+            "infraspinatus": "Infraspinatus",
+            "supraspinatus": "Supraspinatus",
+            "subscapularis": "Subscapularis",
+            "anterior_deltoid": "Ön Deltoid",
+            "lateral_deltoid": "Yan Deltoid",
+            "posterior_deltoid": "Arka Deltoid",
+            "biceps_brachii": "Biceps Brachii",
+            "triceps_brachii": "Triceps Brachii",
+            "brachialis": "Brachialis",
+            "coracobrachialis": "Coracobrachialis",
+            "brachioradialis": "Brachioradialis",
+            "flexor_carpi_radialis": "Flexor Carpi Radialis",
+            "flexor_carpi_ulnaris": "Flexor Carpi Ulnaris",
+            "palmaris_longus": "Palmaris Longus",
+            "extensor_digitorum": "Extensor Digitorum",
+            "rectus_abdominis": "Rectus Abdominis",
+            "external_oblique": "External Oblique",
+            "internal_oblique": "Internal Oblique",
+            "transversus_abdominis": "Transversus Abdominis",
+            "iliopsoas": "Iliopsoas",
+            "gluteus_maximus": "Gluteus Maximus",
+            "gluteus_medius": "Gluteus Medius",
+            "gluteus_minimus": "Gluteus Minimus",
+            "piriformis": "Piriformis",
+            "tensor_fasciae_latae": "Tensor Fasciae Latae",
+            "quadratus_femoris": "Quadratus Femoris",
+            "sartorius": "Sartorius",
+            "adductor_magnus": "Adductor Magnus",
+            "adductor_longus": "Adductor Longus",
+            "adductor_brevis": "Adductor Brevis",
+            "gracilis": "Gracilis",
+            "biceps_femoris": "Biceps Femoris",
+            "semitendinosus": "Semitendinosus",
+            "semimembranosus": "Semimembranosus",
+            "quadriceps_femoris": "Quadriceps Femoris",
+            "rectus_femoris": "Rectus Femoris",
+            "gastrocnemius": "Gastrocnemius",
+            "soleus": "Soleus",
+            "tibialis_anterior": "Tibialis Anterior",
+            "fibularis_longus": "Fibularis Longus",
+            "fibularis_brevis": "Fibularis Brevis",
+            "sternocleidomastoid": "Sternocleidomastoid",
+            "scalene_muscles": "Scalene Kasları"
+        },
+        "exercises": {
+            "barbell_squat": "Barbell Squat",
+            "bench_press": "Bench Press",
+            "burpee": "Burpee",
+            "deadlift": "Deadlift",
+            "pull_ups": "Barfiks",
+            "dips": "Dips",
+            "overhead_press": "Overhead Press",
+            "bent_over_row": "Bent Over Row",
+            "skull_crusher": "Skull Crusher",
+            "barbell_curl": "Barbell Curl",
+            "incline_dumbbell_press": "Incline Dumbbell Press",
+            "lat_pulldown": "Lat Pulldown",
+            "leg_extension": "Leg Extension",
+            "leg_curl": "Leg Curl",
+            "lunges": "Lunges",
+            "calf_raise": "Calf Raise",
+            "plank": "Plank",
+            "crunches": "Crunches",
+            "seated_cable_row": "Seated Cable Row",
+            "lateral_raise": "Lateral Raise",
+            "leg_press": "Leg Press",
+            "romanian_deadlift": "Romanian Deadlift",
+            "hyperextension": "Hyperextension",
+            "one_arm_dumbbell_row": "One Arm Dumbbell Row",
+            "seated_dumbbell_press": "Seated Dumbbell Press",
+            "dumbbell_fly": "Dumbbell Fly",
+            "dumbbell_curl": "Dumbbell Curl",
+            "glute_bridge": "Glute Bridge",
+            "side_plank": "Side Plank",
+            "triceps_pushdown": "Triceps Pushdown"
+        },
+        "workout_templates": {
+            "powerlifting_heavy_squat_day": "Powerlifting - Ağır Squat Günü",
+            "powerlifting_heavy_bench_day": "Powerlifting - Ağır Bench Günü",
+            "powerlifting_heavy_deadlift_day": "Powerlifting - Ağır Deadlift Günü",
+            "bodybuilding_chest_triceps": "Bodybuilding - Göğüs & Triceps",
+            "bodybuilding_back_biceps": "Bodybuilding - Sırt & Biceps",
+            "bodybuilding_legs_shoulders": "Bodybuilding - Bacak & Omuz",
+            "full_body_general_fitness": "Tüm Vücut - Genel Fitness",
+            "cardio_endurance_session": "Kardiyo - Dayanıklılık Seansı",
+            "calisthenics_upper_body": "Calisthenics - Üst Vücut",
+            "liss_recovery_walk": "LISS - Toparlanma Yürüyüşü"
+        },
+        "microcycle_templates": {
+            "week_1_foundation": "Hafta 1 - Temel",
+            "week_2_volume_build": "Hafta 2 - Hacim İnşası",
+            "week_3_intensity_peak": "Hafta 3 - Yoğunluk Zirvesi",
+            "week_4_deload": "Hafta 4 - Deload",
+            "5x5_strength_cycle": "5x5 Güç Döngüsü",
+            "hypertrophy_block_a": "Hipertrofi Bloğu A",
+            "hypertrophy_block_b": "Hipertrofi Bloğu B",
+            "powerlifting_meet_prep": "Powerlifting Yarışma Hazırlığı",
+            "general_fitness_week": "Genel Fitness Haftası",
+            "active_recovery_week": "Aktif Toparlanma Haftası"
+        }
+    },
+    "settings": {
+        "trainer_mode": "Antrenör Modu",
+        "theme_mode": "Uygulama Teması"
+    },
+    "classes": {
+        "training_process": {
+            "exercise_title": "Egzersiz",
+            "exercise_repetitions": "Tekrar",
+            "exercise_weight": "Ağırlık"
+        },
+        "app_colors": {
+            "color_themes": {
+                "Aurora Borealis": "Aurora Borealis",
+                "Arabian Night": "Arap Gecesi",
+                "Space Cream": "Uzay Kreması",
+                "The last breath of a Jacquot": "Bir Jacquot'un Son Nefesi",
+                "Sakura": "Sakura",
+                "Sunset in the Wasteland": "Çorak Arazide Gün Batımı",
+                "Frog in satin pajamas": "Saten Pijamalı Kurbağa"
+            }
+        }
+    },
+    "ui": {
+        "components": {
+            "exercise_set": {
+                "set_name": "Egzersiz",
+                "set_count": "Set",
+                "set_repetitions": "Tekrar",
+                "set_weight": "Ağırlık"
+            },
+            "manager_dialog": {
+                "delete_succes": "Başarıyla silindi!"
+            },
+            "navigation_menu": {
+                "dashboard_screen": {
+                    "label": "Antrenmanlar",
+                    "tooltip": "Mevcut Mikro Döngü"
+                },
+                "planning_screen": {
+                    "label": "Plan",
+                    "tooltip": "Antrenman Planlama"
+                },
+                "reference_information_screen": {
+                    "label": "Bilgi",
+                    "tooltip": "Referans Bilgileri"
+                },
+                "settings_screen": {
+                    "label": "Ayarlar",
+                    "tooltip": "Uygulama Ayarları"
+                }
+            },
+            "records_list": {
+                "no_data": "Veri yok",
+                "imposible_delete_last_user": "Silme iptal edildi.\nSistemde en az 1 kullanıcı olmalıdır.",
+                "imposible_change_the_record": "Bu kayıt değiştirilemez"
+            },
+            "invalid_data_alert_dialog": {
+                "check_data": "Kaydetme hatası. Girilen verileri kontrol edin."
+            }
+        },
+        "screens": {
+            "setup_wizard": {
+                "language_screen": {
+                    "title": "Hoş Geldiniz!",
+                    "choose_language": "Dil seçin:"
+                },
+                "user_screen": {
+                    "insert_username": "Adınız:"
+                },
+                "initial_data_screen": {
+                    "main_label": "Yüklenecek verileri seçin:",
+                    "insert_agonists": "Agonist Kaslar",
+                    "insert_exercises": "Egzersizler"
+                },
+                "finish_screen": {
+                    "main_label": "Kurulum tamamlandı!",
+                    "secondary_label": "Uygulamanın keyfini çıkarın.",
+                    "button_label": "Başla!"
+                }
+            },
+            "dashboard_screen": {
+                "user_popup_menu_button_tooltip": "Mevcut Kullanıcı",
+                "is_unloading_microcycle_title": "Deload Haftası",
+                "no_planned_mesocycles": "Planlanmış mezodöngünüz yok",
+                "no_planned_workouts": "Planlanmış antrenmanınız yok",
+                "no_workouts_today": "Bugün antrenman yok."
+            },
+            "planning_screen": {
+                "workout_template_menu": "Antrenman Şablonları",
+                "microcycle_template_menu": "Mikro Döngü Şablonları",
+                "mesocycle_menu": "Mezodöngüler",
+                "macrocycle_menu": "Makrodöngüler"
+            },
+            "reference_information_screen": {
+                "user_information": "Kullanıcı Bilgileri",
+                "workout_statuses": "Antrenman Durumları",
+                "workout_types": "Antrenman Tipleri",
+                "hypertrophy_types": "Hipertrofi Tipleri",
+                "exercises": "Egzersizler",
+                "agonists": "Agonistler"
+            },
+            "settings_screen": {
+                "language": "Uygulama Dili",
+                "trainer_mode_switch": "Antrenör Modu",
+                "active_user_statuses": "Aktif Kullanıcı Durumları",
+                "app_color_themes": "Uygulama Renk Teması"
+            },
+            "workout_template_menu": {
+                "no_data": "Hiç şablonunuz yok.",
+                "loading": "Veriler yükleniyor..."
+            },
+            "workout_template_screen": {
+                "save_button": "Kaydet",
+                "save_error": "Kaydedilemiyor.\nGirilen verileri kontrol edin."
+            },
+            "microcycle_template_menu": {
+                "no_data": "Hiç şablonunuz yok.",
+                "loading": "Veriler yükleniyor..."
+            },
+            "microcycle_template_screen": {
+                "save_button": "Kaydet",
+                "save_error": "Kaydedilemiyor.\nGirilen verileri kontrol edin.",
+                "set_name": "Egzersiz",
+                "set_count": "Set"
+            },
+            "mesocycle_menu": {
+                "no_data": "Hiç mezodöngünüz yok.",
+                "loading": "Veriler yükleniyor...",
+                "mesocycle_no_data": "Veri yok",
+                "no_user": "Önce bir kullanıcı seçin"
+            },
+            "mesocycle_screen": {
+                "save_button": "Kaydet",
+                "is_unloading_checkbox": "Deload Haftası"
+            },
+            "macrocycle_menu": {
+                "no_data": "Hiç makrodöngünüz yok.",
+                "loading": "Veriler yükleniyor...",
+                "macrocycle_no_data": "Veri yok",
+                "no_user": "Önce bir kullanıcı seçin"
+            },
+            "macrocycle_screen": {
+                "no_data": "Bu makrodöngüye dahil edilmiş mezodöngü yok",
+                "invalid_mesocycle_data": "Önce mezodöngüyü planlayın"
+            },
+            "workout_screen": {
+                "save_button": "Kaydet",
+                "start_workout": "Antrenmanı Başlat",
+                "end_workout": "Antrenmanı Bitir"
+            },
+            "user_information_screen": {
+                "users": "Kullanıcılar",
+                "user_statuses": "Kullanıcı Durumları"
+            },
+            "users_screen": {
+                "no_data": "Kullanıcı yok"
+            },
+            "user_statuses_screen": {
+                "no_data": "Kullanıcı durumu yok"
+            },
+            "workout_statuses_screen": {
+                "no_data": "Antrenman durumu yok"
+            },
+            "workout_types_screen": {
+                "no_data": "Antrenman tipi yok"
+            },
+            "hypertrophy_types_screen": {
+                "no_data": "Hipertrofi tipi yok"
+            },
+            "exercises_screen": {
+                "no_data": "Egzersiz yok"
+            },
+            "agonists_screen": {
+                "no_data": "Agonist yok"
+            },
+            "universal_record_management_screen": {
+                "title_helper_text": "Başlık",
+                "save_button": "Kaydet"
+            },
+            "user_management_screen": {
+                "username_field_helper_text": "Ad",
+                "phone_field_helper_text": "Telefon",
+                "status_dropdown_helper_text": "Durum",
+                "save_button": "Kaydet"
+            },
+            "exercise_management_screen": {
+                "title_helper_text": "Başlık",
+                "agonists_helper_text": "Agonistler",
+                "save_button": "Kaydet"
+            },
+            "agonist_management_screen": {
+                "title_helper_text": "Başlık",
+                "workout_types_helper_text": "Antrenman Tipleri",
+                "save_button": "Kaydet"
+            },
+            "app_color_themes_screen": {}
+        }
+    }
+}

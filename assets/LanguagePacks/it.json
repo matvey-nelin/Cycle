@@ -1,0 +1,358 @@
+{
+    "data": {
+        "user_statuses": {
+            "active": "Attivo",
+            "inactive": "Inattivo",
+            "sick": "Malato",
+            "injured": "Infortunato",
+            "on_vacation": "In Vacanza",
+            "novyj_status_pol_zovatelja": "Новый статус пользователя"
+        },
+        "workout_types": {
+            "cardio": "Cardio",
+            "crossfit": "CrossFit",
+            "bodybuilding": "Bodybuilding",
+            "hiit": "HIIT",
+            "cycling": "Ciclismo",
+            "aerobics": "Aerobica",
+            "martial_arts": "Arti Marziali",
+            "yoga": "Yoga",
+            "full_body": "Full Body",
+            "powerlifting": "Powerlifting",
+            "calisthenics": "Calisthenics",
+            "strength": "Allenamento di Forza",
+            "endurance": "Resistenza",
+            "flexibility": "Flessibilità",
+            "recovery": "Recupero",
+            "swimming": "Nuoto",
+            "running": "Corsa"
+        },
+        "workout_statuses": {
+            "scheduled": "Programmato",
+            "overcompleted": "Supercompletato",
+            "completed": "Completato",
+            "cancelled": "Annullato",
+            "in_progress": "In Corso",
+            "skipped": "Saltato",
+            "partially_completed": "Completato (Parzialmente)",
+            "novyj_status_trenirovki": "Новый статус тренировки"
+        },
+        "hypertrophy_types": {
+            "sarcoplasmic": "Ipertrofia Sarcoplasmatica",
+            "myofibrillar": "Ipertrofia Miofibrillare",
+            "mixed": "Mista",
+            "neural": "Adattamento Neurale",
+            "novyj_tip_gipertrofii": "Новый тип гипертрофии"
+        },
+        "agonists": {
+            "pectoralis_major": "Grande Pettorale",
+            "pectoralis_minor": "Piccolo Pettorale",
+            "latissimus_dorsi": "Gran Dorsale",
+            "trapezius_muscle": "Trapezio",
+            "rhomboid_muscle": "Romboide",
+            "teres_major": "Grande Rotondo",
+            "teres_minor": "Piccolo Rotondo",
+            "infraspinatus": "Sovraspinato",
+            "supraspinatus": "Sovraspinato",
+            "subscapularis": "Sottoscapolare",
+            "anterior_deltoid": "Deltoide Anteriore",
+            "lateral_deltoid": "Deltoide Laterale",
+            "posterior_deltoid": "Deltoide Posteriore",
+            "biceps_brachii": "Bicipite Brachiale",
+            "triceps_brachii": "Tricipite Brachiale",
+            "brachialis": "Brachiale",
+            "coracobrachialis": "Coracobrachiale",
+            "brachioradialis": "Brachioradiale",
+            "flexor_carpi_radialis": "Flessore Radiale del Carpo",
+            "flexor_carpi_ulnaris": "Flessore Ulnare del Carpo",
+            "palmaris_longus": "Palmare Lungo",
+            "extensor_digitorum": "Estensore delle Dita",
+            "rectus_abdominis": "Retto dell'Addome",
+            "external_oblique": "Obliquo Esterno",
+            "internal_oblique": "Obliquo Interno",
+            "transversus_abdominis": "Trasverso dell'Addome",
+            "iliopsoas": "Ileopsoas",
+            "gluteus_maximus": "Grande Gluteo",
+            "gluteus_medius": "Medio Gluteo",
+            "gluteus_minimus": "Piccolo Gluteo",
+            "piriformis": "Piriforme",
+            "tensor_fasciae_latae": "Tensore della Fascia Lata",
+            "quadratus_femoris": "Quadrato del Femore",
+            "sartorius": "Sartorio",
+            "adductor_magnus": "Grande Adduttore",
+            "adductor_longus": "Lungo Adduttore",
+            "adductor_brevis": "Breve Adduttore",
+            "gracilis": "Gracile",
+            "biceps_femoris": "Bicipite Femorale",
+            "semitendinosus": "Semitendinoso",
+            "semimembranosus": "Semimembranoso",
+            "quadriceps_femoris": "Quadricipite Femorale",
+            "rectus_femoris": "Retto Femorale",
+            "gastrocnemius": "Gastrocnemio",
+            "soleus": "Soleo",
+            "tibialis_anterior": "Tibiale Anteriore",
+            "fibularis_longus": "Peroniero Lungo",
+            "fibularis_brevis": "Peroniero Breve",
+            "sternocleidomastoid": "Sternocleidomastoideo",
+            "scalene_muscles": "Muscoli Scaleni",
+            "novyj_agonist": "Новый агонист"
+        },
+        "exercises": {
+            "barbell_squat": "Squat con Bilanciere",
+            "bench_press": "Panca Piana",
+            "burpee": "Burpee",
+            "deadlift": "Stacco da Terra",
+            "pull_ups": "Trazioni",
+            "dips": "Dips",
+            "overhead_press": "Lento Avanti",
+            "bent_over_row": "Rematore con Bilanciere",
+            "skull_crusher": "French Press",
+            "barbell_curl": "Curl con Bilanciere",
+            "incline_dumbbell_press": "Panca Inclinata con Manubri",
+            "lat_pulldown": "Lat Machine",
+            "leg_extension": "Estensioni Gambe",
+            "leg_curl": "Leg Curl",
+            "lunges": "Affondi",
+            "calf_raise": "Calf Raise",
+            "plank": "Plank",
+            "crunches": "Crunch",
+            "seated_cable_row": "Rematore al Cavo Seduto",
+            "lateral_raise": "Alzate Laterali",
+            "leg_press": "Leg Press",
+            "romanian_deadlift": "Stacco Rumeno",
+            "hyperextension": "Hyperextension",
+            "one_arm_dumbbell_row": "Rematore con Manubrio Unilaterale",
+            "seated_dumbbell_press": "Lento Avanti con Manubri Seduto",
+            "dumbbell_fly": "Croci con Manubri",
+            "dumbbell_curl": "Curl con Manubri",
+            "glute_bridge": "Ponte Glutei",
+            "side_plank": "Plank Laterale",
+            "triceps_pushdown": "Estensioni Tricipiti al Cavo",
+            "novoe_uprazhnenie": "Новое упражнение"
+        },
+        "workout_templates": {
+            "powerlifting_heavy_squat_day": "Powerlifting - Giorno Squat Pesante",
+            "powerlifting_heavy_bench_day": "Powerlifting - Giorno Panca Pesante",
+            "powerlifting_heavy_deadlift_day": "Powerlifting - Giorno Stacco Pesante",
+            "bodybuilding_chest_triceps": "Bodybuilding - Petto & Tricipiti",
+            "bodybuilding_back_biceps": "Bodybuilding - Schiena & Bicipiti",
+            "bodybuilding_legs_shoulders": "Bodybuilding - Gambe & Spalle",
+            "full_body_general_fitness": "Full Body - Fitness Generale",
+            "cardio_endurance_session": "Cardio - Sessione Resistenza",
+            "calisthenics_upper_body": "Calisthenics - Parte Superiore",
+            "liss_recovery_walk": "LISS - Camminata Recupero",
+            "novyj_shablon_trenirovki": "Новый шаблон тренировки"
+        },
+        "microcycle_templates": {
+            "week_1_foundation": "Settimana 1 - Fondazione",
+            "week_2_volume_build": "Settimana 2 - Costruzione Volume",
+            "week_3_intensity_peak": "Settimana 3 - Picco di Intensità",
+            "week_4_deload": "Settimana 4 - Scarico",
+            "5x5_strength_cycle": "Ciclo Forza 5x5",
+            "hypertrophy_block_a": "Blocco Ipertrofia A",
+            "hypertrophy_block_b": "Blocco Ipertrofia B",
+            "powerlifting_meet_prep": "Prep Gara Powerlifting",
+            "general_fitness_week": "Settimana Fitness Generale",
+            "active_recovery_week": "Settimana di Recupero Attivo",
+            "novyj_shablon_mikrotsikla": "Новый шаблон микроцикла"
+        }
+    },
+    "settings": {
+        "trainer_mode": "Modalità Allenatore",
+        "theme_mode": "Tema App"
+    },
+    "classes": {
+        "training_process": {
+            "exercise_title": "Esercizio",
+            "exercise_repetitions": "Rip.",
+            "exercise_weight": "Peso"
+        },
+        "app_colors": {
+            "color_themes": {
+                "Aurora Borealis": "Aurora Boreale",
+                "Arabian Night": "Notte Araba",
+                "Space Cream": "Crema Spaziale",
+                "The last breath of a Jacquot": "L'Ultimo Respiro di un Jacquot",
+                "Sakura": "Sakura",
+                "Sunset in the Wasteland": "Tramonto nella Terra Desolata",
+                "Frog in satin pajamas": "Rana in Pigiama di Raso"
+            }
+        }
+    },
+    "ui": {
+        "components": {
+            "exercise_set": {
+                "set_name": "Esercizio",
+                "set_count": "Serie",
+                "set_repetitions": "Rip.",
+                "set_weight": "Peso"
+            },
+            "manager_dialog": {
+                "delete_succes": "Eliminato con successo!"
+            },
+            "navigation_menu": {
+                "dashboard_screen": {
+                    "label": "Allenamenti",
+                    "tooltip": "Microciclo Attuale"
+                },
+                "planning_screen": {
+                    "label": "Piano",
+                    "tooltip": "Pianificazione Allenamenti"
+                },
+                "reference_information_screen": {
+                    "label": "Info",
+                    "tooltip": "Informazioni di Riferimento"
+                },
+                "settings_screen": {
+                    "label": "Impostazioni",
+                    "tooltip": "Impostazioni App"
+                }
+            },
+            "records_list": {
+                "no_data": "Nessun dato",
+                "imposible_delete_last_user": "Eliminazione annullata.\nDeve esistere almeno 1 utente nel sistema.",
+                "imposible_change_the_record": "Questo record non può essere modificato"
+            },
+            "invalid_data_alert_dialog": {
+                "check_data": "Errore salvataggio. Controlla i dati inseriti."
+            }
+        },
+        "screens": {
+            "setup_wizard": {
+                "language_screen": {
+                    "title": "Benvenuto!",
+                    "choose_language": "Scegli la lingua:"
+                },
+                "user_screen": {
+                    "insert_username": "Il tuo nome:"
+                },
+                "initial_data_screen": {
+                    "main_label": "Seleziona i dati da caricare:",
+                    "insert_agonists": "Muscoli Agonisti",
+                    "insert_exercises": "Esercizi"
+                },
+                "finish_screen": {
+                    "main_label": "Configurazione completata!",
+                    "secondary_label": "Goditi l'app.",
+                    "button_label": "Inizia!"
+                }
+            },
+            "dashboard_screen": {
+                "user_popup_menu_button_tooltip": "Utente Attuale",
+                "is_unloading_microcycle_title": "Settimana di Scarico",
+                "no_planned_mesocycles": "Non hai mesocicli pianificati",
+                "no_planned_workouts": "Non hai allenamenti pianificati",
+                "no_workouts_today": "Nessun allenamento per oggi."
+            },
+            "planning_screen": {
+                "workout_template_menu": "Modelli Allenamento",
+                "microcycle_template_menu": "Modelli Microciclo",
+                "mesocycle_menu": "Mesocicli",
+                "macrocycle_menu": "Macrocicli"
+            },
+            "reference_information_screen": {
+                "user_information": "Informazioni Utente",
+                "workout_statuses": "Stati Allenamento",
+                "workout_types": "Tipi Allenamento",
+                "hypertrophy_types": "Tipi Ipertrofia",
+                "exercises": "Esercizi",
+                "agonists": "Agonisti"
+            },
+            "settings_screen": {
+                "language": "Lingua App",
+                "trainer_mode_switch": "Modalità Allenatore",
+                "active_user_statuses": "Stati Utente Attivi",
+                "app_color_themes": "Tema Colore App"
+            },
+            "workout_template_menu": {
+                "no_data": "Non hai nessun modello.",
+                "loading": "Caricamento dati..."
+            },
+            "workout_template_screen": {
+                "save_button": "Salva",
+                "save_error": "Impossibile salvare.\nControlla i dati inseriti."
+            },
+            "microcycle_template_menu": {
+                "no_data": "Non hai nessun modello.",
+                "loading": "Caricamento dati..."
+            },
+            "microcycle_template_screen": {
+                "save_button": "Salva",
+                "save_error": "Impossibile salvare.\nControlla i dati inseriti.",
+                "set_name": "Esercizio",
+                "set_count": "Serie"
+            },
+            "mesocycle_menu": {
+                "no_data": "Non hai nessun mesociclo.",
+                "loading": "Caricamento dati...",
+                "mesocycle_no_data": "Nessun dato",
+                "no_user": "Seleziona prima un utente"
+            },
+            "mesocycle_screen": {
+                "save_button": "Salva",
+                "is_unloading_checkbox": "Settimana di Scarico"
+            },
+            "macrocycle_menu": {
+                "no_data": "Non hai nessun macrociclo.",
+                "loading": "Caricamento dati...",
+                "macrocycle_no_data": "Nessun dato",
+                "no_user": "Seleziona prima un utente"
+            },
+            "macrocycle_screen": {
+                "no_data": "Nessun mesociclo incluso in questo macrociclo",
+                "invalid_mesocycle_data": "Pianifica prima il mesociclo"
+            },
+            "workout_screen": {
+                "save_button": "Salva",
+                "start_workout": "Inizia Allenamento",
+                "end_workout": "Finisci Allenamento"
+            },
+            "user_information_screen": {
+                "users": "Utenti",
+                "user_statuses": "Stati Utente"
+            },
+            "users_screen": {
+                "no_data": "Nessun utente"
+            },
+            "user_statuses_screen": {
+                "no_data": "Nessuno stato utente"
+            },
+            "workout_statuses_screen": {
+                "no_data": "Nessuno stato allenamento"
+            },
+            "workout_types_screen": {
+                "no_data": "Nessun tipo allenamento"
+            },
+            "hypertrophy_types_screen": {
+                "no_data": "Nessun tipo ipertrofia"
+            },
+            "exercises_screen": {
+                "no_data": "Nessun esercizio"
+            },
+            "agonists_screen": {
+                "no_data": "Nessun agonista"
+            },
+            "universal_record_management_screen": {
+                "title_helper_text": "Titolo",
+                "save_button": "Salva"
+            },
+            "user_management_screen": {
+                "username_field_helper_text": "Nome",
+                "phone_field_helper_text": "Telefono",
+                "status_dropdown_helper_text": "Stato",
+                "save_button": "Salva"
+            },
+            "exercise_management_screen": {
+                "title_helper_text": "Titolo",
+                "agonists_helper_text": "Agonisti",
+                "save_button": "Salva"
+            },
+            "agonist_management_screen": {
+                "title_helper_text": "Titolo",
+                "workout_types_helper_text": "Tipi Allenamento",
+                "save_button": "Salva"
+            },
+            "app_color_themes_screen": {}
+        }
+    }
+}

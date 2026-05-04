@@ -1,0 +1,6 @@
+[build]
+# Гарантирует установку пакета в окружение сборки
+packages = ["certifi"]
+
+# Принудительно передаёт PyInstaller флаг --hidden-import
+hidden_imports = ["certifi"]

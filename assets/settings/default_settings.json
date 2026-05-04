@@ -1,0 +1,59 @@
+{
+    "first_launch": true,
+    "language": "en",
+    "trainer_mode": false,
+    "theme_mode": "light",
+    "color_theme": "Arabian Night",
+    "current_user": 0,
+    "current_workout": 0,
+    "unchangeable_records": {
+        "user_statuses": [
+            1,
+            2,
+            3,
+            4,
+            5
+        ],
+        "workout_statuses": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+        ],
+        "workout_types": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18
+        ],
+        "hypertrophy_types": [
+            1,
+            2,
+            3,
+            4
+        ],
+        "exercises": [
+            
+        ],
+        "agonists": [
+            
+        ]
+    }
+}
