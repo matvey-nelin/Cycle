@@ -1,6 +1,13 @@
 [build]
 # Гарантирует установку пакета в окружение сборки
-packages = ["certifi"]
+packages = ["certifi", "transliterate"]
 
 # Принудительно передаёт PyInstaller флаг --hidden-import
-hidden_imports = ["certifi"]
+hidden_imports = ["certifi", "transliterate"]
+
+[build.android]
+app_name = "Cycle"                    # Название, которое видит пользователь
+package_name = "com.nelin-matvey.cycle"   # Уникальный ID приложения (обязательно латиница, точки, без подчёркиваний!)
+version = "1.0.0"                     # Версия для магазина
+min_sdk_version = 21                  # Минимальная версия Android
+target_sdk_version = 34               # Целевая версия
