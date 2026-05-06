@@ -1,32 +1,139 @@
-
-@"
-# Python
+# ==================== PYTHON ====================
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+
+# C extensions
+*.c
+*.h
+*.o
+*.obj
+*.dll
+*.exe
+*.pyd
+
+# Distribution / packaging
 .Python
-env/
-venv/
-.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Flet / Build artifacts
+# ==================== VIRTUAL ENV ====================
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# ==================== FLET ====================
+# Flet build artifacts
+.flet/
+.flet-cache/
+
+# ==================== IDE ====================
+# VS Code
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ==================== ANDROID ====================
+# Android build artifacts
 build/
 dist/
-.flet/
-*.spec
-
-# Android / Flutter
-.gradle/
-.idea/
-.local.properties
 *.apk
 *.aab
 *.keystore
+*.jks
+keystore.properties
+local.properties
 
-# OS files
-.DS_Store
+# Android Studio
+.gradle/
+.idea/
+*.iml
+out/
+captures/
+
+# ==================== SECRETS & CONFIGS ====================
+# Environment variables
+.env
+.env.local
+.env.production
+*.env
+
+# Database files (если есть локальные БД)
+*.db
+*.sqlite
+*.sqlite3
+!assets/*.db  # кроме тех, что в assets (если нужны)
+
+# API keys, tokens
+config_secrets.json
+secrets.json
+*.pem
+*.key
+
+# ==================== OS FILES ====================
+# Windows
 Thumbs.db
-"@ | Out-File -FilePath ".gitignore" -Encoding UTF8
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.fuse_hidden*
+.Trash-*
+
+# ==================== TEST & COVERAGE ====================
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# ==================== DOCS ====================
+docs/_build/
+*.log
+
+# ==================== TEMP FILES ====================
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
