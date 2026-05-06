@@ -6,8 +6,22 @@ packages = ["certifi", "transliterate"]
 hidden_imports = ["certifi", "transliterate"]
 
 [build.android]
-app_name = "Cycle"                    # Название, которое видит пользователь
-package_name = "com.nelinmatvey.cycle"   # Уникальный ID приложения (обязательно латиница, точки, без подчёркиваний!)
-version = "1.0.0"                     # Версия для магазина
-min_sdk_version = 21                  # Минимальная версия Android
-target_sdk_version = 34               # Целевая версия
+app_name = "Cycle"                      # Название, которое видит пользователь
+package_name = "com.nelinmatvey.cycle"  # Уникальный ID приложения (обязательно латиница, точки, без подчёркиваний!)
+version = "1.0.0"                       # Версия для магазина
+min_sdk_version = 21                    # Минимальная версия Android
+target_sdk_version = 34                 # Целевая версия
+
+[build.ios]
+app_name = "Cycle"
+bundle_name = "com.nelin.cycle"
+version = "1.0.0"
+
+[build.macos]
+app_name = "Cycle"
+
+[build.linux]
+app_name = "Cycle"
+
+[build.windows]
+app_name = "Cycle"
