@@ -1,13 +1,20 @@
 import sqlite3
 import os
-import sys
 
 import utils
 
 
+
+def get_app_data_dir() -> str:
+    """Возвращает приватную директорию приложения (Android/Windows/Linux)"""
+    return os.path.dirname(os.path.abspath(__file__))
+
+
+
 class Database:
     def __init__(self):
-        self.db_path = os.path.join(os.path.dirname(sys.executable), "CycleDatabase.db")
+        base_dir = get_app_data_dir()
+        self.db_path = os.path.join(base_dir, "CycleDatabase.db")
 
         try:
             if not os.path.exists(self.db_path):
