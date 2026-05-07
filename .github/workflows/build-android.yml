@@ -36,11 +36,25 @@ jobs:
       - name: Accept licenses
         run: yes | sdkmanager --licenses
 
-      - name: Clean previous builds
-        run: rm -rf build .flet __pycache__
+        # --- ПРИНУДИТЕЛЬНАЯ ОЧИСТКА ---
+      - name: Clean Flet & Flutter cache
+        run: |
+          flet clean
+          flutter clean
+          rm -rf .dart_tool/ .flutter-plugins* pubspec.lock
+        shell: bash
 
       - name: Build APK
         run: flet build apk --verbose
+      
+      - name: Check APK App Label
+        run: |
+          APK_PATH=$(find build -name "app-release.apk" | head -n 1)
+          echo "📦 Extracting app label from APK..."
+          unzip -p "$APK_PATH" AndroidManifest.xml | strings | grep -i "application-label" || true
+          # Альтернативный способ через aapt (если доступен)
+          $ANDROID_HOME/build-tools/*/aapt dump badging "$APK_PATH" | grep application-label || true
+        shell: bash
 
       - name: Upload APK
         uses: actions/upload-artifact@v4

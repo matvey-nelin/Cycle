@@ -1,20 +1,20 @@
 [build.android]
-app_name = "Cycle"                      # Название, которое видит пользователь
-package_name = "com.nelinmatvey.cycle"  # Уникальный ID приложения (обязательно латиница, точки, без подчёркиваний!)
-version = "1.0.0"                       # Версия для магазина
-min_sdk_version = 21                    # Минимальная версия Android
-target_sdk_version = 34                 # Целевая версия
+app_name = "Cycle"
+package_name = "com.nelinmatvey.cycle"
+version = "1.0.0"
+min_sdk_version = 21
+target_sdk_version = 34
 
 [build.ios]
 app_name = "Cycle"
 bundle_name = "com.nelinmatvey.cycle"
 version = "1.0.0"
 
-[build.macos]
+[build.windows]
 app_name = "Cycle"
 
 [build.linux]
 app_name = "Cycle"
 
-[build.windows]
+[build.macos]
 app_name = "Cycle"

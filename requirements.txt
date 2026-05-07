@@ -3,3 +3,29 @@ flet==0.83.1
 
 # === ВАШИ ПРЯМЫЕ ИМПОРТЫ (оставьте только те, что используете) ===
 transliterate==1.10.2
+
+# --- Flet Runtime & Backend Dependencies ---
+# Flet активно использует эти библиотеки внутри себя.
+# Если их нет, приложение падает с ModuleNotFoundError.
+pydantic
+fastapi
+starlette
+uvicorn
+httpx
+httpcore
+anyio
+h11
+typing_extensions
+requests
+urllib3
+certifi
+charset-normalizer
+idna
+python-dotenv
+pyyaml
+msgpack
+
+# --- Utilities ---
+rich
+markdown-it-py
+pygments
