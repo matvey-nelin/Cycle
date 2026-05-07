@@ -1,5 +1,4 @@
 import flet as ft
-from wcwidth import wrap
 
 from UI.ColorThemes.AppColors import AppColors
 

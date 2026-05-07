@@ -2,7 +2,6 @@ import sqlite3
 import os
 import sys
 
-from httpx import request
 import utils
 
 

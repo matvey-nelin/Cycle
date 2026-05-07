@@ -1,6 +1,5 @@
 import flet as ft
 from datetime import datetime
-import time
 
 from AppState import AppState
 from UI.Components.TemplateCard import TemplateCard

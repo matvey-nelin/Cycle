@@ -2,7 +2,6 @@ import flet as ft
 
 from Languages.Translator import Translator
 from UI.Screens.BaseView import BaseView
-from UI.ColorThemes.AppColors import AppColors
 
 
 class BaseLayout():

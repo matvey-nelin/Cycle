@@ -1,12 +1,7 @@
 import flet as ft
-import time
-
-from pydantic import NonNegativeFloat
 
 from UI.Components.ManagerDialog import ManagerDialog
 from UI.Screens.BaseView import BaseView
-from UI.ColorThemes.AppColors import AppColors
-from UI.Layouts.ClearLayout import ClearLayout
 
 
 class TemplateCard(ft.Container):

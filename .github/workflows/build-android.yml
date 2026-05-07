@@ -36,6 +36,28 @@ jobs:
       - name: Accept licenses
         run: yes | sdkmanager --licenses
 
+      - name: 🔍 Verify flet.toml & Generated Config
+        run: |
+          echo "=== 1. flet.toml exists? ==="
+          ls -la flet.toml || echo "FILE NOT FOUND!"
+          
+          echo "=== 2. flet.toml content (hex check for BOM) ==="
+          hexdump -C flet.toml | head -n 5
+          
+          echo "=== 3. Python TOML parse test ==="
+          python3 -c "
+          import tomllib
+          try:
+              with open('flet.toml', 'rb') as f:
+                  cfg = tomllib.load(f)
+              print('✅ Parsed OK')
+              print('app_name:', cfg.get('build', {}).get('android', {}).get('app_name', 'MISSING'))
+              print('package_name:', cfg.get('build', {}).get('android', {}).get('package_name', 'MISSING'))
+          except Exception as e:
+              print('❌ Parse Error:', e)
+          "
+        shell: bash
+
         # --- ПРИНУДИТЕЛЬНАЯ ОЧИСТКА ---
       - name: Hard clean build artifacts
         run: |

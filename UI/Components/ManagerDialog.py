@@ -1,8 +1,6 @@
 import flet as ft
 
 from AppState import AppState
-from UI.Screens.BaseView import BaseView
-from UI.Screens.Planning.WorkoutTemplateScreen import WorkoutTemplateScreen
 
 
 class ManagerDialog(ft.AlertDialog):

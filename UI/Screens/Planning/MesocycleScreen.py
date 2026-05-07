@@ -1,7 +1,6 @@
 import flet as ft
 
 from AppState import AppState
-from UI.Components.TemplateCard import TemplateCard
 from UI.Screens.BaseView import BaseView
 
 from UI.Components.TemplateContainer import TemplateContainer
