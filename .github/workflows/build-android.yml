@@ -59,27 +59,26 @@ jobs:
         shell: bash
 
         # --- ПРИНУДИТЕЛЬНАЯ ОЧИСТКА ---
-      - name: Hard clean build artifacts
+      - name: Hard Clean
         run: |
-          rm -rf build/
-          rm -rf .flet/
-          rm -rf .dart_tool/
-          rm -rf __pycache__/
-          rm -rf pubspec.lock
-          rm -rf .flutter-plugins*
-          rm -rf flet_server.log
+          rm -rf build/ .flet/ .dart_tool/ __pycache__/
+          rm -rf pubspec.lock .flutter-plugins* flet_server.log
+          # Критично: удаляем скрытый кэш Flet CLI
+          rm -rf ~/.flet/
+          flutter pub cache clean 2>/dev/null || true
         shell: bash
 
       - name: Build APK
         run: flet build apk --verbose
       
-      - name: Check APK App Label
+      - name: Verify APK Label
         run: |
-          APK_PATH=$(find build -name "app-release.apk" | head -n 1)
-          echo "📦 Extracting app label from APK..."
-          unzip -p "$APK_PATH" AndroidManifest.xml | strings | grep -i "application-label" || true
-          # Альтернативный способ через aapt (если доступен)
-          $ANDROID_HOME/build-tools/*/aapt dump badging "$APK_PATH" | grep application-label || true
+          APK=$(find build -name "app-release.apk" | head -n 1)
+          echo "📦 APK: $APK"
+          # Flet хранит имя в strings.xml
+          unzip -p "$APK" res/values/strings.xml 2>/dev/null | grep -A1 'app_name' || echo "Not found"
+          # Дубликат в манифесте
+          unzip -p "$APK" AndroidManifest.xml 2>/dev/null | strings | grep 'application-label' || echo "Not found"
         shell: bash
 
       - name: Upload APK

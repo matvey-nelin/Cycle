@@ -226,6 +226,11 @@ class CycleApp:
 
         self.layout.change_screen(self.screen)
 
+        try:
+            self.page.update() 
+        except:
+            pass 
+
 
 
     def _on_resize_page_(self, e):

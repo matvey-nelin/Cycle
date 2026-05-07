@@ -61,6 +61,9 @@ def check_and_create_service_files():
 def main(page: ft.Page):
     check_and_create_service_files()
 
+    # Предотавращает мгновенное закрытие при багах навигации
+    page.on_close = lambda: None
+
     app_state = AppState(page)
     CycleApp(page, app_state)
 
