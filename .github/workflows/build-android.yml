@@ -37,11 +37,15 @@ jobs:
         run: yes | sdkmanager --licenses
 
         # --- ПРИНУДИТЕЛЬНАЯ ОЧИСТКА ---
-      - name: Clean Flet & Flutter cache
+      - name: Hard clean build artifacts
         run: |
-          flet clean
-          flutter clean
-          rm -rf .dart_tool/ .flutter-plugins* pubspec.lock
+          rm -rf build/
+          rm -rf .flet/
+          rm -rf .dart_tool/
+          rm -rf __pycache__/
+          rm -rf pubspec.lock
+          rm -rf .flutter-plugins*
+          rm -rf flet_server.log
         shell: bash
 
       - name: Build APK
