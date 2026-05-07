@@ -1,14 +1,9 @@
-from turtle import color
-
 import flet as ft
 import datetime
-
-from numpy import size
 
 from AppState import AppState
 from UI.Screens.BaseView import BaseView
 
-from UI.Components.TemplateContainer import TemplateContainer
 from Classes.TrainingProcess import TrainingProcess
 
 

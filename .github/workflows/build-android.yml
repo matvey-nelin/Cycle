@@ -9,7 +9,6 @@ jobs:
   build-apk:
     runs-on: ubuntu-latest
     env:
-      # Подавляем интерактивные запросы в CI
       CI: "true"
       DEBIAN_FRONTEND: "noninteractive"
       
@@ -24,20 +23,21 @@ jobs:
       - name: Install Flet
         run: pip install flet==0.83.1 flet-cli==0.83.1
 
-      - name: Set up Flutter (версия, которую требует Flet)
+      - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          # ⚠️ Ставим именно ту версию, которую просит лог ошибки:
           flutter-version: '3.41.4'
           channel: 'stable'
-          # Это важно: не переключать канал автоматически
-          cache: true
+          cache: false  # ⚠️ ОТКЛЮЧАЕМ КЭШ ДЛЯ ЧИСТОЙ СБОРКИ
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Accept Android licenses
+      - name: Accept licenses
         run: yes | sdkmanager --licenses
+
+      - name: Clean previous builds
+        run: rm -rf build .flet __pycache__
 
       - name: Build APK
         run: flet build apk --verbose
@@ -45,5 +45,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: cycle-deploy-apk
+          name: cycle-apk
           path: build/flutter/build/app/outputs/flutter-apk/app-release.apk

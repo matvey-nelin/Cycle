@@ -1,10 +1,3 @@
-[build]
-# Гарантирует установку пакета в окружение сборки
-packages = ["certifi", "transliterate"]
-
-# Принудительно передаёт PyInstaller флаг --hidden-import
-hidden_imports = ["certifi", "transliterate"]
-
 [build.android]
 app_name = "Cycle"                      # Название, которое видит пользователь
 package_name = "com.nelinmatvey.cycle"  # Уникальный ID приложения (обязательно латиница, точки, без подчёркиваний!)
