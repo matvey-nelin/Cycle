@@ -20,7 +20,7 @@ class AppState:
 
         self.db_path        = os.path.join(self.app_dir, "CycleDatabase.db")
         self.settings_path  = os.path.join(self.app_dir, "settings.json")
-        self.lang_pack_path = lambda lang_cade: os.path.join(self.app_dir, rf"language_packs\{lang_cade}")
+        self.lang_pack_path = lambda lang_cade: os.path.join(self.app_dir, rf"language_packs/{lang_cade}")
         
         self.database   = Database()
         self.settings   = Settings()

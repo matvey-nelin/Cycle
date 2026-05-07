@@ -212,7 +212,7 @@ class WorkoutScreen(BaseView):
         )
 
         if self.is_planning_screen:
-            list_time_pickers: list[ft.Control] = [self.date_picker_row, self.time_pickers_row] if self.settings.trainer_mode\
+            list_time_pickers: list[ft.Control] = [self.date_picker_row, self.time_pickers_row] if self.settings.trainer_mode \
                                             else  [self.date_picker_row]
         else:
             self.start_time_picker_button.on_click  = None

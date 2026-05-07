@@ -20,7 +20,7 @@ class Translator:
             raise ValueError("Unsupported language")
 
         
-        self.language_pack_path = os.path.join(os.path.dirname(sys.executable), rf"language_packs\{language}.json")
+        self.language_pack_path = os.path.join(os.path.dirname(sys.executable), rf"language_packs/{language}.json")
         with open(self.language_pack_path, "r", encoding="UTF-8") as pack:
             self.language_pack = dict(json.load(pack))
 
@@ -171,7 +171,7 @@ class Translator:
             raise ValueError("Incorrect data of essence for creating slug")
 
         for language in list(SupportedLanguages.LANGUAGES.keys()):
-            language_pack_path = os.path.join(os.path.dirname(sys.executable), rf"language_packs\{language}.json")
+            language_pack_path = os.path.join(os.path.dirname(sys.executable), rf"language_packs/{language}.json")
 
             with open(language_pack_path, "r", encoding="UTF-8") as pack:
                 language_pack = dict(json.load(pack))
@@ -201,7 +201,7 @@ class Translator:
         
 
         for language in list(SupportedLanguages.LANGUAGES.keys()):
-            language_pack_path = os.path.join(os.path.dirname(sys.executable), rf"language_packs\{language}.json")
+            language_pack_path = os.path.join(os.path.dirname(sys.executable), rf"language_packs/{language}.json")
 
             with open(language_pack_path, "r", encoding="UTF-8") as pack:
                 language_pack = dict(json.load(pack))

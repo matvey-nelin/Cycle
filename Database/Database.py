@@ -17,13 +17,13 @@ class Database:
                     cur  = conn.cursor()
 
                     # Создание базы данных (если не существует)
-                    with open(utils.resource_path(r"assets\database\Requests\Creating a database.sql"), encoding='UTF-8') as file:
+                    with open(utils.resource_path(r"assets/database/Requests/Creating a database.sql"), encoding='UTF-8') as file:
                         create_database_request = file.read()
                     cur.executescript(create_database_request)
                     
 
                     # Вставка первичных данных (если данных нет в таблице)
-                    with open(utils.resource_path(r"assets\database\Requests\Inserting data\Inserting initial data.sql"), encoding='UTF-8') as file:
+                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting initial data.sql"), encoding='UTF-8') as file:
                         inserting_initial_data_request = file.read()
                     cur.executescript(inserting_initial_data_request)
 
@@ -39,13 +39,13 @@ class Database:
                 # Вставка вторичных данных (если данных нет в таблице)                    
                     # Вставка мышц-агонистов
                 if insert_agonists:
-                    with open(utils.resource_path(r"assets\database\Requests\Inserting data\Inserting agonists.sql"), encoding='UTF-8') as file:
+                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting agonists.sql"), encoding='UTF-8') as file:
                         inserting_agonists_data_request = file.read()
                     cur.executescript(inserting_agonists_data_request)
                     
                     # Вставка упражнений
                 if insert_exercises:
-                    with open(utils.resource_path(r"assets\database\Requests\Inserting data\Inserting exercices.sql"), encoding='UTF-8') as file:
+                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting exercices.sql"), encoding='UTF-8') as file:
                         inserting_exercices_data_request = file.read()
                     cur.executescript(inserting_exercices_data_request)
 

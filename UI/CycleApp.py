@@ -261,22 +261,22 @@ class CycleApp:
         
         if system == "Windows":
             # Для Windows используем ICO
-            icon_path = utils.resource_path(r"assets\icons\windows_icon.ico")
+            icon_path = utils.resource_path(r"assets/icons/windows_icon.ico")
             if os.path.exists(icon_path):
                 return icon_path
             # Fallback на PNG
-            return utils.resource_path(r"assets\icons\app_icon.png")
+            return utils.resource_path(r"assets/icons/app_icon.png")
         
         elif system == "Darwin":  # macOS
             # Для macOS пробуем ICNS
-            icon_path = utils.resource_path(r"assets\icons\apple_app_icon.icns")
+            icon_path = utils.resource_path(r"assets/icons/apple_app_icon.icns")
             if os.path.exists(icon_path):
                 return icon_path
             # Fallback на PNG
-            return utils.resource_path(r"assets\icons\app_icon.png")
+            return utils.resource_path(r"assets/icons/app_icon.png")
         
         else:  # Linux и другие
-            return utils.resource_path(r"assets\icons\app_icon.png")
+            return utils.resource_path(r"assets/icons/app_icon.png")
         
 
 
