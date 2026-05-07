@@ -14,7 +14,7 @@ target_sdk_version = 34                 # Целевая версия
 
 [build.ios]
 app_name = "Cycle"
-bundle_name = "com.nelin.cycle"
+bundle_name = "com.nelinmatvey.cycle"
 version = "1.0.0"
 
 [build.macos]

@@ -4,7 +4,7 @@ import sys
 
 import re
 from transliterate import translit
-from langdetect import detect
+import langid
 
 from Languages import SupportedLanguages
 
@@ -138,7 +138,7 @@ class Translator:
         
 
         try:
-            lang_code = detect(text=re.sub(r'[^a-zа-я]', '', text.lower()))
+            lang_code = langid.classify(re.sub(r'[^a-zа-я]', '', text.lower()))[0]
         except:
             lang_code = 'unknown'
 
