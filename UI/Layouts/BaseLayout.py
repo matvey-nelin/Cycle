@@ -33,7 +33,6 @@ class BaseLayout():
 
     def change_screen(self, screen: BaseView):
         self.content_container.content = screen.content
-        self.content_container.update()
 
 
 

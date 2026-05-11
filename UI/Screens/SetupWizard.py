@@ -19,7 +19,9 @@ class SetupWizard:
 
 
         self.page = page
+        self.page.bottom_appbar = None
         self.navigate = navigate_callback
+
 
 
         self.initial_data = {
