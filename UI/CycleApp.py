@@ -97,7 +97,6 @@ class CycleApp:
         self.current_layout = "global"
         self.screen_name = "dashboard_screen"
 
-        # 🔑 ПЕРСИСТЕНТНЫЙ КОНТЕЙНЕР (живёт всё время работы приложения)
         self.root_container = ft.Container(expand=True)
         self.page.add(self.root_container)
 
@@ -111,7 +110,6 @@ class CycleApp:
             self.current_layout = 'local'
             self.screen_name = "setup_wizard"
             SetupWizard(self.page, self.navigate, self.app_state)
-
         elif self.settings.current_workout != 0:
             self.navigate(
                 screen_name="planning_workout_screen",
@@ -146,7 +144,6 @@ class CycleApp:
             screens_list = self.local_screens
             self.layout = self.local_layout
 
-        # Управление bottom_appbar
         if target_is_global and self.app_state.is_mobile:
             self.page.bottom_appbar = self.mobile_layout.bottom_appbar
         else:
@@ -157,10 +154,13 @@ class CycleApp:
         
         self.screen = screens_list[screen_name](**kwargs) if is_temporary_screen else screens_list[screen_name]
 
-        # 🔑 МЯГКАЯ ЗАМЕНА КОНТЕНТА (вместо clear/add)
+        # 🔑 Сначала обновляем экран внутри лэйаута
         self.layout.change_screen(self.screen)
+        
+        # 🔑 Затем назначаем лэйаут в корневой контейнер
         self.root_container.content = self.layout.layout_container
-
+        
+        # 🔑 Обновляем UI
         self.page.update()
 
 
@@ -174,11 +174,12 @@ class CycleApp:
 
             if self.current_layout == "global":
                 self.page.bottom_appbar = self.global_layout.bottom_appbar if isinstance(self.global_layout, MobileLayout.MobileLayout) else None
-                # 🔑 Мягкая замена контента
                 self.root_container.content = self.global_layout.layout_container
 
         self.local_layout = self.clear_layout
         self.page.update()
+
+
 
     def get_icon_path(self):
         system = platform.system()
@@ -195,6 +196,8 @@ class CycleApp:
         else:
             return utils.resource_path(r"assets/icons/app_icon.png")
 
+
+
     def determine_selected_navigation_option(self):
         if self.screen_name in self.global_screens:
             self.desktop_layout.navigation_rail.selected_index = list(self.global_screens.keys()).index(self.screen_name)
@@ -203,8 +206,9 @@ class CycleApp:
                     if isinstance(bottom_appbar_option, ft.IconButton):
                         bottom_appbar_option.selected = (index == list(self.global_screens.keys()).index(self.screen_name))
 
+
+
     def initialisation_all_layouts(self):
-        # Создаём лэйауты
         self.desktop_layout = DesktopLayout.DesktopLayout(self.page, self.app_state, self.translator, self.navigate)
         self.mobile_layout = MobileLayout.MobileLayout(self.page, self.app_state, self.translator, self.navigate)
         self.clear_layout = ClearLayout.ClearLayout(self.page, self.translator, self.navigate)
@@ -220,7 +224,6 @@ class CycleApp:
 
         self.local_layout = self.clear_layout
 
-        # 🔑 Назначаем контент в персистентный контейнер
         if self.current_layout == "global":
             self.page.bottom_appbar = self.global_layout.bottom_appbar if isinstance(self.global_layout, MobileLayout.MobileLayout) else None
             self.root_container.content = self.global_layout.layout_container
