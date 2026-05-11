@@ -99,12 +99,14 @@ class CycleApp:
 
         self.root_container = ft.Container(expand=True)
         self.page.add(self.root_container)
+    
 
         self.app_state.hot_restart_methods.append(self.initialisation_all_screens)
         self.initialisation_all_screens()
 
         self.app_state.hot_restart_methods.append(self.initialisation_all_layouts)
         self.initialisation_all_layouts()
+
 
         if self.app_state.settings.first_launch:
             self.current_layout = 'local'
@@ -144,10 +146,11 @@ class CycleApp:
             screens_list = self.local_screens
             self.layout = self.local_layout
 
-        if target_is_global and self.app_state.is_mobile:
-            self.page.bottom_appbar = self.mobile_layout.bottom_appbar
-        else:
-            self.page.bottom_appbar = None
+        if self.page.bottom_appbar is not None:
+            if target_is_global and self.app_state.is_mobile:
+                self.page.bottom_appbar.visible = True
+            else:
+                self.page.bottom_appbar.visible = False
 
         if is_universal_screen:
             screens_list[screen_name]._init_data_(**kwargs)
@@ -172,9 +175,10 @@ class CycleApp:
             self.determine_selected_navigation_option()
             self.global_layout = self.mobile_layout if self.app_state.is_mobile else self.desktop_layout
 
-            if self.current_layout == "global":
-                self.page.bottom_appbar = self.global_layout.bottom_appbar if isinstance(self.global_layout, MobileLayout.MobileLayout) else None
-                self.root_container.content = self.global_layout.layout_container
+            if self.page.bottom_appbar is not None:
+                if self.current_layout == "global":
+                    self.page.bottom_appbar.visible = True if isinstance(self.global_layout, MobileLayout.MobileLayout) else False
+                    self.root_container.content = self.global_layout.layout_container
 
         self.local_layout = self.clear_layout
         self.page.update()
@@ -215,20 +219,22 @@ class CycleApp:
 
         self.determine_selected_navigation_option()
         self.app_state.subscribe(self.desktop_layout._on_state_changes)
+
+        self.page.bottom_appbar = self.mobile_layout.bottom_appbar
         
+
         if self.app_state.is_mobile:
             self.global_layout = self.mobile_layout
-            self.page.bottom_appbar = self.global_layout.bottom_appbar
         else:
             self.global_layout = self.desktop_layout
 
         self.local_layout = self.clear_layout
 
         if self.current_layout == "global":
-            self.page.bottom_appbar = self.global_layout.bottom_appbar if isinstance(self.global_layout, MobileLayout.MobileLayout) else None
+            self.page.bottom_appbar.visible = True
             self.root_container.content = self.global_layout.layout_container
         else:
-            self.page.bottom_appbar = None
+            self.page.bottom_appbar.visible = False
             self.root_container.content = self.clear_layout.layout_container
 
         self.navigate(self.screen_name)

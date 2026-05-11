@@ -389,6 +389,8 @@ class SetupWizard:
         )
 
         self.app_state.data_changed_notify()
+        self.app_state.change_current_language(self.settings.language)
 
         self.navigate("dashboard_screen")
-        self.app_state.change_current_language(self.settings.language)
+        
+        self.page.update()
