@@ -252,11 +252,14 @@ class CycleApp:
 
                 self.navigate(self.screen_name)
 
-                self.page.update()
-
-
         # Назначение лэйаута для локальных экранов 
         self.local_layout   = self.clear_layout
+
+        try:
+            self.page.update() 
+        except:
+            pass 
+
 
 
 
@@ -322,11 +325,11 @@ class CycleApp:
         if self.current_layout == "global":
             self.page.bottom_appbar = self.global_layout.bottom_appbar if isinstance(self.global_layout, MobileLayout.MobileLayout) \
                 else None
-
             self.page.add(self.global_layout.layout_container)
 
         elif self.current_layout == "local":
             self.page.add(self.clear_layout.layout_container)
+            self.page.bottom_appbar = None
 
 
         self.navigate(self.screen_name)
