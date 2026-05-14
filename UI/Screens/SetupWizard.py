@@ -182,9 +182,7 @@ class SetupWizard:
             label=self.labels["language_screen"]["choose_language"],
             options=language_options,
             value=self.settings.language,
-            text_style=(ft.TextStyle(
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
-            )),
+            color=ft.Colors.ON_SURFACE,
             on_select=self.__init_languages__,
             align=ft.Alignment.CENTER
         )
@@ -234,7 +232,7 @@ class SetupWizard:
                             value=self.initial_data["user_name"],
                             label=text_field_label,
                             text_style=(ft.TextStyle(
-                                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                                color=ft.Colors.ON_SURFACE
                             )),
                             on_change=change_text
                         ),
@@ -243,7 +241,7 @@ class SetupWizard:
                             label=switch_label,
                             label_position=ft.LabelPosition.LEFT,
                             label_text_style=(ft.TextStyle(
-                                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                                color=ft.Colors.ON_SURFACE
                             )),
                             on_change=change_trainer_mode,
                             active_color=self.colors.LIGHT_PRIMARY if self.colors.theme == "light" else self.colors.DARK_PRIMARY,
@@ -280,7 +278,7 @@ class SetupWizard:
                     [
                         ft.Text(
                             value=self.labels["initial_data_screen"]["main_label"],
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND,
+                            color=ft.Colors.ON_SURFACE,
                             size=24
                         ),
 
@@ -289,7 +287,7 @@ class SetupWizard:
                             label=self.labels["initial_data_screen"]["insert_agonists"],
                             label_position=ft.LabelPosition.LEFT,
                             label_text_style=(ft.TextStyle(
-                                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                                color=ft.Colors.ON_SURFACE
                             )),
                             on_change=switch_insertion,
                             data=self.initial_data["insert_agonists"],
@@ -301,7 +299,7 @@ class SetupWizard:
                             label=self.labels["initial_data_screen"]["insert_exercises"],
                             label_position=ft.LabelPosition.LEFT,
                             label_text_style=(ft.TextStyle(
-                                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                                color=ft.Colors.ON_SURFACE
                             )),
                             on_change=switch_insertion,
                             data=self.initial_data["insert_exercises"],
@@ -331,12 +329,12 @@ class SetupWizard:
                     [
                         ft.Text(
                             value=self.labels["finish_screen"]["main_label"],
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND,
+                            color=ft.Colors.ON_SURFACE,
                             size=24
                         ),
                         ft.Text(
                             value=self.labels["finish_screen"]["secondary_label"],
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND,
+                            color=ft.Colors.ON_SURFACE,
                             size=18
                         )
                     ],
@@ -369,12 +367,6 @@ class SetupWizard:
 
 
     def __save_initial_data__(self):
-        # Сохранение настроек        
-        self.settings.first_launch = False
-        self.settings.language = self.initial_data["language"]
-        self.settings.trainer_mode = self.initial_data["trainer_mode"]
-        self.settings.unloading()
-
         # Вставка данных в БД
         self.database.insert_user(self.initial_data["user_name"])
         self.settings.change_current_user(id_user=1)
@@ -388,9 +380,17 @@ class SetupWizard:
             exercises=self.initial_data["insert_exercises"]
         )
 
+
+        # Сохранение настроек  
+        self.settings.language = self.initial_data["language"]
+        self.settings.trainer_mode = self.initial_data["trainer_mode"]
+
+        # Изменение интерфейса согласно новым настройкам
         self.app_state.data_changed_notify()
         self.app_state.change_current_language(self.settings.language)
 
         self.navigate("dashboard_screen")
-        
-        self.page.update()
+
+        # Сохранение настроек        
+        self.settings.first_launch = False
+        self.settings.unloading()

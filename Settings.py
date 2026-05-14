@@ -1,6 +1,4 @@
 import json
-import os
-import sys
 
 from Languages import SupportedLanguages
 
@@ -10,10 +8,10 @@ import utils
 
 class Settings:
     def __init__(self) -> None:
-        self.settings_path = os.path.join(os.path.dirname(sys.executable), "settings.json")
+        self.settings_path = utils.get_data_directory() / "settings.json"
 
         # Запись файла настроек в первый запуск программы
-        if not os.path.exists(self.settings_path):
+        if not self.settings_path.exists():
             self._settings_dict = {
                 "first_launch"  : True,
                 "language"      : "en",
@@ -34,14 +32,14 @@ class Settings:
                     "agonists"          : [] # [_ for _ in range(1, 51)]   # Первые 50 инициируемых при создании БД записей
                 }
             }
-            with open(utils.resource_path(self.settings_path), "w", encoding="UTF-8") as file:
+            with open(self.settings_path, "w", encoding="UTF-8") as file:
                 json.dump(self._settings_dict, file, ensure_ascii=False, indent=4)
 
         try:
             # Назначение параметров настроек 
             # (для проверки правильности написания: в файле должно быть 5 имен каждой настройки (через поиск))
             
-            with open(utils.resource_path(self.settings_path), "r", encoding="UTF-8") as file:
+            with open(self.settings_path, "r", encoding="UTF-8") as file:
                 self._settings_dict = dict(json.load(file))
 
 
@@ -98,7 +96,7 @@ class Settings:
                 }
             }
 
-            with open(utils.resource_path(self.settings_path), "w", encoding="UTF-8") as file:
+            with open(self.settings_path, "w", encoding="UTF-8") as file:
                 json.dump(self._settings_dict, file, ensure_ascii=False, indent=4)
 
         except Exception as _ex:

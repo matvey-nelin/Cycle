@@ -32,7 +32,7 @@ class DesktopLayout(BaseLayout):
             selected_index=0,
             label_type=ft.NavigationRailLabelType.ALL,
             destinations=self.destinations,
-            on_change=self.handle_navigation,
+            on_change=self.handle_navigation, 
             expand=False,
             height=float("inf"),
             indicator_color=self.colors.LIGHT_TERTIARY_CONTAINER if self.colors.theme == 'light' else self.colors.DARK_TERTIARY_CONTAINER,

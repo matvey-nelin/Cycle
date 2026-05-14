@@ -5,10 +5,10 @@
             "inactive": "Inactive",
             "sick": "Sick",
             "injured": "Injured",
-            "on_vacation": "On Vacation",
-            "novyj_status_pol_zovatelja": "Новый статус пользователя"
+            "on_vacation": "On Vacation"
         },
         "workout_types": {
+            "liss": "LISS",
             "cardio": "Cardio",
             "crossfit": "CrossFit",
             "bodybuilding": "Bodybuilding",
@@ -34,15 +34,13 @@
             "cancelled": "Cancelled",
             "in_progress": "In Progress",
             "skipped": "Skipped",
-            "partially_completed": "Completed (Partially)",
-            "novyj_status_trenirovki": "Новый статус тренировки"
+            "partially_completed": "Completed (Partially)"
         },
         "hypertrophy_types": {
             "sarcoplasmic": "Sarcoplasmic Hypertrophy",
             "myofibrillar": "Myofibrillar Hypertrophy",
             "mixed": "Mixed",
-            "neural": "Neural Adaptation",
-            "novyj_tip_gipertrofii": "Новый тип гипертрофии"
+            "neural": "Neural Adaptation"
         },
         "agonists": {
             "pectoralis_major": "Pectoralis Major",
@@ -94,8 +92,7 @@
             "fibularis_longus": "Fibularis Longus",
             "fibularis_brevis": "Fibularis Brevis",
             "sternocleidomastoid": "Sternocleidomastoid",
-            "scalene_muscles": "Scalene Muscles",
-            "novyj_agonist": "Новый агонист"
+            "scalene_muscles": "Scalene Muscles"
         },
         "exercises": {
             "barbell_squat": "Barbell Squat",
@@ -127,8 +124,7 @@
             "dumbbell_curl": "Dumbbell Curl",
             "glute_bridge": "Glute Bridge",
             "side_plank": "Side Plank",
-            "triceps_pushdown": "Triceps Pushdown",
-            "novoe_uprazhnenie": "Новое упражнение"
+            "triceps_pushdown": "Triceps Pushdown"
         },
         "workout_templates": {
             "powerlifting_heavy_squat_day": "Powerlifting - Heavy Squat Day",
@@ -140,8 +136,7 @@
             "full_body_general_fitness": "Full Body - General Fitness",
             "cardio_endurance_session": "Cardio - Endurance Session",
             "calisthenics_upper_body": "Calisthenics - Upper Body",
-            "liss_recovery_walk": "LISS - Recovery Walk",
-            "novyj_shablon_trenirovki": "Новый шаблон тренировки"
+            "liss_recovery_walk": "LISS - Recovery Walk"
         },
         "microcycle_templates": {
             "week_1_foundation": "Week 1 - Foundation",
@@ -153,8 +148,7 @@
             "hypertrophy_block_b": "Hypertrophy Block B",
             "powerlifting_meet_prep": "Powerlifting Meet Prep",
             "general_fitness_week": "General Fitness Week",
-            "active_recovery_week": "Active Recovery Week",
-            "novyj_shablon_mikrotsikla": "Новый шаблон микроцикла"
+            "active_recovery_week": "Active Recovery Week"
         }
     },
     "settings": {
@@ -198,6 +192,10 @@
                 "planning_screen": {
                     "label": "Plan",
                     "tooltip": "Workout Planning"
+                },
+                "statistics_screen": {
+                    "label": "Statistics",
+                    "tooltip": "Target metrics"
                 },
                 "reference_information_screen": {
                     "label": "Info",

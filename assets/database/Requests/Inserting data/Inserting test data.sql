@@ -1,107 +1,130 @@
-INSERT OR IGNORE INTO target_muscles(id_workout_type, id_agonist)
-VALUES 
--- Powerlifting (id=11): грудь, спина, ноги
-(11, 1),  -- Pectoralis major
-(11, 3),  -- Latissimus dorsi
-(11, 42), -- Quadriceps femoris
-(11, 28), -- Gluteus maximus
+-- =====================================================
+-- 2. ШАБЛОНЫ ТРЕНИРОВОК (минимум: 2 штуки)
+--    Зависит: workout_type ✓, hypertrophy_type ✓
+-- =====================================================
 
--- Bodybuilding (id=4): все основные группы
-(4, 1), (4, 3), (4, 11), (4, 14), (4, 15), (4, 23), (4, 28), (4, 42),
+-- Шаблон 1: "Push - Сила" (грудь/дельты/трицепс, миозиллярная гипертрофия)
+INSERT INTO workout_templates(id_workout_type, id_hypertrophy_type, title, slug)
+VALUES (13, 2, 'Push - Strength', 'push_strength');
 
--- Cardio (id=2): ноги, кор
-(2, 42), (2, 28), (2, 23), (2, 44),
-
--- Full Body (id=10): всё тело
-(10, 1), (10, 3), (10, 11), (10, 14), (10, 23), (10, 28), (10, 42);
-
-INSERT OR IGNORE INTO workout_templates(id_workout_type, id_hypertrophy_type, title, slug)
-VALUES 
-(11, 2, "Powerlifting - Heavy Squat Day", "powerlifting_heavy_squat_day"),
-(11, 2, "Powerlifting - Heavy Bench Day", "powerlifting_heavy_bench_day"),
-(11, 2, "Powerlifting - Heavy Deadlift Day", "powerlifting_heavy_deadlift_day"),
-(4, 1, "Bodybuilding - Chest & Triceps", "bodybuilding_chest_triceps"),
-(4, 1, "Bodybuilding - Back & Biceps", "bodybuilding_back_biceps"),
-(4, 1, "Bodybuilding - Legs & Shoulders", "bodybuilding_legs_shoulders"),
-(10, 3, "Full Body - General Fitness", "full_body_general_fitness"),
-(2, 4, "Cardio - Endurance Session", "cardio_endurance_session"),
-(12, 3, "Calisthenics - Upper Body", "calisthenics_upper_body"),
-(1, 4, "LISS - Recovery Walk", "liss_recovery_walk");
-
-INSERT OR IGNORE INTO workout_template_composition(id_workout_template, id_exercise)
-VALUES 
--- Шаблон 1: Powerlifting - Heavy Squat Day
-(1, 2), (1, 20), (1, 13), (1, 15),
-
--- Шаблон 2: Powerlifting - Heavy Bench Day
-(2, 1), (2, 11), (2, 9), (2, 19),
-
--- Шаблон 3: Powerlifting - Heavy Deadlift Day
-(3, 3), (3, 21), (3, 22), (3, 16),
-
--- Шаблон 4: Bodybuilding - Chest & Triceps
-(4, 1), (4, 11), (4, 25), (4, 9), (4, 27),
-
--- Шаблон 5: Bodybuilding - Back & Biceps
-(5, 4), (5, 12), (5, 7), (5, 10), (5, 26),
-
--- Шаблон 6: Bodybuilding - Legs & Shoulders
-(6, 2), (6, 8), (6, 6), (6, 19), (6, 15),
-
--- Шаблон 7: Full Body - General Fitness
-(7, 1), (7, 4), (7, 2), (7, 16), (7, 30),
-
--- Шаблон 8: Cardio - Endurance Session
-(8, 30), (8, 16), (8, 8),
-
--- Шаблон 9: Calisthenics - Upper Body
-(9, 4), (9, 5), (9, 16), (9, 29),
-
--- Шаблон 10: LISS - Recovery Walk
-(10, 16), (10, 29);
-
-INSERT OR IGNORE INTO microcycle_templates(title, slug)
-VALUES 
-("Week 1 - Foundation", "week_1_foundation"),
-("Week 2 - Volume Build", "week_2_volume_build"),
-("Week 3 - Intensity Peak", "week_3_intensity_peak"),
-("Week 4 - Deload", "week_4_deload"),
-("5x5 Strength Cycle", "5x5_strength_cycle"),
-("Hypertrophy Block A", "hypertrophy_block_a"),
-("Hypertrophy Block B", "hypertrophy_block_b"),
-("Powerlifting Meet Prep", "powerlifting_meet_prep"),
-("General Fitness Week", "general_fitness_week"),
-("Active Recovery Week", "active_recovery_week");
+-- Шаблон 2: "Pull - Объём" (спина/бицепс, саркоплазматическая гипертрофия)
+INSERT INTO workout_templates(id_workout_type, id_hypertrophy_type, title, slug)
+VALUES (13, 1, 'Pull - Volume', 'pull_volume');
 
 
-INSERT OR IGNORE INTO microcycle_template_composition(id_microcycle_template, id_workout_template)
-VALUES 
--- Микроцикл 1: Foundation (3 тренировки)
-(1, 1), (1, 2), (1, 3),
+-- =====================================================
+-- 3. СОСТАВ ШАБЛОНОВ (какие упражнения входят)
+--    Зависит: workout_templates ✓, exercises ✓
+-- =====================================================
 
--- Микроцикл 2: Volume Build (4 тренировки)
-(2, 4), (2, 5), (2, 6), (2, 7),
+-- Push-шаблон: 4 базовых упражнения
+INSERT INTO workout_template_composition(id_workout_template, id_exercise) VALUES
+    (1, 1),   -- Bench Press
+    (1, 6),   -- Overhead Press
+    (1, 19),  -- Lateral Raise
+    (1, 9);   -- Skull Crusher
 
--- Микроцикл 3: Intensity Peak (3 тренировки)
-(3, 1), (3, 2), (3, 3),
+-- Pull-шаблон: 4 базовых упражнения
+INSERT INTO workout_template_composition(id_workout_template, id_exercise) VALUES
+    (2, 4),   -- Pull-ups
+    (2, 7),   -- Bent Over Row
+    (2, 12),  -- Lat Pulldown
+    (2, 10);  -- Barbell Curl
 
--- Микроцикл 4: Deload (2 лёгкие тренировки)
-(4, 7), (4, 10),
 
--- Микроцикл 5: 5x5 Strength (3 тренировки)
-(5, 1), (5, 2), (5, 3),
+-- =====================================================
+-- 4. ПЕРИОДИЗАЦИЯ (Макро → Мезо → Микро)
+--    Зависит: users ✓
+-- =====================================================
 
--- Микроцикл 6: Hypertrophy A (4 тренировки)
-(6, 4), (6, 5), (6, 6), (6, 7),
+-- Макроцикл: "Подготовка к лету 2026"
+INSERT INTO macrocycles(id_user) VALUES (1);
 
--- Микроцикл 7: Hypertrophy B (4 тренировки)
-(7, 4), (7, 5), (7, 6), (7, 9),
+-- Мезоцикл: "Набор силы" (привязан к макроциклу)
+INSERT INTO mesocycles(id_macrocycle, id_user) VALUES (1, 1);
 
--- Микроцикл 8: Meet Prep (3 тренировки)
-(8, 1), (8, 2), (8, 3),
+-- Микроциклы: 3 недели (1 обычная, 1 разгрузка, 1 пиковая)
+INSERT INTO microcycles(id_mesocycle, is_unloading) VALUES
+    (1, 0),  -- id=1: Неделя 1 (обычная)
+    (1, 1),  -- id=2: Неделя 2 (РАЗГРУЗКА 🔥)
+    (1, 0);  -- id=3: Неделя 3 (прогрессия нагрузки)
 
--- Микроцикл 9: General Fitness (3 тренировки)
-(9, 7), (9, 8), (9, 10),
 
--- Микроцикл 10: Active Recovery (2 тренировки)
-(10, 8), (10, 10);
+-- =====================================================
+-- 5. РЕАЛЬНЫЕ ТРЕНИРОВКИ
+--    Зависит: microcycles ✓, workout_templates ✓, workout_status ✓
+--    Даты: база 1778400000 ≈ 6 мая 2026, шаг ~2-3 дня
+-- =====================================================
+INSERT INTO workouts(
+    id_microcycle, id_workout_template, id_workout_status,
+    planned_workout_start_datetime, planned_workout_end_datetime,
+    actual_workout_start_datetime, actual_workout_end_datetime
+) VALUES
+    -- 📅 Микроцикл 1 (Обычная нагрузка)
+    (1, 1, 3, 1778400000, 1778403600, 1778400300, 1778403900), -- W1: Push, Completed, ~60 мин
+    (1, 2, 3, 1778659200, 1778662800, 1778659400, 1778663000), -- W2: Pull, Completed, ~60 мин
+    
+    -- 📅 Микроцикл 2 (Разгрузка 🔥)
+    (2, 1, 3, 1779004800, 1779007200, 1779005000, 1779007400), -- W3: Push-light, Completed, ~40 мин
+    
+    -- 📅 Микроцикл 3 (Прогрессия + краевые случаи)
+    (3, 1, 3, 1779609600, 1779613200, 1779609900, 1779613500), -- W4: Push-heavy, Completed, рост весов
+    (3, 2, 4, 1779868800, 1779872400, 1779869000, 1779871000), -- W5: Pull, Partially Completed (бросил)
+    (3, NULL, 6, 1780128000, 1780131600, 1780128300, 1780128300); -- W6: Free workout, In Progress
+
+
+-- =====================================================
+-- 6. ФАКТИЧЕСКОЕ ВЫПОЛНЕНИЕ (workout_composition)
+--    Зависит: workouts ✓, exercises ✓
+--    🔥 Тест-кейсы: weight=0, NULL actuals, прогрессия, перевыполнение
+-- =====================================================
+
+-- 🏋️ W1: Push по шаблону (вес=0 для разминки)
+INSERT INTO workout_composition(id_workout, id_exercise, planned_repetitions, planned_weight, actual_repetitions, actual_weight) VALUES
+    (1, 1, 2, 0.0, 2, 0.0),      -- Жим разминка (вес=0 → считаем как 1)
+    (1, 1, 4, 80.0, 4, 80.0),    -- Жим рабочий 1: 320 кг
+    (1, 1, 4, 80.0, 5, 80.0),    -- Жим рабочий 2 (+1 реп): 400 кг
+    (1, 6, 3, 50.0, 3, 50.0),    -- Армейский жим: 150 кг
+    (1, 19, 3, 12.5, 3, 12.5),   -- Махи: 37.5 кг
+    (1, 9, 3, 40.0, 3, 40.0),    -- Французский жим: 120 кг
+    (1, 27, 3, 30.0, NULL, NULL);-- Разгибания на блоке (пропустил → NULL)
+
+-- 🏋️ W2: Pull по шаблону (упражнения с весом тела)
+INSERT INTO workout_composition(id_workout, id_exercise, planned_repetitions, planned_weight, actual_repetitions, actual_weight) VALUES
+    (2, 4, 4, 0.0, 4, 0.0),      -- Подтягивания: 4×0 = 4 (вес тела)
+    (2, 4, 4, 0.0, 5, 0.0),      -- Подтягивания доп. подход: 5×0 = 5
+    (2, 7, 4, 70.0, 4, 70.0),    -- Тяга штанги: 280 кг
+    (2, 12, 3, 60.0, 3, 60.0),   -- Тяга блока: 180 кг
+    (2, 10, 3, 35.0, 3, 35.0),   -- Бицепс штанга: 105 кг
+    (2, 16, 3, 0.0, 3, 0.0);     -- Планка: 3×0 = 3
+
+-- 🏋️ W3: РАЗГРУЗКА 🔥 (низкие веса, меньше подходов)
+INSERT INTO workout_composition(id_workout, id_exercise, planned_repetitions, planned_weight, actual_repetitions, actual_weight) VALUES
+    (3, 1, 3, 50.0, 3, 50.0),    -- Жим легкий: 150 кг
+    (3, 6, 2, 40.0, 2, 40.0),    -- Армейский легкий: 80 кг
+    (3, 19, 2, 10.0, 2, 10.0),   -- Махи легкие: 20 кг
+    (3, 9, 2, 30.0, 2, 30.0),    -- Французский легкий: 60 кг
+    (3, 30, 3, 0.0, 3, 0.0),     -- Берпи: 3×0 = 3
+    (3, 29, 2, 0.0, 2, 0.0);     -- Боковая планка: 2×0 = 2
+
+-- 🏋️ W4: ПРОГРЕССИЯ (рост рабочих весов!)
+INSERT INTO workout_composition(id_workout, id_exercise, planned_repetitions, planned_weight, actual_repetitions, actual_weight) VALUES
+    (4, 1, 4, 85.0, 4, 85.0),    -- Жим: 340 кг (+20 к прошлой!)
+    (4, 1, 3, 75.0, 3, 75.0),    -- Жим бэк-офф: 225 кг
+    (4, 6, 4, 55.0, 4, 55.0),    -- Армейский: 220 кг (+70!)
+    (4, 11, 3, 30.0, 3, 30.0),   -- Жим гантелей под углом: 90 кг
+    (4, 25, 3, 20.0, 3, 20.0),   -- Разводка: 60 кг
+    (4, 26, 3, 17.5, 3, 17.5);   -- Бицепс гантели: 52.5 кг
+
+-- 🏋️ W5: ЧАСТИЧНО ВЫПОЛНЕННАЯ (бросил тренировку)
+INSERT INTO workout_composition(id_workout, id_exercise, planned_repetitions, planned_weight, actual_repetitions, actual_weight) VALUES
+    (5, 4, 4, 0.0, 3, 0.0),      -- Подтягивания: сделал 3 из 4 = 3
+    (5, 7, 4, 70.0, 2, 70.0),    -- Тяга: сделал 2 из 4 = 140
+    (5, 12, 3, 60.0, NULL, NULL),-- Тяга блока: вообще не сделал
+    (5, 10, 3, 35.0, 3, 35.0),   -- Бицепс: успел = 105
+    (5, 14, 3, 45.0, NULL, NULL);-- Сгибания ног: не сделал (добавил лишнее для теста)
+
+-- 🏋️ W6: IN PROGRESS (только начал, actual_end = actual_start)
+INSERT INTO workout_composition(id_workout, id_exercise, planned_repetitions, planned_weight, actual_repetitions, actual_weight) VALUES
+    (6, 2, 5, 110.0, 1, 110.0),  -- Присед: сделал 1 подход из 5 = 110
+    (6, 20, 4, 130.0, NULL, NULL);-- Жим ногами: ещё не начал

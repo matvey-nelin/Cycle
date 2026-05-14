@@ -1,38 +1,29 @@
 import sqlite3
-import os
 
 import utils
 
 
 
-def get_app_data_dir() -> str:
-    """Возвращает приватную директорию приложения (Android/Windows/Linux)"""
-    return os.path.dirname(os.path.abspath(__file__))
-
-
 
 class Database:
     def __init__(self):
-        base_dir = get_app_data_dir()
-        self.db_path = os.path.join(base_dir, "CycleDatabase.db")
+        self.db_path = utils.get_data_directory() / "CycleDatabase.db"
 
         try:
-            if not os.path.exists(self.db_path):
+            if not self.db_path.exists():
                 sqlite3.connect(self.db_path, check_same_thread=False)
                 
                 with sqlite3.connect(self.db_path, check_same_thread=False) as conn:
                     cur  = conn.cursor()
 
                     # Создание базы данных (если не существует)
-                    with open(utils.resource_path(r"assets/database/Requests/Creating a database.sql"), encoding='UTF-8') as file:
-                        create_database_request = file.read()
-                    cur.executescript(create_database_request)
+                    with open(utils.resource_path(r"assets/database/Requests/Creating a database.sql"), 'r', encoding='UTF-8') as file:
+                        cur.executescript(file.read())
                     
 
                     # Вставка первичных данных (если данных нет в таблице)
-                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting initial data.sql"), encoding='UTF-8') as file:
-                        inserting_initial_data_request = file.read()
-                    cur.executescript(inserting_initial_data_request)
+                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting initial data.sql"), 'r', encoding='UTF-8') as file:
+                        cur.executescript(file.read())
 
         except Exception as _ex:
             self._exception = _ex
@@ -46,15 +37,13 @@ class Database:
                 # Вставка вторичных данных (если данных нет в таблице)                    
                     # Вставка мышц-агонистов
                 if insert_agonists:
-                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting agonists.sql"), encoding='UTF-8') as file:
-                        inserting_agonists_data_request = file.read()
-                    cur.executescript(inserting_agonists_data_request)
+                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting agonists.sql"), 'r', encoding='UTF-8') as file:
+                        cur.executescript(file.read())
                     
                     # Вставка упражнений
                 if insert_exercises:
-                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting exercices.sql"), encoding='UTF-8') as file:
-                        inserting_exercices_data_request = file.read()
-                    cur.executescript(inserting_exercices_data_request)
+                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting exercices.sql"), 'r', encoding='UTF-8') as file:
+                        cur.executescript(file.read())
 
         except Exception as _ex:
             self._exception = _ex
@@ -1487,3 +1476,76 @@ class Database:
         """
 
         self.__execute_request__(request)
+
+
+    
+    def get_total_volume(self, id_user: int, start_ts: int, end_ts: int):
+        """
+        Method for calculate total volume of work by id_user
+        """
+
+        request = f"""
+            SELECT COALESCE(
+            SUM(
+                wc.actual_repetitions * 
+                CASE 
+                    WHEN wc.actual_weight = 0 
+                    THEN 1 
+                    ELSE wc.actual_weight 
+                END
+            ), 0)
+        FROM workout_composition AS wc
+        JOIN workouts       AS w        ON wc.id_workout    = w.id_workout
+        JOIN microcycles    AS mc       ON w.id_microcycle  = mc.id_microcycle
+        JOIN mesocycles     AS m        ON mc.id_mesocycle  = m.id_mesocycle
+        WHERE m.id_user = {id_user}
+          AND wc.actual_repetitions IS NOT NULL
+          AND wc.actual_weight IS NOT NULL
+          AND w.planned_workout_start_datetime BETWEEN {start_ts} AND {end_ts}
+        """
+
+        return self.__select_request__(request)
+    
+
+    def get_workouts_count(self, id_user: int, start_ts: int, end_ts: int):
+        """
+        Get count of workouts by datarange by statuses: completed, overcompleted, partially_completed, in_progress
+        """
+        request = f"""
+            SELECT COUNT(DISTINCT w.id_workout)
+            FROM workouts       AS w
+            JOIN microcycles    AS mc   ON w.id_microcycle      = mc.id_microcycle
+            JOIN mesocycles     AS m    ON mc.id_mesocycle      = m.id_mesocycle
+            JOIN workout_status AS ws   ON w.id_workout_status  = ws.id_workout_status
+            WHERE m.id_user = {id_user}
+                AND (
+                    ws.slug     = '{'completed'}' 
+                    OR ws.slug  = '{'overcompleted'}' 
+                    OR ws.slug  = '{'partially_completed'}'
+                    OR ws.slug  = '{'in_progress'}'
+                )
+                AND w.planned_workout_start_datetime BETWEEN {start_ts} AND {end_ts}
+        """
+        return self.__select_request__(request)
+    
+
+    def get_workout_avg_duration(self, id_user: int, start_ts: int, end_ts: int):
+        """
+        Method for get average workout duration by id_user and dataranges
+        """
+
+        request = f"""
+            SELECT 
+                AVG(
+                    CAST(w.actual_workout_end_datetime - w.actual_workout_start_datetime AS REAL) / 60.0
+                ) AS avg_duration_minutes
+            FROM workouts       AS w
+            JOIN microcycles    AS mc   ON w.id_microcycle = mc.id_microcycle
+            JOIN mesocycles     AS m    ON mc.id_mesocycle = m.id_mesocycle
+            WHERE m.id_user = {id_user}
+                AND w.actual_workout_start_datetime > 0
+                AND w.actual_workout_end_datetime > w.actual_workout_start_datetime
+                AND w.planned_workout_start_datetime BETWEEN {start_ts} AND {end_ts};
+        """
+
+        return self.__select_request__(request)

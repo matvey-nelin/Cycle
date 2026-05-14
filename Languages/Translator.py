@@ -18,14 +18,31 @@ class Translator:
         
         if language not in list(SupportedLanguages.LANGUAGES.keys()):
             raise ValueError("Unsupported language")
-
         
-        self.language_pack_path = os.path.join(os.path.dirname(sys.executable), rf"language_packs/{language}.json")
+        try:
+            # Инициализация языковых пакетов
+            language_packs_dir = utils.get_data_directory() / "language_packs"
+            os.makedirs(language_packs_dir, exist_ok=True)
+
+            for lang_code in SupportedLanguages.LANGUAGES.keys():
+                language_pack_path  = language_packs_dir / f"{lang_code}.json"
+                default_pack_path   = utils.resource_path(f"assets/language_packs/{lang_code}.json")
+
+                if not language_pack_path.exists():
+                    with open(default_pack_path, "r", encoding="UTF-8") as file:
+                        pack_data = json.load(file)
+
+                    with open(language_pack_path, "w", encoding="UTF-8") as file:
+                        json.dump(pack_data, file, ensure_ascii=False, indent=4)
+        
+        except Exception as e:
+            print(f"[INIT ERROR] {e}")
+        
+
+
+        self.language_pack_path = utils.get_data_directory() / rf"language_packs/{language}.json"
         with open(self.language_pack_path, "r", encoding="UTF-8") as pack:
             self.language_pack = dict(json.load(pack))
-
-        # Языки, которые нужно транслитерировать в латиницу
-        self.TRANSLITERATE_LANGS = ['ru', 'uk', 'bg', 'kk', 'sr'] 
 
 
         # Назначение надписей данных
@@ -136,13 +153,10 @@ class Translator:
             raise ValueError("Incorrect data for creating slug")
         
 
-        try:
-            lang_code = utils.detect_language_native(text)
-        except:
-            lang_code = 'unknown'
+        lang_code = utils.detect_language_native(text).lower()
 
         try:
-            if lang_code in self.TRANSLITERATE_LANGS:
+            if lang_code == 'ru':
                 processed_text = translit(text, lang_code, reversed=True)
             else:
                 processed_text = text
@@ -171,7 +185,7 @@ class Translator:
             raise ValueError("Incorrect data of essence for creating slug")
 
         for language in list(SupportedLanguages.LANGUAGES.keys()):
-            language_pack_path = os.path.join(os.path.dirname(sys.executable), rf"language_packs/{language}.json")
+            language_pack_path = utils.get_data_directory() / rf"language_packs/{language}.json"
 
             with open(language_pack_path, "r", encoding="UTF-8") as pack:
                 language_pack = dict(json.load(pack))
@@ -201,7 +215,7 @@ class Translator:
         
 
         for language in list(SupportedLanguages.LANGUAGES.keys()):
-            language_pack_path = os.path.join(os.path.dirname(sys.executable), rf"language_packs/{language}.json")
+            language_pack_path = utils.get_data_directory() / rf"language_packs/{language}.json"
 
             with open(language_pack_path, "r", encoding="UTF-8") as pack:
                 language_pack = dict(json.load(pack))

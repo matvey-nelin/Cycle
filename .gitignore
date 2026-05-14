@@ -90,6 +90,7 @@ captures/
 .env.local
 .env.production
 *.env
+app_data/
 
 # Database files (если есть локальные БД)
 *.db
@@ -126,6 +127,7 @@ $RECYCLE.BIN/
 htmlcov/
 .tox/
 .nox/
+*.ipynb
 
 # ==================== DOCS ====================
 docs/_build/

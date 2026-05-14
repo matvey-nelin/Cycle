@@ -39,7 +39,7 @@ class SettingsScreen(BaseView):
                     [
                         ft.Image(
                             margin=ft.Margin.only(bottom=10), 
-                            src=utils.resource_path(r"assets/icons/android-chrome-192x192_without_background.png"),
+                            src=str(utils.resource_path(r"assets/icons/android-chrome-192x192_without_background.png")),
                             error_content=ft.Icon(
                                 icon=ft.Icons.CHANGE_CIRCLE_OUTLINED,
                                 size=75,

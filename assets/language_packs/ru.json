@@ -5,10 +5,10 @@
             "inactive": "Неактивен",
             "sick": "Болеет",
             "injured": "Травмирован",
-            "on_vacation": "В отпуске",
-            "novyj_status_pol_zovatelja": "Новый статус пользователя"
+            "on_vacation": "В отпуске"
         },
         "workout_types": {
+            "liss": "LISS",
             "cardio": "Кардио",
             "crossfit": "CrossFit",
             "bodybuilding": "Бодибилдинг",
@@ -34,15 +34,13 @@
             "cancelled": "Отменено",
             "in_progress": "В процессе",
             "skipped": "Пропущено",
-            "partially_completed": "Выполнено (частично)",
-            "novyj_status_trenirovki": "Новый статус тренировки"
+            "partially_completed": "Выполнено (частично)"
         },
         "hypertrophy_types": {
             "sarcoplasmic": "Саркоплазматическая гипертрофия",
             "myofibrillar": "Миофибриллярная гипертрофия",
             "mixed": "Смешанная",
-            "neural": "Нейральная адаптация",
-            "novyj_tip_gipertrofii": "Новый тип гипертрофии"
+            "neural": "Нейральная адаптация"
         },
         "agonists": {
             "pectoralis_major": "Большая грудная мышца",
@@ -94,8 +92,7 @@
             "fibularis_longus": "Длинная малоберцовая мышца",
             "fibularis_brevis": "Короткая малоберцовая мышца",
             "sternocleidomastoid": "Грудино-ключично-сосцевидная мышца",
-            "scalene_muscles": "Лестничные мышцы",
-            "novyj_agonist": "Новый агонист"
+            "scalene_muscles": "Лестничные мышцы"
         },
         "exercises": {
             "barbell_squat": "Приседания со штангой",
@@ -127,8 +124,7 @@
             "dumbbell_curl": "Подъем гантелей на бицепс",
             "glute_bridge": "Ягодичный мостик",
             "side_plank": "Боковая планка",
-            "triceps_pushdown": "Разгибание рук на блоке",
-            "novoe_uprazhnenie": "Новое упражнение"
+            "triceps_pushdown": "Разгибание рук на блоке"
         },
         "workout_templates": {
             "powerlifting_heavy_squat_day": "Пауэрлифтинг - День тяжелых приседаний",
@@ -140,8 +136,7 @@
             "full_body_general_fitness": "Фуллбоди - общая физическая подготовка",
             "cardio_endurance_session": "Кардио-тренировка на выносливость",
             "calisthenics_upper_body": "Калистеника - верх тела",
-            "liss_recovery_walk": "LISS - Восстановительная прогулка",
-            "novyj_shablon_trenirovki": "Новый шаблон тренировки"
+            "liss_recovery_walk": "LISS - Восстановительная прогулка"
         },
         "microcycle_templates": {
             "week_1_foundation": "Неделя 1 - Основы",
@@ -153,8 +148,7 @@
             "hypertrophy_block_b": "Блок гипертрофии Б",
             "powerlifting_meet_prep": "Подготовка к соревнованиям по пауэрлифтингу",
             "general_fitness_week": "Общая неделя фитнеса",
-            "active_recovery_week": "Неделя активного восстановления",
-            "novyj_shablon_mikrotsikla": "Новый шаблон микроцикла"
+            "active_recovery_week": "Неделя активного восстановления"
         }
     },
     "settings": {
@@ -198,6 +192,10 @@
                 "planning_screen": {
                     "label": "План",
                     "tooltip": "Планирование тренировок"
+                },
+                "statistics_screen": {
+                    "label": "Статистика",
+                    "tooltip": "Целевые метрики"
                 },
                 "reference_information_screen": {
                     "label": "Инфо",

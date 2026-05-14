@@ -19,8 +19,9 @@ class MobileLayout(BaseLayout):
         self.navigation_destintinations = {
             0: "dashboard_screen",
             1: "planning_screen",
-            2: "reference_information_screen",
-            3: "settings_screen"
+            2: "statistics_screen",
+            3: "reference_information_screen",
+            4: "settings_screen"
         }
 
 

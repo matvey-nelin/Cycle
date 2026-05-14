@@ -24,6 +24,8 @@ from UI.Screens.Planning.WorkoutScreen              import WorkoutScreen
 from UI.Screens.Planning.MacrocycleMenu             import MacrocycleMenu
 from UI.Screens.Planning.MacrocycleScreen           import MacrocycleScreen
 
+from UI.Screens.Statistics.StatisticsScreen         import StatisticsScreen
+
 from UI.Screens.ReferenceInformation.ReferenceInformationScreen import ReferenceInformationScreen
 
 from UI.Screens.ReferenceInformation.UserInformationScreen  import UserInformationScreen
@@ -109,8 +111,6 @@ class CycleApp:
 
 
         if self.app_state.settings.first_launch:
-            self.current_layout = 'local'
-            self.screen_name = "setup_wizard"
             SetupWizard(self.page, self.navigate, self.app_state)
         elif self.settings.current_workout != 0:
             self.navigate(
@@ -157,13 +157,14 @@ class CycleApp:
         
         self.screen = screens_list[screen_name](**kwargs) if is_temporary_screen else screens_list[screen_name]
 
-        # 🔑 Сначала обновляем экран внутри лэйаута
         self.layout.change_screen(self.screen)
-        
-        # 🔑 Затем назначаем лэйаут в корневой контейнер
         self.root_container.content = self.layout.layout_container
         
-        # 🔑 Обновляем UI
+        # Изменение контейнера окна на root_container если ранее было окно SetupWizard (был первый запуск)
+        if self.settings.first_launch:
+            self.page.controls.clear()
+            self.page.add(self.root_container)
+
         self.page.update()
 
 
@@ -187,18 +188,17 @@ class CycleApp:
 
     def get_icon_path(self):
         system = platform.system()
+
         if system == "Windows":
             icon_path = utils.resource_path(r"assets/icons/windows_icon.ico")
-            if os.path.exists(icon_path):
-                return icon_path
-            return utils.resource_path(r"assets/icons/app_icon.png")
+            if icon_path.exists():
+                return str(icon_path) # Возврат для Windows
         elif system == "Darwin":
             icon_path = utils.resource_path(r"assets/icons/apple_app_icon.icns")
-            if os.path.exists(icon_path):
-                return icon_path
-            return utils.resource_path(r"assets/icons/app_icon.png")
-        else:
-            return utils.resource_path(r"assets/icons/app_icon.png")
+            if icon_path.exists():
+                return str(icon_path) # Возврат для MacOS
+            
+        return str(utils.resource_path(r"assets/icons/app_icon.png")) # Возврат для всех остальных случаев
 
 
 
@@ -246,6 +246,7 @@ class CycleApp:
         {
             "dashboard_screen"              : DashboardScreen(self.page, self.navigate, self.app_state),
             "planning_screen"               : PlanningScreen(self.page, self.navigate, self.app_state),
+            "statistics_screen"             : StatisticsScreen(self.page, self.navigate, self.app_state),
             "reference_information_screen"  : ReferenceInformationScreen(self.page, self.navigate, self.app_state),
             "settings_screen"               : SettingsScreen(self.page, self.navigate, self.app_state)
         }
