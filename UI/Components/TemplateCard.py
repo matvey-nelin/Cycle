@@ -18,7 +18,7 @@ class TemplateCard(ft.Container):
         self.height     = height
 
 
-        self.bgcolor = self.colors.LIGHT_SURFACE if self.colors.theme == "light" else self.colors.DARK_SURFACE
+        self.bgcolor = ft.Colors.SURFACE_CONTAINER_HIGHEST
         self.border_radius = 10
 
         if self.colors.theme == "light":
@@ -37,10 +37,13 @@ class TemplateCard(ft.Container):
             )
         
 
-        self.delete_function = None
-
+        
         self.on_click = lambda: on_card_click(self.id)
         # self.on_hover = self.change_gradient_on_hover
+        
+
+        # Определение функции удаления
+        self.delete_function = None
 
         if delete_function is not None:
             self.on_long_press = self.show_manager_dialog
@@ -49,6 +52,7 @@ class TemplateCard(ft.Container):
         if delete_from_list_function is not None:
             self.on_long_press = self.show_manager_dialog
             self.delete_function = lambda: delete_from_list_function(self)
+
 
 
         self.alignment = ft.Alignment.TOP_CENTER
@@ -99,9 +103,14 @@ class TemplateCard(ft.Container):
                 id=self.id, 
                 title=self.data[0], 
                 essence="workout_templates",
-                delete_function=self.delete_function
+                delete_function=self.perform_deletion
             )
         )
+
+    def perform_deletion(self):
+        if self.delete_function is not None:
+            self.delete_function()
+
 
 
     def change_gradient_on_hover(self, e):

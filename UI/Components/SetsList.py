@@ -163,10 +163,10 @@ class SetsList(ft.Container):
                     id_composition   = exercise[0]
                     excercises_title = str(self.screen.translator.exercises[exercise[1]])
 
-                    planned_exercise_reps       = int(exercise[2])
-                    planned_exercise_weight     = float(exercise[3])
-                    actual_exercise_reps        = int(exercise[4])
-                    actual_exercise_weight      = float(exercise[5])
+                    planned_exercise_reps       = int(exercise[2])      if exercise[2] is not None else str("NULL")
+                    planned_exercise_weight     = float(exercise[3])    if exercise[3] is not None else str("NULL")
+                    actual_exercise_reps        = int(exercise[4])      if exercise[4] is not None else str("NULL")
+                    actual_exercise_weight      = float(exercise[5])    if exercise[5] is not None else str("NULL")
 
                     self.sets.append(
                         ExerciseSet(

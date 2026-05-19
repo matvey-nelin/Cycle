@@ -10,22 +10,23 @@
         "workout_types": {
             "liss": "LISS",
             "cardio": "كارديو",
-            "crossfit": "CrossFit",
+            "crossfit": "كروس فيت",
             "bodybuilding": "كمال أجسام",
             "hiit": "HIIT",
             "cycling": "ركوب الدراجات",
-            "aerobics": "أيروبيك",
+            "aerobics": "إيروبيك",
             "martial_arts": "فنون قتالية",
             "yoga": "يوغا",
-            "full_body": "الجسم كامل",
-            "powerlifting": "رفع أثقال",
-            "calisthenics": "كاليسثينيكس",
+            "full_body": "كامل الجسم",
+            "powerlifting": "رفع الأثقال",
+            "calisthenics": "تمارين وزن الجسم",
             "strength": "تدريب القوة",
             "endurance": "تحمل",
             "flexibility": "مرونة",
-            "recovery": "استشفاء",
+            "recovery": "تعافي",
             "swimming": "سباحة",
-            "running": "جري"
+            "running": "جري",
+            "dzhiu_dzhitsu": "جيو جيتسو"
         },
         "workout_statuses": {
             "scheduled": "مجدول",
@@ -70,9 +71,9 @@
             "internal_oblique": "المائلة الداخلية",
             "transversus_abdominis": "المستعرضة البطنية",
             "iliopsoas": "الحرقفية القطنية",
-            "gluteus_maximus": "الألية الكبرى",
-            "gluteus_medius": "الألية المتوسطة",
-            "gluteus_minimus": "الألية الصغرى",
+            "gluteus_maximus": "الألوية الكبرى",
+            "gluteus_medius": "الألوية المتوسطة",
+            "gluteus_minimus": "الألوية الصغرى",
             "piriformis": "الكمثرية",
             "tensor_fasciae_latae": "موتر اللفافة العريضة",
             "quadratus_femoris": "مربع الفخذ",
@@ -112,7 +113,7 @@
             "lunges": "طعنات",
             "calf_raise": "رفع الساق",
             "plank": "بلانك",
-            "crunches": "كرنش",
+            "crunches": "كرانش",
             "seated_cable_row": "تجديف كابل جالس",
             "lateral_raise": "رفع جانبي",
             "leg_press": "ضغط الرجل",
@@ -127,16 +128,22 @@
             "triceps_pushdown": "دفع التراي"
         },
         "workout_templates": {
-            "powerlifting_heavy_squat_day": "رفع أثقال - يوم سكوات ثقيل",
-            "powerlifting_heavy_bench_day": "رفع أثقال - يوم بنش ثقيل",
-            "powerlifting_heavy_deadlift_day": "رفع أثقال - يوم رفعة ميتة ثقيلة",
-            "bodybuilding_chest_triceps": "كمال أجسام - صدر و تراي",
-            "bodybuilding_back_biceps": "كمال أجسام - ظهر و باي",
-            "bodybuilding_legs_shoulders": "كمال أجسام - أرجل و أكتاف",
-            "full_body_general_fitness": "الجسم كامل - لياقة عامة",
+            "powerlifting_heavy_squat_day": "باورليفتنغ - يوم القرفصاء الثقيل",
+            "powerlifting_heavy_bench_day": "باورليفتنغ - يوم البنش الثقيل",
+            "powerlifting_heavy_deadlift_day": "باورليفتنغ - يوم الرفعة الميتة الثقيلة",
+            "bodybuilding_chest_triceps": "كمال أجسام - صدر وتراي",
+            "bodybuilding_back_biceps": "كمال أجسام - ظهر وباي",
+            "bodybuilding_legs_shoulders": "كمال أجسام - أرجل وأكتاف",
+            "full_body_general_fitness": "كامل الجسم - لياقة عامة",
             "cardio_endurance_session": "كارديو - جلسة تحمل",
-            "calisthenics_upper_body": "كاليسثينيكس - الجزء العلوي",
-            "liss_recovery_walk": "LISS - مشي استشفاء"
+            "calisthenics_upper_body": "تمارين وزن الجسم - الجزء العلوي",
+            "liss_recovery_walk": "LISS - مشي استشفاء",
+            "lower_strength": "قوة الجزء السفلي",
+            "push_pull_hypertrophy": "تضخم دفع/سحب",
+            "full_body_conditioning": "تكييف كامل الجسم",
+            "novyj_shablon_trenirovki": "قالب تمرين جديد",
+            "silovaja_po_dzhiu_dzhiutsu": "قوة الجيو جيتسو",
+            "upper_strength": "قوة الجزء العلوي"
         },
         "microcycle_templates": {
             "week_1_foundation": "الأسبوع 1 - الأساس",
@@ -146,14 +153,16 @@
             "5x5_strength_cycle": "دورة قوة 5x5",
             "hypertrophy_block_a": "كتلة تضخم أ",
             "hypertrophy_block_b": "كتلة تضخم ب",
-            "powerlifting_meet_prep": "تحضير مسابقة رفع أثقال",
+            "powerlifting_meet_prep": "تحضير مسابقة باورليفتنغ",
             "general_fitness_week": "أسبوع لياقة عام",
-            "active_recovery_week": "أسبوع استشفاء نشط"
+            "active_recovery_week": "أسبوع استشفاء نشط",
+            "base_3day": "تقسيم أساسي 3 أيام",
+            "deload_3day": "تخفيف حمل 3 أيام"
         }
     },
     "settings": {
         "trainer_mode": "وضع المدرب",
-        "theme_mode": "موضوع التطبيق"
+        "theme_mode": "ثيم التطبيق"
     },
     "classes": {
         "training_process": {
@@ -163,13 +172,13 @@
         },
         "app_colors": {
             "color_themes": {
-                "Aurora Borealis": "الأورورا بوريليس",
+                "Aurora Borealis": "الشفق القطبي",
                 "Arabian Night": "ليلة عربية",
-                "Space Cream": "كريم الفضاء",
-                "The last breath of a Jacquot": "آخر نفس لجاكوت",
+                "Space Cream": "كريمة الفضاء",
+                "The last breath of a Jacquot": "النفس الأخير لطائر الجاكوت",
                 "Sakura": "ساكورا",
-                "Sunset in the Wasteland": "غروب الشمس في الأرض القاحلة",
-                "Frog in satin pajamas": "ضفدع في بيجاما ساتان"
+                "Sunset in the Wasteland": "غروب في الأرض القاحلة",
+                "Frog in satin pajamas": "ضفدع ببيجامة ساتان"
             }
         }
     },
@@ -192,6 +201,10 @@
                 "planning_screen": {
                     "label": "خطة",
                     "tooltip": "تخطيط التدريبات"
+                },
+                "statistics_screen": {
+                    "label": "إحصائيات",
+                    "tooltip": "المقاييس المستهدفة"
                 },
                 "reference_information_screen": {
                     "label": "معلومات",
@@ -222,7 +235,7 @@
                 },
                 "initial_data_screen": {
                     "main_label": "اختر البيانات للتحميل:",
-                    "insert_agonists": "عضلات agonists",
+                    "insert_agonists": "العضلات المستهدفة",
                     "insert_exercises": "تمارين"
                 },
                 "finish_screen": {
@@ -244,19 +257,38 @@
                 "mesocycle_menu": "دورات متوسطة",
                 "macrocycle_menu": "دورات كبرى"
             },
+            "statistics_screen": {
+                "base_metrics": {
+                    "total_volume": "الحجم الإجمالي",
+                    "total_volume_units": "كغ / رطل",
+                    "workouts_count": "عدد التدريبات",
+                    "workouts_count_time_range": "لكل دورة متوسطة",
+                    "workout_avg_duration": "متوسط مدة التدريب",
+                    "workout_avg_duration_unit": {
+                        "minuts": "دقيقة",
+                        "hours": "ساعة"
+                    }
+                },
+                "current_streak": "السلسلة الحالية",
+                "current_streak_subtitle": "هل نتدرب؟",
+                "best_streak": "أفضل سلسلة",
+                "best_streak_subtitle": "الأفضل قادم!",
+                "workout_statuses_piechart_title": "توزيع حالات التدريب لكل دورة متوسطة",
+                "workout_statuses_piechart_no_data": "لا توجد بيانات لحالات التدريب"
+            },
             "reference_information_screen": {
                 "user_information": "معلومات المستخدم",
                 "workout_statuses": "حالات التدريب",
                 "workout_types": "أنواع التدريب",
                 "hypertrophy_types": "أنواع التضخم",
                 "exercises": "تمارين",
-                "agonists": "Agonists"
+                "agonists": "العضلات المستهدفة"
             },
             "settings_screen": {
                 "language": "لغة التطبيق",
                 "trainer_mode_switch": "وضع المدرب",
                 "active_user_statuses": "حالات المستخدم النشطة",
-                "app_color_themes": "موضوع لون التطبيق"
+                "app_color_themes": "ثيم ألوان التطبيق"
             },
             "workout_template_menu": {
                 "no_data": "ليس لديك أي قوالب.",
@@ -293,7 +325,7 @@
                 "no_user": "اختر مستخدمًا أولاً"
             },
             "macrocycle_screen": {
-                "no_data": "لا توجد دورات متوسطةضمنة في هذه الدورة الكبرى",
+                "no_data": "لا توجد دورات متوسطة مضمنة في هذه الدورة الكبرى",
                 "invalid_mesocycle_data": "قم بتخطيط الدورة المتوسطة أولاً"
             },
             "workout_screen": {
@@ -324,7 +356,7 @@
                 "no_data": "لا توجد تمارين"
             },
             "agonists_screen": {
-                "no_data": "لا توجد agonists"
+                "no_data": "لا توجد عضلات مستهدفة"
             },
             "universal_record_management_screen": {
                 "title_helper_text": "عنوان",
@@ -338,7 +370,7 @@
             },
             "exercise_management_screen": {
                 "title_helper_text": "عنوان",
-                "agonists_helper_text": "Agonists",
+                "agonists_helper_text": "العضلات المستهدفة",
                 "save_button": "حفظ"
             },
             "agonist_management_screen": {

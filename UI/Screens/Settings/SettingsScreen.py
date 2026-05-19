@@ -158,11 +158,7 @@ class SettingsScreen(BaseView):
 
 
 
-        
-
-
-
-        # Определяю контейнер со всем содержимым с шириной не более 500px
+        # Определяю контейнер со всем содержимым с шириной не более 600px
         self.main_container.width   = 600 # ограничение максимальной ширины
         # self.main_container.padding = ft.Padding.symmetric(horizontal=50)
         self.main_container.content = ft.Column(

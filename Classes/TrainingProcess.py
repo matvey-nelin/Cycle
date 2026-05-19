@@ -212,8 +212,8 @@ class TrainingProcess:
             id_exercise = int(exercise[1])
             title_exercise = self.translator.exercises[exercise[2]]
 
-            planned_repetitions = int(exercise[3])
-            planned_weight      = float(exercise[4])
+            planned_repetitions = int(exercise[3])   if exercise[3] is not None else str("NULL")
+            planned_weight      = float(exercise[4]) if exercise[4] is not None else str("NULL")
             
             card_info.append(create_row(title_exercise, planned_repetitions, planned_weight))
 

@@ -46,11 +46,3 @@ class TemplateContainer(ft.Container):
         
         if update_container:
             self.templates.update()
-
-
-    def insert_template_card_penultimate_position(self, template_card: TemplateCard):
-        last_element = self.templates.controls[-1]
-        self.templates.controls.remove(last_element)
-
-        self.templates.controls.append(template_card)
-        self.templates.controls.append(last_element)

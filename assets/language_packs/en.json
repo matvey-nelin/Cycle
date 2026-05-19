@@ -25,7 +25,8 @@
             "flexibility": "Flexibility",
             "recovery": "Recovery",
             "swimming": "Swimming",
-            "running": "Running"
+            "running": "Running",
+            "dzhiu_dzhitsu": "Jiu-Jitsu"
         },
         "workout_statuses": {
             "scheduled": "Scheduled",
@@ -136,7 +137,13 @@
             "full_body_general_fitness": "Full Body - General Fitness",
             "cardio_endurance_session": "Cardio - Endurance Session",
             "calisthenics_upper_body": "Calisthenics - Upper Body",
-            "liss_recovery_walk": "LISS - Recovery Walk"
+            "liss_recovery_walk": "LISS - Recovery Walk",
+            "lower_strength": "Lower Strength",
+            "push_pull_hypertrophy": "Push/Pull Hypertrophy",
+            "full_body_conditioning": "Full Body Conditioning",
+            "novyj_shablon_trenirovki": "New Workout Template",
+            "silovaja_po_dzhiu_dzhiutsu": "Jiu-Jitsu Strength",
+            "upper_strength": "Upper Strength"
         },
         "microcycle_templates": {
             "week_1_foundation": "Week 1 - Foundation",
@@ -148,7 +155,9 @@
             "hypertrophy_block_b": "Hypertrophy Block B",
             "powerlifting_meet_prep": "Powerlifting Meet Prep",
             "general_fitness_week": "General Fitness Week",
-            "active_recovery_week": "Active Recovery Week"
+            "active_recovery_week": "Active Recovery Week",
+            "base_3day": "Base 3-Day Split",
+            "deload_3day": "Deload 3-Day"
         }
     },
     "settings": {
@@ -195,7 +204,7 @@
                 },
                 "statistics_screen": {
                     "label": "Statistics",
-                    "tooltip": "Target metrics"
+                    "tooltip": "Target Metrics"
                 },
                 "reference_information_screen": {
                     "label": "Info",
@@ -247,6 +256,25 @@
                 "microcycle_template_menu": "Microcycle Templates",
                 "mesocycle_menu": "Mesocycles",
                 "macrocycle_menu": "Macrocycles"
+            },
+            "statistics_screen": {
+                "base_metrics": {
+                    "total_volume": "Total Volume",
+                    "total_volume_units": "kg / lbs",
+                    "workouts_count": "Workouts Count",
+                    "workouts_count_time_range": "per mesocycle",
+                    "workout_avg_duration": "Average Workout Duration",
+                    "workout_avg_duration_unit": {
+                        "minuts": "min",
+                        "hours": "h"
+                    }
+                },
+                "current_streak": "Current Streak",
+                "current_streak_subtitle": "Let's train?",
+                "best_streak": "Best Streak",
+                "best_streak_subtitle": "Your best is yet to come!",
+                "workout_statuses_piechart_title": "Workout Status Distribution per Mesocycle",
+                "workout_statuses_piechart_no_data": "No workout status data"
             },
             "reference_information_screen": {
                 "user_information": "User Information",

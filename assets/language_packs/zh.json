@@ -25,7 +25,8 @@
             "flexibility": "柔韧性",
             "recovery": "恢复",
             "swimming": "游泳",
-            "running": "跑步"
+            "running": "跑步",
+            "dzhiu_dzhitsu": "柔术"
         },
         "workout_statuses": {
             "scheduled": "已计划",
@@ -136,7 +137,13 @@
             "full_body_general_fitness": "全身 - 综合健身",
             "cardio_endurance_session": "有氧 - 耐力训练",
             "calisthenics_upper_body": "街头健身 - 上半身",
-            "liss_recovery_walk": "LISS - 恢复 walk"
+            "liss_recovery_walk": "LISS - 恢复 walk",
+            "lower_strength": "下肢力量",
+            "push_pull_hypertrophy": "Push/Pull 肥大",
+            "full_body_conditioning": "全身调节",
+            "novyj_shablon_trenirovki": "新训练模板",
+            "silovaja_po_dzhiu_dzhiutsu": "柔术力量",
+            "upper_strength": "上肢力量"
         },
         "microcycle_templates": {
             "week_1_foundation": "第 1 周 - 基础",
@@ -148,7 +155,9 @@
             "hypertrophy_block_b": "肥大块 B",
             "powerlifting_meet_prep": "力量举比赛准备",
             "general_fitness_week": "综合健身周",
-            "active_recovery_week": "主动恢复周"
+            "active_recovery_week": "主动恢复周",
+            "base_3day": "基础 3 天分化",
+            "deload_3day": "减负 3 天"
         }
     },
     "settings": {
@@ -192,6 +201,10 @@
                 "planning_screen": {
                     "label": "计划",
                     "tooltip": "训练计划"
+                },
+                "statistics_screen": {
+                    "label": "统计",
+                    "tooltip": "目标指标"
                 },
                 "reference_information_screen": {
                     "label": "信息",
@@ -243,6 +256,25 @@
                 "microcycle_template_menu": "微周期模板",
                 "mesocycle_menu": "中周期",
                 "macrocycle_menu": "宏周期"
+            },
+            "statistics_screen": {
+                "base_metrics": {
+                    "total_volume": "总容量",
+                    "total_volume_units": "kg / lbs",
+                    "workouts_count": "训练次数",
+                    "workouts_count_time_range": "每中周期",
+                    "workout_avg_duration": "平均训练时长",
+                    "workout_avg_duration_unit": {
+                        "minuts": "分钟",
+                        "hours": "小时"
+                    }
+                },
+                "current_streak": "当前连续",
+                "current_streak_subtitle": "开始训练？",
+                "best_streak": "最佳连续",
+                "best_streak_subtitle": "更好的还在后面！",
+                "workout_statuses_piechart_title": "中周期训练状态分布",
+                "workout_statuses_piechart_no_data": "无训练状态数据"
             },
             "reference_information_screen": {
                 "user_information": "用户信息",

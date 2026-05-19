@@ -387,6 +387,7 @@ class DashboardScreen(BaseView):
         # Создание контейнера тренировок
         self.workouts_list = ft.Column(
             expand=True,
+            width=500,
             spacing=10,
             controls=[],
             alignment=ft.MainAxisAlignment.START,

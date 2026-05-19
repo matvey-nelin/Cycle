@@ -36,7 +36,7 @@ class DesktopLayout(BaseLayout):
             expand=False,
             height=float("inf"),
             indicator_color=self.colors.LIGHT_TERTIARY_CONTAINER if self.colors.theme == 'light' else self.colors.DARK_TERTIARY_CONTAINER,
-            # bgcolor=self.colors.LIGHT_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_BACKGROUND
+            bgcolor=ft.Colors.SURFACE_BRIGHT
         )
 
         self.layout_container.content = ft.Row(
@@ -46,7 +46,7 @@ class DesktopLayout(BaseLayout):
             controls=
             [
                 self.navigation_rail,
-                ft.VerticalDivider(2),
+                ft.VerticalDivider(2, color=ft.Colors.OUTLINE),
                 self.content_container
             ],
             alignment=ft.MainAxisAlignment.START,

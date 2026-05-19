@@ -70,6 +70,9 @@ class MicrocycleTemplateScreen(BaseView):
             alignment=ft.Alignment.CENTER
         )
 
+        self.template_container.templates.controls = [self.add_workout_template_button]
+
+
         # Меню действий с шаблоном микроцикла
         self.save_button = ft.Container(
             height=40,
@@ -108,7 +111,7 @@ class MicrocycleTemplateScreen(BaseView):
 
         # Определение списка шаблонов
         self._init_data_(self.id)
-
+        
 
         self.main_container.content = ft.Column(
             expand=True,
@@ -133,8 +136,7 @@ class MicrocycleTemplateScreen(BaseView):
             self.title_field.value = self.title
             
             self.workout_templates_list_info = []
-            self.template_container.templates.controls.clear()
-            self.template_container.templates.controls.append(self.add_workout_template_button)
+            self._fill_workout_template_cards_list_()
             return
         
         # Подписка на обновление, с поддержанием единственной актуальной функции в списке
@@ -173,15 +175,19 @@ class MicrocycleTemplateScreen(BaseView):
 
     
     def _fill_workout_template_cards_list_(self):
-        self.template_container.templates.controls.clear()
+        new_controls = []
 
         # Определение списка карточек шаблонов тренировок
         for template_id, template_title in self.workout_templates_list_info:
             # Определение списка упражнений шаблона
-            template_card = self._create_template_card_(template_id, template_title)
-            self.template_container.insert_template_card(template_card)
+            new_controls.append(self._create_template_card_(template_id, template_title))
+        new_controls.append(self.add_workout_template_button)
 
-        self.template_container.templates.controls.append(self.add_workout_template_button)
+        self.template_container.templates.controls = new_controls
+        try:
+            self.template_container.templates.update()
+        except RuntimeError:
+            pass
 
 
 
@@ -197,6 +203,7 @@ class MicrocycleTemplateScreen(BaseView):
             self._fill_workout_template_cards_list_()
 
             self.navigate("microcycle_template_screen")
+            self.template_container.templates.update()
 
         
         self.navigate(
@@ -291,15 +298,17 @@ class MicrocycleTemplateScreen(BaseView):
     
 
     def remove_workout_template(self, e):
-        self.template_container.templates.controls.remove(e)
+        index_template_to_remove = self.template_container.templates.controls.index(e)
+
+        self.template_container.templates.controls.pop(index_template_to_remove)
+        self.workout_templates_list_info.pop(index_template_to_remove)
+
         self.template_container.templates.update()
 
         # Определение списка данных шаблонов тренировок
         temp_workout_card_list = []
-        for template_container_control in self.template_container.templates.controls:
-            if isinstance(template_container_control, TemplateCard):
-                workout_template_card_title = template_container_control.data[0]
-                temp_workout_card_list.append([template_container_control.id, workout_template_card_title])
+        for id, title in self.workout_templates_list_info:
+            temp_workout_card_list.append([id, title])
 
         self.workout_templates_list_info = temp_workout_card_list
 
