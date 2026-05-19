@@ -25,7 +25,8 @@
             "flexibility": "Растяжка",
             "recovery": "Восстановительная",
             "swimming": "Плавание",
-            "running": "Бег"
+            "running": "Бег",
+            "dzhiu_dzhitsu": "Джиу-Джитсу"
         },
         "workout_statuses": {
             "scheduled": "Запланировано",
@@ -136,7 +137,13 @@
             "full_body_general_fitness": "Фуллбоди - общая физическая подготовка",
             "cardio_endurance_session": "Кардио-тренировка на выносливость",
             "calisthenics_upper_body": "Калистеника - верх тела",
-            "liss_recovery_walk": "LISS - Восстановительная прогулка"
+            "liss_recovery_walk": "LISS - Восстановительная прогулка",
+            "lower_strength": "Lower Strength",
+            "push_pull_hypertrophy": "Push/Pull Hypertrophy",
+            "full_body_conditioning": "Full Body Conditioning",
+            "novyj_shablon_trenirovki": "Новый шаблон тренировки",
+            "silovaja_po_dzhiu_dzhiutsu": "Силовая по Джиу-Джиутсу",
+            "upper_strength": "Upper Strength"
         },
         "microcycle_templates": {
             "week_1_foundation": "Неделя 1 - Основы",
@@ -148,7 +155,9 @@
             "hypertrophy_block_b": "Блок гипертрофии Б",
             "powerlifting_meet_prep": "Подготовка к соревнованиям по пауэрлифтингу",
             "general_fitness_week": "Общая неделя фитнеса",
-            "active_recovery_week": "Неделя активного восстановления"
+            "active_recovery_week": "Неделя активного восстановления",
+            "base_3day": "Base 3-Day Split",
+            "deload_3day": "Deload 3-Day"
         }
     },
     "settings": {
@@ -247,6 +256,25 @@
                 "microcycle_template_menu": "Шаблоны микроциклов",
                 "mesocycle_menu": "Мезоциклы",
                 "macrocycle_menu": "Макроциклы"
+            },
+            "statistics_screen": {
+                "base_metrics": {
+                    "total_volume": "Общий объем",
+                    "total_volume_units": "кг / фунты",
+                    "workouts_count": "Количество тренировок",
+                    "workouts_count_time_range": "за мезоцикл",
+                    "workout_avg_duration": "Средняя продолжительность тренировки",
+                    "workout_avg_duration_unit": {
+                        "minuts": "мин",
+                        "hours": "ч"
+                    }
+                },
+                "current_streak": "Текущая серия",
+                "current_streak_subtitle": "Потренируемся?",
+                "best_streak": "Лучшая серия",
+                "best_streak_subtitle": "У вас все впереди!",
+                "workout_statuses_piechart_title": "Распределение статусов тренировок за мезоцикл",
+                "workout_statuses_piechart_no_data": "Нет данных о статусах тренировок"
             },
             "reference_information_screen": {
                 "user_information": "Пользовательская информация",

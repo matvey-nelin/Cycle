@@ -423,8 +423,8 @@ class WorkoutScreen(BaseView):
                     self.database.create_workout_composition(
                         id_workout=     self.id, 
                         id_exercise=    int(set.chosen_dropdown_exercise), 
-                        reps=           int(set.reps_text_field.value),
-                        weight=         float(str(set.weight_text_field.value).replace(",", "."))
+                        reps=           int(set.reps_text_field.value)                              if set.reps_text_field.value   != "NULL" else None,
+                        weight=         float(str(set.weight_text_field.value).replace(",", "."))   if set.weight_text_field.value != "NULL" else None
                     )
 
             self.app_state.data_changed_notify()

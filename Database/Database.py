@@ -1531,7 +1531,7 @@ class Database:
 
     def get_workout_avg_duration(self, id_user: int, start_ts: int, end_ts: int):
         """
-        Method for get average workout duration by id_user and dataranges
+        Method for get average workout duration (MINUTES) by id_user and dataranges
         """
 
         request = f"""
@@ -1546,6 +1546,57 @@ class Database:
                 AND w.actual_workout_start_datetime > 0
                 AND w.actual_workout_end_datetime > w.actual_workout_start_datetime
                 AND w.planned_workout_start_datetime BETWEEN {start_ts} AND {end_ts};
+        """
+
+        return self.__select_request__(request)
+    
+
+    def get_agonists_involvement_by_microcycle(
+        self, 
+        id_microcycle: int, 
+        workout_statuses: tuple = ('in_progress', 'completed', 'partially_completed', 'overcompleted')
+    ):
+        """
+        Возвращает агонисты с количеством выполненных подходов за микроцикл,
+        учитывая только указанные статусы тренировок.
+        """
+        # Динамически создаём плейсхолдеры для IN-клаузы
+        
+        request = f"""
+            SELECT a.id_agonist, a.slug, COUNT(wc.id_composition) AS total_sets
+            FROM microcycles            AS mc 
+            JOIN workouts               AS w    ON mc.id_microcycle     = w.id_microcycle
+            JOIN workout_status         AS ws   ON w.id_workout_status  = ws.id_workout_status
+            JOIN workout_composition    AS wc   ON w.id_workout         = wc.id_workout
+            JOIN agonist_exercises      AS ae   ON wc.id_exercise       = ae.id_exercise
+            JOIN agonists               AS a    ON ae.id_agonist        = a.id_agonist
+            WHERE mc.id_microcycle = {id_microcycle}
+                AND wc.actual_repetitions IS NOT NULL
+                AND ws.slug IN {workout_statuses}
+            GROUP BY a.id_agonist, a.slug
+            ORDER BY total_sets DESC
+        """
+        
+        return self.__select_request__(request)
+    
+
+    def get_all_workouts(self, id_user: int):
+        """
+        Method for get all workouts by 'id_user'\n
+        Info: w.id_workout, ws.slug, 
+                COALESCE(w.actual_workout_start_datetime,   w.planned_workout_start_datetime) AS start_datetime\n
+        Ordered by: start_datetime
+        """
+
+        request = f"""
+            SELECT w.id_workout, ws.slug, 
+                COALESCE(w.actual_workout_start_datetime,   w.planned_workout_start_datetime) AS start_datetime
+            FROM mesocycles     AS ms
+            JOIN microcycles    AS mc   ON mc.id_mesocycle      = ms.id_mesocycle
+            JOIN workouts       AS w    ON w.id_microcycle      = mc.id_microcycle
+            JOIN workout_status AS ws   ON ws.id_workout_status = w.id_workout_status
+            WHERE ms.id_user = {id_user}
+            ORDER BY start_datetime
         """
 
         return self.__select_request__(request)

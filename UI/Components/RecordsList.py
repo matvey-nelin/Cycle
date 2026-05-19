@@ -3,11 +3,14 @@ import flet as ft
 from AppState import AppState
 from UI.Components.InvalidDataAlertDialog import InvalidDataAlertDialog
 from UI.Components.ManagerDialog import ManagerDialog
+from Classes.TrainingMetrics import TrainingMetrics
 
 
 class RecordsList(ft.ListView):
 	def __init__(self, page: ft.Page, app_state: AppState, table_name: str, navigate_callback) -> None:
 		super().__init__()
+
+		self.training_metrics = TrainingMetrics()
 
 		self._page = page
 		self.table_name = table_name
@@ -41,6 +44,7 @@ class RecordsList(ft.ListView):
 				"unchangeable_records" : [],
 				"data" 		: self.database.get_users,
 				"subtitle"	: lambda id: self.user_subtitle(id),
+				"add_info" 	: None,
 				"delete"	: lambda id: self.database.delete_user(id),
 				"arguments" : {
 					"page": 				self._page, 
@@ -60,6 +64,7 @@ class RecordsList(ft.ListView):
 				"unchangeable_records" : self.settings.unchangeable_user_statuses,
 				"data" 		: self.database.get_user_statuses,
 				"subtitle"	: None,
+				"add_info" 	: None,
 				"delete"	: lambda id: self.database.delete_user_status(id),
 				"arguments" : {
 					"page": 				self._page, 
@@ -82,6 +87,7 @@ class RecordsList(ft.ListView):
 				"unchangeable_records" : self.settings.unchangeable_workout_statuses,
 				"data" 		: self.database.get_workout_statuses,
 				"subtitle"	: None,
+				"add_info" 	: None,
 				"delete"	: lambda id: self.database.delete_workout_status(id),
 				"arguments" : {
 					"page": 				self._page, 
@@ -103,6 +109,7 @@ class RecordsList(ft.ListView):
 				"unchangeable_records" : self.settings.unchangeable_workout_types,
 				"data" 		: self.database.get_workout_types,
 				"subtitle"	: None,
+				"add_info" 	: None,
 				"delete"	: lambda id: self.database.delete_workout_type(id),
 				"arguments" : {
 					"page": 				self._page, 
@@ -124,6 +131,7 @@ class RecordsList(ft.ListView):
 				"unchangeable_records" : self.settings.unchangeable_hypertrophy_types,
 				"data" 		: self.database.get_hypertrophy_types,
 				"subtitle"	: None,
+				"add_info" 	: None,
 				"delete"	: lambda id: self.database.delete_hypertrophy_type(id),
 				"arguments" : {
 					"page": 				self._page, 
@@ -146,6 +154,7 @@ class RecordsList(ft.ListView):
 				"unchangeable_records" : self.settings.unchangeable_exercises,
 				"data" 		: self.database.get_exercises,
 				"subtitle"	: lambda id: self.exercise_subtitle(id),
+				"add_info" 	: None,
 				"delete"	: lambda id: self.database.delete_exercise(id),
 				"arguments" : {
 					"page": 				self._page, 
@@ -165,6 +174,7 @@ class RecordsList(ft.ListView):
 				"unchangeable_records" : self.settings.unchangeable_agonists,
 				"data" 		: self.database.get_agonists,
 				"subtitle"	: None,
+				"add_info" 	: lambda id: self.agonist_additional_info(id),
 				"delete"	: lambda id: self.database.delete_agonist(id),
 				"arguments" : {
 					"page": 				self._page, 
@@ -204,6 +214,7 @@ class RecordsList(ft.ListView):
 				
 				is_unchangeable = bool(id_list_tile in self.entities[self.table_name]["unchangeable_records"])
 				subtitle_list_tile 	= self.entities[self.table_name]["subtitle"](id_list_tile) if self.entities[self.table_name]["subtitle"] is not None else None
+				add_info_list_tile 	= self.entities[self.table_name]["add_info"](id_list_tile) if self.entities[self.table_name]["add_info"] is not None else None
 				icon_list_tile 		= self.entities[self.table_name]["icon"]
 
 				self.controls.append(
@@ -211,26 +222,40 @@ class RecordsList(ft.ListView):
 						expand=False,
 						content=ft.ListTile(
 							expand=False,
+
 							title=title_list_tile,
 							title_text_style=ft.TextStyle(
 								size=16,
 								weight=ft.FontWeight.W_400
 							),
 							title_alignment=ft.ListTileTitleAlignment.CENTER,
+
 							subtitle=subtitle_list_tile,
 							subtitle_text_style=ft.TextStyle(
 								size=12,
 								weight=ft.FontWeight.W_400
 							),
-							text_color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND,
+
+							trailing=add_info_list_tile,
+
+							text_color=ft.Colors.ON_SURFACE,
+							
 							data={
-								"id"	: id_list_tile,
-								"slug"	: None if (self.table_name == "users") else record[1]
+								"id"		: id_list_tile,
+								"slug"		: None if (self.table_name == "users") else record[1],
+								"add_info"	: add_info_list_tile
 			 				},
+							 
 							leading=self.unchangeable_record_icon if is_unchangeable else icon_list_tile,
-							on_click=self.show_is_unchangeable_record_dialog if is_unchangeable else self.open_info_manage_screen,
+
+							on_click=(
+								self.show_is_unchangeable_record_dialog 
+								if is_unchangeable and (self.table_name not in ["exercises", "agonists"]) 
+								else self.open_info_manage_screen
+							),
 							on_long_press=(
-								None if is_unchangeable and self.table_name not in ["exercises", "agonists", "workout_types"] 
+								None 
+								if is_unchangeable and (self.table_name not in ["exercises", "agonists", "workout_types"])
 								else self.show_manager_dialog
 							)
 						),
@@ -278,6 +303,35 @@ class RecordsList(ft.ListView):
 
 
 
+	# Методы получения значения дополнительной информации записи
+	def agonist_additional_info(self, id_agonist: int):
+		involvement_level_colors_table = {
+			'low': 		ft.Colors.RED_800,
+			'medium': 	ft.Colors.YELLOW_800,
+			'good': 	ft.Colors.GREEN_800,
+			'great': 	ft.Colors.LIGHT_BLUE_800
+		}
+
+		add_info = self.training_metrics.determine_agonist_involvement_level(id_agonist=id_agonist)
+
+		if add_info is not None:
+			level 	= add_info[0]
+			sets 	= add_info[1]
+
+			add_info = ft.Text(
+				value=f"{sets}",
+				size=18,
+				weight=ft.FontWeight.W_500,
+				color=involvement_level_colors_table[level]
+			)
+
+		return add_info
+
+
+
+
+
+	# Методы получения подзаголовка записи
 	def user_subtitle(self, id_user: int):
 		id_user_status = self.database.get_users(id_user)[0][1]
 		return f"{self.translator.user_statuses[self.database.get_user_statuses(id_user_status)[0][1]]}" 
@@ -295,6 +349,10 @@ class RecordsList(ft.ListView):
 		return ", ".join(subtitle)
 	
 
+
+
+
+	# Методы управления записями
 	def show_manager_dialog(self, e):
 		id_list_tile 	= e.control.data["id"]
 		slug_list_tile 	= e.control.data["slug"]

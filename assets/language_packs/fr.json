@@ -25,7 +25,8 @@
             "flexibility": "Flexibilité",
             "recovery": "Récupération",
             "swimming": "Natation",
-            "running": "Course à Pied"
+            "running": "Course à Pied",
+            "dzhiu_dzhitsu": "Jiu-Jitsu"
         },
         "workout_statuses": {
             "scheduled": "Planifié",
@@ -136,7 +137,13 @@
             "full_body_general_fitness": "Full Body - Fitness Général",
             "cardio_endurance_session": "Cardio - Séance Endurance",
             "calisthenics_upper_body": "Calisthenics - Haut du Corps",
-            "liss_recovery_walk": "LISS - Marche Récupération"
+            "liss_recovery_walk": "LISS - Marche Récupération",
+            "lower_strength": "Force Inférieure",
+            "push_pull_hypertrophy": "Hypertrophie Push/Pull",
+            "full_body_conditioning": "Conditionnement Full Body",
+            "novyj_shablon_trenirovki": "Nouveau Modèle d'Entraînement",
+            "silovaja_po_dzhiu_dzhiutsu": "Force Jiu-Jitsu",
+            "upper_strength": "Force Supérieure"
         },
         "microcycle_templates": {
             "week_1_foundation": "Semaine 1 - Fondation",
@@ -148,7 +155,9 @@
             "hypertrophy_block_b": "Bloc Hypertrophie B",
             "powerlifting_meet_prep": "Prépa Compétition Powerlifting",
             "general_fitness_week": "Semaine Fitness Générale",
-            "active_recovery_week": "Semaine de Récupération Active"
+            "active_recovery_week": "Semaine de Récupération Active",
+            "base_3day": "Split 3 Jours Base",
+            "deload_3day": "Décharge 3 Jours"
         }
     },
     "settings": {
@@ -192,6 +201,10 @@
                 "planning_screen": {
                     "label": "Plan",
                     "tooltip": "Planification des Entraînements"
+                },
+                "statistics_screen": {
+                    "label": "Statistiques",
+                    "tooltip": "Métriques Cibles"
                 },
                 "reference_information_screen": {
                     "label": "Info",
@@ -243,6 +256,25 @@
                 "microcycle_template_menu": "Modèles de Microcycles",
                 "mesocycle_menu": "Mésocycles",
                 "macrocycle_menu": "Macrocycles"
+            },
+            "statistics_screen": {
+                "base_metrics": {
+                    "total_volume": "Volume Total",
+                    "total_volume_units": "kg / lbs",
+                    "workouts_count": "Nombre d'Entraînements",
+                    "workouts_count_time_range": "par mésocycle",
+                    "workout_avg_duration": "Durée Moyenne d'Entraînement",
+                    "workout_avg_duration_unit": {
+                        "minuts": "min",
+                        "hours": "h"
+                    }
+                },
+                "current_streak": "Série Actuelle",
+                "current_streak_subtitle": "On s'entraîne ?",
+                "best_streak": "Meilleure Série",
+                "best_streak_subtitle": "Le meilleur est à venir !",
+                "workout_statuses_piechart_title": "Répartition des Statuts d'Entraînement par Mésocycle",
+                "workout_statuses_piechart_no_data": "Aucune donnée de statut d'entraînement"
             },
             "reference_information_screen": {
                 "user_information": "Informations Utilisateur",

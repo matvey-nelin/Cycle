@@ -283,7 +283,7 @@ class WorkoutTemplateScreen(BaseView):
             
         self.dropdown_workout_types = ft.Dropdown(
             expand=1,
-            content_padding=ft.padding.only(left=10, top=0, right=10, bottom=15),
+            content_padding=ft.Padding.only(left=10, top=0, right=10, bottom=15),
 
             value=str(self.id_workout_type),
             options=self.workout_types,
@@ -329,7 +329,7 @@ class WorkoutTemplateScreen(BaseView):
             
         self.dropdown_hypertrophy_types = ft.Dropdown(
             expand=1,
-            content_padding=ft.padding.only(left=10, top=0, right=10, bottom=15),
+            content_padding=ft.Padding.only(left=10, top=0, right=10, bottom=15),
 
             value=str(self.id_hypertrophy_type),
             options=self.hypertrophy_types,

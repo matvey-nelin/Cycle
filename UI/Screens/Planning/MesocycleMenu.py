@@ -231,7 +231,7 @@ class MesocycleMenu(BaseView):
                 start_mesocycle_range = str(datetime.fromtimestamp(ranges[0]).date())   if ranges[0] != 0 else ""
                 end_mesocycle_range   = str(datetime.fromtimestamp(ranges[1]).date())   if ranges[1] != 0 else ""
 
-            mesocycle_statuses      = self.database.get_mesocycle_workout_statuses(self.settings.current_user, id_mesocycle)
+            mesocycle_statuses = self.database.get_mesocycle_workout_statuses(self.settings.current_user, id_mesocycle)
 
             self.cards.append(
                 self._create_mesocycle_card_(

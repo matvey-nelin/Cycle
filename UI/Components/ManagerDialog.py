@@ -20,12 +20,12 @@ class ManagerDialog(ft.AlertDialog):
 
         self.id = id
 
-        self.title = title if isinstance(title, ft.Text) \
-            else ft.Text(
+        self.title = ft.Text(
                 value=title,
                 size=18,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
-            )
+                color=ft.Colors.ON_SURFACE
+            ) if isinstance(title, str) \
+            else title
         self.title.text_align = ft.TextAlign.CENTER
 
         self.essence = essence
@@ -41,7 +41,7 @@ class ManagerDialog(ft.AlertDialog):
         self.delete_button = ft.IconButton(
             icon=ft.Icons.DELETE_ROUNDED,
             icon_size=20,
-            icon_color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND,
+            icon_color=ft.Colors.ON_SURFACE,
 
             align=ft.Alignment.CENTER,
             on_click=self.on_delete_button_click

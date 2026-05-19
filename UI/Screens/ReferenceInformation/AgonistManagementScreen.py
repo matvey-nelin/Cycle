@@ -71,6 +71,8 @@ class AgonistManagementScreen(BaseView):
                 expand=True,
                 margin=ft.Margin.only(bottom=0, left=25, right=25, top=0),
 
+                disabled=bool(self.id in self.settings.unchangeable_agonists),
+
                 text_align=ft.TextAlign.CENTER,
                 helper=self.labels["title_helper_text"],
                 

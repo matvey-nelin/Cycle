@@ -102,7 +102,11 @@ class Translator:
         self.macrocycle_menu_labels         = dict(self.screens_labels["macrocycle_menu"])
         self.macrocycle_screen_labels       = dict(self.screens_labels["macrocycle_screen"])
 
-        self.workout_screen_labels = dict(self.screens_labels["workout_screen"]) 
+        self.workout_screen_labels = dict(self.screens_labels["workout_screen"])
+
+
+            # Экран статистики
+        self.statistics_screen_labels   = dict(self.screens_labels["statistics_screen"])
         
 
             # Экран справочной информации

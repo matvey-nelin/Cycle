@@ -25,7 +25,8 @@
             "flexibility": "Esneklik",
             "recovery": "Toparlanma",
             "swimming": "Yüzme",
-            "running": "Koşu"
+            "running": "Koşu",
+            "dzhiu_dzhitsu": "Jiu-Jitsu"
         },
         "workout_statuses": {
             "scheduled": "Planlandı",
@@ -136,7 +137,13 @@
             "full_body_general_fitness": "Tüm Vücut - Genel Fitness",
             "cardio_endurance_session": "Kardiyo - Dayanıklılık Seansı",
             "calisthenics_upper_body": "Calisthenics - Üst Vücut",
-            "liss_recovery_walk": "LISS - Toparlanma Yürüyüşü"
+            "liss_recovery_walk": "LISS - Toparlanma Yürüyüşü",
+            "lower_strength": "Alt Vücut Güç",
+            "push_pull_hypertrophy": "Push/Pull Hipertrofi",
+            "full_body_conditioning": "Tüm Vücut Conditioning",
+            "novyj_shablon_trenirovki": "Yeni Antrenman Şablonu",
+            "silovaja_po_dzhiu_dzhiutsu": "Jiu-Jitsu Güç",
+            "upper_strength": "Üst Vücut Güç"
         },
         "microcycle_templates": {
             "week_1_foundation": "Hafta 1 - Temel",
@@ -148,7 +155,9 @@
             "hypertrophy_block_b": "Hipertrofi Bloğu B",
             "powerlifting_meet_prep": "Powerlifting Yarışma Hazırlığı",
             "general_fitness_week": "Genel Fitness Haftası",
-            "active_recovery_week": "Aktif Toparlanma Haftası"
+            "active_recovery_week": "Aktif Toparlanma Haftası",
+            "base_3day": "Base 3-Günlük Split",
+            "deload_3day": "Deload 3-Günlük"
         }
     },
     "settings": {
@@ -192,6 +201,10 @@
                 "planning_screen": {
                     "label": "Plan",
                     "tooltip": "Antrenman Planlama"
+                },
+                "statistics_screen": {
+                    "label": "İstatistikler",
+                    "tooltip": "Hedef Metrikler"
                 },
                 "reference_information_screen": {
                     "label": "Bilgi",
@@ -243,6 +256,25 @@
                 "microcycle_template_menu": "Mikro Döngü Şablonları",
                 "mesocycle_menu": "Mezodöngüler",
                 "macrocycle_menu": "Makrodöngüler"
+            },
+            "statistics_screen": {
+                "base_metrics": {
+                    "total_volume": "Toplam Hacim",
+                    "total_volume_units": "kg / lbs",
+                    "workouts_count": "Antrenman Sayısı",
+                    "workouts_count_time_range": "mezodöngü başına",
+                    "workout_avg_duration": "Ortalama Antrenman Süresi",
+                    "workout_avg_duration_unit": {
+                        "minuts": "dk",
+                        "hours": "s"
+                    }
+                },
+                "current_streak": "Mevcut Seri",
+                "current_streak_subtitle": "Antrenman yapalım mı?",
+                "best_streak": "En İyi Seri",
+                "best_streak_subtitle": "En iyisi henüz gelmedi!",
+                "workout_statuses_piechart_title": "Mezodöngü Başına Antrenman Durum Dağılımı",
+                "workout_statuses_piechart_no_data": "Antrenman durum verisi yok"
             },
             "reference_information_screen": {
                 "user_information": "Kullanıcı Bilgileri",

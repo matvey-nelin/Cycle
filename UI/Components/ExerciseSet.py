@@ -13,11 +13,11 @@ class ExerciseSet(ft.Container):
         title: str,
         index: int,
         id_workout_type: int,
-        reps:   int | None = None, 
-        weight: float | int | None = None,
+        reps:   int | str | None = None, 
+        weight: float | str | int | None = None,
         sets_count: int = 0,
-        planned_reps: int | None = None,
-        planned_weight: float | int | None = None,
+        planned_reps: int | str | None = None,
+        planned_weight: float | str | int | None = None,
         id_composition: int | None = None
     ) -> None:
         super().__init__(ft.Row()) # Заглушка для создание потомка
@@ -356,24 +356,21 @@ class ExerciseSet(ft.Container):
 
     def exercise_dropdown_on_select(self, e):
         for exercise in self.all_exercises:
-                exercise_id     = str(exercise[0])
-                exercise_title  = str(self.translator.exercises[exercise[1]])
+            exercise_id     = str(exercise[0])
+            exercise_title  = str(self.translator.exercises[exercise[1]])
 
-                if exercise_id == e.data:
-                    self.chosen_dropdown_exercise = exercise_id
-                    self.title = exercise_title
+            if exercise_id == e.data:
+                self.chosen_dropdown_exercise = exercise_id
+                self.title = exercise_title
 
-                    self.dropdown_exercises_options.append(
-                        ft.DropdownOption(
-                            key=exercise_id,
-                            text=exercise_title
-                        )
+                self.dropdown_exercises_options.append(
+                    ft.DropdownOption(
+                        key=exercise_id,
+                        text=exercise_title
                     )
+                )
 
-                    break
-
-        self.exercise_dropdown.options = self.dropdown_exercises_options
-        self.exercise_dropdown.update()
+                break
 
 
     def __init_dropdown_options__(self, id_workout_type: int):
