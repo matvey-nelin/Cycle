@@ -193,6 +193,7 @@ class MesocycleMenu(BaseView):
     def delete_mesocycle(self, id: int):
         self.database.delete_mesocycle(id)
         self.app_state.data_changed_notify()
+        self.page.update()
 
 
 

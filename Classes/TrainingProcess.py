@@ -53,23 +53,24 @@ class TrainingProcess:
 
             self.database.create_workout_composition(id_workout, id_exercise)
 
-
+    
 
     def _create_workout_card_(self, screen: BaseView, id_workout: int, planned_info: bool, on_card_click, delete_from_list_function):
         exercises = self.database.get_workout_exercises(id_workout, planned_info) 
 
         def create_row(exercise_title: str, planned_repetitions: int | str, planned_weight: float | str):
             return ft.Row(
+                expand=True,
                 spacing=5,
                 margin=0,
                 controls=
                 [
                     ft.Text(
-                        str(exercise_title),
-                        size=12,
                         expand=True,
+                        value=str(exercise_title),
+                        size=12,
                         max_lines=3,
-                        color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                        color=ft.Colors.ON_SURFACE
                     ),
                     ft.Row(
                         expand=False,
@@ -77,14 +78,14 @@ class TrainingProcess:
                         controls=
                         [
                             ft.Text(
-                                str(planned_repetitions),
+                                value=str(planned_repetitions),
                                 size=12,
-                                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                                color=ft.Colors.ON_SURFACE
                             ),
                             ft.Text(
-                                str(planned_weight),
+                                value=str(planned_weight),
                                 size=12,
-                                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                                color=ft.Colors.ON_SURFACE
                             )
                         ],
                         alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -120,12 +121,12 @@ class TrainingProcess:
                                 ft.Text(
                                     start_date_workout,
                                     size=14,
-                                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                                    color=ft.Colors.ON_SURFACE
                                 ),
                                 ft.Text(
                                     start_time_workout,
                                     size=14,
-                                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                                    color=ft.Colors.ON_SURFACE
                                 ),
                             ],
                             alignment=ft.MainAxisAlignment.CENTER,
@@ -134,7 +135,7 @@ class TrainingProcess:
                         ft.Text(
                             " - ",
                             size=14,
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         ),
                         ft.Column(
                             spacing=1,
@@ -143,12 +144,12 @@ class TrainingProcess:
                                 ft.Text(
                                     end_date_workout,
                                     size=14,
-                                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                                    color=ft.Colors.ON_SURFACE
                                 ),
                                 ft.Text(
                                     end_time_workout,
                                     size=14,
-                                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                                    color=ft.Colors.ON_SURFACE
                                 ),
                             ],
                             alignment=ft.MainAxisAlignment.CENTER,
@@ -170,7 +171,7 @@ class TrainingProcess:
                         ft.Text(
                             start_time_workout,
                             size=12,
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         )
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
@@ -187,7 +188,7 @@ class TrainingProcess:
                     ft.Text(
                         value=title_workout_status,
                         size=14,
-                        color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                        color=ft.Colors.ON_SURFACE
                     )
                 ],
                 alignment=ft.MainAxisAlignment.CENTER,
@@ -197,7 +198,7 @@ class TrainingProcess:
         card_info.append(
             ft.Divider(
                 height=1,
-                color=self.colors.LIGHT_OUTLINE_VARIANT if self.colors.theme == 'light' else self.colors.DARK_OUTLINE_VARIANT
+                color=ft.Colors.OUTLINE_VARIANT
             )
         )
 

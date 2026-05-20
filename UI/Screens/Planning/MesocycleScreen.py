@@ -19,7 +19,10 @@ class MesocycleScreen(BaseView):
         super().__init__(page, navigate_callback, app_state, previous_screen_name)
 
         self.app_state.resize_subscribe(self._on_resize_)
-        self.app_state.data_changed_subscribe(lambda: self._init_data_(self.id))
+
+        self._on_data_changed = lambda: self._init_data_(self.id)
+        self.app_state.data_changed_subscribe(self._on_data_changed)
+
 
         self.id     = id_mesocycle
 
@@ -37,7 +40,7 @@ class MesocycleScreen(BaseView):
             content=ft.IconButton(
                 icon=ft.Icons.ADD_ROUNDED,
                 icon_size=25,
-                icon_color=self.colors.LIGHT_ON_TERTIARY if self.colors.theme == "light" else self.colors.DARK_ON_TERTIARY,
+                icon_color=ft.Colors.ON_TERTIARY,
 
                 on_click=self._add_microcycle_button_on_click_,
                 on_hover=self._add_microcycle_button_on_hover_
@@ -62,15 +65,11 @@ class MesocycleScreen(BaseView):
         self.microcycles_container = ft.Container(
             expand=False,
             content=self.microcycles_row,
-            border=ft.Border().all(
-                width=3,
-                color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
-            ),
-            border_radius=4,
+
+            border_radius=10,
+
             alignment=ft.Alignment.CENTER_LEFT
         )
-
-        self._init_data_(self.id)
 
 
         # Меню действий с мезоциклом
@@ -86,7 +85,6 @@ class MesocycleScreen(BaseView):
         )
 
 
-
         self.main_container.content = ft.Column(
             spacing=0,
             controls=
@@ -99,6 +97,7 @@ class MesocycleScreen(BaseView):
             horizontal_alignment=ft.CrossAxisAlignment.CENTER
         )
 
+        self._init_data_(self.id)
         self._on_resize_(None)
 
 
@@ -110,21 +109,27 @@ class MesocycleScreen(BaseView):
         # Переопределение данных элементов страницы
         if id_mesocycle != self.id:
             try:
-                self.app_state._data_changed_listeners.remove(lambda: self._init_data_(self.id))
+                self.app_state._data_changed_listeners.remove(self._on_data_changed)
             except ValueError:
                 pass
 
             self.id = id_mesocycle
-            self.app_state.data_changed_subscribe(lambda: self._init_data_(self.id))
+            self._on_data_changed = lambda: self._init_data_(self.id)
+            self.app_state.data_changed_subscribe(self._on_data_changed)
 
         self.microcycles = []
         
         for microcycle in self.database.get_microcycles(self.id):
             id_microcycle = int(microcycle[0])
-            microcycle_container = self._create_microcycle_container_(id_microcycle)
-            self.microcycles.append(microcycle_container)
+            self.microcycles.append(
+                self._create_microcycle_container_(id_microcycle)
+            )
         
         self.microcycles_row.controls = [*self.microcycles, self.add_microcycle_button]
+        try:
+            self.microcycles_row.update()
+        except RuntimeError:
+            pass
 
 
 
@@ -163,22 +168,25 @@ class MesocycleScreen(BaseView):
             label_position=ft.LabelPosition.RIGHT,
             label_style=ft.TextStyle(
                 size=14,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                color=ft.Colors.ON_SURFACE
             ),
             on_change=on_checkbox_change
         )
 
         # Создание контейнера
         microcycle = TemplateContainer(self)
-        microcycle.data = id_microcycle
-        microcycle.height = self.microcycles_container.height
-        microcycle.border = ft.Border().all(
+
+        microcycle.data     = id_microcycle
+        microcycle.height   = self.microcycles_container.height
+        microcycle.bgcolor  = ft.Colors.SURFACE_CONTAINER_LOW
+        microcycle.border   = ft.Border().all(
             width=1,
-            color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
+            color=ft.Colors.SECONDARY
         )
         microcycle.padding = ft.Padding.symmetric(vertical=0, horizontal=3)
         microcycle.templates.spacing = 10
         microcycle.templates.controls.append(self.is_unloading_checkbox)
+
 
         workouts    = self.database.get_workouts(id_microcycle)
         workouts_list = []
@@ -189,7 +197,7 @@ class MesocycleScreen(BaseView):
                 screen=                     self, 
                 id_workout=                 id_workout, 
                 planned_info=               False,
-                on_card_click=              lambda id: self.open_workout_screen(id),
+                on_card_click=              lambda id=self.id: self.open_workout_screen(id),
                 delete_from_list_function=  lambda e: self.remove_workout(e)
             )
             workout_card.margin = 0
@@ -240,11 +248,12 @@ class MesocycleScreen(BaseView):
         """
         def add_microcycle(id: int):
             self.training_process.create_microcycle_from_template(id, self.id)
+            self.app_state.data_changed_notify()
             
-            last_microcycle_id = self.database.get_microcycles(self.id)[-1][0]
-            self.microcycles.append(self._create_microcycle_container_(last_microcycle_id))
+            # last_microcycle_id = self.database.get_microcycles(self.id)[-1][0]
+            # self.microcycles.append(self._create_microcycle_container_(last_microcycle_id))
 
-            self.microcycles_row.controls = [*self.microcycles, self.add_microcycle_button]
+            # self.microcycles_row.controls = [*self.microcycles, self.add_microcycle_button]
 
             self.navigate(
                 screen_name=            "mesocycle_screen",
@@ -252,20 +261,17 @@ class MesocycleScreen(BaseView):
                 id_mesocycle=           self.id
             )
 
-            self.microcycles_row.update()
 
-            self.app_state.data_changed_notify()
-
-        
         self.navigate(
             screen_name=            "choosable_microcycle_template_menu",
             is_temporary_screen=    True,
             page=                   self.page, 
             navigate_callback=      self.navigate, 
             app_state=              self.app_state,
-            selection_function=     lambda id: add_microcycle(id),
+            selection_function=     lambda id=self.id: add_microcycle(id),
             previous_screen_name=   "mesocycle_screen"
         )
+
 
 
     def _add_microcycle_button_on_hover_(self, e):

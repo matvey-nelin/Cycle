@@ -18,7 +18,7 @@ class TemplateCard(ft.Container):
         self.height     = height
 
 
-        self.bgcolor = ft.Colors.SURFACE_CONTAINER_HIGHEST
+        self.bgcolor = ft.Colors.SURFACE_CONTAINER_HIGH
         self.border_radius = 10
 
         if self.colors.theme == "light":

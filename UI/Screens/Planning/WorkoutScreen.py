@@ -283,14 +283,15 @@ class WorkoutScreen(BaseView):
             gradient=self.colors.Gradients.BUTTON_PRIMARY,
             content=ft.Text(
                 value=self.labels["save_button"],
-                color=self.colors.LIGHT_ON_PRIMARY if self.colors.theme == "light" else self.colors.DARK_ON_PRIMARY,
+                weight=ft.FontWeight.BOLD,
+                color=ft.Colors.ON_PRIMARY,
                 text_align=ft.TextAlign.CENTER
             ),
 
-            border=ft.Border().all(
-                width=1,
-                color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
-            ),
+            # border=ft.Border().all(
+            #     width=1,
+            #     color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
+            # ),
             border_radius=15,
 
             alignment=ft.Alignment.CENTER,
@@ -308,14 +309,15 @@ class WorkoutScreen(BaseView):
             gradient=self.colors.Gradients.BUTTON_SUCCESS,
             content=ft.Text(
                 value=self.labels["start_workout"],
-                color=self.colors.LIGHT_ON_PRIMARY if self.colors.theme == "light" else self.colors.DARK_ON_PRIMARY,
+                weight=ft.FontWeight.BOLD,
+                color=ft.Colors.ON_PRIMARY,
                 text_align=ft.TextAlign.CENTER
             ),
 
-            border=ft.Border().all(
-                width=1,
-                color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
-            ),
+            # border=ft.Border().all(
+            #     width=1,
+            #     color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
+            # ),
             border_radius=15,
 
             alignment=ft.Alignment.CENTER,
@@ -331,14 +333,15 @@ class WorkoutScreen(BaseView):
             gradient=self.colors.Gradients.BUTTON_DANGER,
             content=ft.Text(
                 value=self.labels["end_workout"],
-                color=self.colors.LIGHT_ON_WARNING if self.colors.theme == "light" else self.colors.DARK_ON_WARNING,
+                weight=ft.FontWeight.BOLD,
+                color=ft.Colors.ON_ERROR,
                 text_align=ft.TextAlign.CENTER
             ),
 
-            border=ft.Border().all(
-                width=1,
-                color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
-            ),
+            # border=ft.Border().all(
+            #     width=1,
+            #     color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
+            # ),
             border_radius=15,
 
             alignment=ft.Alignment.CENTER,

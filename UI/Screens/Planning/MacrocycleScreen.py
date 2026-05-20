@@ -21,6 +21,8 @@ class MacrocycleScreen(BaseView):
 
         self.id = id_macrocycle
         self.labels = self.translator.macrocycle_screen_labels
+
+        self._on_data_changed = lambda: self._init_data_(self.id)
         self.app_state.data_changed_subscribe(self._init_data_)
 
 
@@ -32,12 +34,12 @@ class MacrocycleScreen(BaseView):
 
             content=ft.Icon(
                 icon=ft.Icons.ADD_ROUNDED,
-                color=self.colors.LIGHT_ON_PRIMARY if self.colors.theme == "light" else self.colors.DARK_ON_PRIMARY
+                color=ft.Colors.ON_PRIMARY
             ),
 
             border=ft.Border().all(
-                width=1,
-                color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
+                width=0,
+                color=ft.Colors.OUTLINE
             ),
             border_radius=15,
 
@@ -49,24 +51,31 @@ class MacrocycleScreen(BaseView):
 
         self.mesocycles = []
 
-
-
         self.mesocycles_container = ft.Column(
-            width=400,
+            expand=True,
+            spacing=10,
+            width=500,
             controls=
             [
                 *self.mesocycles, 
                 self.add_mesocycle_button
             ],
+
             alignment=ft.MainAxisAlignment.CENTER,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+
             scroll=ft.ScrollMode.AUTO
         )
 
+
+        self.main_container.padding = 10
+
         self.main_container.content = self.mesocycles_container
+        self.main_container.bgcolor = ft.Colors.SURFACE_CONTAINER_LOW
+
         self.main_container.border = ft.Border.all(
-            width=5,
-            color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
+            width=3,
+            color=ft.Colors.TERTIARY
         )
         self.main_container.border_radius = 10
 
@@ -76,12 +85,13 @@ class MacrocycleScreen(BaseView):
         # Переопределение данных элементов страницы
         if id_macrocycle != self.id:
             try:
-                self.app_state._data_changed_listeners.remove(lambda: self._init_data_(self.id))
+                self.app_state._data_changed_listeners.remove(self._on_data_changed)
             except ValueError:
                 pass
 
             self.id = id_macrocycle
-            self.app_state.data_changed_subscribe(lambda: self._init_data_(self.id))
+            self._on_data_changed = lambda: self._init_data_(self.id)
+            self.app_state.data_changed_subscribe(self._on_data_changed)
 
         self.mesocycles = []
         
@@ -110,20 +120,19 @@ class MacrocycleScreen(BaseView):
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 scroll=ft.ScrollMode.AUTO
             )
+
+        try:
+            self.mesocycles_container.update()
+        except RuntimeError:
+            pass
+
     
 
     def choose_mesocycle(self, e):
-        id_mesocycle = e
-        self.database.update_mesocycle(id_mesocycle, self.id)
-
-        mesocycle_card  = self.create_mesocycle_card(id_mesocycle)
-        self.mesocycles.append(mesocycle_card)
-
-        self.mesocycles_container.controls = [*self.mesocycles, self.add_mesocycle_button]
-
+        self.database.update_mesocycle(e, self.id)
         self.app_state.data_changed_notify()
+
         self.navigate("macrocycle_screen")
-        self.mesocycles_container.update()
 
 
     def remove_mesocycle(self, e):
@@ -131,8 +140,8 @@ class MacrocycleScreen(BaseView):
                         
         self.database.update_mesocycle(e.id, 0)
 
-        self.mesocycles_container.update()
         self.app_state.data_changed_notify()
+        self.mesocycles_container.update()
 
 
 
@@ -156,16 +165,16 @@ class MacrocycleScreen(BaseView):
                     [
                         ft.Text(
                             value=start_range,
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         ),
                         
                         ft.Text(
                             value=" - ",
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         ),
                         ft.Text(
                             value=end_range,
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         )
                     ],
                     alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -187,12 +196,12 @@ class MacrocycleScreen(BaseView):
                     [
                         ft.Text(
                             value=title_status,
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         ),
                         
                         ft.Text(
                             value=f"{count_status} / {count_all_statuses}",
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         ),
                     ],
                     alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -207,7 +216,7 @@ class MacrocycleScreen(BaseView):
                     [
                         ft.Text(
                             value=self.labels["mesocycle_no_data"],
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND,
+                            color=ft.Colors.ON_SURFACE,
                             text_align=ft.TextAlign.CENTER
                         )
                     ],
@@ -244,7 +253,7 @@ class MacrocycleScreen(BaseView):
     def _on_hover_add_button_(self, e):
         try:
             if e:
-                self.add_mesocycle_button.gradient =self.colors.Gradients.BUTTON_HOVER if e.data == True else self.colors.Gradients.BUTTON_PRIMARY
+                self.add_mesocycle_button.gradient = self.colors.Gradients.BUTTON_HOVER if e.data == True else self.colors.Gradients.BUTTON_PRIMARY
                 self.add_mesocycle_button.update()
         except:
             return

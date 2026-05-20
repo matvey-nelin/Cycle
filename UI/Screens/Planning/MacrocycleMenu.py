@@ -180,6 +180,8 @@ class MacrocycleMenu(BaseView):
         self.database.delete_macrocycle(id)
         self.app_state.data_changed_notify()
 
+        self.page.update()
+
 
 
     def _init_macrocycle_cards_(self):

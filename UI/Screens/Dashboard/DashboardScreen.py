@@ -204,7 +204,7 @@ class DashboardScreen(BaseView):
         self.current_date = int(datetime.datetime.now().replace(hour=0, minute=0, second=0).timestamp())
         day_period   = int(24 * 60 * 60)
 
-        self.fill_table_time(date=self.current_date, period=day_period)
+        self.fill_timetable(date=self.current_date, period=day_period)
     
         time_periods = self.determine_time_period(int(self.current_date), day_period)
         
@@ -216,7 +216,7 @@ class DashboardScreen(BaseView):
         
 
     
-    def fill_table_time(self, date: int, period: int):
+    def fill_timetable(self, date: int, period: int):
         self.workouts_list.controls.clear()
         workouts = self.database.get_workouts_near_to_date(date, abs(period)) 
 
@@ -306,7 +306,7 @@ class DashboardScreen(BaseView):
         time_period = e.control.data["time_period"]
         self.current_date += time_period
 
-        self.fill_table_time(int(self.current_date), time_period)
+        self.fill_timetable(int(self.current_date), time_period)
         time_periods = self.determine_time_period(int(self.current_date), time_period)
         
         self.time_period_row.controls = [

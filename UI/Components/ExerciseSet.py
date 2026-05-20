@@ -64,10 +64,11 @@ class ExerciseSet(ft.Container):
             margin=0,
             height=40,
 
-            gradient=self.colors.Gradients.CARD_DEFAULT,
+            # gradient=self.colors.Gradients.CARD_DEFAULT,
+            bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
             border=ft.Border().all(
                 width=1,
-                color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
+                color=ft.Colors.OUTLINE
             ),
             border_radius=10 
         )
@@ -79,14 +80,14 @@ class ExerciseSet(ft.Container):
             margin=0,
             height=40,
 
-            gradient=self.colors.Gradients.CARD_DEFAULT,
+            # gradient=self.colors.Gradients.CARD_DEFAULT,
             border=ft.Border().all(
                 width=1,
-                color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
+                color=ft.Colors.OUTLINE
             ),
             border_radius=10,
 
-            bgcolor = self.colors.LIGHT_SECONDARY_CONTAINER if self.colors.theme == "light" else self.colors.DARK_SECONDARY_CONTAINER,
+            bgcolor = ft.Colors.SECONDARY_CONTAINER,
             opacity = 0.5
         )
         
@@ -185,7 +186,7 @@ class ExerciseSet(ft.Container):
             value=self.chosen_dropdown_exercise,
             text_style=ft.TextStyle(
                 size=12,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                color=ft.Colors.ON_SURFACE
             ),
             options=self.dropdown_exercises_options,
 
@@ -193,7 +194,7 @@ class ExerciseSet(ft.Container):
 
             text_align=ft.TextAlign.START,
             border=ft.InputBorder.NONE,
-            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND,
+            color=ft.Colors.ON_SURFACE,
 
             on_select=self.exercise_dropdown_on_select
         )
@@ -206,11 +207,15 @@ class ExerciseSet(ft.Container):
             content_padding=ft.Padding.only(bottom=5),
 
             helper=self.labels["set_count"],
+            helper_style=ft.TextStyle(
+                size=10,
+                color=ft.Colors.ON_SURFACE
+            ),
 
             value=str(sets_count), 
             text_style=ft.TextStyle(
                 size=12,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                color=ft.Colors.ON_SURFACE
             ),
             text_align=ft.TextAlign.CENTER,
             
@@ -230,11 +235,15 @@ class ExerciseSet(ft.Container):
 
             hint_text=str(planned_reps) if planned_reps is not None else None,
             helper=self.labels["set_repetitions"],
+            helper_style=ft.TextStyle(
+                size=10,
+                color=ft.Colors.ON_SURFACE
+            ),
 
             value=str(reps), 
             text_style=ft.TextStyle(
                 size=12,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                color=ft.Colors.ON_SURFACE
             ),
             text_align=ft.TextAlign.CENTER,
             
@@ -245,7 +254,7 @@ class ExerciseSet(ft.Container):
             max_lines=1,
             keyboard_type=ft.KeyboardType.NUMBER, 
 
-            on_blur=self.change_and_save_reps if (self.settings.current_workout != 0) else None
+            on_change=self.change_and_save_reps if (self.settings.current_workout != 0) else None
         )
 
         # TextField с весом
@@ -256,11 +265,15 @@ class ExerciseSet(ft.Container):
 
             hint_text=str(planned_weight) if planned_weight is not None else None,
             helper=self.labels["set_weight"],
+            helper_style=ft.TextStyle(
+                size=10,
+                color=ft.Colors.ON_SURFACE
+            ),
 
-            value=str(weight),
+            value=str("0" if (str(weight) == "0.0") else weight),
             text_style=ft.TextStyle(
                 size=12,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                color=ft.Colors.ON_SURFACE
             ),
             text_align=ft.TextAlign.CENTER,
             
@@ -271,7 +284,7 @@ class ExerciseSet(ft.Container):
             max_lines=1,
             keyboard_type=ft.KeyboardType.NUMBER,
 
-            on_blur=self.change_and_save_weight if (self.settings.current_workout != 0) else None
+            on_change=self.change_and_save_weight if (self.settings.current_workout != 0) else None
         )
 
         # IconButton для удаления сета из списка
@@ -283,7 +296,7 @@ class ExerciseSet(ft.Container):
 
                 icon=ft.Icons.DELETE_ROUNDED,
                 size=20,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND,
+                color=ft.Colors.ON_SURFACE,
     
                 align=ft.Alignment.CENTER
             ),
@@ -363,12 +376,12 @@ class ExerciseSet(ft.Container):
                 self.chosen_dropdown_exercise = exercise_id
                 self.title = exercise_title
 
-                self.dropdown_exercises_options.append(
-                    ft.DropdownOption(
-                        key=exercise_id,
-                        text=exercise_title
-                    )
-                )
+                # self.dropdown_exercises_options.append(
+                #     ft.DropdownOption(
+                #         key=exercise_id,
+                #         text=exercise_title
+                #     )
+                # )
 
                 break
 

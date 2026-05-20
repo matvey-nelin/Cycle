@@ -1171,7 +1171,7 @@ class Database:
             JOIN exercises AS ex ON ex.id_exercise = wtc.id_exercise
 
             WHERE wtc.id_workout = {id_workout}
-            ORDER BY ex.id_exercise ASC
+            ORDER BY wtc.id_composition ASC
         """
 
         if get_planned:
@@ -1405,17 +1405,15 @@ class Database:
             )
 
 
-            SELECT  mcc.id_microcycle
-            FROM    microcycles                 AS mcc
-            JOIN    Planned_microcycles_ranges  AS pmr ON pmr.id_microcycle = mcc.id_microcycle
+            SELECT  pmr.id_microcycle, datetime(pmr.planned_start_time, 'unixepoch'), datetime(pmr.planned_end_time, 'unixepoch')
+            FROM    Planned_microcycles_ranges  AS pmr
 
-            WHERE   mcc.id_mesocycle = {id_mesocycle}
             ORDER BY 
                     MIN(
                         ABS(pmr.planned_start_time  - {time}), 
                         ABS(pmr.planned_end_time    - {time})
                     ) ASC
-            LIMIT 1
+            -- LIMIT 1
         """
 
         return self.__select_request__(request)

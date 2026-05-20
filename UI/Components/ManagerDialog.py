@@ -79,5 +79,8 @@ class ManagerDialog(ft.AlertDialog):
         )
 
         self.actions = []
+        
+        self.update()
+
 
         
