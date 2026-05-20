@@ -4,14 +4,27 @@ import flet as ft
 from AppState import AppState
 from UI.CycleApp import CycleApp
 
+import time
 
 
 
 def main(page: ft.Page):
-    # Предотавращает мгновенное закрытие при багах навигации
-    page.on_close = lambda: None
+    # Загрузочное кольцо
+    page.add(ft.ProgressRing())
 
-    app_state = AppState(page)
+    try:
+        # Инициализация объекта храненящего состояние приложения
+        app_state = AppState(page)
+    
+    except Exception as ex:
+        page.clean()
+        page.add(ft.Text(f"{ex}"))
+        return
+
+    # Закрытие соединения с БД при закрытии
+    page.clean()
+    page.on_close = lambda e: app_state.database._close_connection_()
+
     CycleApp(page, app_state)
 
 

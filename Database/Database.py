@@ -1,4 +1,5 @@
 import sqlite3
+import logging
 
 import utils
 
@@ -10,58 +11,64 @@ class Database:
         self.db_path = utils.get_data_directory() / "CycleDatabase.db"
 
         try:
-            if not self.db_path.exists():
-                sqlite3.connect(self.db_path, check_same_thread=False)
+            self.conn = sqlite3.connect(self.db_path, check_same_thread=False, timeout=10)
+            self.cur  = self.conn.cursor()
+
+            self.cur.execute("PRAGMA journal_mode=WAL;")
+            self.cur.execute("PRAGMA foreign_keys=ON;")
+            self.conn.commit()
+
+            self.cur.execute("PRAGMA user_version;")
+            self.db_version = self.cur.fetchone()[0]  
+
+            if self.db_version == 0:
+                # Создание базы данных (если не существует)
+                with open(utils.resource_path(r"assets/database/Requests/Creating a database.sql"), 'r', encoding='UTF-8') as file:
+                    self.cur.executescript(file.read())
                 
-                with sqlite3.connect(self.db_path, check_same_thread=False) as conn:
-                    cur  = conn.cursor()
+                # Вставка первичных данных (если данных нет в таблице)
+                with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting initial data.sql"), 'r', encoding='UTF-8') as file:
+                    self.cur.executescript(file.read())
 
-                    # Создание базы данных (если не существует)
-                    with open(utils.resource_path(r"assets/database/Requests/Creating a database.sql"), 'r', encoding='UTF-8') as file:
-                        cur.executescript(file.read())
-                    
-
-                    # Вставка первичных данных (если данных нет в таблице)
-                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting initial data.sql"), 'r', encoding='UTF-8') as file:
-                        cur.executescript(file.read())
+                self.cur.execute("PRAGMA user_version = 1;")
+                self.conn.commit()
 
         except Exception as _ex:
-            self._exception = _ex
+            logging.critical(f"DB init failed: {_ex}")
+            self._close_connection_()
+            raise _ex
+
+
+    def _close_connection_(self):
+        if self.conn:
+            self.conn.close()
 
 
     def __insertion_secondary_data__(self, insert_agonists: bool, insert_exercises: bool):
         try:
-            with sqlite3.connect(self.db_path, check_same_thread=False) as conn:
-                cur  = conn.cursor()
-
-                # Вставка вторичных данных (если данных нет в таблице)                    
-                    # Вставка мышц-агонистов
-                if insert_agonists:
-                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting agonists.sql"), 'r', encoding='UTF-8') as file:
-                        cur.executescript(file.read())
-                    
-                    # Вставка упражнений
-                if insert_exercises:
-                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting exercices.sql"), 'r', encoding='UTF-8') as file:
-                        cur.executescript(file.read())
+            # Вставка вторичных данных (если данных нет в таблице)                    
+                # Вставка мышц-агонистов
+            if insert_agonists:
+                with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting agonists.sql"), 'r', encoding='UTF-8') as file:
+                    self.cur.executescript(file.read())
+                
+                # Вставка упражнений
+            if insert_exercises:
+                with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting exercices.sql"), 'r', encoding='UTF-8') as file:
+                    self.cur.executescript(file.read())
 
         except Exception as _ex:
+            self.conn.rollback()
             self._exception = _ex
-            return _ex
+            raise _ex
 
 
 
     def __select_request__(self, request_string: str) -> list:        
         try:
-            with sqlite3.connect(self.db_path, check_same_thread=False) as conn:
-                cur  = conn.cursor()
-                cur.execute(request_string)
-
-                result = cur.fetchall()
-                if isinstance(result, Exception):
-                    raise result
-                
-                return result 
+            self.cur.execute(request_string)
+            result = self.cur.fetchall()
+            return result 
 
         except Exception as _ex:
             self._exception = _ex
@@ -73,22 +80,22 @@ class Database:
             raise TypeError("Invalid data type for insertion.")
 
         try:
-            with sqlite3.connect(self.db_path, check_same_thread=False) as conn:
-                cur  = conn.cursor()
-                cur.executemany(request_string, data)
+            self.cur.executemany(request_string, data)
+            self.conn.commit()
 
         except Exception as _ex:
+            self.conn.rollback()
             self._exception = _ex
             raise _ex
 
 
     def __execute_request__(self, request_string: str):
         try:
-            with sqlite3.connect(self.db_path, check_same_thread=False) as conn:
-                cur  = conn.cursor()
-                cur.execute(request_string)
+            self.cur.execute(request_string)
+            self.conn.commit()
 
         except Exception as _ex:
+            self.conn.rollback()
             self._exception = _ex
             raise _ex
 
