@@ -58,14 +58,12 @@ class ExerciseSet(ft.Container):
 
         
         self.content_container = ft.Container(
-            expand=True,
-            content=None,
+            # expand=True,
             padding=0,
             margin=0,
             height=40,
 
-            # gradient=self.colors.Gradients.CARD_DEFAULT,
-            bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
+            bgcolor=ft.Colors.SURFACE_CONTAINER_HIGH,
             border=ft.Border().all(
                 width=1,
                 color=ft.Colors.OUTLINE
@@ -78,9 +76,8 @@ class ExerciseSet(ft.Container):
             content=None,
             padding=0,
             margin=0,
-            height=40,
+            height=None,
 
-            # gradient=self.colors.Gradients.CARD_DEFAULT,
             border=ft.Border().all(
                 width=1,
                 color=ft.Colors.OUTLINE
@@ -185,7 +182,7 @@ class ExerciseSet(ft.Container):
 
             value=self.chosen_dropdown_exercise,
             text_style=ft.TextStyle(
-                size=12,
+                size=10,
                 color=ft.Colors.ON_SURFACE
             ),
             options=self.dropdown_exercises_options,
@@ -417,11 +414,26 @@ class ExerciseSet(ft.Container):
                 ft.DropdownOption(
                     key=exercise_id,
                     text=exercise_title,
-                    tooltip=ft.Tooltip(agonists_tooltip)
+                    
+                    content=ft.Text(
+                        expand=True,
+
+                        value=exercise_title,
+                        size=12,
+                        width=None,
+                        
+                        no_wrap=False,
+                        max_lines=3,
+                        overflow=ft.TextOverflow.ELLIPSIS,
+
+                        color=ft.Colors.ON_SURFACE,
+                    ),
+
+                    tooltip=ft.Tooltip(message=agonists_tooltip)
                 )
             )
 
-        dropdown_exercises_options = sorted(dropdown_exercises_options, key=lambda x: x.text)
+        dropdown_exercises_options = sorted(dropdown_exercises_options, key=lambda x: x.content.value)
         
         if self.chosen_dropdown_exercise == "":
             if isinstance(self.all_exercises, Exception):

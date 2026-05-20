@@ -17,7 +17,7 @@ class NavigationOption(ft.Container):
 
         self.border = ft.Border().all(
             width=2, 
-            color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
+            color=ft.Colors.OUTLINE
         )
         self.border_radius = 10
 
@@ -30,14 +30,14 @@ class NavigationOption(ft.Container):
             expand=True,
             value=text,
             size=16,
-            color=self.colors.LIGHT_ON_SURFACE if self.colors.theme == "light" else self.colors.DARK_ON_SURFACE,
+            color=ft.Colors.ON_SURFACE,
             no_wrap=False,
             max_lines=3,
         )
 
         self.arrow_icon = ft.Icon(
             icon=ft.Icons.KEYBOARD_ARROW_RIGHT_ROUNDED,
-            color=self.colors.LIGHT_SECONDARY if self.colors.theme == "light" else self.colors.DARK_SECONDARY,
+            color=ft.Colors.SECONDARY,
             size=35
         )
 
@@ -56,5 +56,5 @@ class NavigationOption(ft.Container):
         self.navigate(self.navigation_screen_name)
 
     def navigation_option_on_hover(self, e):
-        navigation_option_bgcolor = self.colors.LIGHT_OUTLINE_VARIANT if self.colors.theme == 'light' else self.colors.DARK_OUTLINE_VARIANT
+        navigation_option_bgcolor = ft.Colors.OUTLINE_VARIANT
         e.control.bgcolor = navigation_option_bgcolor if e.data else None

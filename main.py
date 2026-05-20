@@ -21,7 +21,7 @@ def main(page: ft.Page):
         page.add(ft.Text(f"{ex}"))
         return
 
-    # Закрытие соединения с БД при закрытии
+    # Закрытие соединения с БД при закрытии     
     page.clean()
     page.on_close = lambda e: app_state.database._close_connection_()
 

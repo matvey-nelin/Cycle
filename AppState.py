@@ -137,6 +137,14 @@ class AppState:
             theme_mode = self.page.platform_brightness.value if self.page.platform_brightness is not None else "light"
         self.colors     = AppColors(theme_mode, self.settings.color_theme)
 
+
+        # Назначение цветовой темы приложения при горячей перезагрузке
+        current_text_theme = self.page.theme.text_theme if self.page.theme is not None else None
+
+        self.page.theme = ft.Theme(color_scheme=self.colors.light_color_scheme, text_theme=current_text_theme)
+        self.page.dark_theme = ft.Theme(color_scheme=self.colors.dark_color_scheme, text_theme=current_text_theme)
+
+
         for restart_method in self.hot_restart_methods:
             if isinstance(restart_method, MethodType):
                 restart_method()

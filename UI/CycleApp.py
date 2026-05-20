@@ -142,9 +142,11 @@ class CycleApp:
         if target_is_global:
             screens_list = self.global_screens
             self.layout = self.global_layout
+            self.current_layout = "global"
         else:
             screens_list = self.local_screens
             self.layout = self.local_layout
+            self.current_layout = "local"
 
         if self.page.bottom_appbar is not None:
             if target_is_global and self.app_state.is_mobile:
@@ -176,14 +178,17 @@ class CycleApp:
             self.determine_selected_navigation_option()
             self.global_layout = self.mobile_layout if self.app_state.is_mobile else self.desktop_layout
 
-            if (self.page.bottom_appbar is not None) and (self.app_state.is_mobile):
-                if self.current_layout == "global":
-                    self.page.bottom_appbar.visible = self.app_state.is_mobile
+            if self.current_layout == "global":
+                if (self.page.bottom_appbar is not None):
+                    self.page.bottom_appbar.visible = bool(self.app_state.is_mobile)
+                    
+                    self.global_layout.change_screen(self.screen)
                     self.root_container.content = self.global_layout.layout_container
+                
 
         self.local_layout = self.clear_layout
+        
 
-        self.navigate(self.screen_name)
         self.page.update()
 
 
