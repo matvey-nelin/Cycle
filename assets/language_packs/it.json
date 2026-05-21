@@ -259,11 +259,12 @@
             },
             "statistics_screen": {
                 "base_metrics": {
-                    "total_volume": "Volume Totale",
+                    "percentage_of_completion": "Percentuale di completamento del piano",
+                    "total_volume": "Volume totale (effettivo)",
                     "total_volume_units": "kg / lbs",
-                    "workouts_count": "Numero Allenamenti",
+                    "workouts_count": "Numero di allenamenti",
                     "workouts_count_time_range": "per mesociclo",
-                    "workout_avg_duration": "Durata Media Allenamento",
+                    "workout_avg_duration": "Durata media allenamento",
                     "workout_avg_duration_unit": {
                         "minuts": "min",
                         "hours": "h"

@@ -22,11 +22,11 @@ class BaseLayout():
         self.destination_labels  = list(self.translator.navigation_menu_labels.keys())
         self.config_destinations = \
         [
-            {"icon": ft.Icons.FITNESS_CENTER_ROUNDED,           "selected_icon": ft.Icons.FITNESS_CENTER_ROUNDED,   "idx": 0},
-            {"icon": ft.Icons.CALENDAR_MONTH_OUTLINED,          "selected_icon": ft.Icons.CALENDAR_MONTH,           "idx": 1},
-            {"icon": ft.Icons.INSERT_CHART_OUTLINED_ROUNDED,    "selected_icon": ft.Icons.INSERT_CHART_ROUNDED,     "idx": 2},
-            {"icon": ft.Icons.MY_LIBRARY_BOOKS_OUTLINED,        "selected_icon": ft.Icons.MY_LIBRARY_BOOKS_ROUNDED, "idx": 3},
-            {"icon": ft.Icons.SETTINGS_OUTLINED,                "selected_icon": ft.Icons.SETTINGS,                 "idx": 4}
+            {"icon": ft.Icon(ft.Icons.FITNESS_CENTER_ROUNDED, size=25),           "selected_icon": ft.Icon(ft.Icons.FITNESS_CENTER_ROUNDED, size=25),   "idx": 0},
+            {"icon": ft.Icon(ft.Icons.CALENDAR_MONTH_OUTLINED, size=25),          "selected_icon": ft.Icon(ft.Icons.CALENDAR_MONTH, size=25),           "idx": 1},
+            {"icon": ft.Icon(ft.Icons.INSERT_CHART_OUTLINED_ROUNDED, size=25),    "selected_icon": ft.Icon(ft.Icons.INSERT_CHART_ROUNDED, size=25),     "idx": 2},
+            {"icon": ft.Icon(ft.Icons.MY_LIBRARY_BOOKS_OUTLINED, size=25),        "selected_icon": ft.Icon(ft.Icons.MY_LIBRARY_BOOKS_ROUNDED, size=25), "idx": 3},
+            {"icon": ft.Icon(ft.Icons.SETTINGS_OUTLINED, size=25),                "selected_icon": ft.Icon(ft.Icons.SETTINGS, size=25),                 "idx": 4}
         ]
 
         self.destinations = []

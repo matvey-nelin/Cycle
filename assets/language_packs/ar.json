@@ -259,7 +259,8 @@
             },
             "statistics_screen": {
                 "base_metrics": {
-                    "total_volume": "الحجم الإجمالي",
+                    "percentage_of_completion": "نسبة إكمال الخطة",
+                    "total_volume": "الحجم الإجمالي (الفعلي)",
                     "total_volume_units": "كغ / رطل",
                     "workouts_count": "عدد التدريبات",
                     "workouts_count_time_range": "لكل دورة متوسطة",

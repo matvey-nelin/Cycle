@@ -259,7 +259,8 @@
             },
             "statistics_screen": {
                 "base_metrics": {
-                    "total_volume": "总容量",
+                    "percentage_of_completion": "计划完成百分比",
+                    "total_volume": "总容量（实际）",
                     "total_volume_units": "kg / lbs",
                     "workouts_count": "训练次数",
                     "workouts_count_time_range": "每中周期",

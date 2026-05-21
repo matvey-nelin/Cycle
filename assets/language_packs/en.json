@@ -259,7 +259,8 @@
             },
             "statistics_screen": {
                 "base_metrics": {
-                    "total_volume": "Total Volume",
+                    "percentage_of_completion": "Plan Completion Percentage",
+                    "total_volume": "Total Volume (Actual)",
                     "total_volume_units": "kg / lbs",
                     "workouts_count": "Workouts Count",
                     "workouts_count_time_range": "per mesocycle",
