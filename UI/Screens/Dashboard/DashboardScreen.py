@@ -15,6 +15,8 @@ class DashboardScreen(BaseView):
         self.training_process = TrainingProcess(self.app_state)
         self.labels = self.translator.dashboard_screen_labels
         self.app_state.data_changed_subscribe(self._init_users_popup_menu_items_)
+        self.app_state.data_changed_subscribe(self._init_trainer_data_)
+        self.app_state.data_changed_subscribe(self._init_sportsmen_data_)
             
 
         # Меню выбора пользователя
@@ -525,7 +527,7 @@ class DashboardScreen(BaseView):
 
     def fill_microcycle_container(self, id_microcycle: int):
         self.workouts_list.controls.clear()
-        workouts = self.database.get_workouts(id_microcycle)
+        workouts = self.database.get_workouts_by_microcycle(id_microcycle)
 
         for workout in workouts:
             id_workout = workout[0]

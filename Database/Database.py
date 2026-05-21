@@ -1,5 +1,7 @@
+import datetime
 import sqlite3
 import logging
+
 
 import utils
 
@@ -1122,7 +1124,7 @@ class Database:
         self.__execute_request__(request)
 
 
-    def get_workouts(self, id_microcycle: int):
+    def get_workouts_by_microcycle(self, id_microcycle: int):
         """
         Method for obtaining workouts by 'id_microcycle'.\n
         Sorted by 'id_workout' ASC.\n
@@ -1484,30 +1486,51 @@ class Database:
 
 
     
-    def get_total_volume(self, id_user: int, start_ts: int, end_ts: int):
+    def get_total_volume(self, id_user: int, start_ts: int, end_ts: int, get_planned: bool = False):
         """
         Method for calculate total volume of work by id_user
         """
 
         request = f"""
             SELECT COALESCE(
-            SUM(
-                wc.actual_repetitions * 
-                CASE 
-                    WHEN wc.actual_weight = 0 
-                    THEN 1 
-                    ELSE wc.actual_weight 
-                END
-            ), 0)
-        FROM workout_composition AS wc
-        JOIN workouts       AS w        ON wc.id_workout    = w.id_workout
-        JOIN microcycles    AS mc       ON w.id_microcycle  = mc.id_microcycle
-        JOIN mesocycles     AS m        ON mc.id_mesocycle  = m.id_mesocycle
-        WHERE m.id_user = {id_user}
-          AND wc.actual_repetitions IS NOT NULL
-          AND wc.actual_weight IS NOT NULL
-          AND w.planned_workout_start_datetime BETWEEN {start_ts} AND {end_ts}
+                SUM(
+                    wc.actual_repetitions * 
+                    CASE 
+                        WHEN wc.actual_weight = 0 
+                        THEN 1 
+                        ELSE wc.actual_weight 
+                    END
+                ), 0)
+            FROM workout_composition AS wc
+            JOIN workouts       AS w        ON wc.id_workout    = w.id_workout
+            JOIN microcycles    AS mc       ON w.id_microcycle  = mc.id_microcycle
+            JOIN mesocycles     AS m        ON mc.id_mesocycle  = m.id_mesocycle
+            WHERE m.id_user = {id_user}
+                AND wc.actual_repetitions IS NOT NULL
+                AND wc.actual_weight IS NOT NULL
+                AND w.actual_workout_start_datetime BETWEEN {start_ts} AND {end_ts}
         """
+
+        if get_planned:
+            request = f"""
+                SELECT COALESCE(
+                    SUM(
+                        wc.planned_repetitions * 
+                        CASE 
+                            WHEN wc.planned_weight = 0 
+                            THEN 1 
+                            ELSE wc.planned_weight 
+                        END
+                    ), 0)
+                FROM workout_composition AS wc
+                JOIN workouts       AS w        ON wc.id_workout    = w.id_workout
+                JOIN microcycles    AS mc       ON w.id_microcycle  = mc.id_microcycle
+                JOIN mesocycles     AS m        ON mc.id_mesocycle  = m.id_mesocycle
+                WHERE m.id_user = {id_user}
+                    AND wc.actual_repetitions IS NOT NULL
+                    AND wc.actual_weight IS NOT NULL
+                    AND w.actual_workout_start_datetime BETWEEN {start_ts} AND {end_ts}
+            """
 
         return self.__select_request__(request)
     
@@ -1600,8 +1623,28 @@ class Database:
             JOIN microcycles    AS mc   ON mc.id_mesocycle      = ms.id_mesocycle
             JOIN workouts       AS w    ON w.id_microcycle      = mc.id_microcycle
             JOIN workout_status AS ws   ON ws.id_workout_status = w.id_workout_status
-            WHERE ms.id_user = {id_user}
+            WHERE (ms.id_user = {id_user}) AND (start_datetime <= {datetime.datetime.now().timestamp()})
             ORDER BY start_datetime
+        """
+
+        return self.__select_request__(request)
+    
+
+    def get_workout_info(self, id_workout: int):
+        """
+        Method for get workout info by 'id_workout'\n
+        Info: wt.id_workout, users.username, ws.slug, wt.actual_workout_start_datetime, wt.actual_workout_end_datetime
+        """
+
+        request = f"""
+            SELECT wt.id_workout, users.username, ws.slug, wt.actual_workout_start_datetime, wt.actual_workout_end_datetime
+                FROM workouts       AS wt
+                JOIN workout_status AS ws   ON ws.id_workout_status = wt.id_workout_status
+                JOIN microcycles    AS mcc  ON mcc.id_microcycle    = wt.id_microcycle
+                JOIN mesocycles     AS msc  ON msc.id_mesocycle     = mcc.id_mesocycle
+                JOIN users                  ON users.id_user        = msc.id_user
+
+                WHERE wt.id_workout = {id_workout}
         """
 
         return self.__select_request__(request)

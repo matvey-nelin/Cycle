@@ -71,6 +71,44 @@ class StatisticsScreen(BaseView):
         )
 
         
+        self.percentage_of_completion_block = ft.Container(
+            expand=True,
+            height=100,
+            padding=ft.Padding.all(10),
+            content=ft.Column(
+                spacing=5,
+                controls=
+                [
+                    ft.Text(
+                        value=self.labels["base_metrics"]["percentage_of_completion"],
+                        size=12,
+                        color=ft.Colors.ON_SURFACE,
+                        text_align=ft.TextAlign.CENTER
+                    ),
+                    
+                    ft.Text(
+                        value=f"{self.training_metrics.percentage_of_completion}",
+                        size=18,
+                        weight=ft.FontWeight.BOLD,
+                        color=ft.Colors.ON_SURFACE,
+                        text_align=ft.TextAlign.CENTER
+                    ),
+
+                    ft.Text(
+                        value="%",
+                        size=12,
+                        color=ft.Colors.ON_SURFACE,
+                        text_align=ft.TextAlign.CENTER
+                    )
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER
+            ),
+
+            bgcolor=ft.Colors.SURFACE_CONTAINER_HIGH,
+            border_radius=10
+        )
+
         self.total_volume_block = ft.Container(
             expand=True,
             height=100,
@@ -193,7 +231,7 @@ class StatisticsScreen(BaseView):
                 ft.Row(
                     controls=
                     [
-                        self.total_volume_block,
+                        self.percentage_of_completion_block,
                         self.workouts_count_block
                     ],
                     
@@ -203,6 +241,7 @@ class StatisticsScreen(BaseView):
                 ft.Row(
                     controls=
                     [
+                        self.total_volume_block,
                         self.workout_avg_duration_block
                     ],
                     

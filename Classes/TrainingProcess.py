@@ -42,7 +42,7 @@ class TrainingProcess:
 
     def _create_workout_(self, id_microcycle: int, id_workout_template: int, id_workout_status: int):
         self.database.insert_workout(id_microcycle, id_workout_template, id_workout_status)
-        id_workout = int(self.database.get_workouts(id_microcycle)[-1][0])
+        id_workout = int(self.database.get_workouts_by_microcycle(id_microcycle)[-1][0])
 
         exercises = self.database.get_workout_template_exercises(id_workout_template)
 

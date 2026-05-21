@@ -188,7 +188,7 @@ class MesocycleScreen(BaseView):
         microcycle.templates.controls.append(self.is_unloading_checkbox)
 
 
-        workouts    = self.database.get_workouts(id_microcycle)
+        workouts    = self.database.get_workouts_by_microcycle(id_microcycle)
         workouts_list = []
 
         for workout in workouts:

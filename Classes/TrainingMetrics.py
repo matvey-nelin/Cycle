@@ -17,9 +17,10 @@ class TrainingMetrics:
         self.get_current_mesocycle_and_microcycle()
 
         # Базовые метрики
-        self.total_volume           = 0
-        self.workouts_count         = 0
-        self.workout_avg_duration   = 0
+        self.percentage_of_completion   = 0
+        self.total_volume               = 0
+        self.workouts_count             = 0
+        self.workout_avg_duration       = 0
         self.get_base_metrics()
 
         # Таблица вовлеченности агонистов
@@ -48,8 +49,20 @@ class TrainingMetrics:
             self.total_volume = round(float(self.database.get_total_volume(
                 id_user=    self.settings.current_user, 
                 start_ts=   current_mesocycle_ranges[0][0], 
-                end_ts=     current_mesocycle_ranges[0][1]
+                end_ts=     current_mesocycle_ranges[0][1],
+                get_planned=False
             )[0][0]), ndigits=2)
+
+            planned_volume = round(float(self.database.get_total_volume(
+                id_user=    self.settings.current_user, 
+                start_ts=   current_mesocycle_ranges[0][0], 
+                end_ts=     current_mesocycle_ranges[0][1],
+                get_planned=True
+            )[0][0]), ndigits=2) 
+
+
+            self.percentage_of_completion = round((self.total_volume / planned_volume) * 100, ndigits=2)
+
 
             self.workouts_count = int(self.database.get_workouts_count(
                 id_user=    self.settings.current_user, 
@@ -57,11 +70,13 @@ class TrainingMetrics:
                 end_ts=     current_mesocycle_ranges[0][1]
             )[0][0])
 
+
             self.workout_avg_duration = round(float(self.database.get_workout_avg_duration(
                 id_user=    self.settings.current_user, 
                 start_ts=   current_mesocycle_ranges[0][0], 
                 end_ts=     current_mesocycle_ranges[0][1]
             )[0][0]), ndigits=2)
+
 
         return {
             "total_volume"          : self.total_volume,
@@ -99,7 +114,7 @@ class TrainingMetrics:
         if (self.id_current_mesocycle is None) and (self.id_current_microcycle is None):
             self.get_current_mesocycle_and_microcycle()
 
-        if self.id_current_microcycle is not None:
+        if self.id_current_microcycle is not None and self.agonists_involvement_table == []:
             self.agonists_involvement_table = self.database.get_agonists_involvement_by_microcycle(
                 id_microcycle=self.id_current_microcycle
             )
@@ -123,8 +138,7 @@ class TrainingMetrics:
                 return ("great", sets)
         
         # Проверка на наличие тренировочных данных
-        if (self.id_current_mesocycle is None) and (self.id_current_microcycle is None):
-            self.calculate_agonists_involvement()
+        self.calculate_agonists_involvement()
 
         
         for agonist in self.agonists_involvement_table:
@@ -169,3 +183,33 @@ class TrainingMetrics:
         if (best_streak != []):
             self.length_best_streak         = len(best_streak)
             self.date_range_best_streak     = [best_streak[0], best_streak[-1]]
+
+
+
+    def get_workout_volume(self, id_workout: int):
+        workout_info = self.database.get_workout_info(id_workout=id_workout)
+
+        workout_start_time  = workout_info[0][3]
+        workout_end_time    = workout_info[0][4]
+
+        workout_planned_volume = round(self.database.get_total_volume(
+            id_user=self.settings.current_user,
+            start_ts=workout_start_time,
+            end_ts=workout_end_time,
+            get_planned=True
+        )[0][0], ndigits=2)
+
+        workout_actual_volume = round(self.database.get_total_volume(
+            id_user=self.settings.current_user,
+            start_ts=workout_start_time,
+            end_ts=workout_end_time,
+            get_planned=False
+        )[0][0], ndigits=2)
+
+
+        return {
+            "workout_planned_volume" : workout_planned_volume,
+            "workout_actual_volume" : workout_actual_volume
+        }
+
+        

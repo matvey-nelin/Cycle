@@ -1,6 +1,8 @@
 import flet as ft
 import datetime
 
+from Classes.TrainingMetrics import TrainingMetrics
+
 from AppState import AppState
 from UI.Screens.BaseView import BaseView
 
@@ -288,10 +290,6 @@ class WorkoutScreen(BaseView):
                 text_align=ft.TextAlign.CENTER
             ),
 
-            # border=ft.Border().all(
-            #     width=1,
-            #     color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
-            # ),
             border_radius=15,
 
             alignment=ft.Alignment.CENTER,
@@ -313,11 +311,6 @@ class WorkoutScreen(BaseView):
                 color=ft.Colors.ON_PRIMARY,
                 text_align=ft.TextAlign.CENTER
             ),
-
-            # border=ft.Border().all(
-            #     width=1,
-            #     color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
-            # ),
             border_radius=15,
 
             alignment=ft.Alignment.CENTER,
@@ -338,10 +331,6 @@ class WorkoutScreen(BaseView):
                 text_align=ft.TextAlign.CENTER
             ),
 
-            # border=ft.Border().all(
-            #     width=1,
-            #     color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
-            # ),
             border_radius=15,
 
             alignment=ft.Alignment.CENTER,
@@ -450,6 +439,9 @@ class WorkoutScreen(BaseView):
         self.database.update_workout_datetime(self.id, "actual_workout_start_datetime", new_start_time)
         self.database.update_workout_datetime(self.id, "actual_workout_end_datetime",   new_end_time)
 
+        id_workout_status_in_progress = self.database.get_workout_statuses(status_slug='in_progress')[0][0]
+        self.database.update_workout_status(id_workout=self.id, id_status=id_workout_status_in_progress)
+
         self.app_state.data_changed_notify()
 
         self.navigate(
@@ -468,6 +460,19 @@ class WorkoutScreen(BaseView):
     def _end_workout_button_on_click_(self):
         self.settings.end_workout()
         self.database.update_workout_datetime(self.id, "actual_workout_end_datetime", int(datetime.datetime.now().timestamp()))
+
+        training_metrics = TrainingMetrics()
+        workout_volumes = training_metrics.get_workout_volume(id_workout=self.id)
+
+        if workout_volumes["workout_planned_volume"] == workout_volumes["workout_actual_volume"]:
+            id_workout_status = self.database.get_workout_statuses(status_slug='completed')[0][0]
+        elif workout_volumes["workout_planned_volume"] < workout_volumes["workout_actual_volume"]:
+            id_workout_status = self.database.get_workout_statuses(status_slug='overcompleted')[0][0]
+        elif workout_volumes["workout_planned_volume"] > workout_volumes["workout_actual_volume"]:
+            id_workout_status = self.database.get_workout_statuses(status_slug='partially_completed')[0][0]
+
+        self.database.update_workout_status(id_workout=self.id, id_status=id_workout_status)
+
 
         self.app_state.data_changed_notify()
 
