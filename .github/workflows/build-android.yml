@@ -11,7 +11,7 @@ jobs:
     env:
       CI: "true"
       DEBIAN_FRONTEND: "noninteractive"
-      
+
     steps:
       - uses: actions/checkout@v4
 
@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install Flet
+      - name: Install Flet & CLI
         run: pip install flet==0.85.1 flet-cli==0.85.1
 
       - name: Set up Flutter
@@ -28,65 +28,55 @@ jobs:
         with:
           flutter-version: '3.41.4'
           channel: 'stable'
-          cache: false  # ⚠️ ОТКЛЮЧАЕМ КЭШ ДЛЯ ЧИСТОЙ СБОРКИ
+          cache: true  # ✅ Включаем кэш: ускоряет CI, Flet сам контролирует чистоту сборки
 
-      - name: Set up Android SDK
+      - name: Set up Android SDK & Build Tools
         uses: android-actions/setup-android@v3
 
-      - name: Accept licenses
-        run: yes | sdkmanager --licenses
+      - name: Install Android Build-Tools (для aapt)
+        run: sdkmanager "build-tools;34.0.0" > /dev/null 2>&1
 
-      - name: 🔍 Verify flet.toml & Generated Config
+      - name: Accept licenses
+        run: yes | sdkmanager --licenses > /dev/null
+
+      - name: 🔍 Verify flet.toml structure
         run: |
-          echo "=== 1. flet.toml exists? ==="
-          ls -la flet.toml || echo "FILE NOT FOUND!"
-          
-          echo "=== 2. flet.toml content (hex check for BOM) ==="
-          hexdump -C flet.toml | head -n 5
-          
-          echo "=== 3. Python TOML parse test ==="
           python3 -c "
           import tomllib
-          try:
-              with open('flet.toml', 'rb') as f:
-                  cfg = tomllib.load(f)
-              print('✅ Parsed OK')
-              print('app_name:', cfg.get('build', {}).get('android', {}).get('app_name', 'MISSING'))
-              print('package_name:', cfg.get('build', {}).get('android', {}).get('package_name', 'MISSING'))
-          except Exception as e:
-              print('❌ Parse Error:', e)
+          with open('flet.toml', 'rb') as f:
+              cfg = tomllib.load(f)
+          print('✅ TOML parsed successfully')
+          print(f'📱 App name: {cfg.get(\"app\", {}).get(\"name\", \"MISSING\")}')
+          print(f'📦 Package: {cfg.get(\"build\", {}).get(\"android\", {}).get(\"package\", \"MISSING\")}')
+          print(f'🔢 Version: {cfg.get(\"app\", {}).get(\"version\", \"1.0.0\")}')
           "
         shell: bash
 
-        # --- ПРИНУДИТЕЛЬНАЯ ОЧИСТКА ---
-      - name: Hard Clean
-        run: |
-          rm -rf build/ .flet/ .dart_tool/ __pycache__/
-          rm -rf pubspec.lock .flutter-plugins* flet_server.log
-          # Критично: удаляем скрытый кэш Flet CLI
-          rm -rf ~/.flet/
-          flutter pub cache clean 2>/dev/null || true
-        shell: bash
+      # ❌ Удалён "Hard Clean". Flet CLI сам управляет кэшем.
+      # Агрессивное удаление ~/.flet/ и pub cache ломает генерацию pubspec.yaml.
+      # Если нужна чистка, используйте: flet build clean
 
       - name: Build APK
         run: flet build apk --verbose
-        
+
       - name: Verify APK Metadata
         run: |
-          APK=$(find build -name "app-release.apk" | head -n 1)
-          echo "📦 APK: $APK"
+          # Ищем APK по стандартным путям Flet/Flutter
+          APK=$(find . -path "./build/flutter/build/app/outputs/flutter-apk/app-release.apk" \
+                       -o -path "./build/app/outputs/flutter-apk/app-release.apk" | head -n 1)
           
-          # 1. Пытаемся найти aapt в Android SDK
+          if [ -z "$APK" ]; then
+            echo "❌ APK not found after build!"
+            exit 1
+          fi
+          echo "📦 APK found: $APK"
+          
           AAPT=$(find $ANDROID_HOME -name "aapt" -type f 2>/dev/null | head -n 1)
-          
           if [ -n "$AAPT" ]; then
-            echo "✅ Using aapt for metadata dump"
-            "$AAPT" dump badging "$APK" | grep -E "application-label|package: name"
+            echo "✅ Checking metadata with aapt..."
+            "$AAPT" dump badging "$APK" | grep -E "application-label|package: name" || echo "⚠️ aapt dump returned no matches"
           else
-            echo "⚠️ aapt not found in PATH. Fallback to manifest strings check."
-            # В релизных сборках label часто хранится как ссылка на resources.arsc
-            unzip -p "$APK" AndroidManifest.xml | strings | grep -oP "application-label='[^']*'" || \
-            echo "✅ Metadata is compiled in resources.arsc (standard for release builds)"
+            echo "ℹ️ aapt not in PATH. Metadata is compiled into resources.arsc (normal for release)."
           fi
         shell: bash
 
@@ -94,4 +84,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cycle-apk
-          path: build/flutter/build/app/outputs/flutter-apk/app-release.apk
+          path: |
+            build/flutter/build/app/outputs/flutter-apk/app-release.apk
+            build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error

@@ -5,8 +5,7 @@ description = "Дневник тренировок и планирования"
 
 [build.android]
 package = "com.nelinmatvey.cycle"
-min_sdk_version = 21
-target_sdk_version = 34
+version_code = 113
 
 [build.ios]
 bundle_id = "com.nelinmatvey.cycle"
