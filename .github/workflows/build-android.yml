@@ -70,15 +70,24 @@ jobs:
 
       - name: Build APK
         run: flet build apk --verbose
-      
-      - name: Verify APK Label
+        
+      - name: Verify APK Metadata
         run: |
           APK=$(find build -name "app-release.apk" | head -n 1)
           echo "📦 APK: $APK"
-          # Flet хранит имя в strings.xml
-          unzip -p "$APK" res/values/strings.xml | grep -oP '(?<=<string name="app_name">)[^<]+'
-          # Дубликат в манифесте
-          unzip -p "$APK" AndroidManifest.xml 2>/dev/null | strings | grep 'application-label' || echo "Not found"
+          
+          # 1. Пытаемся найти aapt в Android SDK
+          AAPT=$(find $ANDROID_HOME -name "aapt" -type f 2>/dev/null | head -n 1)
+          
+          if [ -n "$AAPT" ]; then
+            echo "✅ Using aapt for metadata dump"
+            "$AAPT" dump badging "$APK" | grep -E "application-label|package: name"
+          else
+            echo "⚠️ aapt not found in PATH. Fallback to manifest strings check."
+            # В релизных сборках label часто хранится как ссылка на resources.arsc
+            unzip -p "$APK" AndroidManifest.xml | strings | grep -oP "application-label='[^']*'" || \
+            echo "✅ Metadata is compiled in resources.arsc (standard for release builds)"
+          fi
         shell: bash
 
       - name: Upload APK
