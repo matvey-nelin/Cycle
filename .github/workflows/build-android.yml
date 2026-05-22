@@ -21,7 +21,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install Flet
-        run: pip install flet==0.83.1 flet-cli==0.83.1
+        run: pip install flet==0.85.1 flet-cli==0.85.1
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -76,7 +76,7 @@ jobs:
           APK=$(find build -name "app-release.apk" | head -n 1)
           echo "📦 APK: $APK"
           # Flet хранит имя в strings.xml
-          unzip -p "$APK" res/values/strings.xml 2>/dev/null | grep -A1 'app_name' || echo "Not found"
+          unzip -p "$APK" res/values/strings.xml | grep -oP '(?<=<string name="app_name">)[^<]+'
           # Дубликат в манифесте
           unzip -p "$APK" AndroidManifest.xml 2>/dev/null | strings | grep 'application-label' || echo "Not found"
         shell: bash

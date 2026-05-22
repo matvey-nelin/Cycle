@@ -1,20 +1,21 @@
-[build.android]
-app_name = "Cycle"
-package_name = "com.nelinmatvey.cycle"
+[app]
+name = "Cycle"
 version = "1.1.3"
+description = "Дневник тренировок и планирования"
+
+[build.android]
+package = "com.nelinmatvey.cycle"
 min_sdk_version = 21
 target_sdk_version = 34
 
 [build.ios]
-app_name = "Cycle"
-bundle_name = "com.nelinmatvey.cycle"
-version = "1.1.3"
-
-[build.windows]
-app_name = "Cycle"
-
-[build.linux]
-app_name = "Cycle"
+bundle_id = "com.nelinmatvey.cycle"
 
 [build.macos]
-app_name = "Cycle"
+bundle_id = "com.nelinmatvey.cycle"
+
+[build.windows]
+# Наследует name, version и description из [app]
+
+[build.linux]
+# Наследует name, version и description из [app]
