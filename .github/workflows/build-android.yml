@@ -39,11 +39,11 @@ jobs:
       - name: Accept licenses
         run: yes | sdkmanager --licenses > /dev/null
 
-      - name: 🔍 Verify flet.toml structure
+      - name: 🔍 Verify pyproject.toml structure
         run: |
           python3 -c "
           import tomllib
-          with open('flet.toml', 'rb') as f:
+          with open('pyproject.toml', 'rb') as f:
               cfg = tomllib.load(f)
           print('✅ TOML parsed successfully')
           print(f'📱 App name: {cfg.get(\"app\", {}).get(\"name\", \"MISSING\")}')
