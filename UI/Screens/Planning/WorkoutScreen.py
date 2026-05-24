@@ -27,6 +27,9 @@ class WorkoutScreen(BaseView):
         self.labels = self.translator.workout_screen_labels
         self.is_planning_screen = is_planning_screen
 
+        self.time_changed           = False
+        self.composition_changed    = False
+
         self.app_state.resize_subscribe(self._on_resize_)
 
         
@@ -99,7 +102,8 @@ class WorkoutScreen(BaseView):
 
     def _init_date_time_pickers_(self):
         def determine_date(e): 
-            # добавляю один день, потому что сам он берет предыдущий день от выбранного
+            self.time_changed = True
+
             self.picked_date        = datetime.datetime.fromtimestamp(e.data.timestamp()).date()
             self.start_time         = datetime.datetime.combine(self.picked_date, self.picked_start_time).timestamp()
             self.end_time           = self.start_time + 3600
@@ -114,6 +118,8 @@ class WorkoutScreen(BaseView):
 
 
         def determine_start_time(e):
+            self.time_changed = True
+
             self.picked_start_time  = e.data
             self.start_time         = datetime.datetime.combine(self.picked_date, self.picked_start_time).timestamp()
             self.end_time           = self.start_time + 3600
@@ -129,6 +135,8 @@ class WorkoutScreen(BaseView):
 
 
         def determine_end_time(e):
+            self.time_changed = True
+
             self.picked_end_time    = e.data
             self.end_time           = datetime.datetime.combine(self.picked_date, self.picked_end_time).timestamp()
             self.end_time_string    = datetime.datetime.fromtimestamp(float(self.end_time)).strftime("%H:%M")
@@ -142,24 +150,30 @@ class WorkoutScreen(BaseView):
         self.date_picker = ft.DatePicker(
             value=self.picked_date,
             locale=ft.Locale(language_code=self.settings.language),
-            on_change=determine_date if self.is_planning_screen else None,
+
             switch_to_input_icon=ft.Icons.EDIT_ROUNDED,
             switch_to_calendar_icon=ft.Icons.EDIT_CALENDAR_ROUNDED,
+
+            on_change=determine_date if self.is_planning_screen else None
         )
 
         self.start_time_picker = ft.TimePicker(
             value=self.picked_start_time,
             locale=ft.Locale(language_code=self.settings.language),
+
             switch_to_input_icon=ft.Icons.EDIT_ROUNDED,
             switch_to_timer_icon=ft.Icons.ACCESS_TIME_ROUNDED,
+
             on_change=determine_start_time if self.is_planning_screen else None
         )
         
         self.end_time_picker = ft.TimePicker(
             value=self.picked_end_time,
             locale=ft.Locale(language_code=self.settings.language),
+
             switch_to_input_icon=ft.Icons.EDIT_ROUNDED,
             switch_to_timer_icon=ft.Icons.ACCESS_TIME_ROUNDED,
+
             on_change=determine_end_time if self.is_planning_screen else None
         )
 
@@ -210,7 +224,20 @@ class WorkoutScreen(BaseView):
                     expand=1,
                     controls=[self.end_time_picker_button]
                 )
+            ] 
+            if self.app_state.is_mobile
+            else 
+            [
+                ft.Row(
+                    expand=1,
+                    controls=
+                    [
+                        self.start_time_picker_button,
+                        self.end_time_picker_button
+                    ]
+                )
             ]
+            
         )
 
         if self.is_planning_screen:
@@ -253,7 +280,7 @@ class WorkoutScreen(BaseView):
                                 expand=1, 
                                 value=self.workout_template_title,
                                 size=14,
-                                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                                color=ft.Colors.ON_SURFACE
                             )
                         ],
                         alignment=ft.MainAxisAlignment.CENTER,
@@ -402,22 +429,24 @@ class WorkoutScreen(BaseView):
         if self.is_planning_screen:
             self.database.update_workout_status(self.id, self.workout_status_id)
 
-            self.database.update_workout_datetime(self.id, "planned_workout_start_datetime", int(self.start_time))
-            self.database.update_workout_datetime(self.id, "planned_workout_end_datetime",   int(self.end_time))
-            self.database.update_workout_datetime(self.id, "actual_workout_start_datetime", int(self.start_time))
-            self.database.update_workout_datetime(self.id, "actual_workout_end_datetime",   int(self.end_time))
+            if self.time_changed:
+                self.database.update_workout_datetime(self.id, "planned_workout_start_datetime", int(self.start_time))
+                self.database.update_workout_datetime(self.id, "planned_workout_end_datetime",   int(self.end_time))
+                self.database.update_workout_datetime(self.id, "actual_workout_start_datetime", int(self.start_time))
+                self.database.update_workout_datetime(self.id, "actual_workout_end_datetime",   int(self.end_time))
 
 
-            self.database.delete_workout_composition(self.id)
+            if self.composition_changed:
+                self.database.delete_workout_composition(self.id)
 
-            for set in self.sets_list.sets:
-                if isinstance(set, ExerciseSet):
-                    self.database.create_workout_composition(
-                        id_workout=     self.id, 
-                        id_exercise=    int(set.chosen_dropdown_exercise), 
-                        reps=           int(set.reps_text_field.value)                              if set.reps_text_field.value   != "NULL" else None,
-                        weight=         float(str(set.weight_text_field.value).replace(",", "."))   if set.weight_text_field.value != "NULL" else None
-                    )
+                for set in self.sets_list.sets:
+                    if isinstance(set, ExerciseSet):
+                        self.database.create_workout_composition(
+                            id_workout=     self.id, 
+                            id_exercise=    int(set.chosen_dropdown_exercise), 
+                            reps=           int(set.reps_text_field.value)                              if set.reps_text_field.value   != "NULL" else None,
+                            weight=         float(str(set.weight_text_field.value).replace(",", "."))   if set.weight_text_field.value != "NULL" else None
+                        )
 
             self.app_state.data_changed_notify()
             self.return_previous_screen()
@@ -489,15 +518,27 @@ class WorkoutScreen(BaseView):
                         ft.Icon(
                             icon=ft.Icons.FILTER_LIST_ROUNDED, 
                             size=20,
-                            color=self.colors.LIGHT_SECONDARY if self.colors.theme == 'light' else self.colors.DARK_SECONDARY
+                            color=ft.Colors.SECONDARY
                         )
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
                     vertical_alignment=ft.CrossAxisAlignment.CENTER
                 ),
-                border=ft.Border.all(1, self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE),
+                border=ft.Border.all(1, ft.Colors.OUTLINE),
                 border_radius=20
             )
+
+            self.time_pickers_column.controls = [
+                ft.Row(
+                    expand=1,
+                    controls=
+                    [
+                        self.start_time_picker_button,
+                        self.end_time_picker_button
+                    ]
+                )
+            ]
+
         else:
             self.workout_status_button.content = ft.Container(
                 content=ft.Row(
@@ -506,24 +547,36 @@ class WorkoutScreen(BaseView):
                         ft.Icon(
                             icon=ft.Icons.FILTER_LIST_ROUNDED, 
                             size=20,
-                            color=self.colors.LIGHT_SECONDARY if self.colors.theme == 'light' else self.colors.DARK_SECONDARY
+                            color=ft.Colors.SECONDARY
                         ),
                         ft.Text(
                                 self.workout_status_title,
                                 weight=ft.FontWeight.W_500,
-                                color=self.colors.LIGHT_SURFACE_TINT if self.colors.theme == "light" else self.colors.DARK_SURFACE_TINT
+                                color=ft.Colors.SURFACE_TINT
                         )
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
                     vertical_alignment=ft.CrossAxisAlignment.CENTER
                 ),
-                border=ft.Border.all(1, self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE),
+                border=ft.Border.all(1, ft.Colors.OUTLINE),
                 border_radius=20
             ) 
             
+
+            self.time_pickers_column.controls = [
+                ft.Row(
+                    expand=1,
+                    controls=[self.start_time_picker_button]
+                ),
+                ft.Row(
+                    expand=1,
+                    controls=[self.end_time_picker_button]
+                )
+            ] 
             
         try:
             self.workout_status_button.update()
+            self.time_pickers_column.update()
         except:
             pass
 

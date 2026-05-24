@@ -59,11 +59,19 @@ class CycleApp:
         self.colors = self.app_state.colors
 
         self.page = page
-        self.page.window.min_width = 360
-        self.page.window.min_height = 480
         self.page.padding = 0
+        self.page.vertical_alignment = ft.MainAxisAlignment.CENTER
+        self.page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+
+        if platform.system() in ["Windows", "Darwin", "Linux"]:
+            self.page.window.min_width = 360
+            self.page.window.min_height = 480
+
+
         self.app_state.resize_subscribe(self._on_resize_page_)
         self.page.on_resize = self.app_state.resize_notify
+
+        self.page.on_view_pop = self.return_previous_screen
 
         self.page.title = "Cycle"
         self.page.window.icon = self.get_icon_path()
@@ -81,8 +89,10 @@ class CycleApp:
             body_large=ft.TextStyle(font_family="Nunito", size=16, weight=ft.FontWeight.W_400),
             body_medium=ft.TextStyle(font_family="Nunito", size=14, weight=ft.FontWeight.W_400),
             body_small=ft.TextStyle(
-                font_family="Nunito", size=12, weight=ft.FontWeight.W_400,
-                color=self.colors.LIGHT_ON_SECONDARY if self.colors.theme == "light" else self.colors.DARK_ON_SECONDARY,
+                font_family="Nunito", 
+                size=12, 
+                weight=ft.FontWeight.W_400,
+                color=ft.Colors.ON_SECONDARY,
             ),
             label_large=ft.TextStyle(font_family="Nunito-Bold", size=16, weight=ft.FontWeight.W_700),
             label_medium=ft.TextStyle(font_family="Nunito", size=14, weight=ft.FontWeight.W_500),
@@ -164,10 +174,17 @@ class CycleApp:
         
         # Изменение контейнера окна на root_container если ранее было окно SetupWizard (был первый запуск)
         if self.settings.first_launch:
-            self.page.controls.clear()
-            self.page.add(self.root_container)
+            self.page.controls = [self.root_container]
 
         self.page.update()
+
+
+
+    async def return_previous_screen(self, e):
+        if getattr(self.screen, "previous_screen_name", None) is not None:
+            self.page.run_task(self.screen.return_previous_screen)
+        else:
+            await self.page.window.close()
 
 
 
@@ -188,7 +205,6 @@ class CycleApp:
 
         self.local_layout = self.clear_layout
         
-
         self.page.update()
 
 

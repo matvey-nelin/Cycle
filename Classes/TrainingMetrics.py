@@ -59,7 +59,7 @@ class TrainingMetrics:
                 end_ts=     current_mesocycle_ranges[0][1],
                 get_planned=True
             )[0][0]), ndigits=2) 
-
+            planned_volume = planned_volume if planned_volume != 0 else 1
 
             self.percentage_of_completion = round((self.total_volume / planned_volume) * 100, ndigits=2)
 

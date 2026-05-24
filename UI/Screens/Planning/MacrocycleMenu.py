@@ -108,7 +108,7 @@ class MacrocycleMenu(BaseView):
             controls=[],
 
             scroll=ft.ScrollMode.AUTO,
-            alignment=ft.MainAxisAlignment.START,
+            alignment=ft.MainAxisAlignment.CENTER,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER
         )
         
@@ -127,7 +127,7 @@ class MacrocycleMenu(BaseView):
                 ft.Row(
                     controls=row,
                     alignment=ft.MainAxisAlignment.CENTER,
-                    vertical_alignment=ft.CrossAxisAlignment.START
+                    vertical_alignment=ft.CrossAxisAlignment.CENTER
                 )
             )
         

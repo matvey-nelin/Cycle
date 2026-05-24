@@ -249,11 +249,6 @@ class MesocycleScreen(BaseView):
         def add_microcycle(id: int):
             self.training_process.create_microcycle_from_template(id, self.id)
             self.app_state.data_changed_notify()
-            
-            # last_microcycle_id = self.database.get_microcycles(self.id)[-1][0]
-            # self.microcycles.append(self._create_microcycle_container_(last_microcycle_id))
-
-            # self.microcycles_row.controls = [*self.microcycles, self.add_microcycle_button]
 
             self.navigate(
                 screen_name=            "mesocycle_screen",

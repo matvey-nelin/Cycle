@@ -215,22 +215,23 @@ class ExerciseManagementScreen(BaseView):
             self.id = self.database.get_exercises()[-1][0]
 
         else:
-            new_slug = self.translator.get_slug(self.title, "exercises", self.slug)
-            self.translator.add_slug(self.title, new_slug, "exercises", self.slug)
+            if self.id not in self.settings.unchangeable_exercises:
+                new_slug = self.translator.get_slug(self.title, "exercises", self.slug)
+                self.translator.add_slug(self.title, new_slug, "exercises", self.slug)
 
-            request = f"""
-                UPDATE 
-                    exercises
-                SET
-                    title = '{self.title.strip()}',
-                    slug = '{new_slug}'
-                WHERE 
-                    id_exercise = {self.id}
-            """
+                request = f"""
+                    UPDATE 
+                        exercises
+                    SET
+                        title = '{self.title.strip()}',
+                        slug = '{new_slug}'
+                    WHERE 
+                        id_exercise = {self.id}
+                """
 
-            self.database.__execute_request__(request)
+                self.database.__execute_request__(request)
 
-        self.slug = new_slug
+        self.slug = new_slug if (self.id not in self.settings.unchangeable_exercises) else self.slug
 
 
         self.database.delete_agonist_exercises(self.id)

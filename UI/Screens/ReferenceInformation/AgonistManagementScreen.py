@@ -216,22 +216,23 @@ class AgonistManagementScreen(BaseView):
             self.id = self.database.get_agonists()[-1][0]
 
         else:
-            new_slug = self.translator.get_slug(self.title, "agonists", self.slug)
-            self.translator.add_slug(self.title, new_slug, "agonists", self.slug)
+            if self.id not in self.settings.unchangeable_agonists:
+                new_slug = self.translator.get_slug(self.title, "agonists", self.slug)
+                self.translator.add_slug(self.title, new_slug, "agonists", self.slug)
 
-            request = f"""
-                UPDATE 
-                    agonists
-                SET
-                    title = '{self.title.strip()}',
-                    slug = '{new_slug}'
-                WHERE 
-                    id_agonist = {self.id}
-            """
+                request = f"""
+                    UPDATE 
+                        agonists
+                    SET
+                        title = '{self.title.strip()}',
+                        slug = '{new_slug}'
+                    WHERE 
+                        id_agonist = {self.id}
+                """
 
-            self.database.__execute_request__(request)
+                self.database.__execute_request__(request)
 
-        self.slug = new_slug
+        self.slug = new_slug if (self.id not in self.settings.unchangeable_agonists) else self.slug
 
 
         self.database.delete_target_muscles(self.id)

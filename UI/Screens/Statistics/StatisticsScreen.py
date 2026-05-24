@@ -67,6 +67,7 @@ class StatisticsScreen(BaseView):
             padding=ft.Padding.all(15),
 
             bgcolor=ft.Colors.SURFACE_CONTAINER_LOW,
+            # gradient=self.colors.Gradients.BUTTON_PRIMARY,
             border_radius=10
         )
 
@@ -144,6 +145,7 @@ class StatisticsScreen(BaseView):
             ),
 
             bgcolor=ft.Colors.SURFACE_CONTAINER_HIGH,
+            # gradient=self.colors.Gradients.BUTTON_PRIMARY,
             border_radius=10
         )
 
@@ -265,6 +267,7 @@ class StatisticsScreen(BaseView):
             padding=ft.Padding.all(15),
 
             bgcolor=ft.Colors.SURFACE_CONTAINER_LOW,
+            # gradient=self.colors.Gradients.HEADER,
             border_radius=10
         )
 
@@ -486,6 +489,8 @@ class StatisticsScreen(BaseView):
             padding=ft.Padding.all(25),
 
             bgcolor=ft.Colors.SURFACE_CONTAINER_LOW,
+            # gradient=self.colors.Gradients.BUTTON_PRIMARY,
+
             border_radius=10,
 
             alignment=ft.Alignment.CENTER

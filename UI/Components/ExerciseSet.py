@@ -98,7 +98,7 @@ class ExerciseSet(ft.Container):
                 ft.Icon(
                     icon=ft.Icons.DRAG_HANDLE_ROUNDED,
                     size=28,
-                    color=self.colors.LIGHT_PRIMARY if self.colors.theme == "light" else self.colors.DARK_PRIMARY
+                    color=ft.Colors.PRIMARY
                 ),
                 
                 # Название упражнения (жирный текст)
@@ -116,7 +116,7 @@ class ExerciseSet(ft.Container):
                         weight=ft.FontWeight.W_500,
                     ),
                     padding=ft.Padding.symmetric(horizontal=8, vertical=4),
-                    bgcolor=self.colors.LIGHT_PRIMARY_CONTAINER if self.colors.theme == "light" else self.colors.DARK_PRIMARY_CONTAINER,
+                    bgcolor=ft.Colors.PRIMARY_CONTAINER,
                     border_radius=6,
                 ),
             ],
@@ -131,7 +131,7 @@ class ExerciseSet(ft.Container):
             padding=ft.Padding.symmetric(horizontal=12, vertical=8),
             
             # Фон (контрастный, но не яркий)
-            bgcolor=self.colors.LIGHT_SURFACE if self.colors.theme == "light" else self.colors.DARK_SURFACE,
+            bgcolor=ft.Colors.SURFACE,
             
             # Тень для эффекта «парения»
             shadow=ft.BoxShadow(
@@ -143,7 +143,7 @@ class ExerciseSet(ft.Container):
             
             # Скругление и рамка
             border_radius=10,
-            border=ft.Border.all(1, self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE),
+            border=ft.Border.all(1, ft.Colors.OUTLINE),
             
             # Полупрозрачность для эффекта «под пальцем»
             opacity=0.95,
@@ -251,7 +251,7 @@ class ExerciseSet(ft.Container):
             max_lines=1,
             keyboard_type=ft.KeyboardType.NUMBER, 
 
-            on_change=self.change_and_save_reps if (self.settings.current_workout != 0) else None
+            on_change=self.change_and_save_reps if (self.settings.current_workout != 0) else self.change_composition_status
         )
 
         # TextField с весом
@@ -267,7 +267,7 @@ class ExerciseSet(ft.Container):
                 color=ft.Colors.ON_SURFACE
             ),
 
-            value=str("0" if (str(weight) == "0.0") else weight),
+            value=str("0" if (str(weight) == "0.0") else weight), 
             text_style=ft.TextStyle(
                 size=12,
                 color=ft.Colors.ON_SURFACE
@@ -394,46 +394,50 @@ class ExerciseSet(ft.Container):
         
         list_exercises = list_exercises if list_exercises != [] else self.all_exercises
         
-
         for exercise in list_exercises:
-            exercise_id     = str(exercise[0])
-            exercise_title  = str(self.translator.exercises[exercise[1]])
+            try:
+                exercise_id     = str(exercise[0])
+                exercise_title  = str(self.translator.exercises[exercise[1]])
 
-            if exercise_title == self.title:
-                self.chosen_dropdown_exercise = exercise_id
+                if exercise_title == self.title:
+                    self.chosen_dropdown_exercise = exercise_id
 
 
-            agonists_tooltip = self.screen.database.get_agonists(int(exercise_id))
-            if isinstance(agonists_tooltip, Exception):
-                raise ValueError("Invalid data of agonists")
-            agonists_tooltip = [self.translator.agonists[agonist[1]] for agonist in agonists_tooltip]
-            agonists_tooltip = ", ".join(agonists_tooltip)
-            
-            
-            dropdown_exercises_options.append(
-                ft.DropdownOption(
-                    key=exercise_id,
-                    text=exercise_title,
-                    
-                    content=ft.Text(
-                        expand=True,
-
-                        value=exercise_title,
-                        size=12,
-                        width=None,
+                agonists_tooltip = self.screen.database.get_agonists(int(exercise_id))
+                if isinstance(agonists_tooltip, Exception):
+                    raise ValueError("Invalid data of agonists")
+                agonists_tooltip = [self.translator.agonists[agonist[1]] for agonist in agonists_tooltip]
+                agonists_tooltip = ", ".join(agonists_tooltip)
+                
+                
+                dropdown_exercises_options.append(
+                    ft.DropdownOption(
+                        key=exercise_id,
+                        text=exercise_title,
                         
-                        no_wrap=False,
-                        max_lines=3,
-                        overflow=ft.TextOverflow.ELLIPSIS,
+                        content=ft.Text(
+                            expand=True,
 
-                        color=ft.Colors.ON_SURFACE,
-                    ),
+                            value=exercise_title,
+                            size=12,
+                            width=None,
+                            
+                            no_wrap=False,
+                            max_lines=3,
+                            overflow=ft.TextOverflow.ELLIPSIS,
 
-                    tooltip=ft.Tooltip(message=agonists_tooltip)
-                )
-            )
+                            color=ft.Colors.ON_SURFACE,
+                        ),
+
+                        tooltip=ft.Tooltip(message=agonists_tooltip)
+                    )
+                ) 
+
+            except KeyError:
+                continue
 
         dropdown_exercises_options = sorted(dropdown_exercises_options, key=lambda x: x.content.value)
+       
         
         if self.chosen_dropdown_exercise == "":
             if isinstance(self.all_exercises, Exception):
@@ -475,6 +479,8 @@ class ExerciseSet(ft.Container):
             id_composition=self.id_composition,
             reps=int(reps_value) if reps_value != "" else 0
         )
+
+        self.screen.app_state.data_changed_notify()
         
     
     def change_and_save_weight(self, e):
@@ -487,3 +493,10 @@ class ExerciseSet(ft.Container):
             id_composition=self.id_composition,
             weight=float(weight_value) if weight_value != "" else 0
         )
+        
+        self.screen.app_state.data_changed_notify()
+
+
+    def change_composition_status(self):
+        if hasattr(self.screen, "composition_changed"):
+            self.screen.composition_changed = True # pyright: ignore[reportAttributeAccessIssue]

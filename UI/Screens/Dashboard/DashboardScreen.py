@@ -15,8 +15,6 @@ class DashboardScreen(BaseView):
         self.training_process = TrainingProcess(self.app_state)
         self.labels = self.translator.dashboard_screen_labels
         self.app_state.data_changed_subscribe(self._init_users_popup_menu_items_)
-        self.app_state.data_changed_subscribe(self._init_trainer_data_)
-        self.app_state.data_changed_subscribe(self._init_sportsmen_data_)
             
 
         # Меню выбора пользователя
@@ -25,7 +23,7 @@ class DashboardScreen(BaseView):
             icon=ft.Icon(
                 icon=ft.Icons.ACCOUNT_CIRCLE_ROUNDED,
                 size=35,
-                color=self.colors.LIGHT_SECONDARY_CONTAINER if self.colors.theme == 'light' else self.colors.DARK_SECONDARY_CONTAINER,
+                color=ft.Colors.TERTIARY,
             ),
             menu_position=ft.PopupMenuPosition.UNDER
         )
@@ -35,7 +33,7 @@ class DashboardScreen(BaseView):
                 value="",
                 text_align=ft.TextAlign.CENTER,
                 size=14,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                color=ft.Colors.ON_SURFACE
             ),
             alignment=ft.Alignment.CENTER
         )
@@ -104,13 +102,13 @@ class DashboardScreen(BaseView):
                             title_alignment=ft.ListTileTitleAlignment.CENTER,
                             title_text_style=ft.TextStyle(
                                 size=14,
-                                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                                color=ft.Colors.ON_SURFACE
                             )
                         ),
 
                         border=ft.Border.all(
                             width=1,
-                            color=self.colors.LIGHT_OUTLINE if self.colors.theme == 'light' else self.colors.DARK_OUTLINE
+                            color=ft.Colors.OUTLINE
                         ),
                         border_radius=5,
 
@@ -145,27 +143,55 @@ class DashboardScreen(BaseView):
 
         self.previous_time_period = ft.IconButton(
             data={"time_period" : -day_period},
+            
             icon=ft.Icons.KEYBOARD_ARROW_LEFT_ROUNDED,
             icon_size=30,
-            disabled_color=self.colors.LIGHT_OUTLINE if self.colors.theme == 'light' else self.colors.DARK_OUTLINE,
+
+            style=ft.ButtonStyle(
+                color={
+                    ft.ControlState.DEFAULT: ft.Colors.ON_PRIMARY,
+                    ft.ControlState.DISABLED: ft.Colors.GREY_500
+                }
+            ),
+
+
             on_click=self.change_time_period
         )
         self.next_time_period = ft.IconButton(
             data={"time_period" : day_period},
+
             icon=ft.Icons.KEYBOARD_ARROW_RIGHT_ROUNDED,
             icon_size=30,
-            disabled_color=self.colors.LIGHT_OUTLINE if self.colors.theme == 'light' else self.colors.DARK_OUTLINE,
+
+            style=ft.ButtonStyle(
+                color={
+                    ft.ControlState.DEFAULT: ft.Colors.ON_PRIMARY,
+                    ft.ControlState.DISABLED: ft.Colors.GREY_500
+                }
+            ),
+
             on_click=self.change_time_period
         )
 
-        self.time_period_row = ft.Row(
+        self.time_period_row = ft.Container(
             expand=False,
-            controls=
-            [
-                self.previous_time_period,
-                self.next_time_period
-            ],
-            alignment=ft.MainAxisAlignment.SPACE_AROUND
+            margin=ft.Margin.symmetric(horizontal=50),
+            width=300,
+
+            content=ft.Row(
+                expand=True,
+                spacing=25,
+                controls=
+                [
+                    self.previous_time_period,
+                    self.next_time_period
+                ],
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN
+            ),
+
+            gradient=self.colors.Gradients.HEADER,
+
+            border_radius=25
         )
 
 
@@ -174,10 +200,15 @@ class DashboardScreen(BaseView):
             margin=ft.Margin.symmetric(vertical=25, horizontal=15),
             padding=ft.Padding.symmetric(vertical=10, horizontal=10),
             content=self.workouts_list,
+
+            bgcolor=ft.Colors.SURFACE_CONTAINER_LOW,
+
             border = ft.Border().all(
                 width=2,
-                color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE,
+                color=ft.Colors.OUTLINE,
             ),
+            border_radius=10,
+
             alignment=ft.Alignment.CENTER
         )
 
@@ -210,11 +241,12 @@ class DashboardScreen(BaseView):
     
         time_periods = self.determine_time_period(int(self.current_date), day_period)
         
-        self.time_period_row.controls = [
-            self.previous_time_period,
-            *time_periods,
-            self.next_time_period
-        ]
+        if isinstance(self.time_period_row.content, ft.Row):
+            self.time_period_row.content.controls = [
+                self.previous_time_period,
+                *time_periods,
+                self.next_time_period
+            ]
         
 
     
@@ -228,7 +260,7 @@ class DashboardScreen(BaseView):
                 size=16,
                 width=None,
                 text_align=ft.TextAlign.CENTER,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                color=ft.Colors.ON_SURFACE
             )
             return
 
@@ -239,15 +271,15 @@ class DashboardScreen(BaseView):
             start_str_time  = datetime.datetime.fromtimestamp(workout[3]).time().strftime("%H:%M")
             end_str_time    = datetime.datetime.fromtimestamp(workout[4]).time().strftime("%H:%M")
 
-            current_workout_bgcolor = self.colors.LIGHT_PRIMARY if self.colors.theme == 'light' else self.colors.DARK_PRIMARY
+            current_workout_bgcolor = ft.Colors.PRIMARY
 
             self.workouts_list.controls.append(
                 ft.Container(
                     data={"id": id_workout},
-                    bgcolor=current_workout_bgcolor if self.settings.current_workout == id_workout else None,
+                    bgcolor=current_workout_bgcolor if self.settings.current_workout == id_workout else ft.Colors.SURFACE_CONTAINER_HIGH,
                     content=ft.ListTile(
                         expand=True,
-                        content_padding=ft.Padding.only(left=15 , right=15),
+                        content_padding=ft.Padding.only(left=10, right=10),
                         title=ft.Row(
                             # margin=ft.Margin.symmetric(horizontal=25),
                             controls=
@@ -258,7 +290,7 @@ class DashboardScreen(BaseView):
                                     width=200,
                                     no_wrap=False,
                                     max_lines=3,
-                                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                                    color=ft.Colors.ON_SURFACE
                                 ),
                                 ft.Column(
                                     controls=
@@ -266,12 +298,12 @@ class DashboardScreen(BaseView):
                                         ft.Text(
                                             value=start_str_time,
                                             size=14,
-                                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                                            color=ft.Colors.ON_SURFACE
                                         ),
                                         ft.Text(
                                             value=end_str_time,
                                             size=14,
-                                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                                            color=ft.Colors.ON_SURFACE
                                         )
                                     ],
                                     alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -284,10 +316,11 @@ class DashboardScreen(BaseView):
                         subtitle=ft.Text(
                             value=workout_status,
                             size=12,
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         ),
                         hover_color=self.colors.LIGHT_OUTLINE_VARIANT if self.colors.theme == 'light' else self.colors.DARK_OUTLINE_VARIANT
                     ),
+
                     border=ft.Border.all(
                         width=1,
                         color=self.colors.LIGHT_OUTLINE if self.colors.theme == 'light' else self.colors.DARK_OUTLINE
@@ -311,11 +344,12 @@ class DashboardScreen(BaseView):
         self.fill_timetable(int(self.current_date), time_period)
         time_periods = self.determine_time_period(int(self.current_date), time_period)
         
-        self.time_period_row.controls = [
-            self.previous_time_period,
-            *time_periods,
-            self.next_time_period
-        ]
+        if isinstance(self.time_period_row.content, ft.Row):
+            self.time_period_row.content.controls = [
+                self.previous_time_period,
+                *time_periods,
+                self.next_time_period
+            ]
 
         try:
             self.time_period_row.update()
@@ -330,7 +364,8 @@ class DashboardScreen(BaseView):
                 ft.Text(
                     value=datetime.datetime.fromtimestamp(date).date().strftime("%d.%m.%Y"),
                     size=14,
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                    weight=ft.FontWeight.BOLD,
+                    color=ft.Colors.ON_PRIMARY
                 )
             ]
         else:
@@ -339,25 +374,27 @@ class DashboardScreen(BaseView):
                     value=datetime.datetime.fromtimestamp(date).date().strftime("%d.%m.%Y") if period > 0 
                         else datetime.datetime.fromtimestamp(date + period).date().strftime("%d.%m.%Y"),
                     size=14,
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                    weight=ft.FontWeight.BOLD,
+                    color=ft.Colors.ON_PRIMARY
                 ),
                 ft.Text(
                     value=" - ",
                     size=14,
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                    weight=ft.FontWeight.BOLD,
+                    color=ft.Colors.ON_PRIMARY
                 ),
                 ft.Text(
                     value=datetime.datetime.fromtimestamp(date + period).date().strftime("%d.%m.%Y") if period > 0 
                         else datetime.datetime.fromtimestamp(date).date().strftime("%d.%m.%Y"),
                     size=14,
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                    weight=ft.FontWeight.BOLD,
+                    color=ft.Colors.ON_PRIMARY
                 )
             ]
 
 
     def _on_list_tile_hover(self, e):
-        list_tile_hover_bgcolor = self.colors.LIGHT_OUTLINE_VARIANT if self.colors.theme == 'light' else self.colors.DARK_OUTLINE_VARIANT
-        e.control.bgcolor = list_tile_hover_bgcolor if e.data == True else None
+        e.control.bgcolor = ft.Colors.OUTLINE_VARIANT if e.data == True else ft.Colors.SURFACE_CONTAINER_HIGH
 
 
 
@@ -380,11 +417,6 @@ class DashboardScreen(BaseView):
  
 
 
-
-
-
-
-
     def _init_sportsmen_dashboard_(self):
         # Создание контейнера тренировок
         self.workouts_list = ft.Column(
@@ -392,46 +424,78 @@ class DashboardScreen(BaseView):
             width=500,
             spacing=10,
             controls=[],
+
             alignment=ft.MainAxisAlignment.START,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+
             scroll=ft.ScrollMode.AUTO
         )
 
         self.microcycle_container = ft.Container(
             expand=True,
-            padding=ft.Padding.symmetric(vertical=10, horizontal=20),
+            # padding=ft.Padding.symmetric(vertical=10, horizontal=20),
             content=self.workouts_list,
+
+            bgcolor=ft.Colors.SURFACE_CONTAINER_LOW,
+
             border = ft.Border().all(
                 width=2,
-                color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE,
+                color=ft.Colors.OUTLINE,
             ),
+            border_radius=10,
+
             alignment=ft.Alignment.CENTER
         )
 
         # Создание навигации по микроциклам
         self.previous_microcycle_button = ft.IconButton(
-            data={"step" : -1},
+            data={"step" : -1}, 
             icon=ft.Icons.KEYBOARD_ARROW_LEFT_ROUNDED,
             icon_size=30,
-            disabled_color=self.colors.LIGHT_OUTLINE if self.colors.theme == 'light' else self.colors.DARK_OUTLINE,
+
+            style=ft.ButtonStyle(
+                color={
+                    ft.ControlState.DEFAULT: ft.Colors.ON_PRIMARY,
+                    ft.ControlState.DISABLED: ft.Colors.GREY_500
+                }
+            ),
+
             on_click=self.microcycle_navigation
         )
         self.next_microcycle_button = ft.IconButton(
             data={"step" : 1},
             icon=ft.Icons.KEYBOARD_ARROW_RIGHT_ROUNDED,
             icon_size=30,
-            disabled_color=self.colors.LIGHT_OUTLINE if self.colors.theme == 'light' else self.colors.DARK_OUTLINE,
+
+            style=ft.ButtonStyle(
+                color={
+                    ft.ControlState.DEFAULT: ft.Colors.ON_PRIMARY,
+                    ft.ControlState.DISABLED: ft.Colors.GREY_500
+                }
+            ),
+
             on_click=self.microcycle_navigation
         )
 
-        self.microcycle_time_ranges_row = ft.Row(
+        self.microcycle_time_ranges_row = ft.Container(
             expand=False,
-            controls=
-            [
-                self.previous_microcycle_button,
-                self.next_microcycle_button
-            ],
-            alignment=ft.MainAxisAlignment.SPACE_AROUND
+            margin=ft.Margin.symmetric(horizontal=10),
+            width=500,
+
+            content=ft.Row(
+                expand=False,
+                spacing=0,
+                controls=
+                [
+                    self.previous_microcycle_button,
+                    self.next_microcycle_button
+                ],
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN
+            ),
+
+            gradient=self.colors.Gradients.HEADER,
+
+            border_radius=25
         )
 
         
@@ -470,7 +534,7 @@ class DashboardScreen(BaseView):
                 value=self.labels["no_planned_mesocycles"],
                 text_align=ft.TextAlign.CENTER,
                 size=18,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                color=ft.Colors.ON_SURFACE
             )
             return
         
@@ -487,7 +551,7 @@ class DashboardScreen(BaseView):
                 value=self.labels["no_planned_workouts"],
                 text_align=ft.TextAlign.CENTER,
                 size=18,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                color=ft.Colors.ON_SURFACE
             )
             return
         
@@ -538,19 +602,27 @@ class DashboardScreen(BaseView):
                 on_card_click=lambda id: self.on_workout_card_click(id),
                 delete_from_list_function=None
             )
+            # Отступ первой карточки для исправления эффекта обрезания тени
+            if len(self.workouts_list.controls) == 0:
+                workout_card.margin = ft.Margin.only(top=10)
+            if len(self.workouts_list.controls) == (len(workouts) - 1):
+                workout_card.margin = ft.Margin.only(bottom=10)
+
             self.workouts_list.controls.append(workout_card)
 
 
     def fill_microcycle_time_ranges_row(self, start_time_microcycle: int, end_time_microcycle: int):
-        self.microcycle_time_ranges_row.controls.clear()
+        if isinstance(self.microcycle_time_ranges_row.content, ft.Row):
+            self.microcycle_time_ranges_row.content.controls.clear()
         
         data_ranges = self.determine_data_ranges(start_time_microcycle, end_time_microcycle)
 
-        self.microcycle_time_ranges_row.controls = [
-            self.previous_microcycle_button, 
-            *data_ranges,
-            self.next_microcycle_button
-        ]
+        if isinstance(self.microcycle_time_ranges_row.content, ft.Row):
+            self.microcycle_time_ranges_row.content.controls = [
+                self.previous_microcycle_button, 
+                *data_ranges,
+                self.next_microcycle_button
+            ]
 
 
     def on_workout_card_click(self, id_workout: int):
@@ -598,18 +670,21 @@ class DashboardScreen(BaseView):
                 value=datetime.datetime.fromtimestamp(start_time_microcycle).date().strftime("%d.%m.%Y") \
                 if start_time_microcycle != 0 else "",
                 size=14,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                weight=ft.FontWeight.BOLD,
+                color=ft.Colors.ON_PRIMARY
             ),
             ft.Text(
                 value=" - ",
                 size=14,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                weight=ft.FontWeight.BOLD,
+                color=ft.Colors.ON_PRIMARY
             ),
             ft.Text(
                 value=datetime.datetime.fromtimestamp(end_time_microcycle).date().strftime("%d.%m.%Y") \
                 if end_time_microcycle != 0 else "",
                 size=14,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                weight=ft.FontWeight.BOLD,
+                color=ft.Colors.ON_PRIMARY
             )
         ] 
             

@@ -9,8 +9,6 @@ import time
 
 
 def main(page: ft.Page):
-    # Загрузочное кольцо
-    page.add(ft.ProgressRing())
 
     try:
         # Инициализация объекта храненящего состояние приложения
@@ -18,7 +16,7 @@ def main(page: ft.Page):
     
     except Exception as ex:
         page.clean()
-        page.add(ft.Text(f"{ex}"))
+        page.add(ft.Text(f"Exception: {ex}"))
         return
 
     # Закрытие соединения с БД при закрытии     

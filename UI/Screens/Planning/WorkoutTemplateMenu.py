@@ -229,3 +229,5 @@ class WorkoutTemplateMenu(BaseView):
 
         self.database.delete_workout_template(id, True)
         self.app_state.data_changed_notify()
+
+        self.page.update()
