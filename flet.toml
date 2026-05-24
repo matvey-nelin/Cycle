@@ -1,20 +1,23 @@
-[app]
-name = "Cycle"
+[project]
+name = "cycle"
 version = "1.2.0"
 description = "Дневник тренировок и планирования"
+dependencies = [
+    "flet",
+]
 
-[build.android]
+[tool.flet.android]
 package = "com.nelinmatvey.cycle"
-version_code = 120
+build_number = 120
 
-[build.ios]
+[tool.flet.ios]
 bundle_id = "com.nelinmatvey.cycle"
 
-[build.macos]
+[tool.flet.macos]
 bundle_id = "com.nelinmatvey.cycle"
 
-[build.windows]
-# Наследует name, version и description из [app]
+[tool.flet.windows]
+# Автоматически наследует имя, версию и описание из [project]
 
-[build.linux]
-# Наследует name, version и description из [app]
+[tool.flet.linux]
+# Автоматически наследует имя, версию и описание из [project]
