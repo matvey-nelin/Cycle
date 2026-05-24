@@ -531,13 +531,13 @@ class WorkoutScreen(BaseView):
             self.time_pickers_column.controls = [
                 ft.Row(
                     expand=1,
-                    controls=
-                    [
-                        self.start_time_picker_button,
-                        self.end_time_picker_button
-                    ]
+                    controls=[self.start_time_picker_button]
+                ),
+                ft.Row(
+                    expand=1,
+                    controls=[self.end_time_picker_button]
                 )
-            ]
+            ] 
 
         else:
             self.workout_status_button.content = ft.Container(
@@ -562,18 +562,17 @@ class WorkoutScreen(BaseView):
                 border_radius=20
             ) 
             
-
             self.time_pickers_column.controls = [
                 ft.Row(
                     expand=1,
-                    controls=[self.start_time_picker_button]
-                ),
-                ft.Row(
-                    expand=1,
-                    controls=[self.end_time_picker_button]
+                    controls=
+                    [
+                        self.start_time_picker_button,
+                        self.end_time_picker_button
+                    ]
                 )
-            ] 
-            
+            ]
+
         try:
             self.workout_status_button.update()
             self.time_pickers_column.update()
