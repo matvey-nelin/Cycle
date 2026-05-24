@@ -15,6 +15,9 @@ def main(page: ft.Page):
         app_state = AppState(page)
     
     except Exception as ex:
+        page.vertical_alignment = ft.MainAxisAlignment.CENTER
+        page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+        
         page.clean()
         page.add(ft.Text(f"Exception: {ex}"))
         return
