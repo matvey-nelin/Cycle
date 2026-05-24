@@ -64,7 +64,13 @@ jobs:
         shell: bash
 
       - name: Build APK
-        run: flet build apk --verbose
+        env:
+          # Отключаем цвета, чтобы Gradle выводил чистый текст
+          TERM: dumb
+        run: |
+          flet build apk --verbose 2>&1 | tee build_output.log
+          # Если сборка упала, покажем последние 50 строк логa
+          tail -n 50 build_output.log
       
       - name: Verify APK Metadata
         run: |
@@ -89,7 +95,7 @@ jobs:
             echo "ℹ️ aapt not found. Skipping metadata dump."
           fi
         shell: bash
-        
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
