@@ -1,0 +1,28 @@
+[project]
+name = "cycle"
+version = "1.2.0"
+description = "Дневник тренировок и планирования"
+dependencies = [
+    "flet",
+]
+
+[tool.flet]
+product = "Cycle"                     # Имя для иконки на экране телефона
+org = "com.nelinmatvey"               # Домен организации
+app.exclude = ["assets"]              # Исключаем assets из Python-сборки (Flutter заберет их сам)
+
+[tool.flet.android]
+package = "com.nelinmatvey.cycle"
+build_number = 120
+
+[tool.flet.ios]
+bundle_id = "com.nelinmatvey.cycle"
+
+[tool.flet.macos]
+bundle_id = "com.nelinmatvey.cycle"
+
+[tool.flet.windows]
+# Автоматически наследует
+
+[tool.flet.linux]
+# Автоматически наследует
