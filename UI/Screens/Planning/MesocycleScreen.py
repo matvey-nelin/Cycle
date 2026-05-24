@@ -52,7 +52,6 @@ class MesocycleScreen(BaseView):
 
         self.microcycles = []
         self.microcycles_row = ft.Row(
-            margin=ft.Margin.symmetric(vertical=15, horizontal=15),
             spacing=0,
 
             controls=[*self.microcycles, self.add_microcycle_button],
@@ -63,7 +62,7 @@ class MesocycleScreen(BaseView):
         )
 
         self.microcycles_container = ft.Container(
-            expand=False,
+            expand=True,
             content=self.microcycles_row,
 
             border_radius=10,
@@ -84,7 +83,7 @@ class MesocycleScreen(BaseView):
             visible=False
         )
 
-
+        self.main_container.padding = 0
         self.main_container.content = ft.Column(
             spacing=0,
             controls=

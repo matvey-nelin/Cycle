@@ -1,10 +1,8 @@
 [project]
 name = "cycle"
-version = "1.2.0"
+version = "1.2.1"
 description = "Дневник тренировок и планирования"
-dependencies = [
-    "flet",
-]
+dependencies = []
 
 [tool.flet]
 product = "Cycle"                     # Имя для иконки на экране телефона
@@ -13,7 +11,7 @@ app.exclude = ["assets"]              # Исключаем assets из Python-с
 
 [tool.flet.android]
 package = "com.nelinmatvey.cycle"
-build_number = 120
+build_number = 121
 
 [tool.flet.ios]
 bundle_id = "com.nelinmatvey.cycle"
