@@ -28,7 +28,7 @@ jobs:
         with:
           flutter-version: '3.41.4'
           channel: 'stable'
-          cache: true  # ✅ Включаем кэш: ускоряет CI, Flet сам контролирует чистоту сборки
+          cache: true  # ✅ Включаем кэш: ускоряет CI
 
       - name: Set up Android SDK & Build Tools
         uses: android-actions/setup-android@v3
@@ -46,14 +46,13 @@ jobs:
           with open('pyproject.toml', 'rb') as f:
               cfg = tomllib.load(f)
           print('✅ TOML parsed successfully')
-          print(f'📱 App name: {cfg.get(\"app\", {}).get(\"name\", \"MISSING\")}')
-          print(f'📦 Package: {cfg.get(\"build\", {}).get(\"android\", {}).get(\"package\", \"MISSING\")}')
-          print(f'🔢 Version: {cfg.get(\"app\", {}).get(\"version\", \"1.0.0\")}')
+          print(f'📱 Product: {cfg.get(\"tool\", {}).get(\"flet\", {}).get(\"product\", \"MISSING\")}')
+          print(f'📦 Package: {cfg.get(\"tool\", {}).get(\"flet\", {}).get(\"android\", {}).get(\"package\", \"MISSING\")}')
+          print(f'🔢 Version: {cfg.get(\"project\", {}).get(\"version\", \"1.0.0\")}')
+          print(f'🔢 Build #: {cfg.get(\"tool\", {}).get(\"flet\", {}).get(\"android\", {}).get(\"build_number\", \"MISSING\")}')
           "
         shell: bash
 
-      # --- ВАЖНО: Очистка кэша сборки ---
-      # Без этого Flet может использовать старый сгенерированный шаблон
       - name: Hard Clean
         run: |
           echo "🧹 Cleaning build directories and Flet global cache..."
@@ -69,11 +68,16 @@ jobs:
       
       - name: Verify APK Metadata
         run: |
+          # Flet CLI формирует имя APK на основе [tool.flet].product
           APK="./build/apk/Cycle.apk"
           
           if [ ! -f "$APK" ]; then
-            echo "❌ APK not found at $APK!"
-            exit 1
+            # Фоллбэк: ищем любой APK в папке, если имя изменится
+            APK=$(find ./build/apk -name "*.apk" | head -n 1)
+            if [ -z "$APK" ]; then
+              echo "❌ APK not found in build/apk/"
+              exit 1
+            fi
           fi
           echo "📦 APK found: $APK"
           
