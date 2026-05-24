@@ -89,10 +89,10 @@ jobs:
             echo "ℹ️ aapt not found. Skipping metadata dump."
           fi
         shell: bash
-
+        
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: cycle-apk
-          path: build/apk/Cycle.apk
+          path: build/apk/*.apk
           if-no-files-found: error

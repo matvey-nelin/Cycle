@@ -28,6 +28,5 @@ def main(page: ft.Page):
 
 ft.run(
     main=main,
-    assets_dir="assets",
-    name="Cycle"
+    assets_dir="assets"
 )
