@@ -52,21 +52,25 @@ jobs:
           "
         shell: bash
 
-      # ❌ Удалён "Hard Clean". Flet CLI сам управляет кэшем.
-      # Агрессивное удаление ~/.flet/ и pub cache ломает генерацию pubspec.yaml.
-      # Если нужна чистка, используйте: flet build clean
+      # --- ВАЖНО: Очистка кэша сборки ---
+      # Без этого Flet может использовать старый сгенерированный шаблон
+      - name: Clean Build Cache
+        run: |
+          echo "🧹 Cleaning build directories..."
+          rm -rf build/
+          rm -rf .flet/
+          find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
+        shell: bash
 
       - name: Build APK
         run: flet build apk --verbose
-
+      
       - name: Verify APK Metadata
         run: |
-          # Ищем APK по стандартным путям Flet/Flutter
-          APK=$(find . -path "./build/flutter/build/app/outputs/flutter-apk/app-release.apk" \
-                       -o -path "./build/app/outputs/flutter-apk/app-release.apk" | head -n 1)
+          APK="./build/apk/Cycle.apk"
           
-          if [ -z "$APK" ]; then
-            echo "❌ APK not found after build!"
+          if [ ! -f "$APK" ]; then
+            echo "❌ APK not found at $APK!"
             exit 1
           fi
           echo "📦 APK found: $APK"
@@ -74,9 +78,9 @@ jobs:
           AAPT=$(find $ANDROID_HOME -name "aapt" -type f 2>/dev/null | head -n 1)
           if [ -n "$AAPT" ]; then
             echo "✅ Checking metadata with aapt..."
-            "$AAPT" dump badging "$APK" | grep -E "application-label|package: name" || echo "⚠️ aapt dump returned no matches"
+            "$AAPT" dump badging "$APK" | grep -E "application-label|package: name"
           else
-            echo "ℹ️ aapt not in PATH. Metadata is compiled into resources.arsc (normal for release)."
+            echo "ℹ️ aapt not found. Skipping metadata dump."
           fi
         shell: bash
 
@@ -84,7 +88,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cycle-apk
-          path: |
-            build/flutter/build/app/outputs/flutter-apk/app-release.apk
-            build/app/outputs/flutter-apk/app-release.apk
+          path: build/apk/Cycle.apk
           if-no-files-found: error
