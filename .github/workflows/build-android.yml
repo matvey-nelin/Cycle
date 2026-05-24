@@ -54,11 +54,13 @@ jobs:
 
       # --- ВАЖНО: Очистка кэша сборки ---
       # Без этого Flet может использовать старый сгенерированный шаблон
-      - name: Clean Build Cache
+      - name: Hard Clean
         run: |
-          echo "🧹 Cleaning build directories..."
+          echo "🧹 Cleaning build directories and Flet global cache..."
           rm -rf build/
           rm -rf .flet/
+          # КРИТИЧНО: Удаляем кэш сгенерированных шаблонов
+          rm -rf ~/.flet/ 
           find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
         shell: bash
 
