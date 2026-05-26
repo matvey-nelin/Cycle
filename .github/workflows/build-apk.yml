@@ -36,25 +36,18 @@ jobs:
       - name: Install Android Build-Tools (для aapt)
         run: sdkmanager "build-tools;34.0.0" > /dev/null 2>&1
 
+
       - name: Accept licenses
         run: yes | sdkmanager --licenses
 
-      - name: Setup Keystore & Auto-Increment Build Number
+      - name: Decode Keystore & Auto-Increment Build Number
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           BUILD_NUMBER: ${{ github.run_number }}
         run: |
-          # 1. Декодируем релизный ключ из Secrets
           echo "$KEYSTORE_BASE64" | base64 -d > cycle-release.jks
-          
-          # 2. Автоинкремент build_number в pyproject.toml
           sed -i "s/build_number = .*/build_number = $BUILD_NUMBER/" pyproject.toml
-          
-          # 3. Показываем итоговую версию в логе
-          echo "✅ Signed build ready. BuildNumber: $BUILD_NUMBER"
+          echo "✅ Build number: $BUILD_NUMBER"
         shell: bash
 
       - name: Hard clean build artifacts
@@ -64,37 +57,14 @@ jobs:
         shell: bash
 
       - name: Build Release APK
-        env:
-          FLET_ANDROID_KEY_STORE: cycle-release.jks
-          FLET_ANDROID_KEY_STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          FLET_ANDROID_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          FLET_ANDROID_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        run: flet build apk --release --verbose
-
-      
-      - name: Verify APK Metadata
         run: |
-          # Flet CLI формирует имя APK на основе [tool.flet].product
-          APK="./build/apk/Cycle.apk"
-          
-          if [ ! -f "$APK" ]; then
-            # Фоллбэк: ищем любой APK в папке, если имя изменится
-            APK=$(find ./build/apk -name "*.apk" | head -n 1)
-            if [ -z "$APK" ]; then
-              echo "❌ APK not found in build/apk/"
-              exit 1
-            fi
-          fi
-          echo "📦 APK found: $APK"
-          
-          AAPT=$(find $ANDROID_HOME -name "aapt" -type f 2>/dev/null | head -n 1)
-          if [ -n "$AAPT" ]; then
-            echo "✅ Checking metadata with aapt..."
-            "$AAPT" dump badging "$APK" | grep -E "application-label|package: name"
-          else
-            echo "ℹ️ aapt not found. Skipping metadata dump."
-          fi
-        shell: bash
+          flet build apk \
+            --build-type release \
+            --android-signing-key-store cycle-release.jks \
+            --android-signing-key-store-password "${{ secrets.KEYSTORE_PASSWORD }}" \
+            --android-signing-key-alias "${{ secrets.KEY_ALIAS }}" \
+            --android-signing-key-password "${{ secrets.KEY_PASSWORD }}" \
+            --verbose
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
