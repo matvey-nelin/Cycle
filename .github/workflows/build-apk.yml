@@ -50,8 +50,8 @@ jobs:
           # 1. Декодируем релизный ключ из Secrets
           echo "$KEYSTORE_BASE64" | base64 -d > cycle-release.jks
           
-          # 2. Автоинкремент build_number в flet.toml
-          sed -i "s/build_number = .*/build_number = $BUILD_NUMBER/" flet.toml
+          # 2. Автоинкремент build_number в pyproject.toml
+          sed -i "s/build_number = .*/build_number = $BUILD_NUMBER/" pyproject.toml
           
           # 3. Показываем итоговую версию в логе
           echo "✅ Signed build ready. BuildNumber: $BUILD_NUMBER"
