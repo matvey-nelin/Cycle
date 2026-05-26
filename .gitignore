@@ -139,3 +139,11 @@ temp/
 *.tmp
 *.bak
 *.backup
+
+
+# Android signing keys (NEVER COMMIT)
+*.jks
+*.keystore
+key_b64.txt
+key.properties
+android/key.properties

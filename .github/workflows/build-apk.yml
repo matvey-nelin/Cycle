@@ -37,40 +37,40 @@ jobs:
         run: sdkmanager "build-tools;34.0.0" > /dev/null 2>&1
 
       - name: Accept licenses
-        run: yes | sdkmanager --licenses > /dev/null
+        run: yes | sdkmanager --licenses
 
-      - name: 🔍 Verify pyproject.toml structure
-        run: |
-          python3 -c "
-          import tomllib
-          with open('pyproject.toml', 'rb') as f:
-              cfg = tomllib.load(f)
-          print('✅ TOML parsed successfully')
-          print(f'📱 Product: {cfg.get(\"tool\", {}).get(\"flet\", {}).get(\"product\", \"MISSING\")}')
-          print(f'📦 Package: {cfg.get(\"tool\", {}).get(\"flet\", {}).get(\"android\", {}).get(\"package\", \"MISSING\")}')
-          print(f'🔢 Version: {cfg.get(\"project\", {}).get(\"version\", \"1.0.0\")}')
-          print(f'🔢 Build #: {cfg.get(\"tool\", {}).get(\"flet\", {}).get(\"android\", {}).get(\"build_number\", \"MISSING\")}')
-          "
-        shell: bash
-
-      - name: Hard Clean
-        run: |
-          echo "🧹 Cleaning build directories and Flet global cache..."
-          rm -rf build/
-          rm -rf .flet/
-          # КРИТИЧНО: Удаляем кэш сгенерированных шаблонов
-          rm -rf ~/.flet/ 
-          find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
-        shell: bash
-
-      - name: Build APK
+      - name: Setup Keystore & Auto-Increment Build Number
         env:
-          # Отключаем цвета, чтобы Gradle выводил чистый текст
-          TERM: dumb
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          BUILD_NUMBER: ${{ github.run_number }}
         run: |
-          flet build apk --verbose 2>&1 | tee build_output.log
-          # Если сборка упала, покажем последние 50 строк логa
-          tail -n 50 build_output.log
+          # 1. Декодируем релизный ключ из Secrets
+          echo "$KEYSTORE_BASE64" | base64 -d > cycle-release.jks
+          
+          # 2. Автоинкремент build_number в flet.toml
+          sed -i "s/build_number = .*/build_number = $BUILD_NUMBER/" flet.toml
+          
+          # 3. Показываем итоговую версию в логе
+          echo "✅ Signed build ready. BuildNumber: $BUILD_NUMBER"
+        shell: bash
+
+      - name: Hard clean build artifacts
+        run: |
+          rm -rf build/ .flet/ .dart_tool/ __pycache__/
+          rm -rf pubspec.lock .flutter-plugins* flet_server.log
+        shell: bash
+
+      - name: Build Release APK
+        env:
+          FLET_ANDROID_KEY_STORE: cycle-release.jks
+          FLET_ANDROID_KEY_STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          FLET_ANDROID_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          FLET_ANDROID_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: flet build apk --release --verbose
+
       
       - name: Verify APK Metadata
         run: |
@@ -99,6 +99,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: cycle-apk
-          path: build/apk/*.apk
-          if-no-files-found: error
+          name: Cycle-v${{ github.run_number }}
+          path: build/flutter/build/app/outputs/flutter-apk/app-release.apk

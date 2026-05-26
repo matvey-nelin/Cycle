@@ -1,6 +1,6 @@
 [project]
 name = "cycle"
-version = "1.2.2"
+version = "1.3.0"
 description = "Дневник тренировок и планирования"
 dependencies = []
 
@@ -10,7 +10,7 @@ org = "com.nelinmatvey"               # Домен организации
 
 [tool.flet.android]
 package = "com.nelinmatvey.cycle"
-build_number = 122
+build_number = 1
 
 [tool.flet.ios]
 bundle_id = "com.nelinmatvey.cycle"
