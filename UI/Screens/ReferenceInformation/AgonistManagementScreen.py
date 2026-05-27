@@ -45,7 +45,7 @@ class AgonistManagementScreen(BaseView):
                 label=self.translator.workout_types[workout_type[1]],
                 label_style=ft.TextStyle(
                     size=14,
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                    color=ft.Colors.ON_SURFACE
                 ),
 
                 value=(workout_type[0] in self.chosen_id_workout_types), 
@@ -79,7 +79,7 @@ class AgonistManagementScreen(BaseView):
                 value=self.title,  
                 text_style=ft.TextStyle(
                     size=16,
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                    color=ft.Colors.ON_SURFACE
                 ),
                 border=ft.InputBorder.UNDERLINE,
                 border_color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE,
@@ -106,7 +106,7 @@ class AgonistManagementScreen(BaseView):
                 value=self.labels["workout_types_helper_text"],
                 size=12
             ), 
-            text_color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND,
+            text_color=ft.Colors.ON_SURFACE,
             controls=
             [
                 ft.Column(

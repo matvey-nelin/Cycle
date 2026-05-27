@@ -17,15 +17,22 @@ class TemplateContainer(ft.Container):
         self.expand=6
         self.margin=ft.Margin.only(left=5, right=5)
 
-        self.border=ft.Border().all(
-            width=3,
-            color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
+        self.bgcolor = ft.Colors.SURFACE_CONTAINER_LOW
+
+        self.border_radius=10
+
+        self.shadow = ft.BoxShadow(
+            spread_radius=0,
+            blur_radius=12,
+            color=ft.Colors.with_opacity(opacity=0.5, color=ft.Colors.SHADOW), 
+            offset=ft.Offset(0, 4)
         )
-        self.border_radius=4
+
+
 
         self.templates = ft.Column(
             expand=True,
-            margin=ft.Margin.symmetric(vertical=10),
+            margin=ft.Margin.symmetric(vertical=0),
             controls=[],
 
             alignment=ft.MainAxisAlignment.START,

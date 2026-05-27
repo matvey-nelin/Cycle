@@ -1,68 +1,68 @@
 import flet as ft
 
-class FrogInSatinPajamas:
+class LavaFlow:
     def __init__(self) -> None:
         
         # ==========================================
-        # ТЁМНАЯ ТЕМА (FrogInSatinPajamas - Ночной пруд)
+        # ТЁМНАЯ ТЕМА (LavaFlow - Жерло вулкана)
         # ==========================================
         
-        # --- Основные акценты (Лайм, Сирень, Бирюза) ---
-        self.DARK_PRIMARY =                     ft.Colors.LIME_400
-        self.DARK_ON_PRIMARY =                  "#0F1410"
-        self.DARK_PRIMARY_CONTAINER =           ft.Colors.LIME_800
-        self.DARK_ON_PRIMARY_CONTAINER =        ft.Colors.LIME_100
-        self.DARK_PRIMARY_FIXED =               ft.Colors.LIME_700
-        self.DARK_PRIMARY_FIXED_DIM =           ft.Colors.LIME_800
-        self.DARK_ON_PRIMARY_FIXED =            "#0F1410"
-        self.DARK_ON_PRIMARY_FIXED_VARIANT =    "#242B1A"
+        # --- Основные акценты (Оранжевый, Красный, Желтый) ---
+        self.DARK_PRIMARY =                     ft.Colors.ORANGE_500
+        self.DARK_ON_PRIMARY =                  "#140A05"
+        self.DARK_PRIMARY_CONTAINER =           ft.Colors.ORANGE_800
+        self.DARK_ON_PRIMARY_CONTAINER =        ft.Colors.ORANGE_100
+        self.DARK_PRIMARY_FIXED =               ft.Colors.ORANGE_700
+        self.DARK_PRIMARY_FIXED_DIM =           ft.Colors.ORANGE_800
+        self.DARK_ON_PRIMARY_FIXED =            "#140A05"
+        self.DARK_ON_PRIMARY_FIXED_VARIANT =    "#2A1405"
         
-        self.DARK_SECONDARY =                   ft.Colors.PURPLE_400
-        self.DARK_ON_SECONDARY =                "#0F1410"
-        self.DARK_SECONDARY_CONTAINER =         ft.Colors.PURPLE_800
-        self.DARK_ON_SECONDARY_CONTAINER =      ft.Colors.PURPLE_100
-        self.DARK_SECONDARY_FIXED =             ft.Colors.PURPLE_700
-        self.DARK_SECONDARY_FIXED_DIM =         ft.Colors.PURPLE_800
-        self.DARK_ON_SECONDARY_FIXED =          "#0F1410"
-        self.DARK_ON_SECONDARY_FIXED_VARIANT =  "#2A1A28"
+        self.DARK_SECONDARY =                   ft.Colors.RED_500
+        self.DARK_ON_SECONDARY =                "#140A05"
+        self.DARK_SECONDARY_CONTAINER =         ft.Colors.RED_800
+        self.DARK_ON_SECONDARY_CONTAINER =      ft.Colors.RED_100
+        self.DARK_SECONDARY_FIXED =             ft.Colors.RED_700
+        self.DARK_SECONDARY_FIXED_DIM =         ft.Colors.RED_800
+        self.DARK_ON_SECONDARY_FIXED =          "#140A05"
+        self.DARK_ON_SECONDARY_FIXED_VARIANT =  "#2A0505"
         
-        self.DARK_TERTIARY =                    ft.Colors.TEAL_400
-        self.DARK_ON_TERTIARY =                 "#0F1410"
-        self.DARK_TERTIARY_CONTAINER =          ft.Colors.TEAL_800
-        self.DARK_ON_TERTIARY_CONTAINER =       ft.Colors.TEAL_100
-        self.DARK_TERTIARY_FIXED =              ft.Colors.TEAL_700
-        self.DARK_TERTIARY_FIXED_DIM =          ft.Colors.TEAL_800
-        self.DARK_ON_TERTIARY_FIXED =           "#0F1410"
-        self.DARK_ON_TERTIARY_FIXED_VARIANT =   "#1A2422"
+        self.DARK_TERTIARY =                    ft.Colors.YELLOW_500
+        self.DARK_ON_TERTIARY =                 "#140A05"
+        self.DARK_TERTIARY_CONTAINER =          ft.Colors.YELLOW_800
+        self.DARK_ON_TERTIARY_CONTAINER =       ft.Colors.YELLOW_100
+        self.DARK_TERTIARY_FIXED =              ft.Colors.YELLOW_700
+        self.DARK_TERTIARY_FIXED_DIM =          ft.Colors.YELLOW_800
+        self.DARK_ON_TERTIARY_FIXED =           "#140A05"
+        self.DARK_ON_TERTIARY_FIXED_VARIANT =   "#2A2200"
         
         # --- Ошибки ---
         self.DARK_ERROR =                       ft.Colors.RED_400
-        self.DARK_ON_ERROR =                    "#0F1410"
+        self.DARK_ON_ERROR =                    "#140A05"
         self.DARK_ERROR_CONTAINER =             ft.Colors.RED_800
         self.DARK_ON_ERROR_CONTAINER =          ft.Colors.RED_100
         
-        # --- Поверхности (Глубокий мох) ---
-        self.DARK_SURFACE =                     "#121814"
+        # --- Поверхности (Темный пепел) ---
+        self.DARK_SURFACE =                     "#0F0805"
         self.DARK_ON_SURFACE =                  "#E6E1E5"
         self.DARK_ON_SURFACE_VARIANT =          "#C4C7C5"
-        self.DARK_SURFACE_TINT =                ft.Colors.LIME_400
+        self.DARK_SURFACE_TINT =                ft.Colors.ORANGE_500
         
-        self.DARK_SURFACE_DIM =                 "#0A0F0C"
-        self.DARK_SURFACE_BRIGHT =              "#2A302C"
-        self.DARK_SURFACE_CONTAINER_LOWEST =    "#0E1310"
-        self.DARK_SURFACE_CONTAINER_LOW =       "#121814"
-        self.DARK_SURFACE_CONTAINER =           "#161C18"
-        self.DARK_SURFACE_CONTAINER_HIGH =      "#1C221E"
-        self.DARK_SURFACE_CONTAINER_HIGHEST =   "#232A26"
+        self.DARK_SURFACE_DIM =                 "#080402"
+        self.DARK_SURFACE_BRIGHT =              "#281E15"
+        self.DARK_SURFACE_CONTAINER_LOWEST =    "#0C0604"
+        self.DARK_SURFACE_CONTAINER_LOW =       "#0F0805"
+        self.DARK_SURFACE_CONTAINER =           "#140C08"
+        self.DARK_SURFACE_CONTAINER_HIGH =      "#1A120C"
+        self.DARK_SURFACE_CONTAINER_HIGHEST =   "#221810"
         
         # --- Границы, Инверсия, Тени ---
         self.DARK_OUTLINE =                     "#938F99"
         self.DARK_OUTLINE_VARIANT =             "#49454F"
-        self.DARK_SHADOW =                      "#050A07"
+        self.DARK_SHADOW =                      "#140804"
         self.DARK_SCRIM =                       "#000000"
         self.DARK_INVERSE_SURFACE =             "#E6E1E5"
-        self.DARK_ON_INVERSE_SURFACE =          "#0F1410"
-        self.DARK_INVERSE_PRIMARY =             ft.Colors.LIME_700
+        self.DARK_ON_INVERSE_SURFACE =          "#140A05"
+        self.DARK_INVERSE_PRIMARY =             ft.Colors.ORANGE_700
 
         self.dark_color_scheme = ft.ColorScheme(
             primary=                        self.DARK_PRIMARY,
@@ -114,36 +114,36 @@ class FrogInSatinPajamas:
         )
 
         # ==========================================
-        # СВЕТЛАЯ ТЕМА (FrogInSatinPajamas - Утренний луг)
+        # СВЕТЛАЯ ТЕМА (LavaFlow - Солнечный камень)
         # ==========================================
         
         # --- Основные акценты ---
-        self.LIGHT_PRIMARY =                    ft.Colors.LIME_700
+        self.LIGHT_PRIMARY =                    ft.Colors.ORANGE_600
         self.LIGHT_ON_PRIMARY =                 ft.Colors.WHITE
-        self.LIGHT_PRIMARY_CONTAINER =          ft.Colors.LIME_100
-        self.LIGHT_ON_PRIMARY_CONTAINER =       ft.Colors.LIME_900
-        self.LIGHT_PRIMARY_FIXED =              ft.Colors.LIME_700
-        self.LIGHT_PRIMARY_FIXED_DIM =          ft.Colors.LIME_800
-        self.LIGHT_ON_PRIMARY_FIXED =           "#0F1410"
-        self.LIGHT_ON_PRIMARY_FIXED_VARIANT =   "#242B1A"
+        self.LIGHT_PRIMARY_CONTAINER =          ft.Colors.ORANGE_100
+        self.LIGHT_ON_PRIMARY_CONTAINER =       ft.Colors.ORANGE_900
+        self.LIGHT_PRIMARY_FIXED =              ft.Colors.ORANGE_700
+        self.LIGHT_PRIMARY_FIXED_DIM =          ft.Colors.ORANGE_800
+        self.LIGHT_ON_PRIMARY_FIXED =           "#140A05"
+        self.LIGHT_ON_PRIMARY_FIXED_VARIANT =   "#2A1405"
         
-        self.LIGHT_SECONDARY =                  ft.Colors.PURPLE_700
+        self.LIGHT_SECONDARY =                  ft.Colors.RED_600
         self.LIGHT_ON_SECONDARY =               ft.Colors.WHITE
-        self.LIGHT_SECONDARY_CONTAINER =        ft.Colors.PURPLE_100
-        self.LIGHT_ON_SECONDARY_CONTAINER =     ft.Colors.PURPLE_900
-        self.LIGHT_SECONDARY_FIXED =            ft.Colors.PURPLE_700
-        self.LIGHT_SECONDARY_FIXED_DIM =        ft.Colors.PURPLE_800
-        self.LIGHT_ON_SECONDARY_FIXED =         "#0F1410"
-        self.LIGHT_ON_SECONDARY_FIXED_VARIANT = "#2A1A28"
+        self.LIGHT_SECONDARY_CONTAINER =        ft.Colors.RED_100
+        self.LIGHT_ON_SECONDARY_CONTAINER =     ft.Colors.RED_900
+        self.LIGHT_SECONDARY_FIXED =            ft.Colors.RED_700
+        self.LIGHT_SECONDARY_FIXED_DIM =        ft.Colors.RED_800
+        self.LIGHT_ON_SECONDARY_FIXED =         "#140A05"
+        self.LIGHT_ON_SECONDARY_FIXED_VARIANT = "#2A0505"
         
-        self.LIGHT_TERTIARY =                   ft.Colors.TEAL_700
+        self.LIGHT_TERTIARY =                   ft.Colors.YELLOW_600
         self.LIGHT_ON_TERTIARY =                ft.Colors.WHITE
-        self.LIGHT_TERTIARY_CONTAINER =         ft.Colors.TEAL_100
-        self.LIGHT_ON_TERTIARY_CONTAINER =      ft.Colors.TEAL_900
-        self.LIGHT_TERTIARY_FIXED =             ft.Colors.TEAL_700
-        self.LIGHT_TERTIARY_FIXED_DIM =         ft.Colors.TEAL_800
-        self.LIGHT_ON_TERTIARY_FIXED =          "#0F1410"
-        self.LIGHT_ON_TERTIARY_FIXED_VARIANT =  "#1A2422"
+        self.LIGHT_TERTIARY_CONTAINER =         ft.Colors.YELLOW_100
+        self.LIGHT_ON_TERTIARY_CONTAINER =      ft.Colors.YELLOW_900
+        self.LIGHT_TERTIARY_FIXED =             ft.Colors.YELLOW_700
+        self.LIGHT_TERTIARY_FIXED_DIM =         ft.Colors.YELLOW_800
+        self.LIGHT_ON_TERTIARY_FIXED =          "#140A05"
+        self.LIGHT_ON_TERTIARY_FIXED_VARIANT =  "#2A2200"
         
         # --- Ошибки ---
         self.LIGHT_ERROR =                      ft.Colors.RED_600
@@ -151,28 +151,28 @@ class FrogInSatinPajamas:
         self.LIGHT_ERROR_CONTAINER =            ft.Colors.RED_100
         self.LIGHT_ON_ERROR_CONTAINER =         ft.Colors.RED_900
         
-        # --- Поверхности (Свежая зелень) ---
-        self.LIGHT_SURFACE =                    "#F7FAF6"
+        # --- Поверхности (Теплый камень) ---
+        self.LIGHT_SURFACE =                    "#FBF5F0"
         self.LIGHT_ON_SURFACE =                 "#1D1B20"
         self.LIGHT_ON_SURFACE_VARIANT =         "#49454F"
-        self.LIGHT_SURFACE_TINT =               ft.Colors.LIME_700
+        self.LIGHT_SURFACE_TINT =               ft.Colors.ORANGE_600
         
-        self.LIGHT_SURFACE_DIM =                "#DADFD8"
-        self.LIGHT_SURFACE_BRIGHT =             "#F7FAF6"
+        self.LIGHT_SURFACE_DIM =                "#E0D5CC"
+        self.LIGHT_SURFACE_BRIGHT =             "#FBF5F0"
         self.LIGHT_SURFACE_CONTAINER_LOWEST =   "#FFFFFF"
-        self.LIGHT_SURFACE_CONTAINER_LOW =      "#EEF3ED"
-        self.LIGHT_SURFACE_CONTAINER =          "#E6EBE5"
-        self.LIGHT_SURFACE_CONTAINER_HIGH =     "#DEE3DD"
-        self.LIGHT_SURFACE_CONTAINER_HIGHEST =  "#D6DBD5"
+        self.LIGHT_SURFACE_CONTAINER_LOW =      "#F3EDE6"
+        self.LIGHT_SURFACE_CONTAINER =          "#EBE5DE"
+        self.LIGHT_SURFACE_CONTAINER_HIGH =     "#E3DDD5"
+        self.LIGHT_SURFACE_CONTAINER_HIGHEST =  "#DBD5CC"
         
         # --- Границы, Инверсия, Тени ---
         self.LIGHT_OUTLINE =                    "#79747E"
         self.LIGHT_OUTLINE_VARIANT =            "#CAC4D0"
-        self.LIGHT_SHADOW =                     "#14281A"
+        self.LIGHT_SHADOW =                     "#2A1405"
         self.LIGHT_SCRIM =                      "#000000"
         self.LIGHT_INVERSE_SURFACE =            "#322F35"
         self.LIGHT_ON_INVERSE_SURFACE =         "#F5EFF7"
-        self.LIGHT_INVERSE_PRIMARY =            ft.Colors.LIME_200
+        self.LIGHT_INVERSE_PRIMARY =            ft.Colors.ORANGE_200
 
         self.light_color_scheme = ft.ColorScheme(
             primary=                        self.LIGHT_PRIMARY,

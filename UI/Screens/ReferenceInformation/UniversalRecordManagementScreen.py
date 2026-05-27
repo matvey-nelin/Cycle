@@ -76,7 +76,7 @@ class UniversalRecordManagementScreen(BaseView):
                 value=self.title,  
                 text_style=ft.TextStyle(
                     size=14,
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                    color=ft.Colors.ON_SURFACE
                 ),
                 border=ft.InputBorder.UNDERLINE,
                 border_color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE,

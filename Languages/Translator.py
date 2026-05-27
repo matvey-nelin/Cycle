@@ -8,6 +8,7 @@ from transliterate import translit
 from Languages import SupportedLanguages
 
 import utils
+import global_variable
 
 
 
@@ -35,6 +36,9 @@ class Translator:
                     with open(language_pack_path, "w", encoding="UTF-8") as file:
                         json.dump(pack_data, file, ensure_ascii=False, indent=4)
         
+
+                # if global_variable.APP_VERSION
+
         except Exception as e:
             print(f"[INIT ERROR] {e}")
         

@@ -45,7 +45,7 @@ class ExerciseManagementScreen(BaseView):
                 label=self.translator.agonists[agonist[1]],
                 label_style=ft.TextStyle(
                     size=14,
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                    color=ft.Colors.ON_SURFACE
                 ),
                 
                 value=(agonist[0] in self.chosen_id_agonists),
@@ -79,7 +79,7 @@ class ExerciseManagementScreen(BaseView):
                 value=self.title,  
                 text_style=ft.TextStyle(
                     size=16,
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                    color=ft.Colors.ON_SURFACE
                 ),
                 border=ft.InputBorder.UNDERLINE,
                 border_color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE,

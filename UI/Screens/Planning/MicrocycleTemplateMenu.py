@@ -34,7 +34,7 @@ class MicrocycleTemplateMenu(BaseView):
 
         self.main_container.content = ft.Text(
             self.labels["loading"], 
-            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+            color=ft.Colors.ON_SURFACE
         )
 
 
@@ -174,7 +174,7 @@ class MicrocycleTemplateMenu(BaseView):
                     [
                         ft.Text(
                             self.labels["no_data"], 
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND,
+                            color=ft.Colors.ON_SURFACE,
                             align=ft.Alignment.CENTER
                         ),
                         self.actions_menu
@@ -193,7 +193,7 @@ class MicrocycleTemplateMenu(BaseView):
         for template_info in microcycle_templates_info:
             template_id = int(template_info[0])
             try:
-                template_title = self.translator.microcycle_templates[template_info[1]]
+                template_title = self.translator.microcycle_templates.get(template_info[1], template_info[1])
             
             
                 if template_id != temp_template_id:
@@ -203,7 +203,7 @@ class MicrocycleTemplateMenu(BaseView):
                     temp_template_labels = [template_id, template_title]
                     temp_template_id = template_id
 
-                temp_template_labels.append(self.translator.workout_templates[template_info[2]])
+                temp_template_labels.append(self.translator.workout_templates.get(template_info[2], "Unknown"))
             except KeyError:
                     continue
         # Добавление последнего шаблона в список

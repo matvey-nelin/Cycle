@@ -172,13 +172,18 @@
         },
         "app_colors": {
             "color_themes": {
-                "Aurora Borealis": "Aurora Borealis",
+                "Aurora Borealis": "Kuzey Işıkları",
                 "Arabian Night": "Arap Gecesi",
                 "Space Cream": "Uzay Kreması",
                 "The last breath of a Jacquot": "Bir Jacquot'un Son Nefesi",
                 "Sakura": "Sakura",
                 "Sunset in the Wasteland": "Çorak Arazide Gün Batımı",
-                "Frog in satin pajamas": "Saten Pijamalı Kurbağa"
+                "Frog in satin pajamas": "Saten Pijamalı Kurbağa",
+                "Neon City": "Neon Şehir",
+                "Mariana Trench": "Mariana Çukuru",
+                "Nordic Forest": "Nordik Orman",
+                "Retro Terminal": "Retro Terminal",
+                "Lava Flow": "Lava Akışı"
             }
         }
     },

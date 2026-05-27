@@ -29,16 +29,14 @@ class AppColorThemesScreen(BaseView):
     
     def _init_data_(self):
         for color_theme in SupportedColorThemes.COLOR_THEMES:
-            title_list_tile = self.translator.app_colors_labels["color_themes"][color_theme]
+            title_list_tile = self.translator.app_colors_labels["color_themes"].get(color_theme, color_theme)
 
             background_list_tile    = None
-            title_color_list_tile   = self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+            title_color_list_tile   = ft.Colors.ON_SURFACE
 
             if color_theme == self.settings.color_theme:
-                background_list_tile = self.colors.LIGHT_PRIMARY_CONTAINER      if self.colors.theme == 'light' \
-                    else self.colors.DARK_PRIMARY_CONTAINER
-                title_color_list_tile = self.colors.LIGHT_ON_PRIMARY_CONTAINER  if self.colors.theme == 'light' \
-                    else self.colors.DARK_ON_PRIMARY_CONTAINER
+                background_list_tile = ft.Colors.PRIMARY_CONTAINER
+                title_color_list_tile = ft.Colors.ON_PRIMARY_CONTAINER
 
 
             self.color_themes_list_view.controls.append(

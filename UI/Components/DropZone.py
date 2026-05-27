@@ -3,39 +3,64 @@ import flet as ft
 
 
 class DropZone(ft.DragTarget):
-    def __init__(self, exercise_set, index: int, height: int = 5):
+    def __init__(self, exercise_set, index: int, height: int | float = 10):
         super().__init__(ft.Row())
+
+        self.exercise_set = exercise_set
+
         
         self.data = index
         self.group = "exercise_set"
-        self.on_will_accept = exercise_set._on_set_will_accept_
-        # self.on_leave       = exercise_set._on_set_leave_
+        self.on_accept      = self._on_accept_
+        self.on_will_accept = self._on_will_accept_
+        self.on_leave       = self._on_leave_
         
-        
-        # Линия-индикатор (изначально прозрачная)
+
+
         self.indicator = ft.Container(
             height=4,
-            bgcolor=exercise_set.colors.LIGHT_PRIMARY if exercise_set.colors.theme == "light" else exercise_set.colors.DARK_PRIMARY,
-            visible=False,
-            border_radius=2
+            opacity=0.0,
+
+            bgcolor=ft.Colors.with_opacity(opacity=0.5, color=ft.Colors.PRIMARY),
+            border_radius=5,
+
+            animate_opacity=ft.Animation(
+                duration=200,
+                curve=ft.AnimationCurve.EASE_IN_OUT
+            )
         )
-        
-        # Контейнер зоны (минимальная высота для захвата)
+
         self.content = ft.Container(
+            height=height,
             content=self.indicator,
-            padding=ft.Padding.symmetric(vertical=height),  # Зона захвата 10px
-            height=1  # Визуально почти не занимает места
         )
+
 
         
 
  
+    def _on_accept_(self, e):
+        if hasattr(self.exercise_set, "_on_set_will_accept_"):
+            self.exercise_set._on_set_will_accept_(e)
+
+        if isinstance(self.content, ft.Container):
+            self.content.gradient   = None
+            self.indicator.opacity  = 0.0
+            self.content.update()
  
+
     def _on_will_accept_(self, e):
-        if e:
-            self.indicator.visible = True
-            self.indicator.update()
+        if e and isinstance(self.content, ft.Container):
+            self.content.gradient   = self.exercise_set.colors.Gradients.DIVIDER_FADE
+            self.indicator.opacity  = 1.0
+            self.content.update()
+
 
     def _on_leave_(self, e):
-        self.indicator.visible = False
-        self.indicator.update()
+        if hasattr(self.exercise_set, "_on_set_leave_"):
+            self.exercise_set._on_set_leave_(e)
+
+        if isinstance(self.content, ft.Container):
+            self.content.gradient   = None
+            self.indicator.opacity  = 0.0
+            self.content.update()

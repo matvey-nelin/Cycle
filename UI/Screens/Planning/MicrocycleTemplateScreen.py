@@ -32,7 +32,7 @@ class MicrocycleTemplateScreen(BaseView):
             value=self.title, 
             text_style=ft.TextStyle(
                 size=16,
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                color=ft.Colors.ON_SURFACE
             ),
             border=ft.InputBorder.UNDERLINE,
             border_color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE,
@@ -157,7 +157,7 @@ class MicrocycleTemplateScreen(BaseView):
         self.result = self.database.get_microcycle_template_info(self.id)
 
         self.slug = str(self.result[0][1])
-        self.title = self.translator.microcycle_templates[self.slug]
+        self.title = self.translator.microcycle_templates.get(self.slug, self.slug)
         self.title_field.value = self.title
 
 
@@ -166,7 +166,7 @@ class MicrocycleTemplateScreen(BaseView):
             workout_template_info = workout_template_info[2:]
             
             workout_template_id    = int(workout_template_info[0])
-            workout_template_title = self.translator.workout_templates[workout_template_info[1]]
+            workout_template_title = self.translator.workout_templates.get(workout_template_info[1], workout_template_info[1])
 
             self.workout_templates_list_info.append([workout_template_id, workout_template_title])
 
@@ -176,6 +176,7 @@ class MicrocycleTemplateScreen(BaseView):
     
     def _fill_workout_template_cards_list_(self):
         new_controls = []
+        self.template_container.templates.controls = new_controls
 
         # Определение списка карточек шаблонов тренировок
         for template_id, template_title in self.workout_templates_list_info:
@@ -197,7 +198,7 @@ class MicrocycleTemplateScreen(BaseView):
         """
         def add_workout_template(id: int):
             result  = self.database.get_workout_template_info(id)
-            title   = self.translator.workout_templates[result[0][0]]
+            title   = self.translator.workout_templates.get(result[0][0], result[0][0])
 
             self.workout_templates_list_info.append([id, title])
             self._fill_workout_template_cards_list_()
@@ -328,14 +329,14 @@ class MicrocycleTemplateScreen(BaseView):
                     value=exercise_title,
                     size=12,
                     max_lines=3,
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                    color=ft.Colors.ON_SURFACE
                 ),
 
                 ft.Text(
                     value=exercise_count,
                     size=12,
                     max_lines=1,
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                    color=ft.Colors.ON_SURFACE
                 )
             ]
 
@@ -360,11 +361,11 @@ class MicrocycleTemplateScreen(BaseView):
 
         if exercises != []:
             excercises_list = []
-            temp_title   = self.translator.exercises[exercises[0][1]]
+            temp_title   = self.translator.exercises.get(exercises[0][1], exercises[0][1])
             temp_count  = 1
 
             for exercise in exercises[1:]:
-                exercise = self.translator.exercises[exercise[1]]
+                exercise = self.translator.exercises.get(exercise[1], exercise[1])
                 
                 if (exercise != temp_title):
                     excercises_list.append((temp_title, temp_count))
@@ -376,7 +377,7 @@ class MicrocycleTemplateScreen(BaseView):
             excercises_list.append((temp_title, temp_count))
             template_card_data = [*template_card_data, *self._create_template_data_(excercises_list)]
 
-        return TemplateCard(
+        workout_template_card = TemplateCard(
             self,
             id=workout_template_id,
             data=template_card_data,
@@ -385,3 +386,10 @@ class MicrocycleTemplateScreen(BaseView):
             on_card_click=lambda id: self.open_template_screen(id),
             delete_from_list_function=lambda e: self.remove_workout_template(e),
         )
+
+        if len(self.template_container.templates.controls) == 0: # Кнопка добавления всегда есть
+            workout_template_card.margin = ft.Margin.only(top=10)
+        elif (len(self.template_container.templates.controls) - 1) == len(self.workout_templates_list_info):
+            workout_template_card.margin = ft.Margin.only(bottom=10)
+
+        return workout_template_card

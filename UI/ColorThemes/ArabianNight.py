@@ -1,131 +1,228 @@
 import flet as ft
 
-
 class ArabianNight:
     def __init__(self) -> None:
-        """Цвета для тёмной версии темы 'Арабская ночь'"""
+        
+        # ==========================================
+        # ТЁМНАЯ ТЕМА (Arabian Night - Ночь в пустыне)
+        # ==========================================
+        
+        # --- Основные акценты (Золото, Оазис, Магия) ---
+        self.DARK_PRIMARY =                     ft.Colors.AMBER_200
+        self.DARK_ON_PRIMARY =                  "#1A1C1E"
+        self.DARK_PRIMARY_CONTAINER =           ft.Colors.AMBER_800
+        self.DARK_ON_PRIMARY_CONTAINER =        ft.Colors.AMBER_100
+        self.DARK_PRIMARY_FIXED =               ft.Colors.AMBER_700
+        self.DARK_PRIMARY_FIXED_DIM =           ft.Colors.AMBER_800
+        self.DARK_ON_PRIMARY_FIXED =            "#1A1C1E"
+        self.DARK_ON_PRIMARY_FIXED_VARIANT =    "#3E3A39"
+        
+        self.DARK_SECONDARY =                   ft.Colors.TEAL_200
+        self.DARK_ON_SECONDARY =                "#1A1C1E"
+        self.DARK_SECONDARY_CONTAINER =         ft.Colors.TEAL_800
+        self.DARK_ON_SECONDARY_CONTAINER =      ft.Colors.TEAL_100
+        self.DARK_SECONDARY_FIXED =             ft.Colors.TEAL_700
+        self.DARK_SECONDARY_FIXED_DIM =         ft.Colors.TEAL_800
+        self.DARK_ON_SECONDARY_FIXED =          "#1A1C1E"
+        self.DARK_ON_SECONDARY_FIXED_VARIANT =  "#1C3533"
+        
+        self.DARK_TERTIARY =                    ft.Colors.DEEP_PURPLE_200
+        self.DARK_ON_TERTIARY =                 "#1A1C1E"
+        self.DARK_TERTIARY_CONTAINER =          ft.Colors.DEEP_PURPLE_800
+        self.DARK_ON_TERTIARY_CONTAINER =       ft.Colors.DEEP_PURPLE_100
+        self.DARK_TERTIARY_FIXED =              ft.Colors.DEEP_PURPLE_700
+        self.DARK_TERTIARY_FIXED_DIM =          ft.Colors.DEEP_PURPLE_800
+        self.DARK_ON_TERTIARY_FIXED =           "#1A1C1E"
+        self.DARK_ON_TERTIARY_FIXED_VARIANT =   "#2A2330"
+        
+        # --- Ошибки ---
+        self.DARK_ERROR =                       ft.Colors.RED_300
+        self.DARK_ON_ERROR =                    "#1A1C1E"
+        self.DARK_ERROR_CONTAINER =             ft.Colors.RED_800
+        self.DARK_ON_ERROR_CONTAINER =          ft.Colors.RED_100
+        
+        # --- Поверхности (Ночное небо с градиентом глубины) ---
+        self.DARK_SURFACE =                     "#1A1C1E"
+        self.DARK_ON_SURFACE =                  "#E6E1E5"
+        self.DARK_ON_SURFACE_VARIANT =          "#C4C7C5"
+        self.DARK_SURFACE_TINT =                ft.Colors.AMBER_200
+        
+        self.DARK_SURFACE_DIM =                 "#121418"
+        self.DARK_SURFACE_BRIGHT =              "#3A3C40"
+        self.DARK_SURFACE_CONTAINER_LOWEST =    "#0F1115"
+        self.DARK_SURFACE_CONTAINER_LOW =       "#16181C"
+        self.DARK_SURFACE_CONTAINER =           "#1A1C1E"
+        self.DARK_SURFACE_CONTAINER_HIGH =      "#212327"
+        self.DARK_SURFACE_CONTAINER_HIGHEST =   "#2A2C30"
+        
+        # --- Границы, Инверсия, Тени ---
+        self.DARK_OUTLINE =                     "#938F99"
+        self.DARK_OUTLINE_VARIANT =             "#49454F"
+        self.DARK_SHADOW =                      "#0D0A1F"  # Тематическая ночная тень
+        self.DARK_SCRIM =                       "#000000"
+        
+        self.DARK_INVERSE_SURFACE =             "#E6E1E5"
+        self.DARK_ON_INVERSE_SURFACE =          "#1A1C1E"
+        self.DARK_INVERSE_PRIMARY =             ft.Colors.AMBER_700
 
-        # === ОСНОВНАЯ ПАЛИТРА (для кнопок действий) ===
-        self.DARK_PRIMARY = ft.Colors.AMBER_300
-        self.DARK_PRIMARY_CONTAINER = ft.Colors.AMBER_200
-        self.DARK_ON_PRIMARY = ft.Colors.GREY_900
-        self.DARK_ON_PRIMARY_CONTAINER = ft.Colors.GREY_900
-        
-        self.DARK_SECONDARY = ft.Colors.TEAL_300
-        self.DARK_SECONDARY_CONTAINER = ft.Colors.TEAL_200
-        self.DARK_ON_SECONDARY = ft.Colors.GREY_900
-        self.DARK_ON_SECONDARY_CONTAINER = ft.Colors.GREY_900
-        
-        self.DARK_TERTIARY = ft.Colors.DEEP_PURPLE_300
-        self.DARK_TERTIARY_CONTAINER = ft.Colors.DEEP_PURPLE_200
-        self.DARK_ON_TERTIARY = ft.Colors.GREY_900
-        self.DARK_ON_TERTIARY_CONTAINER = ft.Colors.GREY_900
-        
-        # === ФОН И ПОВЕРХНОСТИ ===
-        self.DARK_SURFACE = ft.Colors.GREY_800
-        self.DARK_ON_SURFACE = ft.Colors.AMBER_50
-        self.DARK_SURFACE_TINT = ft.Colors.AMBER_300
-        self.DARK_BACKGROUND = ft.Colors.GREY_900
-        self.DARK_ON_BACKGROUND = ft.Colors.AMBER_50
-        
-        # === СТАТУСЫ ===
-        self.DARK_ERROR = ft.Colors.RED_400
-        self.DARK_ERROR_CONTAINER = ft.Colors.RED_300
-        self.DARK_ON_ERROR = ft.Colors.GREY_900
-        self.DARK_ON_ERROR_CONTAINER = ft.Colors.GREY_900
-        
-        self.DARK_WARNING = ft.Colors.ORANGE_300
-        self.DARK_ON_WARNING = ft.Colors.GREY_900
-        
-        # === ГРАНИЦЫ ===
-        self.DARK_OUTLINE = ft.Colors.GREY_600
-        self.DARK_OUTLINE_VARIANT = ft.Colors.GREY_700
-
-        # Создание ColorScheme
+        # Создание ColorScheme (Dark)
         self.dark_color_scheme = ft.ColorScheme(
-            primary=                self.DARK_PRIMARY,
-            primary_container=      self.DARK_PRIMARY_CONTAINER,
-            on_primary=             self.DARK_ON_PRIMARY,
-            on_primary_container=   self.DARK_ON_PRIMARY_CONTAINER,
-            secondary=              self.DARK_SECONDARY,
-            secondary_container=    self.DARK_SECONDARY_CONTAINER,
-            on_secondary=           self.DARK_ON_SECONDARY,
-            on_secondary_container= self.DARK_ON_SECONDARY_CONTAINER,
-            tertiary=               self.DARK_TERTIARY,
-            tertiary_container=     self.DARK_TERTIARY_CONTAINER,
-            on_tertiary=            self.DARK_ON_TERTIARY,
-            on_tertiary_container=  self.DARK_ON_TERTIARY_CONTAINER,
-            error=                  self.DARK_ERROR,
-            error_container=        self.DARK_ERROR_CONTAINER,
-            on_error=               self.DARK_ON_ERROR,
-            on_error_container=     self.DARK_ON_ERROR_CONTAINER,
-            surface=                self.DARK_SURFACE,
-            on_surface=             self.DARK_ON_SURFACE,
-            surface_tint=           self.DARK_SURFACE_TINT,
-            outline=                self.DARK_OUTLINE,
-            outline_variant=        self.DARK_OUTLINE_VARIANT,
+            primary=                        self.DARK_PRIMARY,
+            on_primary=                     self.DARK_ON_PRIMARY,
+            primary_container=              self.DARK_PRIMARY_CONTAINER,
+            on_primary_container=           self.DARK_ON_PRIMARY_CONTAINER,
+            primary_fixed=                  self.DARK_PRIMARY_FIXED,
+            primary_fixed_dim=              self.DARK_PRIMARY_FIXED_DIM,
+            on_primary_fixed=               self.DARK_ON_PRIMARY_FIXED,
+            on_primary_fixed_variant=       self.DARK_ON_PRIMARY_FIXED_VARIANT,
+            secondary=                      self.DARK_SECONDARY,
+            on_secondary=                   self.DARK_ON_SECONDARY,
+            secondary_container=            self.DARK_SECONDARY_CONTAINER,
+            on_secondary_container=         self.DARK_ON_SECONDARY_CONTAINER,
+            secondary_fixed=                self.DARK_SECONDARY_FIXED,
+            secondary_fixed_dim=            self.DARK_SECONDARY_FIXED_DIM,
+            on_secondary_fixed=             self.DARK_ON_SECONDARY_FIXED,
+            on_secondary_fixed_variant=     self.DARK_ON_SECONDARY_FIXED_VARIANT,
+            tertiary=                       self.DARK_TERTIARY,
+            on_tertiary=                    self.DARK_ON_TERTIARY,
+            tertiary_container=             self.DARK_TERTIARY_CONTAINER,
+            on_tertiary_container=          self.DARK_ON_TERTIARY_CONTAINER,
+            tertiary_fixed=                 self.DARK_TERTIARY_FIXED,
+            tertiary_fixed_dim=             self.DARK_TERTIARY_FIXED_DIM,
+            on_tertiary_fixed=              self.DARK_ON_TERTIARY_FIXED,
+            on_tertiary_fixed_variant=      self.DARK_ON_TERTIARY_FIXED_VARIANT,
+            error=                          self.DARK_ERROR,
+            on_error=                       self.DARK_ON_ERROR,
+            error_container=                self.DARK_ERROR_CONTAINER,
+            on_error_container=             self.DARK_ON_ERROR_CONTAINER,
+            surface=                        self.DARK_SURFACE,
+            on_surface=                     self.DARK_ON_SURFACE,
+            on_surface_variant=             self.DARK_ON_SURFACE_VARIANT,
+            surface_tint=                   self.DARK_SURFACE_TINT,
+            surface_dim=                    self.DARK_SURFACE_DIM,
+            surface_bright=                 self.DARK_SURFACE_BRIGHT,
+            surface_container_lowest=       self.DARK_SURFACE_CONTAINER_LOWEST,
+            surface_container_low=          self.DARK_SURFACE_CONTAINER_LOW,
+            surface_container=              self.DARK_SURFACE_CONTAINER,
+            surface_container_high=         self.DARK_SURFACE_CONTAINER_HIGH,
+            surface_container_highest=      self.DARK_SURFACE_CONTAINER_HIGHEST,
+            outline=                        self.DARK_OUTLINE,
+            outline_variant=                self.DARK_OUTLINE_VARIANT,
+            shadow=                         self.DARK_SHADOW,
+            scrim=                          self.DARK_SCRIM,
+            inverse_surface=                self.DARK_INVERSE_SURFACE,
+            on_inverse_surface=             self.DARK_ON_INVERSE_SURFACE,
+            inverse_primary=                self.DARK_INVERSE_PRIMARY,
         )
 
+        # ==========================================
+        # СВЕТЛАЯ ТЕМА (Arabian Day - Песок и Солнце)
+        # ==========================================
+        
+        # --- Основные акценты ---
+        self.LIGHT_PRIMARY =                    ft.Colors.AMBER_700
+        self.LIGHT_ON_PRIMARY =                 ft.Colors.WHITE
+        self.LIGHT_PRIMARY_CONTAINER =          ft.Colors.AMBER_100
+        self.LIGHT_ON_PRIMARY_CONTAINER =       ft.Colors.AMBER_900
+        self.LIGHT_PRIMARY_FIXED =              ft.Colors.AMBER_700
+        self.LIGHT_PRIMARY_FIXED_DIM =          ft.Colors.AMBER_800
+        self.LIGHT_ON_PRIMARY_FIXED =           "#1A1C1E"
+        self.LIGHT_ON_PRIMARY_FIXED_VARIANT =   "#3E3A39"
+        
+        self.LIGHT_SECONDARY =                  ft.Colors.TEAL_700
+        self.LIGHT_ON_SECONDARY =               ft.Colors.WHITE
+        self.LIGHT_SECONDARY_CONTAINER =        ft.Colors.TEAL_100
+        self.LIGHT_ON_SECONDARY_CONTAINER =     ft.Colors.TEAL_900
+        self.LIGHT_SECONDARY_FIXED =            ft.Colors.TEAL_700
+        self.LIGHT_SECONDARY_FIXED_DIM =        ft.Colors.TEAL_800
+        self.LIGHT_ON_SECONDARY_FIXED =         "#1A1C1E"
+        self.LIGHT_ON_SECONDARY_FIXED_VARIANT = "#1C3533"
+        
+        self.LIGHT_TERTIARY =                   ft.Colors.DEEP_PURPLE_700
+        self.LIGHT_ON_TERTIARY =                ft.Colors.WHITE
+        self.LIGHT_TERTIARY_CONTAINER =         ft.Colors.DEEP_PURPLE_100
+        self.LIGHT_ON_TERTIARY_CONTAINER =      ft.Colors.DEEP_PURPLE_900
+        self.LIGHT_TERTIARY_FIXED =             ft.Colors.DEEP_PURPLE_700
+        self.LIGHT_TERTIARY_FIXED_DIM =         ft.Colors.DEEP_PURPLE_800
+        self.LIGHT_ON_TERTIARY_FIXED =          "#1A1C1E"
+        self.LIGHT_ON_TERTIARY_FIXED_VARIANT =  "#2A2330"
+        
+        # --- Ошибки ---
+        self.LIGHT_ERROR =                      ft.Colors.RED_600
+        self.LIGHT_ON_ERROR =                   ft.Colors.WHITE
+        self.LIGHT_ERROR_CONTAINER =            ft.Colors.RED_100
+        self.LIGHT_ON_ERROR_CONTAINER =         ft.Colors.RED_900
+        
+        # --- Поверхности (Теплый песок и пергамент) ---
+        self.LIGHT_SURFACE =                    "#FFFBFF"
+        self.LIGHT_ON_SURFACE =                 "#1D1B20"
+        self.LIGHT_ON_SURFACE_VARIANT =         "#49454F"
+        self.LIGHT_SURFACE_TINT =               ft.Colors.AMBER_700
+        
+        self.LIGHT_SURFACE_DIM =                "#DED8E1"
+        self.LIGHT_SURFACE_BRIGHT =             "#FFFBFF"
+        self.LIGHT_SURFACE_CONTAINER_LOWEST =   "#FFFFFF"
+        self.LIGHT_SURFACE_CONTAINER_LOW =      "#F7F2FA"
+        self.LIGHT_SURFACE_CONTAINER =          "#F3EDF7"
+        self.LIGHT_SURFACE_CONTAINER_HIGH =     "#ECE6F0"
+        self.LIGHT_SURFACE_CONTAINER_HIGHEST =  "#E6E0E9"
+        
+        # --- Границы, Инверсия, Тени ---
+        self.LIGHT_OUTLINE =                    "#79747E"
+        self.LIGHT_OUTLINE_VARIANT =            "#CAC4D0"
+        self.LIGHT_SHADOW =                     "#1A1530"  # Тематическая восточная тень
+        self.LIGHT_SCRIM =                      "#000000"
+        
+        self.LIGHT_INVERSE_SURFACE =            "#322F35"
+        self.LIGHT_ON_INVERSE_SURFACE =         "#F5EFF7"
+        self.LIGHT_INVERSE_PRIMARY =            ft.Colors.AMBER_200
 
-        """Цвета для светлой версии темы 'Арабская ночь'"""
-
-        # === ОСНОВНАЯ ПАЛИТРА (для кнопок действий) ===
-        self.LIGHT_PRIMARY = ft.Colors.AMBER_600
-        self.LIGHT_PRIMARY_CONTAINER = ft.Colors.AMBER_500
-        self.LIGHT_ON_PRIMARY = ft.Colors.WHITE
-        self.LIGHT_ON_PRIMARY_CONTAINER = ft.Colors.AMBER_100
-        
-        self.LIGHT_SECONDARY = ft.Colors.TEAL_600
-        self.LIGHT_SECONDARY_CONTAINER = ft.Colors.TEAL_500
-        self.LIGHT_ON_SECONDARY = ft.Colors.WHITE
-        self.LIGHT_ON_SECONDARY_CONTAINER = ft.Colors.TEAL_100
-        
-        self.LIGHT_TERTIARY = ft.Colors.DEEP_PURPLE_600
-        self.LIGHT_TERTIARY_CONTAINER = ft.Colors.DEEP_PURPLE_500
-        self.LIGHT_ON_TERTIARY = ft.Colors.WHITE
-        self.LIGHT_ON_TERTIARY_CONTAINER = ft.Colors.DEEP_PURPLE_100
-        
-        # === ФОН И ПОВЕРХНОСТИ ===
-        self.LIGHT_SURFACE = ft.Colors.WHITE
-        self.LIGHT_ON_SURFACE = ft.Colors.GREY_900
-        self.LIGHT_SURFACE_TINT = ft.Colors.AMBER_600
-        self.LIGHT_BACKGROUND = ft.Colors.AMBER_50
-        self.LIGHT_ON_BACKGROUND = ft.Colors.GREY_900
-        
-        # === СТАТУСЫ ===
-        self.LIGHT_ERROR = ft.Colors.RED_600
-        self.LIGHT_ERROR_CONTAINER = ft.Colors.RED_500
-        self.LIGHT_ON_ERROR = ft.Colors.WHITE
-        self.LIGHT_ON_ERROR_CONTAINER = ft.Colors.RED_100
-        
-        self.LIGHT_WARNING = ft.Colors.ORANGE_600
-        self.LIGHT_ON_WARNING = ft.Colors.WHITE
-        
-        # === ГРАНИЦЫ ===
-        self.LIGHT_OUTLINE = ft.Colors.AMBER_200
-        self.LIGHT_OUTLINE_VARIANT = ft.Colors.AMBER_100
-
-        # Создание ColorScheme
+        # Создание ColorScheme (Light)
         self.light_color_scheme = ft.ColorScheme(
-            primary=                self.LIGHT_PRIMARY,
-            primary_container=      self.LIGHT_PRIMARY_CONTAINER,
-            on_primary=             self.LIGHT_ON_PRIMARY,
-            on_primary_container=   self.LIGHT_ON_PRIMARY_CONTAINER,
-            secondary=              self.LIGHT_SECONDARY,
-            secondary_container=    self.LIGHT_SECONDARY_CONTAINER,
-            on_secondary=           self.LIGHT_ON_SECONDARY,
-            on_secondary_container= self.LIGHT_ON_SECONDARY_CONTAINER,
-            tertiary=               self.LIGHT_TERTIARY,
-            tertiary_container=     self.LIGHT_TERTIARY_CONTAINER,
-            on_tertiary=            self.LIGHT_ON_TERTIARY,
-            on_tertiary_container=  self.LIGHT_ON_TERTIARY_CONTAINER,
-            error=                  self.LIGHT_ERROR,
-            error_container=        self.LIGHT_ERROR_CONTAINER,
-            on_error=               self.LIGHT_ON_ERROR,
-            on_error_container=     self.LIGHT_ON_ERROR_CONTAINER,
-            surface=                self.LIGHT_SURFACE,
-            on_surface=             self.LIGHT_ON_SURFACE,
-            surface_tint=           self.LIGHT_SURFACE_TINT,
-            outline=                self.LIGHT_OUTLINE,
-            outline_variant=        self.LIGHT_OUTLINE_VARIANT,
+            primary=                        self.LIGHT_PRIMARY,
+            on_primary=                     self.LIGHT_ON_PRIMARY,
+            primary_container=              self.LIGHT_PRIMARY_CONTAINER,
+            on_primary_container=           self.LIGHT_ON_PRIMARY_CONTAINER,
+            primary_fixed=                  self.LIGHT_PRIMARY_FIXED,
+            primary_fixed_dim=              self.LIGHT_PRIMARY_FIXED_DIM,
+            on_primary_fixed=               self.LIGHT_ON_PRIMARY_FIXED,
+            on_primary_fixed_variant=       self.LIGHT_ON_PRIMARY_FIXED_VARIANT,
+            secondary=                      self.LIGHT_SECONDARY,
+            on_secondary=                   self.LIGHT_ON_SECONDARY,
+            secondary_container=            self.LIGHT_SECONDARY_CONTAINER,
+            on_secondary_container=         self.LIGHT_ON_SECONDARY_CONTAINER,
+            secondary_fixed=                self.LIGHT_SECONDARY_FIXED,
+            secondary_fixed_dim=            self.LIGHT_SECONDARY_FIXED_DIM,
+            on_secondary_fixed=             self.LIGHT_ON_SECONDARY_FIXED,
+            on_secondary_fixed_variant=     self.LIGHT_ON_SECONDARY_FIXED_VARIANT,
+            tertiary=                       self.LIGHT_TERTIARY,
+            on_tertiary=                    self.LIGHT_ON_TERTIARY,
+            tertiary_container=             self.LIGHT_TERTIARY_CONTAINER,
+            on_tertiary_container=          self.LIGHT_ON_TERTIARY_CONTAINER,
+            tertiary_fixed=                 self.LIGHT_TERTIARY_FIXED,
+            tertiary_fixed_dim=             self.LIGHT_TERTIARY_FIXED_DIM,
+            on_tertiary_fixed=              self.LIGHT_ON_TERTIARY_FIXED,
+            on_tertiary_fixed_variant=      self.LIGHT_ON_TERTIARY_FIXED_VARIANT,
+            error=                          self.LIGHT_ERROR,
+            on_error=                       self.LIGHT_ON_ERROR,
+            error_container=                self.LIGHT_ERROR_CONTAINER,
+            on_error_container=             self.LIGHT_ON_ERROR_CONTAINER,
+            surface=                        self.LIGHT_SURFACE,
+            on_surface=                     self.LIGHT_ON_SURFACE,
+            on_surface_variant=             self.LIGHT_ON_SURFACE_VARIANT,
+            surface_tint=                   self.LIGHT_SURFACE_TINT,
+            surface_dim=                    self.LIGHT_SURFACE_DIM,
+            surface_bright=                 self.LIGHT_SURFACE_BRIGHT,
+            surface_container_lowest=       self.LIGHT_SURFACE_CONTAINER_LOWEST,
+            surface_container_low=          self.LIGHT_SURFACE_CONTAINER_LOW,
+            surface_container=              self.LIGHT_SURFACE_CONTAINER,
+            surface_container_high=         self.LIGHT_SURFACE_CONTAINER_HIGH,
+            surface_container_highest=      self.LIGHT_SURFACE_CONTAINER_HIGHEST,
+            outline=                        self.LIGHT_OUTLINE,
+            outline_variant=                self.LIGHT_OUTLINE_VARIANT,
+            shadow=                         self.LIGHT_SHADOW,
+            scrim=                          self.LIGHT_SCRIM,
+            inverse_surface=                self.LIGHT_INVERSE_SURFACE,
+            on_inverse_surface=             self.LIGHT_ON_INVERSE_SURFACE,
+            inverse_primary=                self.LIGHT_INVERSE_PRIMARY,
         )

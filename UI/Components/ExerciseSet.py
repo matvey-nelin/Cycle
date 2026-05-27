@@ -1,3 +1,5 @@
+import asyncio
+
 import flet as ft
 import re
 
@@ -43,7 +45,7 @@ class ExerciseSet(ft.Container):
 
         self.title = title
         self.sets_list = sets_list
-        self._on_set_will_accept_ = self.sets_list._on_set_will_accept_
+        self._on_set_will_accept_ = self._on_set_accept_
         self._on_delete_exercise_ = lambda e: self.sets_list._on_delete_exercise_(self)
 
         self.data = index # Индентификатор сета в списке
@@ -58,17 +60,29 @@ class ExerciseSet(ft.Container):
 
         
         self.content_container = ft.Container(
-            # expand=True,
             padding=0,
             margin=0,
             height=40,
 
             bgcolor=ft.Colors.SURFACE_CONTAINER_HIGH,
-            border=ft.Border().all(
-                width=1,
-                color=ft.Colors.OUTLINE
+            border_radius=10,
+
+            shadow=ft.BoxShadow(
+                spread_radius=0,
+                blur_radius=6,
+                color=ft.Colors.SHADOW,
+                offset=ft.Offset(0, 2)
             ),
-            border_radius=10 
+
+            animate=ft.Animation(
+                duration=300,
+                curve=ft.AnimationCurve.EASE_IN_OUT
+            ),
+            
+            animate_scale=ft.Animation(
+                duration=400, 
+                curve=ft.AnimationCurve.EASE_OUT_BACK
+            )
         )
 
         self.opacity_content_container = ft.Container(
@@ -80,7 +94,7 @@ class ExerciseSet(ft.Container):
 
             border=ft.Border().all(
                 width=1,
-                color=ft.Colors.OUTLINE
+                color=ft.Colors.OUTLINE_VARIANT
             ),
             border_radius=10,
 
@@ -92,7 +106,7 @@ class ExerciseSet(ft.Container):
         # 1. Создаем красивую строку для перетаскивания
         self.feedback_row = ft.Row(
             expand=True,
-            spacing=15,  # Больше воздуха между элементами
+            spacing=10,  # Больше воздуха между элементами
             controls=[
                 # Иконка ручки
                 ft.Icon(
@@ -106,19 +120,7 @@ class ExerciseSet(ft.Container):
                     self.title,
                     size=15,
                     weight=ft.FontWeight.W_600,
-                ),
-                
-                # Количество подходов (в плашке)
-                ft.Container(
-                    content=ft.Text(
-                        f"{sets_count} {self.labels["set_count"]}",
-                        size=13,
-                        weight=ft.FontWeight.W_500,
-                    ),
-                    padding=ft.Padding.symmetric(horizontal=8, vertical=4),
-                    bgcolor=ft.Colors.PRIMARY_CONTAINER,
-                    border_radius=6,
-                ),
+                )
             ],
             alignment=ft.MainAxisAlignment.START,
             vertical_alignment=ft.CrossAxisAlignment.CENTER
@@ -135,9 +137,9 @@ class ExerciseSet(ft.Container):
             
             # Тень для эффекта «парения»
             shadow=ft.BoxShadow(
-                spread_radius=1,
+                spread_radius=0,
                 blur_radius=8,
-                color=ft.Colors.BLACK38,
+                color=ft.Colors.SHADOW,
                 offset=ft.Offset(0, 2),
             ),
             
@@ -163,11 +165,11 @@ class ExerciseSet(ft.Container):
             ),
 
             content_feedback=self.feedback_container,
-             # Заглушка на старом месте
+            # Заглушка на старом месте
             content_when_dragging=ft.Container(
                 height=40,
-                bgcolor=self.colors.LIGHT_SURFACE_TINT if self.colors.theme == "light" else self.colors.DARK_SURFACE_TINT,
-                border=ft.Border.all(2, self.colors.LIGHT_PRIMARY if self.colors.theme == "light" else self.colors.DARK_PRIMARY),
+                bgcolor=ft.Colors.SURFACE_TINT,
+                border=ft.Border.all(2, ft.Colors.PRIMARY),
                 border_radius=10,
                 opacity=0.5,
             ),
@@ -183,6 +185,7 @@ class ExerciseSet(ft.Container):
             value=self.chosen_dropdown_exercise,
             text_style=ft.TextStyle(
                 size=10,
+                weight=ft.FontWeight.BOLD,
                 color=ft.Colors.ON_SURFACE
             ),
             options=self.dropdown_exercises_options,
@@ -191,6 +194,7 @@ class ExerciseSet(ft.Container):
 
             text_align=ft.TextAlign.START,
             border=ft.InputBorder.NONE,
+            focused_border_color=ft.Colors.PRIMARY,
             color=ft.Colors.ON_SURFACE,
 
             on_select=self.exercise_dropdown_on_select
@@ -205,7 +209,7 @@ class ExerciseSet(ft.Container):
 
             helper=self.labels["set_count"],
             helper_style=ft.TextStyle(
-                size=10,
+                size=8,
                 color=ft.Colors.ON_SURFACE
             ),
 
@@ -216,9 +220,10 @@ class ExerciseSet(ft.Container):
             ),
             text_align=ft.TextAlign.CENTER,
             
+            
             border=ft.InputBorder.NONE,
-            border_color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE,
-            focused_border_color=self.colors.LIGHT_PRIMARY if self.colors.theme == "light" else self.colors.DARK_PRIMARY,
+            border_color=ft.Colors.OUTLINE,
+            focused_border_color=ft.Colors.PRIMARY,
             
             max_lines=1,
             keyboard_type=ft.KeyboardType.NUMBER,
@@ -233,7 +238,7 @@ class ExerciseSet(ft.Container):
             hint_text=str(planned_reps) if planned_reps is not None else None,
             helper=self.labels["set_repetitions"],
             helper_style=ft.TextStyle(
-                size=10,
+                size=8,
                 color=ft.Colors.ON_SURFACE
             ),
 
@@ -245,8 +250,8 @@ class ExerciseSet(ft.Container):
             text_align=ft.TextAlign.CENTER,
             
             border=ft.InputBorder.NONE,
-            border_color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE,
-            focused_border_color=self.colors.LIGHT_PRIMARY if self.colors.theme == "light" else self.colors.DARK_PRIMARY,
+            border_color=ft.Colors.OUTLINE,
+            focused_border_color=ft.Colors.PRIMARY,
             
             max_lines=1,
             keyboard_type=ft.KeyboardType.NUMBER, 
@@ -263,20 +268,20 @@ class ExerciseSet(ft.Container):
             hint_text=str(planned_weight) if planned_weight is not None else None,
             helper=self.labels["set_weight"],
             helper_style=ft.TextStyle(
-                size=10,
+                size=8,
                 color=ft.Colors.ON_SURFACE
             ),
 
             value=str("0" if (str(weight) == "0.0") else weight), 
-            text_style=ft.TextStyle(
+            text_style=ft.TextStyle( 
                 size=12,
                 color=ft.Colors.ON_SURFACE
             ),
             text_align=ft.TextAlign.CENTER,
             
             border=ft.InputBorder.NONE,
-            border_color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE,
-            focused_border_color=self.colors.LIGHT_PRIMARY if self.colors.theme == "light" else self.colors.DARK_PRIMARY,
+            border_color=ft.Colors.OUTLINE,
+            focused_border_color=ft.Colors.PRIMARY,
             
             max_lines=1,
             keyboard_type=ft.KeyboardType.NUMBER,
@@ -308,14 +313,14 @@ class ExerciseSet(ft.Container):
             self.content_container.content = ft.Row(
                 expand=True,
                 margin=ft.Margin.only(left=10, right=10),
-                spacing=0,
+                spacing=12,
                 controls=
                 [
                     self.handle_icon_button,
                     self.exercise_dropdown,
-                    ft.VerticalDivider(1), 
+                    # ft.VerticalDivider(1), 
                     self.count_text_field,
-                    ft.VerticalDivider(1), 
+                    # ft.VerticalDivider(1), 
                     self.delete_button
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -328,16 +333,16 @@ class ExerciseSet(ft.Container):
             self.content_container.content = ft.Row(
                 expand=True,
                 margin=ft.Margin.only(left=10, right=10),
-                spacing=0,
+                spacing=10,
                 controls=
                 [
                     self.handle_icon_button,
                     self.exercise_dropdown,
-                    ft.VerticalDivider(1), 
+                    # ft.VerticalDivider(1), 
                     self.reps_text_field,
-                    ft.VerticalDivider(1), 
+                    # ft.VerticalDivider(1), 
                     self.weight_text_field,
-                    ft.VerticalDivider(1), 
+                    # ft.VerticalDivider(1), 
                     self.delete_button
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -351,14 +356,18 @@ class ExerciseSet(ft.Container):
 
 
     def _init_dropzones_(self):
-        self.dropzone_before = DropZone(self, self.data, height=10)
+        self.dropzone_before = DropZone(self, self.data, height=15)
         self.dropzone_after  = DropZone(self, self.data + 1)
             
         set_controls = [self.content_container, self.dropzone_after]
+
         if self.data == 0:
-            set_controls.insert(0, self.dropzone_before)
+            set_controls = [self.dropzone_before, *set_controls]
+        elif self.data == len(self.sets_list.excercises_list) - 1:
+            set_controls = [self.content_container, DropZone(self, self.data + 1, height=15)]
 
         self.content = ft.Column(
+            spacing=0,
             controls=set_controls
         )
         
@@ -367,20 +376,12 @@ class ExerciseSet(ft.Container):
     def exercise_dropdown_on_select(self, e):
         for exercise in self.all_exercises:
             exercise_id     = str(exercise[0])
-            exercise_title  = str(self.translator.exercises[exercise[1]])
+            exercise_title  = str(self.translator.exercises.get(exercise[1], exercise[2]))
 
             if exercise_id == e.data:
                 self.chosen_dropdown_exercise = exercise_id
                 self.title = exercise_title
-
-                # self.dropdown_exercises_options.append(
-                #     ft.DropdownOption(
-                #         key=exercise_id,
-                #         text=exercise_title
-                #     )
-                # )
-
-                break
+                return
 
 
     def __init_dropdown_options__(self, id_workout_type: int):
@@ -395,26 +396,26 @@ class ExerciseSet(ft.Container):
         list_exercises = list_exercises if list_exercises != [] else self.all_exercises
         
         for exercise in list_exercises:
-            try:
-                exercise_id     = str(exercise[0])
-                exercise_title  = str(self.translator.exercises[exercise[1]])
+            exercise_id     = str(exercise[0])
+            exercise_title  = str(self.translator.exercises.get(exercise[1], exercise[2]))
 
-                if exercise_title == self.title:
-                    self.chosen_dropdown_exercise = exercise_id
+            if exercise_title == self.title:
+                self.chosen_dropdown_exercise = exercise_id
 
 
-                agonists_tooltip = self.screen.database.get_agonists(int(exercise_id))
-                if isinstance(agonists_tooltip, Exception):
-                    raise ValueError("Invalid data of agonists")
-                agonists_tooltip = [self.translator.agonists[agonist[1]] for agonist in agonists_tooltip]
-                agonists_tooltip = ", ".join(agonists_tooltip)
-                
-                
-                dropdown_exercises_options.append(
-                    ft.DropdownOption(
-                        key=exercise_id,
-                        text=exercise_title,
-                        
+            agonists_tooltip = self.screen.database.get_agonists(int(exercise_id))
+            if isinstance(agonists_tooltip, Exception):
+                raise ValueError("Invalid data of agonists")
+            agonists_tooltip = [self.translator.agonists[agonist[1]] for agonist in agonists_tooltip]
+            agonists_tooltip = ", ".join(agonists_tooltip)
+            
+            
+            dropdown_exercises_options.append(
+                ft.DropdownOption(
+                    key=exercise_id,
+                    text=exercise_title,
+                    
+                    content=ft.Container(
                         content=ft.Text(
                             expand=True,
 
@@ -429,14 +430,15 @@ class ExerciseSet(ft.Container):
                             color=ft.Colors.ON_SURFACE,
                         ),
 
-                        tooltip=ft.Tooltip(message=agonists_tooltip)
-                    )
-                ) 
+                        # bgcolor=ft.Colors.with_opacity(opacity=0.5, color=ft.Colors.SECONDARY_CONTAINER),
+                        # blur=(0, 10)
+                    ),
 
-            except KeyError:
-                continue
+                    tooltip=ft.Tooltip(message=agonists_tooltip)
+                )
+            ) 
 
-        dropdown_exercises_options = sorted(dropdown_exercises_options, key=lambda x: x.content.value)
+        dropdown_exercises_options = sorted(dropdown_exercises_options, key=lambda x: x.content.content.value)
        
         
         if self.chosen_dropdown_exercise == "":
@@ -445,7 +447,7 @@ class ExerciseSet(ft.Container):
             
             for exercise in self.all_exercises:
                 exercise_id     = str(exercise[0])
-                exercise_title  = str(self.translator.exercises[exercise[1]])
+                exercise_title  = self.translator.exercises.get(exercise[1], exercise[2])
 
                 if exercise_title == self.title:
                     self.chosen_dropdown_exercise = exercise_id
@@ -454,7 +456,28 @@ class ExerciseSet(ft.Container):
                         0,
                         ft.DropdownOption(
                             key=exercise_id,
-                            text=exercise_title
+                            text=exercise_title,
+                            
+                            content=ft.Container(
+                                content=ft.Text(
+                                    expand=True,
+
+                                    value=exercise_title,
+                                    size=12,
+                                    width=None,
+                                    
+                                    no_wrap=False,
+                                    max_lines=3,
+                                    overflow=ft.TextOverflow.ELLIPSIS,
+
+                                    color=ft.Colors.ON_SURFACE,
+                                ),
+
+                                # bgcolor=ft.Colors.with_opacity(opacity=0.5, color=ft.Colors.SECONDARY_CONTAINER),
+                                # blur=(0, 10)
+                            ),
+
+                            tooltip=ft.Tooltip(message=agonists_tooltip)
                         )
                     )
 
@@ -500,3 +523,26 @@ class ExerciseSet(ft.Container):
     def change_composition_status(self):
         if hasattr(self.screen, "composition_changed"):
             self.screen.composition_changed = True # pyright: ignore[reportAttributeAccessIssue]
+
+
+
+
+
+    def _on_set_accept_(self, e):
+        self.sets_list._on_set_will_accept_(e)
+
+        
+    async def reset(self):
+        self.content_container.bgcolor  = ft.Colors.PRIMARY_CONTAINER
+        self.content_container.update()
+
+        await asyncio.sleep(0.1)
+
+        self.content_container.scale    = 1.005
+        self.content_container.update()
+
+        await asyncio.sleep(0.5)
+        
+        self.content_container.scale    = 1.0
+        self.content_container.bgcolor  = ft.Colors.SURFACE_CONTAINER_HIGH
+        self.content_container.update()

@@ -37,11 +37,9 @@ class SetsList(ft.Container):
         self.expand=6
         self.margin=ft.Margin.only(left=5, right=5)
 
-        self.border=ft.Border().all(
-            width=3,
-            color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
-        )
-        self.border_radius=4
+        self.bgcolor = ft.Colors.SURFACE_CONTAINER_LOW
+
+        self.border_radius=10
 
 
         
@@ -52,7 +50,7 @@ class SetsList(ft.Container):
             content=ft.IconButton(
                 icon=ft.Icons.ADD_ROUNDED,
                 icon_size=25,
-                icon_color=self.colors.LIGHT_ON_TERTIARY if self.colors.theme == "light" else self.colors.DARK_ON_TERTIARY,
+                icon_color=ft.Colors.ON_TERTIARY,
 
                 on_click=self._add_exercise_set_button_on_click_,
                 on_hover=self._add_exercise_set_button_on_hover_
@@ -67,7 +65,7 @@ class SetsList(ft.Container):
             spacing=0, # Т.к. между элементами прослойка dropzone
             controls=[*self.sets, self.add_exercise_set_button],
             scroll=ft.ScrollMode.AUTO,
-            alignment=ft.MainAxisAlignment.START 
+            alignment=ft.MainAxisAlignment.START
         )
 
 
@@ -252,18 +250,23 @@ class SetsList(ft.Container):
             if source_idx == target_idx:
                 return
             
-            if (target_idx == len(self.sets)) and (target_idx - source_idx == 1):
+            if (source_idx < target_idx) and (abs(target_idx - source_idx) <= 1):
                 return
 
-            # МЕНЯЕМ порядок в данных ПРЯМО СЕЙЧАС
+
             item = self.sets.pop(source_idx)
-            self.sets.insert(target_idx, item)
+            self.sets.insert(
+                target_idx if source_idx > target_idx else (target_idx - 1), 
+                item    
+            )
 
             # Обновляем индексы и перерисовываем список
             for index_set in range(len(self.sets)):
                 self.sets[index_set].data = index_set
                 self.sets[index_set].handle_icon_button.data = index_set
                 self.sets[index_set]._init_dropzones_()
+
+                self.screen.page.run_task(item.reset)
 
             
             self.sets_list.controls = [*self.sets, self.add_exercise_set_button]

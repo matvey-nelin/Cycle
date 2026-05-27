@@ -31,7 +31,7 @@ class MobileLayout(BaseLayout):
                 ft.IconButton(
                     icon=config["icon"],
                     selected_icon=config["selected_icon"],
-                    selected_icon_color=self.colors.LIGHT_TERTIARY_CONTAINER if self.colors.theme == 'light' else self.colors.DARK_TERTIARY_CONTAINER,
+                    selected_icon_color=ft.Colors.TERTIARY_CONTAINER,
                     selected=(config["idx"] == 0),
                     data=config["idx"],
                     on_click=self._bottom_bar_click_
@@ -43,7 +43,8 @@ class MobileLayout(BaseLayout):
             content=ft.Row(
                 controls=self.destinations,
                 alignment=ft.MainAxisAlignment.SPACE_AROUND,
-            )
+            ),
+            bgcolor=None
         )
 
         self.layout_container.content = ft.Column(

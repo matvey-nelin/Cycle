@@ -32,7 +32,7 @@ class WorkoutTemplateMenu(BaseView):
 
         self.main_container.content = ft.Text(
             self.labels["loading"], 
-            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+            color=ft.Colors.ON_SURFACE
         )
 
 
@@ -174,7 +174,7 @@ class WorkoutTemplateMenu(BaseView):
                     [
                         ft.Text(
                             self.labels["no_data"], 
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND,
+                            color=ft.Colors.ON_SURFACE,
                             align=ft.Alignment.CENTER
                         ),
                         self.actions_menu

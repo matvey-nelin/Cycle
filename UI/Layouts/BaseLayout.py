@@ -22,11 +22,31 @@ class BaseLayout():
         self.destination_labels  = list(self.translator.navigation_menu_labels.keys())
         self.config_destinations = \
         [
-            {"icon": ft.Icon(ft.Icons.FITNESS_CENTER_ROUNDED, size=25),           "selected_icon": ft.Icon(ft.Icons.FITNESS_CENTER_ROUNDED, size=25),   "idx": 0},
-            {"icon": ft.Icon(ft.Icons.CALENDAR_MONTH_OUTLINED, size=25),          "selected_icon": ft.Icon(ft.Icons.CALENDAR_MONTH, size=25),           "idx": 1},
-            {"icon": ft.Icon(ft.Icons.INSERT_CHART_OUTLINED_ROUNDED, size=25),    "selected_icon": ft.Icon(ft.Icons.INSERT_CHART_ROUNDED, size=25),     "idx": 2},
-            {"icon": ft.Icon(ft.Icons.MY_LIBRARY_BOOKS_OUTLINED, size=25),        "selected_icon": ft.Icon(ft.Icons.MY_LIBRARY_BOOKS_ROUNDED, size=25), "idx": 3},
-            {"icon": ft.Icon(ft.Icons.SETTINGS_OUTLINED, size=25),                "selected_icon": ft.Icon(ft.Icons.SETTINGS, size=25),                 "idx": 4}
+            {
+                "icon":             ft.Icon(ft.Icons.FITNESS_CENTER_ROUNDED, color=ft.Colors.ON_SURFACE_VARIANT, size=25),           
+                "selected_icon":    ft.Icon(ft.Icons.FITNESS_CENTER_ROUNDED, color=ft.Colors.ON_PRIMARY_CONTAINER, size=25),   
+                "idx": 0
+            },
+            {
+                "icon": ft.Icon(ft.Icons.CALENDAR_MONTH_OUTLINED, color=ft.Colors.ON_SURFACE_VARIANT, size=25),          
+                "selected_icon": ft.Icon(ft.Icons.CALENDAR_MONTH, color=ft.Colors.ON_PRIMARY_CONTAINER, size=25),           
+                "idx": 1
+            },
+            {
+                "icon": ft.Icon(ft.Icons.INSERT_CHART_OUTLINED_ROUNDED, color=ft.Colors.ON_SURFACE_VARIANT, size=25),    
+                "selected_icon": ft.Icon(ft.Icons.INSERT_CHART_ROUNDED, color=ft.Colors.ON_PRIMARY_CONTAINER, size=25),     
+                "idx": 2
+            },
+            {
+                "icon": ft.Icon(ft.Icons.MY_LIBRARY_BOOKS_OUTLINED, color=ft.Colors.ON_SURFACE_VARIANT, size=25),        
+                "selected_icon": ft.Icon(ft.Icons.MY_LIBRARY_BOOKS_ROUNDED, color=ft.Colors.ON_PRIMARY_CONTAINER, size=25), 
+                "idx": 3
+            },
+            {
+                "icon": ft.Icon(ft.Icons.SETTINGS_OUTLINED, color=ft.Colors.ON_SURFACE_VARIANT, size=25),                
+                "selected_icon": ft.Icon(ft.Icons.SETTINGS, color=ft.Colors.ON_PRIMARY_CONTAINER, size=25),                 
+                "idx": 4
+            }
         ]
 
         self.destinations = []

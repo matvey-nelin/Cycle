@@ -17,6 +17,8 @@ class TrainingProcess:
 
         self.labels = self.translator.training_process_labels
 
+        self.WORKOUT_CARD_WIDTH = 275
+
 
     def create_microcycle_from_template(self, id_microcycle_template: int, id_mesocycle: int):
         # Проверка id на наличие такового в БД
@@ -58,7 +60,7 @@ class TrainingProcess:
     def _create_workout_card_(self, screen: BaseView, id_workout: int, planned_info: bool, on_card_click, delete_from_list_function):
         exercises = self.database.get_workout_exercises(id_workout, planned_info) 
 
-        def create_row(exercise_title: str, planned_repetitions: int | str, planned_weight: float | str):
+        def create_row(exercise_title: str, planned_repetitions: int | str, planned_weight: float | str, headers: bool = False):
             return ft.Row(
                 expand=True,
                 spacing=5,
@@ -66,11 +68,12 @@ class TrainingProcess:
                 controls=
                 [
                     ft.Text(
-                        expand=True,
+                        expand=4,
                         value=str(exercise_title),
-                        size=12,
                         max_lines=3,
-                        color=ft.Colors.ON_SURFACE
+                        size=12                     if not headers else 11,
+                        weight=ft.FontWeight.NORMAL,
+                        color=ft.Colors.ON_SURFACE  if not headers else (ft.Colors.with_opacity(opacity=0.5, color=ft.Colors.ON_SURFACE_VARIANT))
                     ),
                     ft.Row(
                         expand=False,
@@ -78,14 +81,20 @@ class TrainingProcess:
                         controls=
                         [
                             ft.Text(
+                                expand=1,
                                 value=str(planned_repetitions),
-                                size=12,
-                                color=ft.Colors.ON_SURFACE
+                                text_align=ft.TextAlign.RIGHT,
+                                size=12                     if not headers else 11,
+                                weight=ft.FontWeight.BOLD   if not headers else ft.FontWeight.NORMAL,
+                                color=ft.Colors.ON_SURFACE  if not headers else (ft.Colors.with_opacity(opacity=0.5, color=ft.Colors.ON_SURFACE_VARIANT))
                             ),
                             ft.Text(
+                                expand=1,
                                 value=str(planned_weight),
-                                size=12,
-                                color=ft.Colors.ON_SURFACE
+                                text_align=ft.TextAlign.RIGHT,
+                                size=12                     if not headers else 11,
+                                weight=ft.FontWeight.BOLD   if not headers else ft.FontWeight.NORMAL,
+                                color=ft.Colors.ON_SURFACE  if not headers else (ft.Colors.with_opacity(opacity=0.5, color=ft.Colors.ON_SURFACE_VARIANT))
                             )
                         ],
                         alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -111,99 +120,126 @@ class TrainingProcess:
             end_date_workout    = datetime.datetime.fromtimestamp(end_time_workout).date().strftime("%d.%m.%Y")     if end_time_workout != 0 else ""
             end_time_workout    = datetime.datetime.fromtimestamp(end_time_workout).time().strftime("%H:%M")        if end_time_workout != 0 else ""
 
-            card_info.append(
-                ft.Row(
-                    controls=[
-                        ft.Column(
-                            spacing=1, 
-                            controls=
-                            [
-                                ft.Text(
-                                    start_date_workout,
-                                    size=14,
-                                    color=ft.Colors.ON_SURFACE
-                                ),
-                                ft.Text(
-                                    start_time_workout,
-                                    size=14,
-                                    color=ft.Colors.ON_SURFACE
-                                ),
-                            ],
-                            alignment=ft.MainAxisAlignment.CENTER,
-                            horizontal_alignment=ft.CrossAxisAlignment.CENTER
-                        ), 
-                        ft.Text(
-                            " - ",
-                            size=14,
-                            color=ft.Colors.ON_SURFACE
-                        ),
-                        ft.Column(
-                            spacing=1,
-                            controls=
-                            [
-                                ft.Text(
-                                    end_date_workout,
-                                    size=14,
-                                    color=ft.Colors.ON_SURFACE
-                                ),
-                                ft.Text(
-                                    end_time_workout,
-                                    size=14,
-                                    color=ft.Colors.ON_SURFACE
-                                ),
-                            ],
-                            alignment=ft.MainAxisAlignment.CENTER,
-                            horizontal_alignment=ft.CrossAxisAlignment.CENTER
-                        )
-                    ],
-                    alignment=ft.MainAxisAlignment.SPACE_EVENLY,
-                    vertical_alignment=ft.CrossAxisAlignment.CENTER
-                )
-            )   
+            date_header = ft.Row(
+                controls=[
+                    ft.Column(
+                        spacing=1, 
+                        controls=
+                        [
+                            ft.Text(
+                                start_date_workout,
+                                size=12,
+                                weight=ft.FontWeight.BOLD,
+                                color=ft.Colors.ON_SURFACE
+                            ),
+                            ft.Text(
+                                start_time_workout,
+                                size=12,
+                                weight=ft.FontWeight.BOLD,
+                                color=ft.Colors.ON_SURFACE
+                            ),
+                        ],
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        horizontal_alignment=ft.CrossAxisAlignment.CENTER
+                    ), 
+                    ft.Text(
+                        " - ",
+                        size=12,
+                        weight=ft.FontWeight.BOLD,
+                        color=ft.Colors.ON_SURFACE
+                    ),
+                    ft.Column(
+                        spacing=1,
+                        controls=
+                        [
+                            ft.Text(
+                                end_date_workout,
+                                size=12,
+                                weight=ft.FontWeight.BOLD,
+                                color=ft.Colors.ON_SURFACE
+                            ),
+                            ft.Text(
+                                end_time_workout,
+                                size=12,
+                                weight=ft.FontWeight.BOLD,
+                                color=ft.Colors.ON_SURFACE
+                            ),
+                        ],
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        horizontal_alignment=ft.CrossAxisAlignment.CENTER
+                    )
+                ],
+                alignment=ft.MainAxisAlignment.SPACE_EVENLY,
+                vertical_alignment=ft.CrossAxisAlignment.CENTER
+            )
+               
         else:
             start_time_workout  = workout_ranges[2]
             start_time_workout  = datetime.datetime.fromtimestamp(start_time_workout).date().strftime("%d.%m.%Y")\
                                 if (start_time_workout != 0)   else ""
             
-            card_info.append(
-                ft.Row(
-                    controls=[
-                        ft.Text(
-                            start_time_workout,
-                            size=12,
-                            color=ft.Colors.ON_SURFACE
-                        )
-                    ],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                    vertical_alignment=ft.CrossAxisAlignment.CENTER
-                )
-            )
-
-        title_workout_status = self.translator.workout_statuses[self.database.get_workout_statuses(id_workout=id_workout)[0][1]]
-        card_info.append(
-            ft.Row(
-                margin=ft.Margin.only(bottom=10),
-                controls=
-                [
+            date_header = ft.Row(
+                controls=[
                     ft.Text(
-                        value=title_workout_status,
-                        size=14,
+                        start_time_workout,
+                        size=12,
+                        weight=ft.FontWeight.BOLD,
                         color=ft.Colors.ON_SURFACE
                     )
                 ],
                 alignment=ft.MainAxisAlignment.CENTER,
                 vertical_alignment=ft.CrossAxisAlignment.CENTER
             )
+        
+        workout_status_slug  = self.database.get_workout_statuses(id_workout=id_workout)[0][1]
+        workout_status_title = self.translator.workout_statuses[workout_status_slug]
+
+        if workout_status_slug in ["completed", "overcompleted", "partially_completed", "in_progress"]:
+            text_color          = ft.Colors.TERTIARY
+            bgcolor_container   = ft.Colors.ON_TERTIARY
+        elif workout_status_slug == "scheduled":
+            text_color          = ft.Colors.SECONDARY
+            bgcolor_container   = ft.Colors.ON_SECONDARY 
+        else:
+            text_color          = ft.Colors.ERROR
+            bgcolor_container   = ft.Colors.ON_ERROR
+
+        workout_status_container = ft.Container(
+            padding=ft.Padding.only(left=6, top=2, right=6, bottom=2),
+            content=ft.Row(
+                controls=
+                [
+                    ft.Text(
+                        value=workout_status_title,
+                        size=14,
+                        weight=ft.FontWeight.BOLD,
+                        color=text_color
+                    )
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+                vertical_alignment=ft.CrossAxisAlignment.CENTER
+            ),
+
+            bgcolor=bgcolor_container,
+            border_radius=8,
+
+            alignment=ft.Alignment.CENTER
         )
+
         card_info.append(
-            ft.Divider(
-                height=1,
-                color=ft.Colors.OUTLINE_VARIANT
+            ft.Row(
+                controls=
+                [
+                    date_header,
+                    workout_status_container
+                ],
+                alignment=ft.MainAxisAlignment.SPACE_EVENLY,
+                vertical_alignment=ft.CrossAxisAlignment.CENTER
             )
         )
 
         card_info.append(
-            create_row(self.labels["exercise_title"], self.labels["exercise_repetitions"], self.labels["exercise_weight"])
+            create_row(self.labels["exercise_title"], self.labels["exercise_repetitions"], self.labels["exercise_weight"], headers=True)
         )
         
 
@@ -222,16 +258,10 @@ class TrainingProcess:
             screen=         screen,
             id=             id_workout,
             data=           card_info,
-            width=          250,
+            width=          self.WORKOUT_CARD_WIDTH,
             height=         None,
             on_card_click=  on_card_click,
             delete_from_list_function=delete_from_list_function 
         )
-        workout_card.border = ft.Border().all(
-            width=2,
-            color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
-        )
-        workout_card.border_radius = 5
-        workout_card.padding = 0
 
         return workout_card

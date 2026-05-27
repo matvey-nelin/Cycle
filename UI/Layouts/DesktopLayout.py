@@ -35,8 +35,8 @@ class DesktopLayout(BaseLayout):
             on_change=self.handle_navigation, 
             expand=False,
             height=float("inf"),
-            indicator_color=self.colors.LIGHT_TERTIARY_CONTAINER if self.colors.theme == 'light' else self.colors.DARK_TERTIARY_CONTAINER,
-            bgcolor=ft.Colors.SURFACE_BRIGHT
+            indicator_color=ft.Colors.PRIMARY_CONTAINER,
+            bgcolor=None
         )
 
         self.layout_container.content = ft.Row(

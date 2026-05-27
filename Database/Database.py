@@ -202,7 +202,7 @@ class Database:
         """
 
         request = """
-            SELECT DISTINCT id_exercise, slug
+            SELECT DISTINCT id_exercise, slug, title
             FROM exercises
 
             ORDER BY id_exercise ASC
@@ -210,7 +210,7 @@ class Database:
 
         if id_workout_type is not None:
             request = f"""
-                SELECT DISTINCT ex.id_exercise, ex.slug
+                SELECT DISTINCT ex.id_exercise, ex.slug, ex.title
 
                 FROM exercises AS ex
                 JOIN agonist_exercises AS ae ON ae.id_exercise = ex.id_exercise
@@ -223,7 +223,7 @@ class Database:
             """
         elif id_exercise is not None:
             request = f"""
-                SELECT DISTINCT id_exercise, slug
+                SELECT DISTINCT id_exercise, slug, title
                 FROM exercises
 
                 WHERE id_exercise = {id_exercise}

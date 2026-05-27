@@ -262,7 +262,7 @@ class RecordsList(ft.ListView):
 
 						border=ft.Border.all(
 							width=1,
-							color=self.colors.LIGHT_OUTLINE if self.colors.theme == 'light' else self.colors.DARK_OUTLINE
+							color=ft.Colors.OUTLINE
 						),
 						border_radius=5,
 
@@ -297,7 +297,7 @@ class RecordsList(ft.ListView):
 			value=self.labels["no_data"],
 			size=18, 
 			text_align=ft.TextAlign.CENTER,
-			color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+			color=ft.Colors.ON_SURFACE
 		)
 	
 

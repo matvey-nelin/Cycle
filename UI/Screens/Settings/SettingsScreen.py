@@ -49,12 +49,12 @@ class SettingsScreen(BaseView):
                         ft.Text(
                             value="Cycle",
                             size=16,
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         ),
                         ft.Text(
                             value="by Matvey Nelin",
                             size=12,
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         )
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
@@ -75,7 +75,7 @@ class SettingsScreen(BaseView):
             helper_text=self.labels["language"],
             text_style=ft.TextStyle(
                 size=16, 
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                color=ft.Colors.ON_SURFACE
             ),
 
             value=self.settings.language,
@@ -133,7 +133,7 @@ class SettingsScreen(BaseView):
                         expand=True,
                         value=self.labels["trainer_mode_switch"],
                         size=16,
-                        color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND,
+                        color=ft.Colors.ON_SURFACE,
                         no_wrap=False,
                         max_lines=3,
                     ),

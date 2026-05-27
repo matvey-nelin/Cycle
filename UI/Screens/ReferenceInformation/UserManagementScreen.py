@@ -50,7 +50,7 @@ class UserManagementScreen(BaseView):
                 value=self.username, 
                 text_style=ft.TextStyle(
                     size=14,
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                    color=ft.Colors.ON_SURFACE
                 ),
                 border=ft.InputBorder.UNDERLINE,
                 border_color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE,
@@ -79,7 +79,7 @@ class UserManagementScreen(BaseView):
                 value=self.phone,  
                 text_style=ft.TextStyle(
                     size=14,
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                    color=ft.Colors.ON_SURFACE
                 ),
                 
                 border=ft.InputBorder.UNDERLINE,
@@ -109,7 +109,7 @@ class UserManagementScreen(BaseView):
             text_align=ft.TextAlign.CENTER,
             text_size=14,
             border=ft.InputBorder.OUTLINE,
-            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND,
+            color=ft.Colors.ON_SURFACE,
 
             on_select=on_status_dropdown_change
         )

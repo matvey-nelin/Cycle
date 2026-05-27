@@ -33,7 +33,7 @@ class WorkoutTemplateScreen(BaseView):
                 raise result
             
             self.slug = str(result[0][0])
-            self.title = self.translator.workout_templates[str(result[0][0])]
+            self.title = self.translator.workout_templates.get(str(result[0][0]), str(result[0][0]))
             self.chosen_workout_type_title = self.translator.workout_types[str(result[0][1])]
             self.chosen_hypertrophy_type_title = self.translator.hypertrophy_types[str(result[0][2])]
 
@@ -50,7 +50,7 @@ class WorkoutTemplateScreen(BaseView):
                 value=self.title, 
                 text_style=ft.TextStyle(
                     size=16,
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                    color=ft.Colors.ON_SURFACE
                 ),
                 border=ft.InputBorder.UNDERLINE,
                 border_color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE,
@@ -291,7 +291,7 @@ class WorkoutTemplateScreen(BaseView):
             text_align=ft.TextAlign.START,
             text_size=12,
             border=ft.InputBorder.OUTLINE,
-            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND,
+            color=ft.Colors.ON_SURFACE,
 
             on_select=on_workout_dropdown_select
         )
@@ -337,7 +337,7 @@ class WorkoutTemplateScreen(BaseView):
             text_align=ft.TextAlign.START,
             text_size=12,
             border=ft.InputBorder.OUTLINE,
-            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND,
+            color=ft.Colors.ON_SURFACE,
 
             on_select=on_hypertrophy_dropdown_select
         )

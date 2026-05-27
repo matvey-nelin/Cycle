@@ -11,6 +11,7 @@ class NavigationOption(ft.Container):
         self.colors = colors
 
         self.on_click = self.open_screen
+        self.on_hover = self.navigation_option_on_hover
         self.navigate = navigation_callback
         self.navigation_screen_name = navigation_screen_name
 
@@ -24,6 +25,13 @@ class NavigationOption(ft.Container):
         self.padding = 15
 
         self.alignment = ft.Alignment.CENTER
+
+        
+        self.animate = ft.Animation(
+            duration=200,
+            curve=ft.AnimationCurve.EASE_IN_CIRC
+        )
+        
 
 
         self.text = ft.Text(
@@ -56,5 +64,4 @@ class NavigationOption(ft.Container):
         self.navigate(self.navigation_screen_name)
 
     def navigation_option_on_hover(self, e):
-        navigation_option_bgcolor = ft.Colors.OUTLINE_VARIANT
-        e.control.bgcolor = navigation_option_bgcolor if e.data else None
+        e.control.bgcolor = ft.Colors.OUTLINE_VARIANT if e.data else None

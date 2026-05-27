@@ -50,14 +50,14 @@ class WorkoutScreen(BaseView):
         workout_info = self.database.__select_request__(request)[0]
 
         workout_template_info   = self.database.get_workout_template_info(workout_info[0])[0]
-        self.workout_template_title  = self.translator.workout_templates[workout_template_info[0]]
+        self.workout_template_title  = self.translator.workout_templates.get(workout_template_info[0], workout_template_info[0]) 
 
-        self.workout_type_title     = self.translator.workout_types[workout_template_info[1]]
-        self.hypertrophy_type_title = self.translator.hypertrophy_types[workout_template_info[2]]
+        self.workout_type_title     = self.translator.workout_types.get(workout_template_info[1], workout_template_info[1])
+        self.hypertrophy_type_title = self.translator.hypertrophy_types.get(workout_template_info[2], workout_template_info[2])
 
         self.workout_status_id       = self.database.get_workout_statuses(status_slug=workout_info[1])[0][0]
         workout_status_slug     = workout_info[1]
-        self.workout_status_title    = self.translator.workout_statuses[workout_status_slug]
+        self.workout_status_title    = self.translator.workout_statuses.get(workout_status_slug, workout_status_slug) 
 
 
         time_ranges = self.database.get_all_workout_datetimes(self.id)[0]
@@ -88,7 +88,7 @@ class WorkoutScreen(BaseView):
         for status in self.database.get_workout_statuses():
             status_id    = status[0]
             status_slug  = status[1]
-            status_title = self.translator.workout_statuses[status_slug]
+            status_title = self.translator.workout_statuses.get(status_slug, status_slug)
 
             self.status_items.append(
                 ft.PopupMenuItem(

@@ -182,7 +182,6 @@ class MesocycleScreen(BaseView):
             width=1,
             color=ft.Colors.SECONDARY
         )
-        microcycle.padding = ft.Padding.symmetric(vertical=0, horizontal=3)
         microcycle.templates.spacing = 10
         microcycle.templates.controls.append(self.is_unloading_checkbox)
 
@@ -199,7 +198,12 @@ class MesocycleScreen(BaseView):
                 on_card_click=              lambda id=self.id: self.open_workout_screen(id),
                 delete_from_list_function=  lambda e: self.remove_workout(e)
             )
-            workout_card.margin = 0
+            
+            if len(workouts_list) == 0:
+                workout_card.margin = ft.Margin.only(left=5, top=10, right=5, bottom=0)
+            elif len(workouts_list) == (len(workouts) - 1):
+                workout_card.margin = ft.Margin.only(left=5, top=0, right=5, bottom=10)
+
             workouts_list.append(workout_card)
 
         microcycle.templates.controls = [*microcycle.templates.controls, *workouts_list]

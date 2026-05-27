@@ -48,7 +48,7 @@ class BaseView:
             expand=True,
             content=ft.Text(
                 value="Default main container content",
-                color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                color=ft.Colors.ON_SURFACE
             ), 
             alignment=ft.Alignment.CENTER 
         )

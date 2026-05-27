@@ -112,7 +112,7 @@ class MacrocycleScreen(BaseView):
                     ft.Text(
                         value=self.labels["no_data"],
                         size=16,
-                        color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == 'light' else self.colors.DARK_ON_BACKGROUND
+                        color=ft.Colors.ON_SURFACE
                     ), 
                     self.add_mesocycle_button
                 ],

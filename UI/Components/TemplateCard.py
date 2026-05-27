@@ -21,25 +21,25 @@ class TemplateCard(ft.Container):
         self.bgcolor = ft.Colors.SURFACE_CONTAINER_HIGH
         self.border_radius = 10
 
-        if self.colors.theme == "light":
-            self.shadow = [
-                ft.BoxShadow(
-                    spread_radius=1,
-                    blur_radius=10,
-                    color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE,
-                    offset=ft.Offset(0, 2)
-                )
-            ]
-        else:
-            self.border = ft.Border().all(
-                width=1,
-                color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
+        self.shadow = [
+            ft.BoxShadow(
+                spread_radius=0,
+                blur_radius=12,
+                color=ft.Colors.SHADOW,
+                offset=ft.Offset(0, 4)
             )
+        ]
+
+
+        self.animate = ft.Animation(
+            duration=200,
+            curve=ft.AnimationCurve.BOUNCE_IN_OUT
+        )
         
 
         
         self.on_click = lambda: on_card_click(self.id)
-        # self.on_hover = self.change_gradient_on_hover
+        self.on_hover = self.change_bgcolor_on_hover
         
 
         # Определение функции удаления
@@ -64,7 +64,7 @@ class TemplateCard(ft.Container):
                     margin=ft.Margin.symmetric(vertical=5),
                     value=card_data,
                     text_align= (ft.TextAlign.CENTER if index == 0 else ft.TextAlign.START),
-                    color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND,
+                    color=ft.Colors.ON_SURFACE,
                     size=(14 if index == 0 else 12), # Размер первого тайтла в списке (14) и размер остальных тайтлов (12)
                     width=self.width,
                     max_lines=5
@@ -75,7 +75,7 @@ class TemplateCard(ft.Container):
             if index == 0:
                 card_controls.append(
                     ft.Divider(
-                        color=self.colors.LIGHT_OUTLINE_VARIANT if self.colors.theme == "light" else self.colors.DARK_OUTLINE_VARIANT
+                        color=ft.Colors.OUTLINE_VARIANT
                     )
                 )
 
@@ -113,8 +113,7 @@ class TemplateCard(ft.Container):
 
 
 
-    def change_gradient_on_hover(self, e):
-        pass
-        # self.gradient = self.colors.Gradients.CARD_HOVER if e.data == True else self.colors.Gradients.CARD_DEFAULT
-        # self.update()
+    def change_bgcolor_on_hover(self, e): 
+        self.bgcolor = ft.Colors.SURFACE_CONTAINER_LOW if e.data == True else ft.Colors.SURFACE_CONTAINER_HIGH
+        self.update()
     

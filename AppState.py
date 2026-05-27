@@ -11,16 +11,18 @@ from Settings import Settings
 from UI.ColorThemes.AppColors import AppColors
 from UI.ColorThemes import SupportedColorThemes
 
+import utils
+
 
 class AppState:
-    def __init__(self, page: ft.Page) -> None:
+    def __init__(self, page: ft.Page) -> None:        
         self.page = page
 
         self.app_dir = os.path.dirname(sys.executable)
 
-        self.db_path        = os.path.join(self.app_dir, "CycleDatabase.db")
-        self.settings_path  = os.path.join(self.app_dir, "settings.json")
-        self.lang_pack_path = lambda lang_cade: os.path.join(self.app_dir, rf"language_packs/{lang_cade}")
+        self.db_path        = utils.get_data_directory() / "CycleDatabase.db"
+        self.settings_path  = utils.get_data_directory() / "settings.json"
+        self.lang_pack_path = lambda language: utils.get_data_directory() / rf"language_packs/{language}.json"
         
         self.database   = Database()
         self.settings   = Settings()

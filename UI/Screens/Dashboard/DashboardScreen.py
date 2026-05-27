@@ -189,7 +189,7 @@ class DashboardScreen(BaseView):
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN
             ),
 
-            gradient=self.colors.Gradients.HEADER,
+            gradient=self.colors.Gradients.HEADER_PRIMARY,
 
             border_radius=25
         )
@@ -418,35 +418,6 @@ class DashboardScreen(BaseView):
 
 
     def _init_sportsmen_dashboard_(self):
-        # Создание контейнера тренировок
-        self.workouts_list = ft.Column(
-            expand=True,
-            width=500,
-            spacing=10,
-            controls=[],
-
-            alignment=ft.MainAxisAlignment.START,
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-
-            scroll=ft.ScrollMode.AUTO
-        )
-
-        self.microcycle_container = ft.Container(
-            expand=True,
-            # padding=ft.Padding.symmetric(vertical=10, horizontal=20),
-            content=self.workouts_list,
-
-            bgcolor=ft.Colors.SURFACE_CONTAINER_LOW,
-
-            border = ft.Border().all(
-                width=2,
-                color=ft.Colors.OUTLINE,
-            ),
-            border_radius=10,
-
-            alignment=ft.Alignment.CENTER
-        )
-
         # Создание навигации по микроциклам
         self.previous_microcycle_button = ft.IconButton(
             data={"step" : -1}, 
@@ -493,11 +464,34 @@ class DashboardScreen(BaseView):
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN
             ),
 
-            gradient=self.colors.Gradients.HEADER,
+            gradient=self.colors.Gradients.HEADER_PRIMARY,
 
             border_radius=25
         )
 
+        # Создание контейнера тренировок
+        self.workouts_list = ft.Column(
+            expand=True,
+            width=500,
+            spacing=10,
+            controls=[],
+
+            alignment=ft.MainAxisAlignment.START,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+
+            scroll=ft.ScrollMode.AUTO
+        )
+
+        self.microcycle_container = ft.Container(
+            expand=True,
+            content=self.workouts_list,
+
+            bgcolor=ft.Colors.SURFACE_CONTAINER_LOWEST,
+
+            border_radius=10,
+
+            alignment=ft.Alignment.CENTER
+        )
         
         # Наполнение экрана контентом
         self.microcycle_content = ft.Column(

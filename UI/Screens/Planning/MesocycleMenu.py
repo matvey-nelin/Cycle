@@ -38,7 +38,7 @@ class MesocycleMenu(BaseView):
 
         self.main_container.content = ft.Text(
             self.labels["loading"], 
-            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+            color=ft.Colors.ON_SURFACE
         )
 
 
@@ -85,7 +85,7 @@ class MesocycleMenu(BaseView):
                     [
                         ft.Text(
                             self.labels["no_data"], 
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         ),
                         self.actions_menu
                     ],
@@ -208,7 +208,7 @@ class MesocycleMenu(BaseView):
                     [
                         ft.Text(
                             self.labels["no_data"], 
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND,
+                            color=ft.Colors.ON_SURFACE,
                             text_align=ft.TextAlign.CENTER
                         ),
                         self.actions_menu
@@ -257,16 +257,16 @@ class MesocycleMenu(BaseView):
                     [
                         ft.Text(
                             value=start_range,
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         ),
                         
                         ft.Text(
                             value=" - ",
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         ),
                         ft.Text(
                             value=end_range,
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         )
                     ],
                     alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -288,12 +288,12 @@ class MesocycleMenu(BaseView):
                     [
                         ft.Text(
                             value=title_status,
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         ),
                         
                         ft.Text(
                             value=f"{count_status} / {count_all_statuses}",
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND
+                            color=ft.Colors.ON_SURFACE
                         ),
                     ],
                     alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -308,7 +308,7 @@ class MesocycleMenu(BaseView):
                     [
                         ft.Text(
                             value=self.labels["mesocycle_no_data"],
-                            color=self.colors.LIGHT_ON_BACKGROUND if self.colors.theme == "light" else self.colors.DARK_ON_BACKGROUND,
+                            color=ft.Colors.ON_SURFACE,
                             text_align=ft.TextAlign.CENTER
                         )
                     ],
