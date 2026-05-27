@@ -24,8 +24,8 @@ class AppState:
         self.settings_path  = utils.get_data_directory() / "settings.json"
         self.lang_pack_path = lambda language: utils.get_data_directory() / rf"language_packs/{language}.json"
         
-        self.database   = Database()
         self.settings   = Settings()
+        self.database   = Database()
         self.translator = Translator(self.settings.language)
         
         theme_mode = self.settings.theme_mode

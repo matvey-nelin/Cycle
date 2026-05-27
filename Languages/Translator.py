@@ -8,7 +8,7 @@ from transliterate import translit
 from Languages import SupportedLanguages
 
 import utils
-import global_variable
+import global_variables
 
 
 

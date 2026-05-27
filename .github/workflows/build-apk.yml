@@ -48,20 +48,20 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           BUILD_NUMBER: ${{ github.run_number }}
         run: |
-          # 1. Декодируем ключ
           echo "$KEYSTORE_BASE64" | base64 -d > cycle-release.jks
           
-          # 2. Создаём key.properties (Flet сам переключится в Release Mode)
-          cat > key.properties << EOF
+          mkdir -p android
+          cat > android/key.properties << EOF
           storePassword=$KEYSTORE_PASSWORD
           keyPassword=$KEY_PASSWORD
           keyAlias=$KEY_ALIAS
-          storeFile=cycle-release.jks
+          storeFile=../cycle-release.jks
           EOF
           
-          # 3. Автоинкремент версии
-          sed -i "s/build_number = .*/build_number = $BUILD_NUMBER/" pyproject.toml
-          echo "✅ BuildNumber: $BUILD_NUMBER | key.properties created"
+          sed -i "s/^\(\s*build_number\s*=\s*\).*/\1$BUILD_NUMBER/" pyproject.toml
+          
+          echo "✅ pyproject.toml updated:"
+          grep -A 3 "\[tool.flet.android\]" pyproject.toml
         shell: bash
 
       - name: Hard clean build artifacts

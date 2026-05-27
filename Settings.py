@@ -3,7 +3,7 @@ import json
 from Languages import SupportedLanguages
 
 import utils
-import global_variable
+import global_variables
 
 
 class Settings:
@@ -13,7 +13,7 @@ class Settings:
         # Запись файла настроек в первый запуск программы
         if not self.settings_path.exists():
             self._settings_dict = {
-                "app_version"   : global_variable.APP_VERSION,
+                "app_version"   : global_variables.APP_VERSION,
 
                 "first_launch"  : True,
                 "language"      : "en",
@@ -45,7 +45,7 @@ class Settings:
                 self._settings_dict = dict(json.load(file))
 
 
-            self.app_version    = str(global_variable.APP_VERSION)
+            self.app_version    = str(global_variables.APP_VERSION)
 
             self.first_launch   = bool(self._settings_dict["first_launch"])
             self.language       = str(self._settings_dict["language"])
@@ -80,7 +80,7 @@ class Settings:
         try:
             # Смена стандартных настроек на текущие, если файл настроек существует
             self._settings_dict = {
-                "app_version"   : global_variable.APP_VERSION,
+                "app_version"   : global_variables.APP_VERSION,
                 
                 "first_launch"  : self.first_launch,
                 "language"      : self.language,
