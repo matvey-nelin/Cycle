@@ -43,8 +43,14 @@ class SettingsScreen(BaseView):
                             error_content=ft.Icon(
                                 icon=ft.Icons.CHANGE_CIRCLE_OUTLINED,
                                 size=75,
-                                color=self.colors.LIGHT_PRIMARY if self.colors.theme == 'light' else self.colors.DARK_PRIMARY
+                                color=ft.Colors.PRIMARY
                             )
+                        ),
+                        ft.Text(
+                            value=f"v. {self.settings.app_version}",
+                            size=10,
+                            text_align=ft.TextAlign.RIGHT,
+                            color=ft.Colors.ON_SURFACE
                         ),
                         ft.Text(
                             value="Cycle",

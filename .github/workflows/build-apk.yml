@@ -11,6 +11,8 @@ jobs:
     env:
       CI: "true"
       DEBIAN_FRONTEND: "noninteractive"
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true 
+      BUILD_NUMBER: ${{ github.run_number }}
 
     steps:
       - uses: actions/checkout@v4
@@ -28,7 +30,7 @@ jobs:
         with:
           flutter-version: '3.41.4'
           channel: 'stable'
-          cache: true  # ✅ Включаем кэш: ускоряет CI
+          cache: true
 
       - name: Set up Android SDK & Build Tools
         uses: android-actions/setup-android@v3
@@ -36,17 +38,15 @@ jobs:
       - name: Install Android Build-Tools (для aapt)
         run: sdkmanager "build-tools;34.0.0" > /dev/null 2>&1
 
-
       - name: Accept licenses
         run: yes | sdkmanager --licenses
 
-      - name: Setup Keystore & Auto-Increment Build Number
+      - name: Setup Keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          BUILD_NUMBER: ${{ github.run_number }}
         run: |
           echo "$KEYSTORE_BASE64" | base64 -d > cycle-release.jks
           
@@ -57,11 +57,6 @@ jobs:
           keyAlias=$KEY_ALIAS
           storeFile=../cycle-release.jks
           EOF
-          
-          sed -i "s/^\(\s*build_number\s*=\s*\).*/\1$BUILD_NUMBER/" pyproject.toml
-          
-          echo "✅ pyproject.toml updated:"
-          grep -A 3 "\[tool.flet.android\]" pyproject.toml
         shell: bash
 
       - name: Hard clean build artifacts
@@ -71,7 +66,7 @@ jobs:
         shell: bash
 
       - name: Build APK
-        run: flet build apk --verbose
+        run: flet build apk --build-number $BUILD_NUMBER --verbose
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
