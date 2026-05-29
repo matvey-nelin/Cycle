@@ -68,10 +68,25 @@ jobs:
       - name: Build APK
         run: flet build apk --build-number $BUILD_NUMBER --verbose      
         
-      - name: Verify APK versionCode
+      - name: Verify APK Metadata
         run: |
-          echo "🔍 Проверка версии в APK:"
-          aapt dump badging build/apk/app-release.apk | grep -E "versionCode|versionName"
+          echo "🔍 Checking APK info..."
+          
+          # Указываем полный путь к aapt из SDK
+          AAPT=$ANDROID_HOME/build-tools/34.0.0/aapt
+          
+          # Flet переименовывает файл в название приложения (cycle.apk)
+          APK_PATH="build/apk/cycle.apk"
+          
+          if [ -f "$APK_PATH" ]; then
+            echo "✅ APK found: $APK_PATH"
+            $AAPT dump badging "$APK_PATH" | grep -E "package: name=|versionCode=|versionName=|application-label:"
+          else
+            echo "❌ APK not found at $APK_PATH"
+            echo "Available files in build/apk:"
+            ls -la build/apk/
+          fi
+        shell: bash
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
