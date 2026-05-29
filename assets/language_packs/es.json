@@ -125,39 +125,18 @@
             "dumbbell_curl": "Curl con Mancuernas",
             "glute_bridge": "Puente de Glúteos",
             "side_plank": "Plancha Lateral",
-            "triceps_pushdown": "Extensiones de Tríceps en Polea"
+            "triceps_pushdown": "Extensiones de Tríceps en Polea",
+            "shragi_s_vkljucheniem_rombovidnyh_myshts_spiny": "Elevaciones de hombros con activación de romboides"
         },
         "workout_templates": {
-            "powerlifting_heavy_squat_day": "Powerlifting - Día de Sentadilla Pesado",
-            "powerlifting_heavy_bench_day": "Powerlifting - Día de Banca Pesado",
-            "powerlifting_heavy_deadlift_day": "Powerlifting - Día de Peso Muerto Pesado",
-            "bodybuilding_chest_triceps": "Culturismo - Pecho y Tríceps",
-            "bodybuilding_back_biceps": "Culturismo - Espalda y Bíceps",
-            "bodybuilding_legs_shoulders": "Culturismo - Piernas y Hombros",
-            "full_body_general_fitness": "Cuerpo Completo - Fitness General",
-            "cardio_endurance_session": "Cardio - Sesión de Resistencia",
-            "calisthenics_upper_body": "Calistenia - Parte Superior",
-            "liss_recovery_walk": "LISS - Caminata de Recuperación",
-            "lower_strength": "Fuerza Inferior",
-            "push_pull_hypertrophy": "Hipertrofia Push/Pull",
-            "full_body_conditioning": "Acondicionamiento Full Body",
-            "novyj_shablon_trenirovki": "Nueva Plantilla de Entrenamiento",
-            "silovaja_po_dzhiu_dzhiutsu": "Fuerza Jiu-Jitsu",
-            "upper_strength": "Fuerza Superior"
+            "trenirovka_verha_tela": "Entrenamiento de tren superior",
+            "trenirovka_fullbadi": "Entrenamiento full body",
+            "trenirovki_tjagi_i_zhima": "Entrenamientos de empuje y tracción",
+            "nizkointensivnaja_trenirovka": "Entrenamiento de baja intensidad"
         },
         "microcycle_templates": {
-            "week_1_foundation": "Semana 1 - Fundación",
-            "week_2_volume_build": "Semana 2 - Construcción de Volumen",
-            "week_3_intensity_peak": "Semana 3 - Pico de Intensidad",
-            "week_4_deload": "Semana 4 - Descarga",
-            "5x5_strength_cycle": "Ciclo de Fuerza 5x5",
-            "hypertrophy_block_a": "Bloque de Hipertrofia A",
-            "hypertrophy_block_b": "Bloque de Hipertrofia B",
-            "powerlifting_meet_prep": "Preparación Competición Powerlifting",
-            "general_fitness_week": "Semana de Fitness General",
-            "active_recovery_week": "Semana de Recuperación Activa",
-            "base_3day": "División Base 3 Días",
-            "deload_3day": "Descarga 3 Días"
+            "3_h_dnevnaja_razgruzka": "Descarga de 3 días",
+            "bazovyj_3_h_dnevnyj_split": "División básica de 3 días"
         }
     },
     "settings": {
@@ -269,7 +248,7 @@
                     "total_volume_units": "kg / lbs",
                     "workouts_count": "Cantidad de entrenamientos",
                     "workouts_count_time_range": "por mesociclo",
-                    "workout_avg_duration": "Duración promedio de entrenamiento",
+                    "workout_avg_duration": "Tiempo promedio de entrenamiento",
                     "workout_avg_duration_unit": {
                         "minuts": "min",
                         "hours": "h"
@@ -294,7 +273,8 @@
                 "language": "Idioma de la App",
                 "trainer_mode_switch": "Modo Entrenador",
                 "active_user_statuses": "Estados de Usuario Activos",
-                "app_color_themes": "Tema de Color de la App"
+                "app_color_themes": "Tema de Color de la App",
+                "export_import_data" : "Exportar e Importar datos"
             },
             "workout_template_menu": {
                 "no_data": "No tienes ninguna plantilla.",
@@ -384,7 +364,22 @@
                 "workout_types_helper_text": "Tipos de Entrenamiento",
                 "save_button": "Guardar"
             },
-            "app_color_themes_screen": {}
+            "app_color_themes_screen": {},
+            "export_import_screen" : {
+                "current_db_title" : "Base de datos",
+                "path_to_database" : "Ruta de la base: ",
+                "size_database"    : "Tamaño: ",
+                "import_button": "Importar",
+                "export_button": "Exportar",
+                "import_dialog_title" : "Seleccionar archivo para restaurar",
+                "export_dialog_title" : "Guardar copia de seguridad",
+                "import_error" : "Error de importación. Base no actualizada.",
+                "export_error" : "Error de exportación. Archivo no guardado.",
+                "import_succes" : "Base restaurada con éxito.",
+                "export_succes" : "Copia creada con éxito.",
+                "last_backup_time" : "Fecha de la última copia: ",
+                "no_backups"        : "Sin copias de seguridad"
+            }
         }
     }
 }

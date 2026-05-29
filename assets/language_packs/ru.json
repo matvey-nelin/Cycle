@@ -125,39 +125,18 @@
             "dumbbell_curl": "Подъем гантелей на бицепс",
             "glute_bridge": "Ягодичный мостик",
             "side_plank": "Боковая планка",
-            "triceps_pushdown": "Разгибание рук на блоке"
+            "triceps_pushdown": "Разгибание рук на блоке",
+            "shragi_s_vkljucheniem_rombovidnyh_myshts_spiny": "Шраги с включением ромбовидных мышц спины"
         },
         "workout_templates": {
-            "powerlifting_heavy_squat_day": "Пауэрлифтинг - День тяжелых приседаний",
-            "powerlifting_heavy_bench_day": "Пауэрлифтинг - День жима лежа с большим весом",
-            "powerlifting_heavy_deadlift_day": "Пауэрлифтинг - День тяжелой становой тяги",
-            "bodybuilding_chest_triceps": "Бодибилдинг - Грудь и трицепс",
-            "bodybuilding_back_biceps": "Бодибилдинг - Спина и бицепс",
-            "bodybuilding_legs_shoulders": "Бодибилдинг - ноги и плечи",
-            "full_body_general_fitness": "Фуллбоди - общая физическая подготовка",
-            "cardio_endurance_session": "Кардио-тренировка на выносливость",
-            "calisthenics_upper_body": "Калистеника - верх тела",
-            "liss_recovery_walk": "LISS - Восстановительная прогулка",
-            "lower_strength": "Lower Strength",
-            "push_pull_hypertrophy": "Push/Pull Hypertrophy",
-            "full_body_conditioning": "Full Body Conditioning",
-            "novyj_shablon_trenirovki": "Новый шаблон тренировки",
-            "silovaja_po_dzhiu_dzhiutsu": "Силовая по Джиу-Джиутсу",
-            "upper_strength": "Upper Strength"
+            "trenirovka_verha_tela": "Тренировка верха тела",
+            "trenirovka_fullbadi": "Тренировка фуллбади ",
+            "trenirovki_tjagi_i_zhima": "Тренировки тяги и жима",
+            "nizkointensivnaja_trenirovka": "Низкоинтенсивная тренировка"
         },
         "microcycle_templates": {
-            "week_1_foundation": "Неделя 1 - Основы",
-            "week_2_volume_build": "Неделя 2 - Наращивание объема",
-            "week_3_intensity_peak": "Неделя 3 - Пик интенсивности",
-            "week_4_deload": "Неделя 4 - Разгрузка",
-            "5x5_strength_cycle": "Силовой цикл 5х5",
-            "hypertrophy_block_a": "Блок гипертрофии А",
-            "hypertrophy_block_b": "Блок гипертрофии Б",
-            "powerlifting_meet_prep": "Подготовка к соревнованиям по пауэрлифтингу",
-            "general_fitness_week": "Общая неделя фитнеса",
-            "active_recovery_week": "Неделя активного восстановления",
-            "base_3day": "Base 3-Day Split",
-            "deload_3day": "Deload 3-Day"
+            "3_h_dnevnaja_razgruzka": "3-х дневная разгрузка",
+            "bazovyj_3_h_dnevnyj_split": "Базовый 3-х дневный сплит"
         }
     },
     "settings": {
@@ -294,7 +273,8 @@
                 "language": "Язык приложения",
                 "trainer_mode_switch": "Режим тренера",
                 "active_user_statuses": "Активные статусы пользователей",
-                "app_color_themes": "Цветовая тема приложения"
+                "app_color_themes": "Цветовая тема приложения",
+                "export_import_data" : "Экспорт и Импорт данных"
             },
             "workout_template_menu": {
                 "no_data": "У вас нет ни одного шаблона.",
@@ -384,7 +364,22 @@
                 "workout_types_helper_text": "Типы тренировок",
                 "save_button": "Сохранить"
             },
-            "app_color_themes_screen": {}
+            "app_color_themes_screen": {},
+            "export_import_screen" : {
+                "current_db_title" : "База данных",
+                "path_to_database" : "Путь к базе: ",
+                "size_database"    : "Размер: ",
+                "import_button": "Импорт",
+                "export_button": "Экспорт",
+                "import_dialog_title" : "Выберите файл для восстановления",
+                "export_dialog_title" : "Сохранить резервную копию",
+                "import_error" : "Ошибка импорта. База не обновлена.",
+                "export_error" : "Ошибка экспорта. Файл не сохранен.",
+                "import_succes" : "База данных успешно восстановлена.",
+                "export_succes" : "Резервная копия успешно создана.",
+                "last_backup_time" : "Дата последней резервной копии: ",
+                "no_backups"        : "Нет резервных копий"
+            }
         }
     }
 }

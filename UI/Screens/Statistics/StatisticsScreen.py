@@ -525,7 +525,7 @@ class StatisticsScreen(BaseView):
 
         for workout_status in workout_statuses:
             id_workout_status       = workout_status[0]
-            title_workout_status    = self.translator.workout_statuses[workout_status[1]]
+            title_workout_status    = self.translator.workout_statuses.get(workout_status[1], workout_status[1])
             count_workout_status    = workout_status[2]
             color_workout_status    = next(self.random_color_list)
 

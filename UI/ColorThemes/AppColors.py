@@ -307,6 +307,18 @@ class DarkGradients:
 		)
 
 
+		self.APP_BAR_GRADIENT = ft.LinearGradient(
+			begin=ft.Alignment.CENTER_LEFT,
+			end=ft.Alignment.CENTER_RIGHT,
+			colors=[
+				ft.Colors.with_opacity(0.4, colors.DARK_PRIMARY),
+				ft.Colors.with_opacity(0.4, colors.DARK_SECONDARY),
+				ft.Colors.with_opacity(0.4, colors.DARK_TERTIARY)
+			],
+			stops=[0.0, 0.5, 1.0]
+		)
+
+
 class LightGradients:
 	def __init__(self, colors: AppColors) -> None:
 		"""Градиенты для светлой темы"""
@@ -441,4 +453,16 @@ class LightGradients:
 			begin=ft.Alignment.CENTER_LEFT,
 			end=ft.Alignment.CENTER_RIGHT,
 			colors=[ft.Colors.TRANSPARENT, colors.LIGHT_OUTLINE_VARIANT, ft.Colors.TRANSPARENT],
+		)
+
+		
+		self.APP_BAR_GRADIENT = ft.LinearGradient(
+			begin=ft.Alignment.CENTER_LEFT,
+			end=ft.Alignment.CENTER_RIGHT,
+			colors=[
+				ft.Colors.with_opacity(0.4, colors.LIGHT_PRIMARY),
+				ft.Colors.with_opacity(0.4, colors.LIGHT_SECONDARY),
+				ft.Colors.with_opacity(0.4, colors.LIGHT_TERTIARY)
+			],
+			stops=[0.0, 0.5, 1.0]
 		)

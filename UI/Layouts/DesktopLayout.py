@@ -23,7 +23,11 @@ class DesktopLayout(BaseLayout):
                     padding=0,
                     icon=config["icon"],
                     selected_icon=config["selected_icon"],
-                    label=ft.Text(self.translator.navigation_menu_labels[self.destination_labels[config["idx"]]]["label"]), 
+                    label=ft.Text(
+                        value=self.translator.navigation_menu_labels[self.destination_labels[config["idx"]]]["label"],
+                        size=0,
+                        weight=ft.FontWeight.W_800
+                    ), 
                     tooltip=self.translator.navigation_menu_labels[self.destination_labels[config["idx"]]]["tooltip"]
                 )
             )

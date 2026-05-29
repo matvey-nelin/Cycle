@@ -94,7 +94,7 @@ class WorkoutScreen(BaseView):
                 ft.PopupMenuItem(
                     content=status_title,
                     checked=(status_id == self.workout_status_id),
-                    data=[status_id, status_slug, status_title], 
+                    data=[status_id, status_slug, status_title],  
                     on_click=self.change_and_save_workout_status
                 )
             )
@@ -268,7 +268,7 @@ class WorkoutScreen(BaseView):
             content=ft.Row(
                 expand=True,
                 tight=False,
-                margin=ft.Margin.symmetric(vertical=0, horizontal=10),
+                margin=ft.Margin.only(top=10, left=10, right=10),
                 controls=
                 [
                     ft.Row(

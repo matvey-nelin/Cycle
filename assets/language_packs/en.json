@@ -125,39 +125,18 @@
             "dumbbell_curl": "Dumbbell Curl",
             "glute_bridge": "Glute Bridge",
             "side_plank": "Side Plank",
-            "triceps_pushdown": "Triceps Pushdown"
+            "triceps_pushdown": "Triceps Pushdown",
+            "shragi_s_vkljucheniem_rombovidnyh_myshts_spiny": "Shrugs with Rhomboid Engagement"
         },
         "workout_templates": {
-            "powerlifting_heavy_squat_day": "Powerlifting - Heavy Squat Day",
-            "powerlifting_heavy_bench_day": "Powerlifting - Heavy Bench Day",
-            "powerlifting_heavy_deadlift_day": "Powerlifting - Heavy Deadlift Day",
-            "bodybuilding_chest_triceps": "Bodybuilding - Chest & Triceps",
-            "bodybuilding_back_biceps": "Bodybuilding - Back & Biceps",
-            "bodybuilding_legs_shoulders": "Bodybuilding - Legs & Shoulders",
-            "full_body_general_fitness": "Full Body - General Fitness",
-            "cardio_endurance_session": "Cardio - Endurance Session",
-            "calisthenics_upper_body": "Calisthenics - Upper Body",
-            "liss_recovery_walk": "LISS - Recovery Walk",
-            "lower_strength": "Lower Strength",
-            "push_pull_hypertrophy": "Push/Pull Hypertrophy",
-            "full_body_conditioning": "Full Body Conditioning",
-            "novyj_shablon_trenirovki": "New Workout Template",
-            "silovaja_po_dzhiu_dzhiutsu": "Jiu-Jitsu Strength",
-            "upper_strength": "Upper Strength"
+            "trenirovka_verha_tela": "Upper Body Workout",
+            "trenirovka_fullbadi": "Full Body Workout",
+            "trenirovki_tjagi_i_zhima": "Push & Pull Workouts",
+            "nizkointensivnaja_trenirovka": "Low Intensity Workout"
         },
         "microcycle_templates": {
-            "week_1_foundation": "Week 1 - Foundation",
-            "week_2_volume_build": "Week 2 - Volume Build",
-            "week_3_intensity_peak": "Week 3 - Intensity Peak",
-            "week_4_deload": "Week 4 - Deload",
-            "5x5_strength_cycle": "5x5 Strength Cycle",
-            "hypertrophy_block_a": "Hypertrophy Block A",
-            "hypertrophy_block_b": "Hypertrophy Block B",
-            "powerlifting_meet_prep": "Powerlifting Meet Prep",
-            "general_fitness_week": "General Fitness Week",
-            "active_recovery_week": "Active Recovery Week",
-            "base_3day": "Base 3-Day Split",
-            "deload_3day": "Deload 3-Day"
+            "3_h_dnevnaja_razgruzka": "3-Day Deload",
+            "bazovyj_3_h_dnevnyj_split": "Basic 3-Day Split"
         }
     },
     "settings": {
@@ -269,7 +248,7 @@
                     "total_volume_units": "kg / lbs",
                     "workouts_count": "Workouts Count",
                     "workouts_count_time_range": "per mesocycle",
-                    "workout_avg_duration": "Average Workout Duration",
+                    "workout_avg_duration": "Average Workout Time",
                     "workout_avg_duration_unit": {
                         "minuts": "min",
                         "hours": "h"
@@ -294,7 +273,8 @@
                 "language": "App Language",
                 "trainer_mode_switch": "Trainer Mode",
                 "active_user_statuses": "Active User Statuses",
-                "app_color_themes": "App Color Theme"
+                "app_color_themes": "App Color Theme",
+                "export_import_data" : "Data Export & Import"
             },
             "workout_template_menu": {
                 "no_data": "You have no templates.",
@@ -384,7 +364,22 @@
                 "workout_types_helper_text": "Workout Types",
                 "save_button": "Save"
             },
-            "app_color_themes_screen": {}
+            "app_color_themes_screen": {},
+            "export_import_screen" : {
+                "current_db_title" : "Database",
+                "path_to_database" : "Database path: ",
+                "size_database"    : "Size: ",
+                "import_button": "Import",
+                "export_button": "Export",
+                "import_dialog_title" : "Select file to restore",
+                "export_dialog_title" : "Save backup copy",
+                "import_error" : "Import error. Database not updated.",
+                "export_error" : "Export error. File not saved.",
+                "import_succes" : "Database successfully restored.",
+                "export_succes" : "Backup successfully created.",
+                "last_backup_time" : "Last backup date: ",
+                "no_backups"        : "No backups"
+            }
         }
     }
 }

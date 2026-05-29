@@ -46,6 +46,7 @@ from UI.Screens.Settings.SettingsScreen             import SettingsScreen
 
 from UI.Screens.Settings.ActiveUserStatusesScreen   import ActiveUserStatusesScreen
 from UI.Screens.Settings.AppColorThemesScreen       import AppColorThemesScreen
+from UI.Screens.Settings.ExportImportScreen         import ExportImportScreen
 
 
 class CycleApp:
@@ -109,7 +110,13 @@ class CycleApp:
         self.current_layout = "global"
         self.screen_name = "dashboard_screen"
 
-        self.root_container = ft.Container(expand=True)
+        self.root_container = ft.Container(
+            expand=True,
+            margin=0,
+            padding=0,
+            
+            bgcolor=ft.Colors.TRANSPARENT
+        )
         self.page.add(self.root_container)
     
 
@@ -309,7 +316,8 @@ class CycleApp:
 
             # settings screen
             "active_user_statuses_screen"   : ActiveUserStatusesScreen(self.page, self.navigate, self.app_state, "settings_screen"),
-            "app_color_themes_screen"       : AppColorThemesScreen(self.page, self.navigate, self.app_state, "settings_screen")
+            "app_color_themes_screen"       : AppColorThemesScreen(self.page, self.navigate, self.app_state, "settings_screen"),
+            "export_import_screen"          : ExportImportScreen(self.page, self.navigate, self.app_state, "settings_screen")
         }
 
 

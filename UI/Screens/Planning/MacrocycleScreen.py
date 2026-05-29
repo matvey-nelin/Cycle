@@ -186,7 +186,7 @@ class MacrocycleScreen(BaseView):
         count_all_statuses = sum([status[2] for status in statuses])
 
         for status in statuses:
-            title_status = self.translator.workout_statuses[status[1]]
+            title_status = self.translator.workout_statuses.get(status[1], status[1])
             count_status = str(status[2]) 
 
             mesocycle_card_info.append(

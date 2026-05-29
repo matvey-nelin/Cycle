@@ -125,39 +125,18 @@
             "dumbbell_curl": "كرنچ دمبل",
             "glute_bridge": "جسر الغلوت",
             "side_plank": "بلانك جانبي",
-            "triceps_pushdown": "دفع التراي"
+            "triceps_pushdown": "دفع التراي",
+            "shragi_s_vkljucheniem_rombovidnyh_myshts_spiny": "شراغز مع تفعيل العضلات المعينية"
         },
         "workout_templates": {
-            "powerlifting_heavy_squat_day": "باورليفتنغ - يوم القرفصاء الثقيل",
-            "powerlifting_heavy_bench_day": "باورليفتنغ - يوم البنش الثقيل",
-            "powerlifting_heavy_deadlift_day": "باورليفتنغ - يوم الرفعة الميتة الثقيلة",
-            "bodybuilding_chest_triceps": "كمال أجسام - صدر وتراي",
-            "bodybuilding_back_biceps": "كمال أجسام - ظهر وباي",
-            "bodybuilding_legs_shoulders": "كمال أجسام - أرجل وأكتاف",
-            "full_body_general_fitness": "كامل الجسم - لياقة عامة",
-            "cardio_endurance_session": "كارديو - جلسة تحمل",
-            "calisthenics_upper_body": "تمارين وزن الجسم - الجزء العلوي",
-            "liss_recovery_walk": "LISS - مشي استشفاء",
-            "lower_strength": "قوة الجزء السفلي",
-            "push_pull_hypertrophy": "تضخم دفع/سحب",
-            "full_body_conditioning": "تكييف كامل الجسم",
-            "novyj_shablon_trenirovki": "قالب تمرين جديد",
-            "silovaja_po_dzhiu_dzhiutsu": "قوة الجيو جيتسو",
-            "upper_strength": "قوة الجزء العلوي"
+            "trenirovka_verha_tela": "تمرين الجزء العلوي",
+            "trenirovka_fullbadi": "تمرين كامل الجسم",
+            "trenirovki_tjagi_i_zhima": "تمارين الدفع والسحب",
+            "nizkointensivnaja_trenirovka": "تمرين منخفض الكثافة"
         },
         "microcycle_templates": {
-            "week_1_foundation": "الأسبوع 1 - الأساس",
-            "week_2_volume_build": "الأسبوع 2 - بناء الحجم",
-            "week_3_intensity_peak": "الأسبوع 3 - ذروة الكثافة",
-            "week_4_deload": "الأسبوع 4 - تخفيف الحمل",
-            "5x5_strength_cycle": "دورة قوة 5x5",
-            "hypertrophy_block_a": "كتلة تضخم أ",
-            "hypertrophy_block_b": "كتلة تضخم ب",
-            "powerlifting_meet_prep": "تحضير مسابقة باورليفتنغ",
-            "general_fitness_week": "أسبوع لياقة عام",
-            "active_recovery_week": "أسبوع استشفاء نشط",
-            "base_3day": "تقسيم أساسي 3 أيام",
-            "deload_3day": "تخفيف حمل 3 أيام"
+            "3_h_dnevnaja_razgruzka": "تخفيف حمل 3 أيام",
+            "bazovyj_3_h_dnevnyj_split": "تقسيم أساسي 3 أيام"
         }
     },
     "settings": {
@@ -269,7 +248,7 @@
                     "total_volume_units": "كغ / رطل",
                     "workouts_count": "عدد التدريبات",
                     "workouts_count_time_range": "لكل دورة متوسطة",
-                    "workout_avg_duration": "متوسط مدة التدريب",
+                    "workout_avg_duration": "متوسط وقت التدريب",
                     "workout_avg_duration_unit": {
                         "minuts": "دقيقة",
                         "hours": "ساعة"
@@ -294,7 +273,8 @@
                 "language": "لغة التطبيق",
                 "trainer_mode_switch": "وضع المدرب",
                 "active_user_statuses": "حالات المستخدم النشطة",
-                "app_color_themes": "ثيم ألوان التطبيق"
+                "app_color_themes": "ثيم ألوان التطبيق",
+                "export_import_data" : "تصدير واستيراد البيانات"
             },
             "workout_template_menu": {
                 "no_data": "ليس لديك أي قوالب.",
@@ -384,7 +364,22 @@
                 "workout_types_helper_text": "أنواع التدريب",
                 "save_button": "حفظ"
             },
-            "app_color_themes_screen": {}
+            "app_color_themes_screen": {},
+            "export_import_screen" : {
+                "current_db_title" : "قاعدة البيانات",
+                "path_to_database" : "مسار قاعدة البيانات: ",
+                "size_database"    : "الحجم: ",
+                "import_button": "استيراد",
+                "export_button": "تصدير",
+                "import_dialog_title" : "اختر ملفًا للاستعادة",
+                "export_dialog_title" : "حفظ نسخة احتياطية",
+                "import_error" : "خطأ في الاستيراد. لم يتم تحديث قاعدة البيانات.",
+                "export_error" : "خطأ في التصدير. لم يتم حفظ الملف.",
+                "import_succes" : "تم استعادة قاعدة البيانات بنجاح.",
+                "export_succes" : "تم إنشاء النسخة الاحتياطية بنجاح.",
+                "last_backup_time" : "تاريخ آخر نسخة احتياطية: ",
+                "no_backups"        : "لا توجد نسخ احتياطية"
+            }
         }
     }
 }

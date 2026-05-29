@@ -66,10 +66,15 @@ jobs:
         shell: bash
 
       - name: Build APK
-        run: flet build apk --build-number $BUILD_NUMBER --verbose
+        run: flet build apk --build-number $BUILD_NUMBER --verbose      
+        
+      - name: Verify APK versionCode
+        run: |
+          echo "🔍 Проверка версии в APK:"
+          aapt dump badging build/apk/app-release.apk | grep -E "versionCode|versionName"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Cycle-v${{ github.run_number }}
-          path: build/flutter/build/app/outputs/flutter-apk/app-release.apk
+          path: build/apk/app-release.apk

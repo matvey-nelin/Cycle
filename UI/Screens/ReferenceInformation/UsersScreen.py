@@ -28,7 +28,19 @@ class UsersScreen(BaseView):
 
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN
-            )
+            ),
+            
+            bgcolor=ft.Colors.SURFACE_CONTAINER_HIGH,
+            border_radius=10,
+
+            shadow=[
+                ft.BoxShadow(
+                    spread_radius=0,
+                    blur_radius=12, 
+                    color=ft.Colors.SHADOW,
+                    offset=ft.Offset(0, 4)
+                )
+            ]
         )
 
 

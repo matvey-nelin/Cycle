@@ -15,7 +15,7 @@ class AppColorThemesScreen(BaseView):
         self.labels = self.translator.app_color_themes_screen
 
         self.color_themes_list_view = ft.ListView(
-            margin=0,
+            margin=ft.Margin.symmetric(vertical=10),
 		    spacing=5,
             controls=[],
         )
@@ -41,7 +41,7 @@ class AppColorThemesScreen(BaseView):
 
             self.color_themes_list_view.controls.append(
                 ft.Container(
-                    data={"color_theme": color_theme},
+                    data={"color_theme": color_theme}, 
                     expand=False,
                     content=ft.ListTile(
                         expand=False,

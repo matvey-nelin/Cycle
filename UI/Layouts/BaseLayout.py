@@ -12,11 +12,17 @@ class BaseLayout():
         self.page = page
 
         self.layout_container   = ft.Container( # Контейнер всего экрана
-            expand=True
+            expand=True,
+            margin=0,
+            padding=0,
+
+            bgcolor=ft.Colors.TRANSPARENT
         ) 
         self.content_container  = ft.Container( # Контейнер содержимого окна
             expand=True,
-            margin=ft.Margin.symmetric(vertical=15, horizontal=15)
+            margin=ft.Margin.symmetric(vertical=10, horizontal=10),
+            
+            bgcolor=ft.Colors.TRANSPARENT
         ) 
 
         self.destination_labels  = list(self.translator.navigation_menu_labels.keys())

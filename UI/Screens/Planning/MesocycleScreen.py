@@ -160,7 +160,7 @@ class MesocycleScreen(BaseView):
             
         is_unloading = bool(self.database.get_microcycles(self.id, id_microcycle)[0][1])
         self.is_unloading_checkbox = ft.Checkbox(
-            data={"id_microcycle": id_microcycle},
+            data={"id_microcycle": id_microcycle}, 
             value=is_unloading,
             active_color=self.colors.LIGHT_SECONDARY_CONTAINER if self.colors.theme == 'light' else self.colors.DARK_SECONDARY_CONTAINER,
             label=self.labels["is_unloading_checkbox"],

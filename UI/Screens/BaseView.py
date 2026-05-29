@@ -35,11 +35,24 @@ class BaseView:
 
 
         self.appbar = ft.Container(
-            margin=ft.Margin.symmetric(horizontal=5),
             content=ft.Row(
+                margin=ft.Margin.symmetric(horizontal=5, vertical=5),
                 controls=[self.open_previous_screen_button],
                 alignment=ft.MainAxisAlignment.START
             ),
+            
+            bgcolor=ft.Colors.SURFACE_CONTAINER_HIGH,
+            border_radius=10,
+
+            shadow=[
+                ft.BoxShadow(
+                    spread_radius=0,
+                    blur_radius=12, 
+                    color=ft.Colors.SHADOW,
+                    offset=ft.Offset(0, 4)
+                )
+            ],
+
             visible=(self.previous_screen_name is not None)
         )
             

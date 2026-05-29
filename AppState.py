@@ -52,6 +52,7 @@ class AppState:
         update_page = False
         new_orientation = True if ((self.width is None) or (self.width < 600)) else False
 
+        # Первая запись флага is_mobile
         if self.is_mobile is None:
             self.is_mobile  = new_orientation
 
@@ -111,7 +112,7 @@ class AppState:
     def data_changed_notify(self):
         for data_changed_listener in self._data_changed_listeners:
             try:
-                data_changed_listener()
+                self.page.run_task(data_changed_listener)
             except:
                 pass
 
@@ -128,7 +129,7 @@ class AppState:
     def append_hot_restart_methods(self, callback):
         self.hot_restart_methods.append(callback)
 
-    def hot_restart_app(self):
+    async def hot_restart_app(self):
         self.database   = Database()
         self.settings   = Settings()
         self.translator = Translator(self.settings.language)
@@ -163,7 +164,7 @@ class AppState:
         self.translator = Translator(language_code)
 
         self.language_changed_notify()
-        self.hot_restart_app()
+        self.page.run_task(self.hot_restart_app)
 
     
     def change_theme_mode(self, e):
@@ -177,7 +178,7 @@ class AppState:
         if theme_mode == "system":
             theme_mode = self.page.platform_brightness.value if self.page.platform_brightness is not None else "light"
 
-        self.hot_restart_app()
+        self.page.run_task(self.hot_restart_app)
 
 
     def change_color_theme(self, color_theme: str):
@@ -185,11 +186,10 @@ class AppState:
             raise ValueError("Insupported color theme")
         
         self.settings.change_color_theme(color_theme)
-
-        self.hot_restart_app()
+        self.page.run_task(self.hot_restart_app)
 
 
 
     def change_trainer_mode(self, trainer_mode: bool):
         self.settings.change_trainer_mode(trainer_mode)
-        self.hot_restart_app()
+        self.page.run_task(self.hot_restart_app)

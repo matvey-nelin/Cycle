@@ -203,7 +203,7 @@ class MicrocycleTemplateMenu(BaseView):
                     temp_template_labels = [template_id, template_title]
                     temp_template_id = template_id
 
-                temp_template_labels.append(self.translator.workout_templates.get(template_info[2], "Unknown"))
+                temp_template_labels.append(self.translator.workout_templates.get(template_info[2], template_info[2]))
             except KeyError:
                     continue
         # Добавление последнего шаблона в список

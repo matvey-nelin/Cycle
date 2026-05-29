@@ -35,7 +35,7 @@ class SetsList(ft.Container):
         self.id_workout_type = result[0][0]
 
         self.expand=6
-        self.margin=ft.Margin.only(left=5, right=5)
+        # self.margin=ft.Margin.only(left=5, right=5)
 
         self.bgcolor = ft.Colors.SURFACE_CONTAINER_LOW
 

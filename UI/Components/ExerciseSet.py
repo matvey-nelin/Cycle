@@ -43,8 +43,11 @@ class ExerciseSet(ft.Container):
 
         self.labels = self.translator.exercise_set_labels
 
-        self.title = title
-        self.sets_list = sets_list
+        self.title      = title
+        self.sets_list  = sets_list
+        if hasattr(self.sets_list, "is_planned") and hasattr(self.sets_list, "is_template"):
+            self.disabled = bool((not self.sets_list.is_planned) and (not self.sets_list.is_template) and self.screen.settings.current_workout == 0)
+
         self._on_set_will_accept_ = self._on_set_accept_
         self._on_delete_exercise_ = lambda e: self.sets_list._on_delete_exercise_(self)
 
@@ -61,7 +64,7 @@ class ExerciseSet(ft.Container):
         
         self.content_container = ft.Container(
             padding=0,
-            margin=0,
+            margin=ft.Margin.symmetric(horizontal=10),
             height=40,
 
             bgcolor=ft.Colors.SURFACE_CONTAINER_HIGH,
@@ -164,6 +167,8 @@ class ExerciseSet(ft.Container):
                 align=ft.Alignment.CENTER_LEFT
             ),
 
+            visible=(not self.disabled),
+
             content_feedback=self.feedback_container,
             # Заглушка на старом месте
             content_when_dragging=ft.Container(
@@ -210,13 +215,13 @@ class ExerciseSet(ft.Container):
             helper=self.labels["set_count"],
             helper_style=ft.TextStyle(
                 size=8,
-                color=ft.Colors.ON_SURFACE
+                color=ft.Colors.ON_SURFACE if not self.disabled else ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE_VARIANT)
             ),
 
             value=str(sets_count), 
             text_style=ft.TextStyle(
                 size=12,
-                color=ft.Colors.ON_SURFACE
+                color=ft.Colors.ON_SURFACE if not self.disabled else ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE_VARIANT)
             ),
             text_align=ft.TextAlign.CENTER,
             
@@ -232,20 +237,20 @@ class ExerciseSet(ft.Container):
         # TextField с количеством потворений
         self.reps_text_field = ft.TextField(
             expand=3,
-            margin=ft.Margin.only(bottom=1, left=5, right=5),
+            margin=ft.Margin.only(left=5, right=5),
             content_padding=ft.Padding.only(bottom=5),
 
             hint_text=str(planned_reps) if planned_reps is not None else None,
             helper=self.labels["set_repetitions"],
             helper_style=ft.TextStyle(
                 size=8,
-                color=ft.Colors.ON_SURFACE
+                color=ft.Colors.ON_SURFACE if not self.disabled else ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE_VARIANT)
             ),
 
             value=str(reps), 
             text_style=ft.TextStyle(
                 size=12,
-                color=ft.Colors.ON_SURFACE
+                color=ft.Colors.ON_SURFACE if not self.disabled else ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE_VARIANT)
             ),
             text_align=ft.TextAlign.CENTER,
             
@@ -262,20 +267,20 @@ class ExerciseSet(ft.Container):
         # TextField с весом
         self.weight_text_field = ft.TextField(
             expand=3,
-            margin=ft.Margin.only(bottom=1, left=5, right=5),
+            margin=ft.Margin.only(left=5, right=5),
             content_padding=ft.Padding.only(bottom=5),
 
             hint_text=str(planned_weight) if planned_weight is not None else None,
             helper=self.labels["set_weight"],
             helper_style=ft.TextStyle(
                 size=8,
-                color=ft.Colors.ON_SURFACE
+                color=ft.Colors.ON_SURFACE if not self.disabled else ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE_VARIANT)
             ),
 
             value=str("0" if (str(weight) == "0.0") else weight), 
             text_style=ft.TextStyle( 
                 size=12,
-                color=ft.Colors.ON_SURFACE
+                color=ft.Colors.ON_SURFACE if not self.disabled else ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE_VARIANT)
             ),
             text_align=ft.TextAlign.CENTER,
             
@@ -299,6 +304,7 @@ class ExerciseSet(ft.Container):
                 icon=ft.Icons.DELETE_ROUNDED,
                 size=20,
                 color=ft.Colors.ON_SURFACE,
+                visible=not self.disabled,
     
                 align=ft.Alignment.CENTER
             ),
@@ -318,9 +324,9 @@ class ExerciseSet(ft.Container):
                 [
                     self.handle_icon_button,
                     self.exercise_dropdown,
-                    # ft.VerticalDivider(1), 
+
                     self.count_text_field,
-                    # ft.VerticalDivider(1), 
+
                     self.delete_button
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -338,11 +344,10 @@ class ExerciseSet(ft.Container):
                 [
                     self.handle_icon_button,
                     self.exercise_dropdown,
-                    # ft.VerticalDivider(1), 
+
                     self.reps_text_field,
-                    # ft.VerticalDivider(1), 
                     self.weight_text_field,
-                    # ft.VerticalDivider(1), 
+
                     self.delete_button
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN,

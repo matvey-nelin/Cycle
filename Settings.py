@@ -14,6 +14,7 @@ class Settings:
         if not self.settings_path.exists():
             self._settings_dict = {
                 "app_version"   : global_variables.APP_VERSION,
+                "last_backup"   : 0,
 
                 "first_launch"  : True,
                 "language"      : "en",
@@ -46,6 +47,7 @@ class Settings:
 
 
             self.app_version    = str(global_variables.APP_VERSION)
+            self.last_backup    = int(self._settings_dict["last_backup"])
 
             self.first_launch   = bool(self._settings_dict["first_launch"])
             self.language       = str(self._settings_dict["language"])
@@ -81,6 +83,7 @@ class Settings:
             # Смена стандартных настроек на текущие, если файл настроек существует
             self._settings_dict = {
                 "app_version"   : global_variables.APP_VERSION,
+                "last_backup"   : self.last_backup,
                 
                 "first_launch"  : self.first_launch,
                 "language"      : self.language,
@@ -141,6 +144,10 @@ class Settings:
         self.unloading()
     
 
+    def update_last_backup_time(self, backup_time: int | float):
+        self.last_backup = backup_time
+        self.unloading()
+
 
 
     def start_workout(self, id_workout: int):
@@ -164,3 +171,5 @@ class Settings:
         self.unchangeable_agonists  = [_ for _ in range(1, 51)]     if agonists     else []
 
         self.unloading()
+
+    

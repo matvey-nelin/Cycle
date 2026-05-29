@@ -191,8 +191,8 @@ class WorkoutTemplateMenu(BaseView):
             template_id     = int(template_info[0])
             template_labels = [
                 template_info[1],
-                self.app_state.translator.workout_types[template_info[2]],
-                self.app_state.translator.hypertrophy_types[template_info[3]]
+                self.app_state.translator.workout_types.get(template_info[2], template_info[2]),
+                self.app_state.translator.hypertrophy_types.get(template_info[3], template_info[3])
             ]
 
             

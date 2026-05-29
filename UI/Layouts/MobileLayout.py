@@ -34,7 +34,7 @@ class MobileLayout(BaseLayout):
                     selected_icon_color=ft.Colors.TERTIARY_CONTAINER,
                     selected=(config["idx"] == 0),
                     data=config["idx"],
-                    on_click=self._bottom_bar_click_
+                    on_click=self._bottom_bar_click_ 
                 )
             )
         

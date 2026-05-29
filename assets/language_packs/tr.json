@@ -125,39 +125,18 @@
             "dumbbell_curl": "Dumbbell Curl",
             "glute_bridge": "Glute Bridge",
             "side_plank": "Side Plank",
-            "triceps_pushdown": "Triceps Pushdown"
+            "triceps_pushdown": "Triceps Pushdown",
+            "shragi_s_vkljucheniem_rombovidnyh_myshts_spiny": "Romboid kasları dahil shrug"
         },
         "workout_templates": {
-            "powerlifting_heavy_squat_day": "Powerlifting - Ağır Squat Günü",
-            "powerlifting_heavy_bench_day": "Powerlifting - Ağır Bench Günü",
-            "powerlifting_heavy_deadlift_day": "Powerlifting - Ağır Deadlift Günü",
-            "bodybuilding_chest_triceps": "Bodybuilding - Göğüs & Triceps",
-            "bodybuilding_back_biceps": "Bodybuilding - Sırt & Biceps",
-            "bodybuilding_legs_shoulders": "Bodybuilding - Bacak & Omuz",
-            "full_body_general_fitness": "Tüm Vücut - Genel Fitness",
-            "cardio_endurance_session": "Kardiyo - Dayanıklılık Seansı",
-            "calisthenics_upper_body": "Calisthenics - Üst Vücut",
-            "liss_recovery_walk": "LISS - Toparlanma Yürüyüşü",
-            "lower_strength": "Alt Vücut Güç",
-            "push_pull_hypertrophy": "Push/Pull Hipertrofi",
-            "full_body_conditioning": "Tüm Vücut Conditioning",
-            "novyj_shablon_trenirovki": "Yeni Antrenman Şablonu",
-            "silovaja_po_dzhiu_dzhiutsu": "Jiu-Jitsu Güç",
-            "upper_strength": "Üst Vücut Güç"
+            "trenirovka_verha_tela": "Üst vücut antrenmanı",
+            "trenirovka_fullbadi": "Full body antrenmanı",
+            "trenirovki_tjagi_i_zhima": "İtiş ve çekiş antrenmanları",
+            "nizkointensivnaja_trenirovka": "Düşük yoğunluklu antrenman"
         },
         "microcycle_templates": {
-            "week_1_foundation": "Hafta 1 - Temel",
-            "week_2_volume_build": "Hafta 2 - Hacim İnşası",
-            "week_3_intensity_peak": "Hafta 3 - Yoğunluk Zirvesi",
-            "week_4_deload": "Hafta 4 - Deload",
-            "5x5_strength_cycle": "5x5 Güç Döngüsü",
-            "hypertrophy_block_a": "Hipertrofi Bloğu A",
-            "hypertrophy_block_b": "Hipertrofi Bloğu B",
-            "powerlifting_meet_prep": "Powerlifting Yarışma Hazırlığı",
-            "general_fitness_week": "Genel Fitness Haftası",
-            "active_recovery_week": "Aktif Toparlanma Haftası",
-            "base_3day": "Base 3-Günlük Split",
-            "deload_3day": "Deload 3-Günlük"
+            "3_h_dnevnaja_razgruzka": "3 günlük deload",
+            "bazovyj_3_h_dnevnyj_split": "Temel 3 günlük split"
         }
     },
     "settings": {
@@ -294,7 +273,8 @@
                 "language": "Uygulama Dili",
                 "trainer_mode_switch": "Antrenör Modu",
                 "active_user_statuses": "Aktif Kullanıcı Durumları",
-                "app_color_themes": "Uygulama Renk Teması"
+                "app_color_themes": "Uygulama Renk Teması",
+                "export_import_data" : "Veri Dışa & İçe Aktarımı"
             },
             "workout_template_menu": {
                 "no_data": "Hiç şablonunuz yok.",
@@ -384,7 +364,22 @@
                 "workout_types_helper_text": "Antrenman Tipleri",
                 "save_button": "Kaydet"
             },
-            "app_color_themes_screen": {}
+            "app_color_themes_screen": {},
+            "export_import_screen" : {
+                "current_db_title" : "Veritabanı",
+                "path_to_database" : "Veritabanı yolu: ",
+                "size_database"    : "Boyut: ",
+                "import_button": "İçe Aktar",
+                "export_button": "Dışa Aktar",
+                "import_dialog_title" : "Geri yüklenecek dosyayı seçin",
+                "export_dialog_title" : "Yedek kaydet",
+                "import_error" : "İçe aktarma hatası. Veritabanı güncellenmedi.",
+                "export_error" : "Dışa aktarma hatası. Dosya kaydedilmedi.",
+                "import_succes" : "Veritabanı başarıyla geri yüklendi.",
+                "export_succes" : "Yedek başarıyla oluşturuldu.",
+                "last_backup_time" : "Son yedek tarihi: ",
+                "no_backups"        : "Yedek yok"
+            }
         }
     }
 }

@@ -25,12 +25,16 @@ class UserInformationScreen(BaseView):
 
         self.main_container.alignment = ft.Alignment.TOP_CENTER
         self.main_container.content = ft.Column(
+            margin=ft.Margin.symmetric(vertical=10),
+
             controls=
             [
                 NavigationOption(self.app_state.colors, self.labels["users"], "users_screen", self.navigate),
                 NavigationOption(self.app_state.colors, self.labels["user_statuses"], "user_statuses_screen", self.navigate),
             ],
+
             alignment=ft.MainAxisAlignment.START,
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            
             scroll=ft.ScrollMode.AUTO
         )

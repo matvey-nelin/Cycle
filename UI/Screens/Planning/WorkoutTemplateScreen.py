@@ -34,8 +34,8 @@ class WorkoutTemplateScreen(BaseView):
             
             self.slug = str(result[0][0])
             self.title = self.translator.workout_templates.get(str(result[0][0]), str(result[0][0]))
-            self.chosen_workout_type_title = self.translator.workout_types[str(result[0][1])]
-            self.chosen_hypertrophy_type_title = self.translator.hypertrophy_types[str(result[0][2])]
+            self.chosen_workout_type_title = self.translator.workout_types.get(str(result[0][1]), str(result[0][1]))
+            self.chosen_hypertrophy_type_title = self.translator.hypertrophy_types.get(str(result[0][2]), str(result[0][2]))
 
 
         # Поля имени шаблона
@@ -53,8 +53,8 @@ class WorkoutTemplateScreen(BaseView):
                     color=ft.Colors.ON_SURFACE
                 ),
                 border=ft.InputBorder.UNDERLINE,
-                border_color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE,
-                focused_border_color=self.colors.LIGHT_PRIMARY if self.colors.theme == "light" else self.colors.DARK_PRIMARY,
+                border_color=ft.Colors.OUTLINE,
+                focused_border_color=ft.Colors.PRIMARY,
 
                 max_lines=5,
                 max_length=100,

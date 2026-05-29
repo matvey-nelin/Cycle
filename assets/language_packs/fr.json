@@ -125,39 +125,18 @@
             "dumbbell_curl": "Curl Haltères",
             "glute_bridge": "Pont Fessier",
             "side_plank": "Planche Latérale",
-            "triceps_pushdown": "Extension Triceps Poulie"
+            "triceps_pushdown": "Extension Triceps Poulie",
+            "shragi_s_vkljucheniem_rombovidnyh_myshts_spiny": "Shrugs avec engagement des rhomboïdes"
         },
         "workout_templates": {
-            "powerlifting_heavy_squat_day": "Powerlifting - Jour Squat Lourd",
-            "powerlifting_heavy_bench_day": "Powerlifting - Jour Développé Lourd",
-            "powerlifting_heavy_deadlift_day": "Powerlifting - Jour Soulevé de Terre Lourd",
-            "bodybuilding_chest_triceps": "Culturisme - Pectoraux & Triceps",
-            "bodybuilding_back_biceps": "Culturisme - Dos & Biceps",
-            "bodybuilding_legs_shoulders": "Culturisme - Jambes & Épaules",
-            "full_body_general_fitness": "Full Body - Fitness Général",
-            "cardio_endurance_session": "Cardio - Séance Endurance",
-            "calisthenics_upper_body": "Calisthenics - Haut du Corps",
-            "liss_recovery_walk": "LISS - Marche Récupération",
-            "lower_strength": "Force Inférieure",
-            "push_pull_hypertrophy": "Hypertrophie Push/Pull",
-            "full_body_conditioning": "Conditionnement Full Body",
-            "novyj_shablon_trenirovki": "Nouveau Modèle d'Entraînement",
-            "silovaja_po_dzhiu_dzhiutsu": "Force Jiu-Jitsu",
-            "upper_strength": "Force Supérieure"
+            "trenirovka_verha_tela": "Entraînement haut du corps",
+            "trenirovka_fullbadi": "Entraînement full body",
+            "trenirovki_tjagi_i_zhima": "Entraînements poussée et tirage",
+            "nizkointensivnaja_trenirovka": "Entraînement basse intensité"
         },
         "microcycle_templates": {
-            "week_1_foundation": "Semaine 1 - Fondation",
-            "week_2_volume_build": "Semaine 2 - Construction Volume",
-            "week_3_intensity_peak": "Semaine 3 - Pic d'Intensité",
-            "week_4_deload": "Semaine 4 - Décharge",
-            "5x5_strength_cycle": "Cycle Force 5x5",
-            "hypertrophy_block_a": "Bloc Hypertrophie A",
-            "hypertrophy_block_b": "Bloc Hypertrophie B",
-            "powerlifting_meet_prep": "Prépa Compétition Powerlifting",
-            "general_fitness_week": "Semaine Fitness Générale",
-            "active_recovery_week": "Semaine de Récupération Active",
-            "base_3day": "Split 3 Jours Base",
-            "deload_3day": "Décharge 3 Jours"
+            "3_h_dnevnaja_razgruzka": "Décharge de 3 jours",
+            "bazovyj_3_h_dnevnyj_split": "Split basique de 3 jours"
         }
     },
     "settings": {
@@ -294,7 +273,8 @@
                 "language": "Langue de l'App",
                 "trainer_mode_switch": "Mode Entraîneur",
                 "active_user_statuses": "Statuts Utilisateurs Actifs",
-                "app_color_themes": "Thème de Couleur de l'App"
+                "app_color_themes": "Thème de Couleur de l'App",
+                "export_import_data" : "Export & Import des données"
             },
             "workout_template_menu": {
                 "no_data": "Vous n'avez aucun modèle.",
@@ -384,7 +364,22 @@
                 "workout_types_helper_text": "Types d'Entraînements",
                 "save_button": "Enregistrer"
             },
-            "app_color_themes_screen": {}
+            "app_color_themes_screen": {},
+            "export_import_screen" : {
+                "current_db_title" : "Base de données",
+                "path_to_database" : "Chemin de la base : ",
+                "size_database"    : "Taille : ",
+                "import_button": "Importer",
+                "export_button": "Exporter",
+                "import_dialog_title" : "Sélectionner le fichier à restaurer",
+                "export_dialog_title" : "Sauvegarder une copie",
+                "import_error" : "Erreur d'import. Base non mise à jour.",
+                "export_error" : "Erreur d'export. Fichier non sauvegardé.",
+                "import_succes" : "Base restaurée avec succès.",
+                "export_succes" : "Copie créée avec succès.",
+                "last_backup_time" : "Date de la dernière sauvegarde : ",
+                "no_backups"        : "Aucune sauvegarde"
+            }
         }
     }
 }

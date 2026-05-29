@@ -190,7 +190,7 @@ class RecordsList(ft.ListView):
 			raise ValueError("Incorrect value of 'table_name'")
 		
 
-		self.margin	 = 0
+		self.margin	 = ft.Margin.symmetric(vertical=10)
 		self.spacing = 5
 
 		self._init_data_()
@@ -207,10 +207,7 @@ class RecordsList(ft.ListView):
 
 			for record in self.data:
 				id_list_tile = record[0]
-				try:
-					title_list_tile = record[2] if (self.table_name == "users") else data_labels[record[1]]
-				except KeyError:
-					continue
+				title_list_tile = record[2] if (self.table_name == "users") else data_labels.get(record[1], record[1])
 				
 				is_unchangeable = bool(id_list_tile in self.entities[self.table_name]["unchangeable_records"])
 				subtitle_list_tile 	= self.entities[self.table_name]["subtitle"](id_list_tile) if self.entities[self.table_name]["subtitle"] is not None else None
@@ -334,7 +331,7 @@ class RecordsList(ft.ListView):
 	# Методы получения подзаголовка записи
 	def user_subtitle(self, id_user: int):
 		id_user_status = self.database.get_users(id_user)[0][1]
-		return f"{self.translator.user_statuses[self.database.get_user_statuses(id_user_status)[0][1]]}" 
+		return f"{self.translator.user_statuses.get(self.database.get_user_statuses(id_user_status)[0][1], self.database.get_user_statuses(id_user_status)[0][1])}"
 	
 
 	def exercise_subtitle(self, id_exercise: int):
@@ -344,7 +341,7 @@ class RecordsList(ft.ListView):
 		
 		subtitle = []
 		for agonist in agonists:
-			subtitle.append(self.translator.agonists[agonist[1]])
+			subtitle.append(self.translator.agonists.get(agonist[1], agonist[1]))
 
 		return ", ".join(subtitle)
 	

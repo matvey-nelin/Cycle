@@ -125,39 +125,18 @@
             "dumbbell_curl": "Curl con Manubri",
             "glute_bridge": "Ponte Glutei",
             "side_plank": "Plank Laterale",
-            "triceps_pushdown": "Estensioni Tricipiti al Cavo"
+            "triceps_pushdown": "Estensioni Tricipiti al Cavo",
+            "shragi_s_vkljucheniem_rombovidnyh_myshts_spiny": "Scrollate con attivazione dei romboidi"
         },
         "workout_templates": {
-            "powerlifting_heavy_squat_day": "Powerlifting - Giorno Squat Pesante",
-            "powerlifting_heavy_bench_day": "Powerlifting - Giorno Panca Pesante",
-            "powerlifting_heavy_deadlift_day": "Powerlifting - Giorno Stacco Pesante",
-            "bodybuilding_chest_triceps": "Bodybuilding - Petto & Tricipiti",
-            "bodybuilding_back_biceps": "Bodybuilding - Schiena & Bicipiti",
-            "bodybuilding_legs_shoulders": "Bodybuilding - Gambe & Spalle",
-            "full_body_general_fitness": "Full Body - Fitness Generale",
-            "cardio_endurance_session": "Cardio - Sessione Resistenza",
-            "calisthenics_upper_body": "Calisthenics - Parte Superiore",
-            "liss_recovery_walk": "LISS - Camminata Recupero",
-            "lower_strength": "Forza Inferiore",
-            "push_pull_hypertrophy": "Ipertrofia Push/Pull",
-            "full_body_conditioning": "Condizionamento Full Body",
-            "novyj_shablon_trenirovki": "Nuovo Modello di Allenamento",
-            "silovaja_po_dzhiu_dzhiutsu": "Forza Jiu-Jitsu",
-            "upper_strength": "Forza Superiore"
+            "trenirovka_verha_tela": "Allenamento parte superiore",
+            "trenirovka_fullbadi": "Allenamento full body",
+            "trenirovki_tjagi_i_zhima": "Allenamenti spinta e trazione",
+            "nizkointensivnaja_trenirovka": "Allenamento a bassa intensità"
         },
         "microcycle_templates": {
-            "week_1_foundation": "Settimana 1 - Fondazione",
-            "week_2_volume_build": "Settimana 2 - Costruzione Volume",
-            "week_3_intensity_peak": "Settimana 3 - Picco di Intensità",
-            "week_4_deload": "Settimana 4 - Scarico",
-            "5x5_strength_cycle": "Ciclo Forza 5x5",
-            "hypertrophy_block_a": "Blocco Ipertrofia A",
-            "hypertrophy_block_b": "Blocco Ipertrofia B",
-            "powerlifting_meet_prep": "Prep Gara Powerlifting",
-            "general_fitness_week": "Settimana Fitness Generale",
-            "active_recovery_week": "Settimana di Recupero Attivo",
-            "base_3day": "Split Base 3 Giorni",
-            "deload_3day": "Scarico 3 Giorni"
+            "3_h_dnevnaja_razgruzka": "Scarico di 3 giorni",
+            "bazovyj_3_h_dnevnyj_split": "Split base di 3 giorni"
         }
     },
     "settings": {
@@ -294,7 +273,8 @@
                 "language": "Lingua App",
                 "trainer_mode_switch": "Modalità Allenatore",
                 "active_user_statuses": "Stati Utente Attivi",
-                "app_color_themes": "Tema Colore App"
+                "app_color_themes": "Tema Colore App",
+                "export_import_data" : "Esporta & Importa dati"
             },
             "workout_template_menu": {
                 "no_data": "Non hai nessun modello.",
@@ -384,7 +364,22 @@
                 "workout_types_helper_text": "Tipi Allenamento",
                 "save_button": "Salva"
             },
-            "app_color_themes_screen": {}
+            "app_color_themes_screen": {},
+            "export_import_screen" : {
+                "current_db_title" : "Database",
+                "path_to_database" : "Percorso database: ",
+                "size_database"    : "Dimensione: ",
+                "import_button": "Importa",
+                "export_button": "Esporta",
+                "import_dialog_title" : "Seleziona file da ripristinare",
+                "export_dialog_title" : "Salva copia di backup",
+                "import_error" : "Errore import. Database non aggiornato.",
+                "export_error" : "Errore export. File non salvato.",
+                "import_succes" : "Database ripristinato con successo.",
+                "export_succes" : "Backup creato con successo.",
+                "last_backup_time" : "Data ultimo backup: ",
+                "no_backups"        : "Nessun backup"
+            }
         }
     }
 }

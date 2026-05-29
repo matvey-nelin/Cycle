@@ -47,12 +47,6 @@ class SettingsScreen(BaseView):
                             )
                         ),
                         ft.Text(
-                            value=f"v. {self.settings.app_version}",
-                            size=10,
-                            text_align=ft.TextAlign.RIGHT,
-                            color=ft.Colors.ON_SURFACE
-                        ),
-                        ft.Text(
                             value="Cycle",
                             size=16,
                             color=ft.Colors.ON_SURFACE
@@ -145,7 +139,7 @@ class SettingsScreen(BaseView):
                     ),
                     ft.Switch(
                         value=self.settings.trainer_mode,
-                        active_color=self.colors.LIGHT_PRIMARY if self.colors.theme == "light" else self.colors.DARK_PRIMARY,
+                        active_color=ft.Colors.PRIMARY,
                         on_change=self.trainer_mode_switch_on_change
                     )
                 ],
@@ -155,7 +149,7 @@ class SettingsScreen(BaseView):
 
             border=ft.Border().all(
                 width=2, 
-                color=self.colors.LIGHT_OUTLINE if self.colors.theme == "light" else self.colors.DARK_OUTLINE
+                color=ft.Colors.OUTLINE
             ),
             border_radius=12,
 
@@ -166,7 +160,6 @@ class SettingsScreen(BaseView):
 
         # Определяю контейнер со всем содержимым с шириной не более 600px
         self.main_container.width   = 600 # ограничение максимальной ширины
-        # self.main_container.padding = ft.Padding.symmetric(horizontal=50)
         self.main_container.content = ft.Column(
             margin=ft.Margin.only(top=15, left=50, right=50),
 
@@ -179,13 +172,25 @@ class SettingsScreen(BaseView):
 
                 self.divider,
 
-                # NavigationOption(self.app_state.colors, self.labels["active_user_statuses"], "active_user_statuses_screen", self.navigate),
+                NavigationOption(self.app_state.colors, self.labels["export_import_data"], "export_import_screen", self.navigate),
+
                 NavigationOption(self.app_state.colors, self.labels["app_color_themes"], "app_color_themes_screen", self.navigate),
 
-                # self.divider,
 
-                # NavigationOption(self.app_state.colors, self.labels["mesocycle_menu"], "mesocycle_menu", self.navigate),
-                # NavigationOption(self.app_state.colors, self.labels["macrocycle_menu"], "macrocycle_menu", self.navigate)
+                # NavigationOption(self.app_state.colors, self.labels["active_user_statuses"], "active_user_statuses_screen", self.navigate),
+
+                # ft.Row(
+                #     controls=
+                #     [
+                #         ft.Text(
+                #             value=f"version: {self.settings.app_version}",
+                #             size=10,
+                #             color=ft.Colors.ON_SURFACE
+                #         )
+                #     ],
+                #     alignment=ft.MainAxisAlignment.END,
+                #     vertical_alignment=ft.CrossAxisAlignment.CENTER
+                # )
             ],
             scroll=ft.ScrollMode.AUTO
         )

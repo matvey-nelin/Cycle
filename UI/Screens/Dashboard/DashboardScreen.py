@@ -49,6 +49,19 @@ class DashboardScreen(BaseView):
                 alignment=ft.MainAxisAlignment.END,
                 vertical_alignment=ft.CrossAxisAlignment.CENTER
             ), 
+            
+            bgcolor=ft.Colors.SURFACE_CONTAINER_HIGH,
+            border_radius=10,
+
+            shadow=[
+                ft.BoxShadow(
+                    spread_radius=0,
+                    blur_radius=12, 
+                    color=ft.Colors.SHADOW,
+                    offset=ft.Offset(0, 4)
+                )
+            ],
+
             alignment=ft.Alignment.CENTER_RIGHT
         )
         
@@ -197,16 +210,12 @@ class DashboardScreen(BaseView):
 
         self.timetable = ft.Container(
             expand=True,
-            margin=ft.Margin.symmetric(vertical=25, horizontal=15),
+            margin=ft.Margin.symmetric(vertical=25, horizontal=10),
             padding=ft.Padding.symmetric(vertical=10, horizontal=10),
             content=self.workouts_list,
 
             bgcolor=ft.Colors.SURFACE_CONTAINER_LOW,
 
-            border = ft.Border().all(
-                width=2,
-                color=ft.Colors.OUTLINE,
-            ),
             border_radius=10,
 
             alignment=ft.Alignment.CENTER
@@ -275,7 +284,7 @@ class DashboardScreen(BaseView):
 
             self.workouts_list.controls.append(
                 ft.Container(
-                    data={"id": id_workout},
+                    data={"id": id_workout}, 
                     bgcolor=current_workout_bgcolor if self.settings.current_workout == id_workout else ft.Colors.SURFACE_CONTAINER_HIGH,
                     content=ft.ListTile(
                         expand=True,

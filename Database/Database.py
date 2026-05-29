@@ -1,7 +1,8 @@
-import datetime
 import sqlite3
 import logging
-
+import datetime
+from pathlib import Path
+import time
 
 import utils
 
@@ -13,54 +14,58 @@ class Database:
         self.db_path = utils.get_data_directory() / "CycleDatabase.db"
 
         try:
-            self.conn = sqlite3.connect(self.db_path, check_same_thread=False, timeout=10)
-            self.cur  = self.conn.cursor()
+            with sqlite3.connect(self.db_path, check_same_thread=False, timeout=10) as conn:
+                cur  = conn.cursor()
 
-            self.cur.execute("PRAGMA journal_mode=WAL;")
-            self.cur.execute("PRAGMA foreign_keys=ON;")
-            self.conn.commit()
+                cur.execute("PRAGMA journal_mode=WAL;")
+                cur.execute("PRAGMA foreign_keys=ON;")
+                conn.commit()
 
-            self.cur.execute("PRAGMA user_version;")
-            self.db_version = self.cur.fetchone()[0]  
+                cur.execute("PRAGMA user_version;")
+                self.db_version = cur.fetchone()[0]  
 
-            if self.db_version == 0:
-                # Создание базы данных (если не существует)
-                with open(utils.resource_path(r"assets/database/Requests/Creating a database.sql"), 'r', encoding='UTF-8') as file:
-                    self.cur.executescript(file.read())
-                
-                # Вставка первичных данных (если данных нет в таблице)
-                with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting initial data.sql"), 'r', encoding='UTF-8') as file:
-                    self.cur.executescript(file.read())
+                if self.db_version == 0:
+                    # Создание базы данных (если не существует)
+                    with open(utils.resource_path(r"assets/database/Requests/Creating a database.sql"), 'r', encoding='UTF-8') as file:
+                        cur.executescript(file.read())
+                    
+                    # Вставка первичных данных (если данных нет в таблице)
+                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting initial data.sql"), 'r', encoding='UTF-8') as file:
+                        cur.executescript(file.read())
 
-                self.cur.execute("PRAGMA user_version = 1;")
-                self.conn.commit()
+                    cur.execute("PRAGMA user_version = 1;")
+                    conn.commit()
 
         except Exception as _ex:
             logging.critical(f"DB init failed: {_ex}")
-            self._close_connection_()
             raise _ex
+        
 
 
-    def _close_connection_(self):
-        if self.conn:
-            self.conn.close()
+    def _perform_export_(self, destination_path: str | Path):
+        try:
+            with sqlite3.connect(self.db_path, check_same_thread=False, timeout=10) as conn:
+                conn.execute("VACUUM INTO ?;", [destination_path])
+        except Exception as _ex:
+            raise _ex
 
 
     def __insertion_secondary_data__(self, insert_agonists: bool, insert_exercises: bool):
         try:
-            # Вставка вторичных данных (если данных нет в таблице)                    
-                # Вставка мышц-агонистов
-            if insert_agonists:
-                with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting agonists.sql"), 'r', encoding='UTF-8') as file:
-                    self.cur.executescript(file.read())
-                
-                # Вставка упражнений
-            if insert_exercises:
-                with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting exercices.sql"), 'r', encoding='UTF-8') as file:
-                    self.cur.executescript(file.read())
+            with sqlite3.connect(self.db_path, check_same_thread=False, timeout=10) as conn:
+                cur = conn.cursor()
+                # Вставка вторичных данных (если данных нет в таблице)                    
+                    # Вставка мышц-агонистов
+                if insert_agonists:
+                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting agonists.sql"), 'r', encoding='UTF-8') as file:
+                        cur.executescript(file.read())
+                    
+                    # Вставка упражнений
+                if insert_exercises:
+                    with open(utils.resource_path(r"assets/database/Requests/Inserting data/Inserting exercices.sql"), 'r', encoding='UTF-8') as file:
+                        cur.executescript(file.read())
 
         except Exception as _ex:
-            self.conn.rollback()
             self._exception = _ex
             raise _ex
 
@@ -68,9 +73,13 @@ class Database:
 
     def __select_request__(self, request_string: str) -> list:        
         try:
-            self.cur.execute(request_string)
-            result = self.cur.fetchall()
-            return result 
+            with sqlite3.connect(self.db_path, check_same_thread=False, timeout=10) as conn:
+                cur = conn.cursor()
+
+                cur.execute(request_string)
+                result = cur.fetchall()
+
+                return result 
 
         except Exception as _ex:
             self._exception = _ex
@@ -82,22 +91,27 @@ class Database:
             raise TypeError("Invalid data type for insertion.")
 
         try:
-            self.cur.executemany(request_string, data)
-            self.conn.commit()
+            with sqlite3.connect(self.db_path, check_same_thread=False, timeout=10) as conn:
+                cur = conn.cursor()
+
+                cur.executemany(request_string, data)
+                conn.commit()
 
         except Exception as _ex:
-            self.conn.rollback()
             self._exception = _ex
             raise _ex
 
 
     def __execute_request__(self, request_string: str):
         try:
-            self.cur.execute(request_string)
-            self.conn.commit()
+            with sqlite3.connect(self.db_path, check_same_thread=False, timeout=10) as conn:
+                cur = conn.cursor()
+
+                cur.execute(request_string)
+                conn.commit()
 
         except Exception as _ex:
-            self.conn.rollback()
+            
             self._exception = _ex
             raise _ex
 

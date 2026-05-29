@@ -73,7 +73,7 @@ class TrainingProcess:
                         max_lines=3,
                         size=12                     if not headers else 11,
                         weight=ft.FontWeight.NORMAL,
-                        color=ft.Colors.ON_SURFACE  if not headers else (ft.Colors.with_opacity(opacity=0.5, color=ft.Colors.ON_SURFACE_VARIANT))
+                        color=ft.Colors.with_opacity(0.7, ft.Colors.ON_SURFACE) if not headers else (ft.Colors.with_opacity(0.5, ft.Colors.ON_SURFACE_VARIANT))
                     ),
                     ft.Row(
                         expand=False,
@@ -192,7 +192,7 @@ class TrainingProcess:
             )
         
         workout_status_slug  = self.database.get_workout_statuses(id_workout=id_workout)[0][1]
-        workout_status_title = self.translator.workout_statuses[workout_status_slug]
+        workout_status_title = self.translator.workout_statuses.get(workout_status_slug, workout_status_slug)
 
         if workout_status_slug in ["completed", "overcompleted", "partially_completed", "in_progress"]:
             text_color          = ft.Colors.TERTIARY
@@ -247,7 +247,7 @@ class TrainingProcess:
 
         for exercise in exercises:
             id_exercise = int(exercise[1])
-            title_exercise = self.translator.exercises[exercise[2]]
+            title_exercise = self.translator.exercises.get(exercise[2], exercise[2])
 
             planned_repetitions = int(exercise[3])   if exercise[3] is not None else str("NULL")
             planned_weight      = float(exercise[4]) if exercise[4] is not None else str("NULL")

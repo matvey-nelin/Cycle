@@ -135,7 +135,7 @@ class Translator:
         self.settings_screen_labels     = dict(self.screens_labels["settings_screen"])
 
         self.app_color_themes_screen    = dict(self.screens_labels["app_color_themes_screen"])
-
+        self.export_import_screen       = dict(self.screens_labels["export_import_screen"])
 
         # Таблицы со слагами
         self.essence_data_labels = {

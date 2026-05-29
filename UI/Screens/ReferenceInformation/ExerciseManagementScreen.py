@@ -42,7 +42,7 @@ class ExerciseManagementScreen(BaseView):
         self.all_agonists: list[ft.Control] = [ 
             ft.Checkbox(
                 data={"id": agonist[0]},
-                label=self.translator.agonists[agonist[1]],
+                label=self.translator.agonists.get(agonist[1], agonist[1]),
                 label_style=ft.TextStyle(
                     size=14,
                     color=ft.Colors.ON_SURFACE
@@ -177,12 +177,12 @@ class ExerciseManagementScreen(BaseView):
         record = self.database.get_exercises(id_exercise=self.id)[0]
 
         self.slug        = record[1]
-        self.title       = self.translator.exercises[self.slug]
+        self.title       = self.translator.exercises.get(self.slug, self.slug)
 
 
         for agonist in self.database.get_agonists(self.id):
             self.chosen_id_agonists.append(agonist[0])
-            self.chosen_title_agonists.append(self.translator.agonists[agonist[1]])
+            self.chosen_title_agonists.append(self.translator.agonists.get(agonist[1], agonist[1]))
         
         
 
