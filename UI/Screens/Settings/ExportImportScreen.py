@@ -2,7 +2,6 @@ import datetime
 import shutil
 import sqlite3
 from pathlib import Path
-import time
 import gc
 
 import flet as ft
@@ -69,7 +68,7 @@ class ExportImportScreen(BaseView):
                                     ),
 
                                     ft.Text(
-                                        expand=3, 
+                                        expand=2, 
 
                                         value=f"{self.database_path}",
                                         size=12,
@@ -96,7 +95,7 @@ class ExportImportScreen(BaseView):
                                     ),
 
                                     ft.Text(    
-                                        expand=3,
+                                        expand=2,
                                         value=f"{self.database_size}",
                                         size=12,
                                         weight=ft.FontWeight.BOLD,
@@ -118,7 +117,7 @@ class ExportImportScreen(BaseView):
                                     ),
 
                                     ft.Text(
-                                        expand=3,
+                                        expand=2,
                                         value=f"{self.last_backup_time}",
                                         size=12,
                                         weight=ft.FontWeight.BOLD,
@@ -212,7 +211,9 @@ class ExportImportScreen(BaseView):
             ],
 
             alignment=ft.MainAxisAlignment.START,
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+
+            scroll=ft.ScrollMode.AUTO
         )
 
         
@@ -255,6 +256,7 @@ class ExportImportScreen(BaseView):
 
                         size=14,
                         weight=ft.FontWeight.NORMAL,
+                        max_lines=10,
 
                         color=ft.Colors.ON_TERTIARY if not is_error else ft.Colors.ON_ERROR,
 
@@ -275,20 +277,45 @@ class ExportImportScreen(BaseView):
 
     async def _handle_export_(self):
         export_time = datetime.datetime.now()
+        file_name   = f"CycleDatabase_backup_from_{export_time.strftime('%d_%m_%Y_%H_%M_%S')}.db"
+        db_bytes = self.database._perform_export_()
 
         self.saved_file_path = await self.file_picker.save_file(
-            file_name=f"CycleDatabase_backup_from_{export_time.strftime("%d_%m_%Y_%H_%M_%S")}.db",
             dialog_title=self.labels["export_dialog_title"],
-            allowed_extensions=["db", "sqlite"]
+            file_name=file_name,
+            initial_directory=self.settings.backups_dir,
+            src_bytes=db_bytes
         )
 
         if not self.saved_file_path:
             return
+        
+
+        self.saved_file_path = Path(self.saved_file_path)
+        self.destination_dir = self.saved_file_path.parent
+
+        is_desktop = self.page.platform.value in ("windows", "macos", "linux") if self.page.platform is not None else False
 
         try:
-            self.database._perform_export_(self.saved_file_path)
+            # Перемещение файла резервной копии в специальную папку
+            # выполняется только на платформах где это возможно ("windows", "macos", "linux")
+            if is_desktop: 
+                if self.destination_dir.name.lower() != self.app_state.backups_dir_name.lower():
+                    self.destination_dir = self.destination_dir / self.app_state.backups_dir_name
 
+                self.destination_dir.mkdir(parents=True, exist_ok=True)
+
+                if not self.destination_dir.is_dir():
+                    raise NotADirectoryError(f"Expected a folder, but found a file along the way: {self.destination_dir}")
+
+                self.destination_file_path = self.destination_dir / file_name
+                shutil.move(str(self.saved_file_path), str(self.destination_file_path))
+
+
+            # Далее страндартное поведение для всех ОС
             self.settings.update_last_backup_time(export_time.timestamp())
+            self.settings.change_backups_dir(self.destination_dir)
+
             self.page.run_task(self.app_state.hot_restart_app)
 
             self._show_snackbar_(self.labels["export_succes"])
@@ -301,6 +328,7 @@ class ExportImportScreen(BaseView):
     async def _handle_import_(self):
         self.imported_file_path = await self.file_picker.pick_files(
             dialog_title=self.labels["import_dialog_title"],
+            initial_directory=self.settings.backups_dir,
             allowed_extensions=["db", "sqlite"],
             allow_multiple=False
         )

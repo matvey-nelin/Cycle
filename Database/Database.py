@@ -2,7 +2,6 @@ import sqlite3
 import logging
 import datetime
 from pathlib import Path
-import time
 
 import utils
 
@@ -42,12 +41,17 @@ class Database:
         
 
 
-    def _perform_export_(self, destination_path: str | Path):
+    def _perform_export_(self):
         try:
-            with sqlite3.connect(self.db_path, check_same_thread=False, timeout=10) as conn:
-                conn.execute("VACUUM INTO ?;", [destination_path])
+            with sqlite3.connect(self.db_path) as conn:
+                conn.execute("PRAGMA wal_checkpoint(TRUNCATE);")
+                conn.execute("VACUUM;")
+
+            return Path(self.db_path).read_bytes()
         except Exception as _ex:
-            raise _ex
+            print(_ex)
+
+
 
 
     def __insertion_secondary_data__(self, insert_agonists: bool, insert_exercises: bool):

@@ -23,10 +23,11 @@ class AppState:
         self.db_path        = utils.get_data_directory() / "CycleDatabase.db"
         self.settings_path  = utils.get_data_directory() / "settings.json"
         self.lang_pack_path = lambda language: utils.get_data_directory() / rf"language_packs/{language}.json"
+        self.backups_dir_name = "CycleBackups"
         
         self.settings   = Settings()
         self.database   = Database()
-        self.translator = Translator(self.settings.language)
+        self.translator = Translator(self.settings.language) 
         
         theme_mode = self.settings.theme_mode
         # Фактическая тема для инициализации цветов (dark/light)

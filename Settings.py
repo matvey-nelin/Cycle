@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 from Languages import SupportedLanguages
 
@@ -15,6 +16,7 @@ class Settings:
             self._settings_dict = {
                 "app_version"   : global_variables.APP_VERSION,
                 "last_backup"   : 0,
+                "backups_dir"   : "",
 
                 "first_launch"  : True,
                 "language"      : "en",
@@ -48,6 +50,7 @@ class Settings:
 
             self.app_version    = str(global_variables.APP_VERSION)
             self.last_backup    = int(self._settings_dict["last_backup"])
+            self.backups_dir    = str(self._settings_dict["backups_dir"])
 
             self.first_launch   = bool(self._settings_dict["first_launch"])
             self.language       = str(self._settings_dict["language"])
@@ -84,6 +87,7 @@ class Settings:
             self._settings_dict = {
                 "app_version"   : global_variables.APP_VERSION,
                 "last_backup"   : self.last_backup,
+                "backups_dir"   : self.backups_dir,
                 
                 "first_launch"  : self.first_launch,
                 "language"      : self.language,
@@ -148,6 +152,10 @@ class Settings:
         self.last_backup = backup_time
         self.unloading()
 
+
+    def change_backups_dir(self, backup_dir: str | Path):
+        self.backups_dir = str(backup_dir)
+        self.unloading()
 
 
     def start_workout(self, id_workout: int):
