@@ -36,8 +36,16 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Install Android Build-Tools (для aapt)
-        run: sdkmanager "build-tools;34.0.0" > /dev/null 2>&1
+        run: sdkmanager "build-tools;34.0.0" > /dev/null 2>&1      
+      
 
+      - name: Hard clean build artifacts
+        run: |
+          rm -rf build/ .flet/ .dart_tool/ __pycache__/
+          rm -rf pubspec.lock .flutter-plugins* flet_server.log
+        shell: bash
+
+        
       - name: Accept licenses
         run: yes | sdkmanager --licenses
 
@@ -48,21 +56,17 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
+          # 1. Создаём ключ в корне проекта
           echo "$KEYSTORE_BASE64" | base64 -d > cycle-release.jks
           
-          mkdir -p android
-          cat > android/key.properties << EOF
+          # 2. Создаём файл настроек В КОРНЕ проекта (Flet сам найдет его и скопирует куда нужно)
+          # Убрали 'mkdir -p android' и путь 'android/'
+          cat > key.properties << EOF
           storePassword=$KEYSTORE_PASSWORD
           keyPassword=$KEY_PASSWORD
           keyAlias=$KEY_ALIAS
           storeFile=../cycle-release.jks
           EOF
-        shell: bash
-
-      - name: Hard clean build artifacts
-        run: |
-          rm -rf build/ .flet/ .dart_tool/ __pycache__/
-          rm -rf pubspec.lock .flutter-plugins* flet_server.log
         shell: bash
 
       - name: Build APK

@@ -82,11 +82,12 @@ class Translator:
         self.setup_wizard_labels    = dict(self.screens_labels["setup_wizard"])
 
             # Компоненты
+        self.backup_option_labels   = dict(self.components_labels["backup_option"])
         self.exercise_set_labels    = dict(self.components_labels["exercise_set"])
         self.manager_dialog_labels  = dict(self.components_labels["manager_dialog"])
-        self.invalid_data_alert_dialog_labels = dict(self.components_labels["invalid_data_alert_dialog"])
         self.navigation_menu_labels = dict(self.components_labels["navigation_menu"])
         self.records_list_labels    = dict(self.components_labels["records_list"])
+        self.invalid_data_alert_dialog_labels = dict(self.components_labels["invalid_data_alert_dialog"])
 
             # Главный начальный экран
         self.dashboard_screen_labels = dict(self.screens_labels["dashboard_screen"])

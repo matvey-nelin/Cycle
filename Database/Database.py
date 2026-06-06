@@ -41,7 +41,7 @@ class Database:
         
 
 
-    def _perform_export_(self):
+    def _prepare_for_export_(self):
         try:
             with sqlite3.connect(self.db_path) as conn:
                 conn.execute("PRAGMA wal_checkpoint(TRUNCATE);")

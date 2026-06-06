@@ -303,8 +303,8 @@ class DarkGradients:
 		self.DIVIDER_FADE = ft.LinearGradient(
 			begin=ft.Alignment.CENTER_LEFT,
 			end=ft.Alignment.CENTER_RIGHT,
-			colors=[colors.DARK_SURFACE, colors.DARK_OUTLINE_VARIANT, colors.DARK_SURFACE],
-		)
+			colors=[ft.Colors.TRANSPARENT, colors.DARK_OUTLINE_VARIANT, ft.Colors.TRANSPARENT],
+		) 
 
 
 		self.APP_BAR_GRADIENT = ft.LinearGradient(

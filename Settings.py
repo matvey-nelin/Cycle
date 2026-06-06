@@ -15,8 +15,9 @@ class Settings:
         if not self.settings_path.exists():
             self._settings_dict = {
                 "app_version"   : global_variables.APP_VERSION,
-                "last_backup"   : 0,
-                "backups_dir"   : "",
+
+                "db_backups_dir"        : "",
+                "archive_backups_dir"   : "",
 
                 "first_launch"  : True,
                 "language"      : "en",
@@ -49,8 +50,9 @@ class Settings:
 
 
             self.app_version    = str(global_variables.APP_VERSION)
-            self.last_backup    = int(self._settings_dict["last_backup"])
-            self.backups_dir    = str(self._settings_dict["backups_dir"])
+
+            self.db_backups_dir    = str(self._settings_dict["db_backups_dir"])
+            self.archive_backups_dir = str(self._settings_dict["archive_backups_dir"])
 
             self.first_launch   = bool(self._settings_dict["first_launch"])
             self.language       = str(self._settings_dict["language"])
@@ -86,8 +88,9 @@ class Settings:
             # Смена стандартных настроек на текущие, если файл настроек существует
             self._settings_dict = {
                 "app_version"   : global_variables.APP_VERSION,
-                "last_backup"   : self.last_backup,
-                "backups_dir"   : self.backups_dir,
+
+                "db_backups_dir"        : self.db_backups_dir,
+                "archive_backups_dir"   : self.archive_backups_dir,
                 
                 "first_launch"  : self.first_launch,
                 "language"      : self.language,
@@ -148,14 +151,16 @@ class Settings:
         self.unloading()
     
 
-    def update_last_backup_time(self, backup_time: int | float):
-        self.last_backup = backup_time
+
+    def change_db_backups_dir(self, backup_dir: str | Path):
+        self.db_backups_dir = str(backup_dir)
         self.unloading()
 
 
-    def change_backups_dir(self, backup_dir: str | Path):
-        self.backups_dir = str(backup_dir)
+    def change_archive_backups_dir(self, backup_dir: str | Path):
+        self.archive_backups_dir = str(backup_dir)
         self.unloading()
+
 
 
     def start_workout(self, id_workout: int):

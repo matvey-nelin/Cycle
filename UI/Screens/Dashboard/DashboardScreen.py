@@ -39,7 +39,9 @@ class DashboardScreen(BaseView):
         )
 
         self.app_bar = ft.Container(
-            expand=1,
+            height=50,
+            margin=ft.Margin.only(top=10) if self.app_state.platform in ['ios', 'android'] else None,
+            
             content=ft.Row(
                 controls=
                 [

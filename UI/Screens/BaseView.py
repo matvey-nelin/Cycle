@@ -16,7 +16,7 @@ class BaseView:
 
         self.__on_page_resize__(None)
 
-        self.app_state = app_state
+        self.app_state  = app_state
 
         self.database   = self.app_state.database
         self.settings   = self.app_state.settings
@@ -29,12 +29,16 @@ class BaseView:
 
 
         self.open_previous_screen_button = ft.IconButton(
+            width=40,
             icon=ft.Icons.ARROW_BACK_ROUNDED,
             on_click=self.return_previous_screen
         )
 
 
         self.appbar = ft.Container(
+            height=50, 
+            margin=ft.Margin.only(top=10) if self.app_state.platform in ['ios', 'android'] else None,
+
             content=ft.Row(
                 margin=ft.Margin.symmetric(horizontal=5, vertical=5),
                 controls=[self.open_previous_screen_button],

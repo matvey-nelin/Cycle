@@ -19,7 +19,9 @@ class WorkoutStatusesScreen(BaseView):
         )
 
         self.appbar = ft.Container(
-            margin=ft.Margin.symmetric(horizontal=5),
+            height=50,
+            margin=ft.Margin.only(top=10, left=5, right=5) if self.app_state.platform in ['ios', 'android'] else None,
+            
             content=ft.Row(
                 controls=
                 [

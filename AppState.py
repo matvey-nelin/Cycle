@@ -1,4 +1,5 @@
 from types import MethodType
+from pathlib import Path
 
 import flet as ft
 import os
@@ -18,11 +19,12 @@ class AppState:
     def __init__(self, page: ft.Page) -> None:        
         self.page = page
 
-        self.app_dir = os.path.dirname(sys.executable)
+        self.app_dir    = utils.get_data_directory()
+        self.platform   = self.page.platform.value if self.page.platform is not None else None
 
-        self.db_path        = utils.get_data_directory() / "CycleDatabase.db"
-        self.settings_path  = utils.get_data_directory() / "settings.json"
-        self.lang_pack_path = lambda language: utils.get_data_directory() / rf"language_packs/{language}.json"
+        self.settings_path  = self.app_dir / "settings.json"
+        self.db_path        = self.app_dir / "CycleDatabase.db"
+        self.lang_pack_path = lambda language: self.app_dir / rf"language_packs/{language}.json"
         self.backups_dir_name = "CycleBackups"
         
         self.settings   = Settings()
@@ -85,13 +87,13 @@ class AppState:
 
 
 
+
     def subscribe(self, callback):
         self._listeners.append(callback)
 
     def notify(self):
         for update_listener in self._listeners:
             update_listener()
-
 
 
 
@@ -113,7 +115,7 @@ class AppState:
     def data_changed_notify(self):
         for data_changed_listener in self._data_changed_listeners:
             try:
-                self.page.run_task(data_changed_listener)
+                data_changed_listener()
             except:
                 pass
 
