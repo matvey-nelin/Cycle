@@ -168,6 +168,12 @@
     },
     "ui": {
         "components": {
+            "backup_option":{
+                "seconds": "секунд(ы) назад",
+                "minuts": "минут(ы) назад",
+                "hours": "час(ов) назад",
+                "days": "день назад"
+            },
             "exercise_set": {
                 "set_name": "Упражнение",
                 "set_count": "Подходы",
@@ -274,7 +280,7 @@
                 "trainer_mode_switch": "Режим тренера",
                 "active_user_statuses": "Активные статусы пользователей",
                 "app_color_themes": "Цветовая тема приложения",
-                "export_import_data" : "Экспорт и Импорт данных"
+                "export_import_data": "Экспорт и Импорт данных"
             },
             "workout_template_menu": {
                 "no_data": "У вас нет ни одного шаблона.",
@@ -365,20 +371,31 @@
                 "save_button": "Сохранить"
             },
             "app_color_themes_screen": {},
-            "export_import_screen" : {
-                "current_db_title" : "База данных",
-                "path_to_database" : "Путь к базе: ",
-                "size_database"    : "Размер: ",
+            "export_import_screen": {
+                "toggle_database_button_title" : "БД",
+                "toogle_archive_button_title"  : "Архивы",
+                "current_db_title": "База данных",
+                "path_to_databases": "Папка бэкапов БД:",
+                "databases_count": "Количество:",
+                "total_databases_size": "Общий объем: ",
+                "first_database_time": "Время первой резервной копии:",
+                "last_database_time": "Время последней резервной копии:",
+                "path_to_archives" : "Папка резервных копий:",
+                "archives_count": "Количество:",
+                "total_archives_size": "Общий объем:",
+                "first_archive_time": "Время первой резервной копии:",
+                "last_archive_time": "Время последней резервной копии:",
+                "error_load_backups": "Ошибка загрузки списка резервных копий",
                 "import_button": "Импорт",
                 "export_button": "Экспорт",
-                "import_dialog_title" : "Выберите файл для восстановления",
-                "export_dialog_title" : "Сохранить резервную копию",
-                "import_error" : "Ошибка импорта. База не обновлена.",
-                "export_error" : "Ошибка экспорта. Файл не сохранен.",
-                "import_succes" : "База данных успешно восстановлена.",
-                "export_succes" : "Резервная копия успешно создана.",
-                "last_backup_time" : "Дата последней резервной копии: ",
-                "no_backups"        : "Нет резервных копий"
+                "import_dialog_title": "Выберите файл для восстановления",
+                "export_dialog_title": "Сохранить резервную копию",
+                "import_error": "Ошибка импорта. Восстановление не выполнено.",
+                "export_error": "Ошибка экспорта. Резервная копия не сохранена.",
+                "import_succes": "Восстановление выполнено успешно.",
+                "export_succes": "Резервная копия успешно создана.",
+                "last_backup_time": "Дата последней резервной копии: ",
+                "no_backups": "Нет резервных копий"
             }
         }
     }

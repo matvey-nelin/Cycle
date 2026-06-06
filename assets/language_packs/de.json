@@ -41,11 +41,11 @@
             "sarcoplasmic": "Sarkoplasmatische Hypertrophie",
             "myofibrillar": "Myofibrilläre Hypertrophie",
             "mixed": "Gemischt",
-            "neural": "Neurale Anpassung"
+            "neural": "Neuronale Anpassung"
         },
         "agonists": {
-            "pectoralis_major": "Brustmuskel Groß",
-            "pectoralis_minor": "Brustmuskel Klein",
+            "pectoralis_major": "Großer Brustmuskel",
+            "pectoralis_minor": "Kleiner Brustmuskel",
             "latissimus_dorsi": "Breiter Rückenmuskel",
             "trapezius_muscle": "Trapezmuskel",
             "rhomboid_muscle": "Rautenmuskel",
@@ -53,7 +53,7 @@
             "teres_minor": "Kleiner Rundmuskel",
             "infraspinatus": "Untergrätenmuskel",
             "supraspinatus": "Übergrätenmuskel",
-            "subscapularis": "Unterscapularis",
+            "subscapularis": "Unterschulterblattmuskel",
             "anterior_deltoid": "Vorderer Deltamuskel",
             "lateral_deltoid": "Seitlicher Deltamuskel",
             "posterior_deltoid": "Hinterer Deltamuskel",
@@ -64,18 +64,18 @@
             "brachioradialis": "Oberarmspeichenmuskel",
             "flexor_carpi_radialis": "Radialer Handbeuger",
             "flexor_carpi_ulnaris": "Ulnarer Handbeuger",
-            "palmaris_longus": "Langer Handflächenmuskel",
+            "palmaris_longus": "Langer Hohlhandmuskel",
             "extensor_digitorum": "Fingerstrecker",
             "rectus_abdominis": "Gerader Bauchmuskel",
             "external_oblique": "Äußerer schräger Bauchmuskel",
             "internal_oblique": "Innerer schräger Bauchmuskel",
             "transversus_abdominis": "Querer Bauchmuskel",
-            "iliopsoas": "Iliopsoas",
+            "iliopsoas": "Hüftbeuger",
             "gluteus_maximus": "Großer Gesäßmuskel",
             "gluteus_medius": "Mittlerer Gesäßmuskel",
             "gluteus_minimus": "Kleiner Gesäßmuskel",
             "piriformis": "Birnenmuskel",
-            "tensor_fasciae_latae": "Spanner der Faszia lata",
+            "tensor_fasciae_latae": "Spanner der Fascia lata",
             "quadratus_femoris": "Viereckiger Oberschenkelmuskel",
             "sartorius": "Schneidermuskel",
             "adductor_magnus": "Großer Adduktor",
@@ -83,11 +83,11 @@
             "adductor_brevis": "Kurzer Adduktor",
             "gracilis": "Schlanker Muskel",
             "biceps_femoris": "Bizeps Femoris",
-            "semitendinosus": "Semimembranosus",
-            "semimembranosus": "Semimembranosus",
+            "semitendinosus": "Halbsehnenmuskel",
+            "semimembranosus": "Halbhautiger Muskel",
             "quadriceps_femoris": "Quadriceps",
             "rectus_femoris": "Gerader Oberschenkelmuskel",
-            "gastrocnemius": "Zwillingswadenmuskel",
+            "gastrocnemius": "Zwillingsmuskel",
             "soleus": "Schollenmuskel",
             "tibialis_anterior": "Vorderer Schienbeinmuskel",
             "fibularis_longus": "Langer Wadenbeinmuskel",
@@ -125,7 +125,7 @@
             "dumbbell_curl": "Kurzhantel-Curl",
             "glute_bridge": "Gesäßbrücke",
             "side_plank": "Seitplank",
-            "triceps_pushdown": "Trizeps-Drücken am Kabel",
+            "triceps_pushdown": "Trizepsdrücken am Kabel",
             "shragi_s_vkljucheniem_rombovidnyh_myshts_spiny": "Shrugs mit Einbindung der Rautenmuskeln"
         },
         "workout_templates": {
@@ -136,12 +136,12 @@
         },
         "microcycle_templates": {
             "3_h_dnevnaja_razgruzka": "3-Tage-Entlastung",
-            "bazovyj_3_h_dnevnyj_split": "Basic 3-Tage-Split"
+            "bazovyj_3_h_dnevnyj_split": "Basis 3-Tage-Split"
         }
     },
     "settings": {
         "trainer_mode": "Trainer-Modus",
-        "theme_mode": "App-Thema"
+        "theme_mode": "App-Design"
     },
     "classes": {
         "training_process": {
@@ -168,6 +168,12 @@
     },
     "ui": {
         "components": {
+            "backup_option":{
+                "seconds": "vor Sekunden",
+                "minuts": "vor Minuten",
+                "hours": "vor Stunden",
+                "days": "vor Tagen"
+            },
             "exercise_set": {
                 "set_name": "Übung",
                 "set_count": "Sätze",
@@ -188,7 +194,7 @@
                 },
                 "statistics_screen": {
                     "label": "Statistiken",
-                    "tooltip": "Ziel-Metriken"
+                    "tooltip": "Zielmetriken"
                 },
                 "reference_information_screen": {
                     "label": "Info",
@@ -243,10 +249,10 @@
             },
             "statistics_screen": {
                 "base_metrics": {
-                    "percentage_of_completion": "Prozent der Planerfüllung",
+                    "percentage_of_completion": "Planerfüllung in %",
                     "total_volume": "Gesamtvolumen (tatsächlich)",
                     "total_volume_units": "kg / lbs",
-                    "workouts_count": "Anzahl der Trainingseinheiten",
+                    "workouts_count": "Anzahl Trainingseinheiten",
                     "workouts_count_time_range": "pro Mesocycle",
                     "workout_avg_duration": "Durchschnittliche Trainingsdauer",
                     "workout_avg_duration_unit": {
@@ -259,7 +265,7 @@
                 "best_streak": "Beste Serie",
                 "best_streak_subtitle": "Das Beste kommt noch!",
                 "workout_statuses_piechart_title": "Verteilung der Trainingsstatus pro Mesocycle",
-                "workout_statuses_piechart_no_data": "Keine Trainingsstatus-Daten"
+                "workout_statuses_piechart_no_data": "Keine Daten zu Trainingsstatus"
             },
             "reference_information_screen": {
                 "user_information": "Benutzerinformationen",
@@ -274,7 +280,7 @@
                 "trainer_mode_switch": "Trainer-Modus",
                 "active_user_statuses": "Aktive Benutzerstatus",
                 "app_color_themes": "App-Farbthema",
-                "export_import_data" : "Daten-Export & Import"
+                "export_import_data": "Daten-Export & Import"
             },
             "workout_template_menu": {
                 "no_data": "Sie haben keine Vorlagen.",
@@ -282,7 +288,7 @@
             },
             "workout_template_screen": {
                 "save_button": "Speichern",
-                "save_error": "Speichern nicht möglich.\nÜberprüfen Sie die eingegebenen Daten."
+                "save_error": "Nicht möglich.\nÜberprüfen Sie die eingegebenen Daten."
             },
             "microcycle_template_menu": {
                 "no_data": "Sie haben keine Vorlagen.",
@@ -290,7 +296,7 @@
             },
             "microcycle_template_screen": {
                 "save_button": "Speichern",
-                "save_error": "Speichern nicht möglich.\nÜberprüfen Sie die eingegebenen Daten.",
+                "save_error": "Nicht möglich.\nÜberprüfen Sie die eingegebenen Daten.",
                 "set_name": "Übung",
                 "set_count": "Sätze"
             },
@@ -316,8 +322,8 @@
             },
             "workout_screen": {
                 "save_button": "Speichern",
-                "start_workout": "Training Starten",
-                "end_workout": "Training Beenden"
+                "start_workout": "Training starten",
+                "end_workout": "Training beenden"
             },
             "user_information_screen": {
                 "users": "Benutzer",
@@ -365,20 +371,31 @@
                 "save_button": "Speichern"
             },
             "app_color_themes_screen": {},
-            "export_import_screen" : {
-                "current_db_title" : "Datenbank",
-                "path_to_database" : "Datenbankpfad: ",
-                "size_database"    : "Größe: ",
+            "export_import_screen": {
+                "toggle_database_button_title" : "DB",
+                "toogle_archive_button_title"  : "Archive",
+                "current_db_title": "Datenbank",
+                "path_to_databases": "DB-Backup-Ordner:",
+                "databases_count": "Anzahl:",
+                "total_databases_size": "Gesamtgröße: ",
+                "first_database_time": "Zeitpunkt des ersten Backups:",
+                "last_database_time": "Zeitpunkt des letzten Backups:",
+                "path_to_archives" : "Backup-Ordner:",
+                "archives_count": "Anzahl:",
+                "total_archives_size": "Gesamtgröße:",
+                "first_archive_time": "Zeitpunkt des ersten Backups:",
+                "last_archive_time": "Zeitpunkt des letzten Backups:",
+                "error_load_backups": "Fehler beim Laden der Backup-Liste",
                 "import_button": "Importieren",
                 "export_button": "Exportieren",
-                "import_dialog_title" : "Datei zum Wiederherstellen auswählen",
-                "export_dialog_title" : "Backup speichern",
-                "import_error" : "Importfehler. Datenbank nicht aktualisiert.",
-                "export_error" : "Exportfehler. Datei nicht gespeichert.",
-                "import_succes" : "Datenbank erfolgreich wiederhergestellt.",
-                "export_succes" : "Backup erfolgreich erstellt.",
-                "last_backup_time" : "Datum des letzten Backups: ",
-                "no_backups"        : "Keine Backups"
+                "import_dialog_title": "Datei zum Wiederherstellen auswählen",
+                "export_dialog_title": "Backup speichern",
+                "import_error": "Importfehler. Wiederherstellung fehlgeschlagen.",
+                "export_error": "Exportfehler. Backup nicht gespeichert.",
+                "import_succes": "Wiederherstellung erfolgreich abgeschlossen.",
+                "export_succes": "Backup erfolgreich erstellt.",
+                "last_backup_time": "Datum des letzten Backups: ",
+                "no_backups": "Keine Backups"
             }
         }
     }

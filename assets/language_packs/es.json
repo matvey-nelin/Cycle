@@ -168,6 +168,12 @@
     },
     "ui": {
         "components": {
+            "backup_option":{
+                "seconds": "hace unos segundos",
+                "minuts": "hace unos minutos",
+                "hours": "hace unas horas",
+                "days": "hace unos días"
+            },
             "exercise_set": {
                 "set_name": "Ejercicio",
                 "set_count": "Series",
@@ -274,7 +280,7 @@
                 "trainer_mode_switch": "Modo Entrenador",
                 "active_user_statuses": "Estados de Usuario Activos",
                 "app_color_themes": "Tema de Color de la App",
-                "export_import_data" : "Exportar e Importar datos"
+                "export_import_data": "Exportar e Importar datos"
             },
             "workout_template_menu": {
                 "no_data": "No tienes ninguna plantilla.",
@@ -365,20 +371,31 @@
                 "save_button": "Guardar"
             },
             "app_color_themes_screen": {},
-            "export_import_screen" : {
-                "current_db_title" : "Base de datos",
-                "path_to_database" : "Ruta de la base: ",
-                "size_database"    : "Tamaño: ",
+            "export_import_screen": {
+                "toggle_database_button_title" : "BD",
+                "toogle_archive_button_title"  : "Archivos",
+                "current_db_title": "Base de datos",
+                "path_to_databases": "Carpeta de copias de BD:",
+                "databases_count": "Cantidad:",
+                "total_databases_size": "Tamaño total: ",
+                "first_database_time": "Fecha de la primera copia:",
+                "last_database_time": "Fecha de la última copia:",
+                "path_to_archives" : "Carpeta de copias de seguridad:",
+                "archives_count": "Cantidad:",
+                "total_archives_size": "Tamaño total:",
+                "first_archive_time": "Fecha de la primera copia:",
+                "last_archive_time": "Fecha de la última copia:",
+                "error_load_backups": "Error al cargar la lista de copias",
                 "import_button": "Importar",
                 "export_button": "Exportar",
-                "import_dialog_title" : "Seleccionar archivo para restaurar",
-                "export_dialog_title" : "Guardar copia de seguridad",
-                "import_error" : "Error de importación. Base no actualizada.",
-                "export_error" : "Error de exportación. Archivo no guardado.",
-                "import_succes" : "Base restaurada con éxito.",
-                "export_succes" : "Copia creada con éxito.",
-                "last_backup_time" : "Fecha de la última copia: ",
-                "no_backups"        : "Sin copias de seguridad"
+                "import_dialog_title": "Seleccionar archivo para restaurar",
+                "export_dialog_title": "Guardar copia de seguridad",
+                "import_error": "Error de importación. Restauración fallida.",
+                "export_error": "Error de exportación. Copia no guardada.",
+                "import_succes": "Restauración completada con éxito.",
+                "export_succes": "Copia de seguridad creada con éxito.",
+                "last_backup_time": "Fecha de la última copia: ",
+                "no_backups": "Sin copias de seguridad"
             }
         }
     }

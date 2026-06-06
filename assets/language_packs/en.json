@@ -168,6 +168,12 @@
     },
     "ui": {
         "components": {
+            "backup_option":{
+                "seconds": "seconds ago",
+                "minuts": "minutes ago",
+                "hours": "hours ago",
+                "days": "days ago"
+            },
             "exercise_set": {
                 "set_name": "Exercise",
                 "set_count": "Sets",
@@ -274,7 +280,7 @@
                 "trainer_mode_switch": "Trainer Mode",
                 "active_user_statuses": "Active User Statuses",
                 "app_color_themes": "App Color Theme",
-                "export_import_data" : "Data Export & Import"
+                "export_import_data": "Data Export & Import"
             },
             "workout_template_menu": {
                 "no_data": "You have no templates.",
@@ -365,20 +371,31 @@
                 "save_button": "Save"
             },
             "app_color_themes_screen": {},
-            "export_import_screen" : {
-                "current_db_title" : "Database",
-                "path_to_database" : "Database path: ",
-                "size_database"    : "Size: ",
+            "export_import_screen": {
+                "toggle_database_button_title" : "DB",
+                "toogle_archive_button_title"  : "Archives",
+                "current_db_title": "Database",
+                "path_to_databases": "Database backup folder:",
+                "databases_count": "Count:",
+                "total_databases_size": "Total size: ",
+                "first_database_time": "Time of first backup:",
+                "last_database_time": "Time of last backup:",
+                "path_to_archives" : "Backup folder:",
+                "archives_count": "Count:",
+                "total_archives_size": "Total size:",
+                "first_archive_time": "Time of first backup:",
+                "last_archive_time": "Time of last backup:",
+                "error_load_backups": "Error loading backup list",
                 "import_button": "Import",
                 "export_button": "Export",
-                "import_dialog_title" : "Select file to restore",
-                "export_dialog_title" : "Save backup copy",
-                "import_error" : "Import error. Database not updated.",
-                "export_error" : "Export error. File not saved.",
-                "import_succes" : "Database successfully restored.",
-                "export_succes" : "Backup successfully created.",
-                "last_backup_time" : "Last backup date: ",
-                "no_backups"        : "No backups"
+                "import_dialog_title": "Select file to restore",
+                "export_dialog_title": "Save backup copy",
+                "import_error": "Import error. Restore failed.",
+                "export_error": "Export error. Backup not saved.",
+                "import_succes": "Restore completed successfully.",
+                "export_succes": "Backup successfully created.",
+                "last_backup_time": "Last backup date: ",
+                "no_backups": "No backups"
             }
         }
     }

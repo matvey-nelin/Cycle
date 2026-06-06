@@ -168,6 +168,12 @@
     },
     "ui": {
         "components": {
+            "backup_option":{
+                "seconds": "saniye önce",
+                "minuts": "dakika önce",
+                "hours": "saat önce",
+                "days": "gün önce"
+            },
             "exercise_set": {
                 "set_name": "Egzersiz",
                 "set_count": "Set",
@@ -274,7 +280,7 @@
                 "trainer_mode_switch": "Antrenör Modu",
                 "active_user_statuses": "Aktif Kullanıcı Durumları",
                 "app_color_themes": "Uygulama Renk Teması",
-                "export_import_data" : "Veri Dışa & İçe Aktarımı"
+                "export_import_data": "Veri Dışa & İçe Aktarımı"
             },
             "workout_template_menu": {
                 "no_data": "Hiç şablonunuz yok.",
@@ -365,20 +371,31 @@
                 "save_button": "Kaydet"
             },
             "app_color_themes_screen": {},
-            "export_import_screen" : {
-                "current_db_title" : "Veritabanı",
-                "path_to_database" : "Veritabanı yolu: ",
-                "size_database"    : "Boyut: ",
+            "export_import_screen": {
+                "toggle_database_button_title" : "VT",
+                "toogle_archive_button_title"  : "Arşivler",
+                "current_db_title": "Veritabanı",
+                "path_to_databases": "VT yedek klasörü:",
+                "databases_count": "Sayı:",
+                "total_databases_size": "Toplam boyut: ",
+                "first_database_time": "İlk yedek zamanı:",
+                "last_database_time": "Son yedek zamanı:",
+                "path_to_archives" : "Yedek klasörü:",
+                "archives_count": "Sayı:",
+                "total_archives_size": "Toplam boyut:",
+                "first_archive_time": "İlk yedek zamanı:",
+                "last_archive_time": "Son yedek zamanı:",
+                "error_load_backups": "Yedek listesi yüklenirken hata oluştu",
                 "import_button": "İçe Aktar",
                 "export_button": "Dışa Aktar",
-                "import_dialog_title" : "Geri yüklenecek dosyayı seçin",
-                "export_dialog_title" : "Yedek kaydet",
-                "import_error" : "İçe aktarma hatası. Veritabanı güncellenmedi.",
-                "export_error" : "Dışa aktarma hatası. Dosya kaydedilmedi.",
-                "import_succes" : "Veritabanı başarıyla geri yüklendi.",
-                "export_succes" : "Yedek başarıyla oluşturuldu.",
-                "last_backup_time" : "Son yedek tarihi: ",
-                "no_backups"        : "Yedek yok"
+                "import_dialog_title": "Geri yüklenecek dosyayı seçin",
+                "export_dialog_title": "Yedek kaydet",
+                "import_error": "İçe aktarma hatası. Geri yükleme başarısız.",
+                "export_error": "Dışa aktarma hatası. Yedek kaydedilmedi.",
+                "import_succes": "Geri yükleme başarıyla tamamlandı.",
+                "export_succes": "Yedek başarıyla oluşturuldu.",
+                "last_backup_time": "Son yedek tarihi: ",
+                "no_backups": "Yedek yok"
             }
         }
     }

@@ -51,7 +51,7 @@
             "rhomboid_muscle": "Romboide",
             "teres_major": "Grande Rotondo",
             "teres_minor": "Piccolo Rotondo",
-            "infraspinatus": "Sovraspinato",
+            "infraspinatus": "Infraspinato",
             "supraspinatus": "Sovraspinato",
             "subscapularis": "Sottoscapolare",
             "anterior_deltoid": "Deltoide Anteriore",
@@ -168,6 +168,12 @@
     },
     "ui": {
         "components": {
+            "backup_option":{
+                "seconds": "secondi fa",
+                "minuts": "minuti fa",
+                "hours": "ore fa",
+                "days": "giorni fa"
+            },
             "exercise_set": {
                 "set_name": "Esercizio",
                 "set_count": "Serie",
@@ -274,7 +280,7 @@
                 "trainer_mode_switch": "Modalità Allenatore",
                 "active_user_statuses": "Stati Utente Attivi",
                 "app_color_themes": "Tema Colore App",
-                "export_import_data" : "Esporta & Importa dati"
+                "export_import_data": "Esporta & Importa dati"
             },
             "workout_template_menu": {
                 "no_data": "Non hai nessun modello.",
@@ -365,20 +371,31 @@
                 "save_button": "Salva"
             },
             "app_color_themes_screen": {},
-            "export_import_screen" : {
-                "current_db_title" : "Database",
-                "path_to_database" : "Percorso database: ",
-                "size_database"    : "Dimensione: ",
+            "export_import_screen": {
+                "toggle_database_button_title" : "DB",
+                "toogle_archive_button_title"  : "Archivio",
+                "current_db_title": "Database",
+                "path_to_databases": "Cartella backup DB:",
+                "databases_count": "Quantità:",
+                "total_databases_size": "Dimensione totale: ",
+                "first_database_time": "Data primo backup:",
+                "last_database_time": "Data ultimo backup:",
+                "path_to_archives" : "Cartella backup:",
+                "archives_count": "Quantità:",
+                "total_archives_size": "Dimensione totale:",
+                "first_archive_time": "Data primo backup:",
+                "last_archive_time": "Data ultimo backup:",
+                "error_load_backups": "Errore caricamento lista backup",
                 "import_button": "Importa",
                 "export_button": "Esporta",
-                "import_dialog_title" : "Seleziona file da ripristinare",
-                "export_dialog_title" : "Salva copia di backup",
-                "import_error" : "Errore import. Database non aggiornato.",
-                "export_error" : "Errore export. File non salvato.",
-                "import_succes" : "Database ripristinato con successo.",
-                "export_succes" : "Backup creato con successo.",
-                "last_backup_time" : "Data ultimo backup: ",
-                "no_backups"        : "Nessun backup"
+                "import_dialog_title": "Seleziona file da ripristinare",
+                "export_dialog_title": "Salva copia di backup",
+                "import_error": "Errore import. Ripristino fallito.",
+                "export_error": "Errore export. Backup non salvato.",
+                "import_succes": "Ripristino completato con successo.",
+                "export_succes": "Backup creato con successo.",
+                "last_backup_time": "Data ultimo backup: ",
+                "no_backups": "Nessun backup"
             }
         }
     }

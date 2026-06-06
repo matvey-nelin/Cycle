@@ -168,6 +168,12 @@
     },
     "ui": {
         "components": {
+            "backup_option":{
+                "seconds": "几秒前",
+                "minuts": "几分钟前",
+                "hours": "几小时前",
+                "days": "几天前"
+            },
             "exercise_set": {
                 "set_name": "动作",
                 "set_count": "组数",
@@ -274,7 +280,7 @@
                 "trainer_mode_switch": "教练模式",
                 "active_user_statuses": "活跃用户状态",
                 "app_color_themes": "应用颜色主题",
-                "export_import_data" : "数据导出与导入"
+                "export_import_data": "数据导出与导入"
             },
             "workout_template_menu": {
                 "no_data": "您没有任何模板。",
@@ -365,20 +371,31 @@
                 "save_button": "保存"
             },
             "app_color_themes_screen": {},
-            "export_import_screen" : {
-                "current_db_title" : "数据库",
-                "path_to_database" : "数据库路径： ",
-                "size_database"    : "大小： ",
+            "export_import_screen": {
+                "toggle_database_button_title" : "数据库",
+                "toogle_archive_button_title"  : "归档",
+                "current_db_title": "数据库",
+                "path_to_databases": "数据库备份文件夹：",
+                "databases_count": "数量：",
+                "total_databases_size": "总大小： ",
+                "first_database_time": "首次备份时间：",
+                "last_database_time": "上次备份时间：",
+                "path_to_archives" : "备份文件夹：",
+                "archives_count": "数量：",
+                "total_archives_size": "总大小：",
+                "first_archive_time": "首次备份时间：",
+                "last_archive_time": "上次备份时间：",
+                "error_load_backups": "加载备份列表时出错",
                 "import_button": "导入",
                 "export_button": "导出",
-                "import_dialog_title" : "选择要恢复的文件",
-                "export_dialog_title" : "保存备份",
-                "import_error" : "导入错误。数据库未更新。",
-                "export_error" : "导出错误。文件未保存。",
-                "import_succes" : "数据库已成功恢复。",
-                "export_succes" : "备份已成功创建。",
-                "last_backup_time" : "上次备份日期： ",
-                "no_backups"        : "无备份"
+                "import_dialog_title": "选择要恢复的文件",
+                "export_dialog_title": "保存备份",
+                "import_error": "导入错误。恢复失败。",
+                "export_error": "导出错误。未保存备份。",
+                "import_succes": "恢复成功完成。",
+                "export_succes": "备份已成功创建。",
+                "last_backup_time": "上次备份日期： ",
+                "no_backups": "无备份"
             }
         }
     }

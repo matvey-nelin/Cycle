@@ -168,6 +168,12 @@
     },
     "ui": {
         "components": {
+            "backup_option":{
+                "seconds": "قبل ثوانٍ",
+                "minuts": "قبل دقائق",
+                "hours": "قبل ساعات",
+                "days": "قبل أيام"
+            },
             "exercise_set": {
                 "set_name": "تمرين",
                 "set_count": "مجموعات",
@@ -274,7 +280,7 @@
                 "trainer_mode_switch": "وضع المدرب",
                 "active_user_statuses": "حالات المستخدم النشطة",
                 "app_color_themes": "ثيم ألوان التطبيق",
-                "export_import_data" : "تصدير واستيراد البيانات"
+                "export_import_data": "تصدير واستيراد البيانات"
             },
             "workout_template_menu": {
                 "no_data": "ليس لديك أي قوالب.",
@@ -365,20 +371,31 @@
                 "save_button": "حفظ"
             },
             "app_color_themes_screen": {},
-            "export_import_screen" : {
-                "current_db_title" : "قاعدة البيانات",
-                "path_to_database" : "مسار قاعدة البيانات: ",
-                "size_database"    : "الحجم: ",
+            "export_import_screen": {
+                "toggle_database_button_title" : "قاعدة بيانات",
+                "toogle_archive_button_title"  : "أرشيف",
+                "current_db_title": "قاعدة البيانات",
+                "path_to_databases": "مجلد نسخ قاعدة البيانات:",
+                "databases_count": "العدد:",
+                "total_databases_size": "الحجم الإجمالي: ",
+                "first_database_time": "وقت أول نسخة احتياطية:",
+                "last_database_time": "وقت آخر نسخة احتياطية:",
+                "path_to_archives" : "مجلد النسخ الاحتياطي:",
+                "archives_count": "العدد:",
+                "total_archives_size": "الحجم الإجمالي:",
+                "first_archive_time": "وقت أول نسخة احتياطية:",
+                "last_archive_time": "وقت آخر نسخة احتياطية:",
+                "error_load_backups": "خطأ في تحميل قائمة النسخ الاحتياطية",
                 "import_button": "استيراد",
                 "export_button": "تصدير",
-                "import_dialog_title" : "اختر ملفًا للاستعادة",
-                "export_dialog_title" : "حفظ نسخة احتياطية",
-                "import_error" : "خطأ في الاستيراد. لم يتم تحديث قاعدة البيانات.",
-                "export_error" : "خطأ في التصدير. لم يتم حفظ الملف.",
-                "import_succes" : "تم استعادة قاعدة البيانات بنجاح.",
-                "export_succes" : "تم إنشاء النسخة الاحتياطية بنجاح.",
-                "last_backup_time" : "تاريخ آخر نسخة احتياطية: ",
-                "no_backups"        : "لا توجد نسخ احتياطية"
+                "import_dialog_title": "اختر ملفًا للاستعادة",
+                "export_dialog_title": "حفظ نسخة احتياطية",
+                "import_error": "خطأ في الاستيراد. فشل الاستعادة.",
+                "export_error": "خطأ في التصدير. لم يتم حفظ النسخة الاحتياطية.",
+                "import_succes": "تمت الاستعادة بنجاح.",
+                "export_succes": "تم إنشاء النسخة الاحتياطية بنجاح.",
+                "last_backup_time": "تاريخ آخر نسخة احتياطية: ",
+                "no_backups": "لا توجد نسخ احتياطية"
             }
         }
     }
