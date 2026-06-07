@@ -33,9 +33,13 @@ class BackupMaster():
             Returns a list of backups of the passed extension.\n
             Order by: st_mtime DESC
         """
+
+        if backup_dir == "":
+            return []
+
         backup_path = Path(backup_dir)
 
-        if not backup_path.exists() or backup_dir == "":
+        if not backup_path.exists():
             raise ValueError("Incorrect archive backups path")
 
         files = list(backup_path.glob(f"*.{extension.replace(".", "")}"))    

@@ -677,7 +677,7 @@ class ExportImportScreen(BaseView):
             database_backups = self.backup_master.get_backup_files(self.settings.db_backups_dir, "db")
 
             self.databases_count        = len(database_backups)
-            self.total_databases_size    = sum([database.stat().st_size for database in database_backups])
+            self.total_databases_size   = sum([database.stat().st_size for database in database_backups])
 
 
             if self.total_databases_size < 1024:
@@ -716,8 +716,10 @@ class ExportImportScreen(BaseView):
             else:
                 self.total_archives_size = f"{self.total_archives_size / (1024 ** 2):.2f} MB"
 
-            self.last_archive_time  = datetime.datetime.fromtimestamp(archives_backups[0].stat().st_mtime).strftime("%d.%m.%Y, %H:%M:%S")
-            self.first_archive_time = datetime.datetime.fromtimestamp(archives_backups[-1].stat().st_mtime).strftime("%d.%m.%Y, %H:%M:%S")
+
+            if archives_backups != []:
+                self.last_archive_time  = datetime.datetime.fromtimestamp(archives_backups[0].stat().st_mtime).strftime("%d.%m.%Y, %H:%M:%S")
+                self.first_archive_time = datetime.datetime.fromtimestamp(archives_backups[-1].stat().st_mtime).strftime("%d.%m.%Y, %H:%M:%S")
 
         except Exception as _ex:
             self.archives_count         = 0
