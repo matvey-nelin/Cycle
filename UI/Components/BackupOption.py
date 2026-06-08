@@ -6,7 +6,7 @@ from AppState import AppState
 
 
 class BackupOption(ft.Container):
-    def __init__(self, app_state: AppState, path: Path) -> None:
+    def __init__(self, app_state: AppState, path: dict) -> None:
         super().__init__()
 
         self.app_state  = app_state
@@ -22,18 +22,18 @@ class BackupOption(ft.Container):
 
 
         # Инициализация данных и элементов бэкапа
-        self.path = Path(path)
+        self.path = path
 
 
         icon = ft.Icons.FORMAT_LIST_BULLETED_ROUNDED
-        if self.path.suffix == ".db":
+        if self.path.get("type", "") == ".db":
             icon = ft.Icons.STORAGE_ROUNDED
-        elif self.path.suffix == ".zip":
+        elif self.path.get("type", "") == ".zip":
             icon = ft.Icons.FOLDER_ZIP_ROUNDED
 
-        name        = self.path.name
-        create_time = self.path.stat().st_mtime
-        size        = self.path.stat().st_size
+        name        = self.path.get("name", "")
+        create_time = self.path.get("ctime", "")
+        size        = self.path.get("size", "")
 
 
         # Настройка отображения контейнера
@@ -126,6 +126,9 @@ class BackupOption(ft.Container):
 
 
     def determine_backup_size(self, size_in_bytes: int):
+        if isinstance(size_in_bytes, str):
+            return size_in_bytes
+        
         if size_in_bytes < 1024:
             return f"{size_in_bytes} B"
         elif size_in_bytes < (1024 ** 2):

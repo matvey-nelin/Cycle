@@ -9,7 +9,7 @@ import os
 
 from AppState import AppState
 from UI.Screens.BaseView import BaseView
-from Classes.BackupMaster import BackupMaster
+from Classes.BackupManager import BackupManager
 
 from UI.Components.BackupOption import BackupOption
 
@@ -26,7 +26,7 @@ class ExportImportScreen(BaseView):
 
 
         self.file_picker    = ft.FilePicker()
-        self.backup_master  = BackupMaster(self.app_state)
+        self.backup_master  = BackupManager(self.app_state)
 
 
         self.current_mode = "db"
@@ -575,10 +575,10 @@ class ExportImportScreen(BaseView):
             options = []
 
             if self.current_mode == "db":
-                backup_options = self.backup_master.get_backup_files(self.settings.db_backups_dir, "db")
+                backup_options = self.backup_master.get_backup_file_paths("db")
 
             elif self.current_mode == "archive":
-                backup_options = self.backup_master.get_backup_files(self.settings.archive_backups_dir, "zip")
+                backup_options = self.backup_master.get_backup_file_paths("zip")
             
             for backup_path in backup_options:
                 options.append(
@@ -674,10 +674,10 @@ class ExportImportScreen(BaseView):
 
     def _update_db_file_info_(self):
         try:
-            database_backups = self.backup_master.get_backup_files(self.settings.db_backups_dir, "db")
+            database_backups = self.backup_master.get_backup_file_paths("db")
 
             self.databases_count        = len(database_backups)
-            self.total_databases_size   = sum([database.stat().st_size for database in database_backups])
+            self.total_databases_size   = sum([database.get("size", 0) for database in database_backups])
 
 
             if self.total_databases_size < 1024:
@@ -690,8 +690,8 @@ class ExportImportScreen(BaseView):
 
             
             if database_backups != []:
-                self.last_db_time   = datetime.datetime.fromtimestamp(database_backups[0].stat().st_mtime).strftime("%d.%m.%Y, %H:%M:%S")
-                self.first_db_time  = datetime.datetime.fromtimestamp(database_backups[-1].stat().st_mtime).strftime("%d.%m.%Y, %H:%M:%S")
+                self.last_db_time   = datetime.datetime.fromtimestamp(database_backups[0].get("ctime", "")).strftime("%d.%m.%Y, %H:%M:%S")
+                self.first_db_time  = datetime.datetime.fromtimestamp(database_backups[-1].get("ctime", "")).strftime("%d.%m.%Y, %H:%M:%S")
 
 
         except Exception as _ex:
@@ -704,10 +704,10 @@ class ExportImportScreen(BaseView):
 
     def _update_archive_info_(self):
         try:
-            archives_backups = self.backup_master.get_backup_files(self.settings.archive_backups_dir, "zip")
+            archives_backups = self.backup_master.get_backup_file_paths("zip")
 
             self.archives_count       = len(archives_backups)
-            self.total_archives_size  = sum([archive.stat().st_size for archive in archives_backups])
+            self.total_archives_size  = sum([archive.get("size", 0) for archive in archives_backups])
 
             if self.total_archives_size < 1024:
                 self.total_archives_size = f"{self.total_archives_size} B"
@@ -718,12 +718,12 @@ class ExportImportScreen(BaseView):
 
 
             if archives_backups != []:
-                self.last_archive_time  = datetime.datetime.fromtimestamp(archives_backups[0].stat().st_mtime).strftime("%d.%m.%Y, %H:%M:%S")
-                self.first_archive_time = datetime.datetime.fromtimestamp(archives_backups[-1].stat().st_mtime).strftime("%d.%m.%Y, %H:%M:%S")
+                self.last_archive_time  = datetime.datetime.fromtimestamp(archives_backups[0].get("ctime", "")).strftime("%d.%m.%Y, %H:%M:%S")
+                self.first_archive_time = datetime.datetime.fromtimestamp(archives_backups[-1].get("ctime", "")).strftime("%d.%m.%Y, %H:%M:%S")
 
         except Exception as _ex:
-            self.archives_count         = 0
-            self.total_archives_size    = 0
+            self.archives_count         = "-"
+            self.total_archives_size    = "-"
             self.last_archive_time      = "No data"
             self.first_archive_time     = "No data"
 

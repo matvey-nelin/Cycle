@@ -22,10 +22,11 @@ class AppState:
         self.app_dir    = utils.get_data_directory()
         self.platform   = self.page.platform.value if self.page.platform is not None else None
 
-        self.settings_path  = self.app_dir / "settings.json"
-        self.db_path        = self.app_dir / "CycleDatabase.db"
-        self.lang_pack_path = lambda language: self.app_dir / rf"language_packs/{language}.json"
-        self.backups_dir_name = "CycleBackups"
+        self.settings_path      = self.app_dir / "settings.json"
+        self.db_path            = self.app_dir / "CycleDatabase.db"
+        self.lang_pack_path     = lambda language: self.app_dir / rf"language_packs/{language}.json"
+        self.backups_dir_name   = "CycleBackups"
+        self.backup_registry_path = self.app_dir / "backups_registry.json"
         
         self.settings   = Settings()
         self.database   = Database()

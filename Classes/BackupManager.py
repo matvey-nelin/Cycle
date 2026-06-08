@@ -15,7 +15,7 @@ import sqlite3
 from AppState import AppState
 
 
-class BackupMaster():
+class BackupManager():
     def __init__(self, app_state: AppState):
         self.page       = app_state.page
 
@@ -26,28 +26,37 @@ class BackupMaster():
         self.translator = self.app_state.translator
         self.colors     = self.app_state.colors
         
+        self.backup_registry_path = self.app_state.app_dir / "backups_registry.json"
         
     
-    def get_backup_files(self, backup_dir: str, extension: str = "db") ->  list[Path]:
+    def get_backup_file_paths(self, extension: str = "db") ->  list[dict]:
         """
             Returns a list of backups of the passed extension.\n
             Order by: st_mtime DESC
         """
+        is_desktop = self.app_state.platform in ("windows", "macos", "linux")
 
-        if backup_dir == "":
-            return []
+        backups    = []
+        deleted_backups = []
 
-        backup_path = Path(backup_dir)
+        for backup in self.backup_registry:
+            path = backup.get("path", "Does not exist")
 
-        if not backup_path.exists():
-            raise ValueError("Incorrect archive backups path")
+            if is_desktop and ((path == "Does not exist") or (not Path(path).exists())):
+                deleted_backups.append(backup)
+                continue
 
-        files = list(backup_path.glob(f"*.{extension.replace(".", "")}"))    
-        
-        # Сортируем по дате изменения (сначала новые)
-        files = sorted(files, key=lambda f: f.stat().st_mtime, reverse=True)
+            if backup.get("type", "").lower() == extension.replace(".", "").lower():
+                backups.append(backup)
 
-        return files
+        if deleted_backups:
+            self._backup_registry = [b for b in self.backup_registry if b not in deleted_backups]
+
+            with open(self.backup_registry_path, "w", encoding="UTF-8") as file:
+                json.dump(self._backup_registry, file, ensure_ascii=False, indent=4)
+
+
+        return sorted(backups, key=lambda backup: backup.get("ctime", 0), reverse=True)
 
 
 
@@ -68,9 +77,10 @@ class BackupMaster():
         if not self.saved_file_path:
             return None
         
-
-        self.saved_file_path = Path(self.saved_file_path)
-        self.destination_dir = self.saved_file_path.parent
+       
+        self.saved_file_path    = Path(self.saved_file_path)
+        file_name               = self.saved_file_path.name
+        self.destination_dir    = self.saved_file_path.parent
 
         is_desktop = self.app_state.platform in ("windows", "macos", "linux") if self.app_state.platform is not None else False
 
@@ -88,6 +98,16 @@ class BackupMaster():
             self.destination_file_path = self.destination_dir / file_name
             shutil.move(str(self.saved_file_path), str(self.destination_file_path))
 
+        final_path = str(self.destination_dir / file_name) if is_desktop else str(self.saved_file_path)
+        self.add_backup_record(
+            {
+                "name"  : file_name,
+                "path"  : final_path,
+                "ctime" : int(export_time.timestamp()),
+                "size"  : len(db_bytes) if db_bytes is not None else 0,
+                "type"  : "db"
+            }
+        )
 
         # Далее стандартное поведение для всех ОС
         self.settings.change_db_backups_dir(self.destination_dir)
@@ -111,10 +131,21 @@ class BackupMaster():
         self.imported_file_path = Path(self.imported_file_path[0].path)
 
         self._validate_sqlite_file_(self.imported_file_path)
-            
+        self.database._prepare_for_import_()
+        
         gc.collect()
 
         shutil.copy2(self.imported_file_path, self.database.db_path)
+
+        # Добавление импортированного файла в реестр
+        self.add_backup_record({
+            "name"  : self.imported_file_path.name,
+            "path"  : str(self.imported_file_path),
+            "ctime" : int(self.imported_file_path.stat().st_mtime),
+            "size"  : self.imported_file_path.stat().st_size,
+            "type"  : "db"
+        })
+
         self.page.run_task(self.app_state.hot_restart_app)
 
         return True
@@ -140,8 +171,10 @@ class BackupMaster():
             return None
         
 
-        self.saved_file_path = Path(self.saved_file_path)
-        self.destination_dir = self.saved_file_path.parent
+        self.saved_file_path        = Path(self.saved_file_path)
+        file_name                   = self.saved_file_path.name
+        self.destination_dir        = self.saved_file_path.parent
+
 
         is_desktop = self.app_state.platform in ("windows", "macos", "linux") if self.app_state.platform is not None else False
 
@@ -159,6 +192,17 @@ class BackupMaster():
             self.destination_file_path = self.destination_dir / file_name
             shutil.move(str(self.saved_file_path), str(self.destination_file_path))
 
+
+        final_path = str(self.destination_dir / file_name) if is_desktop else str(self.saved_file_path)
+        self.add_backup_record(
+            {
+                "name"  : file_name,
+                "path"  : final_path,
+                "ctime" : int(export_time.timestamp()),
+                "size"  : len(archive_bytes) if archive_bytes is not None else 0,
+                "type"  : extension.replace(".", "")
+            }
+        )
 
         # Далее стандартное поведение для всех ОС
         self.settings.change_archive_backups_dir(self.destination_dir)
@@ -213,11 +257,22 @@ class BackupMaster():
 
         # МЕСТО ДЛЯ ДОПОЛНИТЕЛЬНЫХ ПРОВЕРОК ФАЙЛОВ ИЗ АРХИВА РЕЗЕРВНОЙ КОПИИ
         # ВОЗМОЖНО ДОБАВЛЕНИЕ ПРОВЕРОК НА СООТВЕТСТВИЕ ВЕРСИИ И ИХ МИГРАЦИИ
-
+        self.database._prepare_for_import_()
         
         # Замена всех файлов приложения на файлы из резервной копии
         if self.app_state.app_dir.exists():
             shutil.copytree(temp_dir, self.app_state.app_dir, dirs_exist_ok=True)
+
+
+        # Добавление импортированного файла в реестр
+        imported_path = Path(self.imported_file_path)
+        self.add_backup_record({
+            "name"  : imported_path.name,
+            "path"  : str(imported_path),
+            "ctime" : int(imported_path.stat().st_mtime),
+            "size"  : imported_path.stat().st_size,
+            "type"  : extension.replace(".", "")
+        })
 
 
         self.page.run_task(self.app_state.hot_restart_app)
@@ -273,3 +328,49 @@ class BackupMaster():
 
         except sqlite3.DatabaseError:
             raise ValueError("The selected file is corrupted or is not a SQLite database.")
+        
+
+
+
+    @property
+    def backup_registry_path(self) -> str:
+        return str(self._backup_registry_path)
+    
+    
+    @backup_registry_path.setter
+    def backup_registry_path(self, registry_path: str | Path) -> None:
+        self._backup_registry_path  = Path(registry_path)
+        self._backup_registry       = None
+
+        if not self._backup_registry_path.exists():
+            with open(self.backup_registry_path, "w", encoding="UTF-8") as file:
+                json.dump([], file)
+
+        _ = self.backup_registry
+
+
+    @property
+    def backup_registry(self) -> list:
+        try:
+            if self._backup_registry is None:
+                with open(self.backup_registry_path, "r", encoding="UTF-8") as file:
+                    self._backup_registry = list(json.load(file))
+
+        except (json.JSONDecodeError, IOError):
+            self._backup_registry = []
+
+        return self._backup_registry
+
+        
+
+    def add_backup_record(self, backup: dict[str, str | int | float]) -> None:
+        self._backup_registry = None
+
+        # Словарь автоматически перезапишет дубликат по ключу "name"
+        registry_dict = {item["name"]: item for item in self.backup_registry}
+        registry_dict[backup["name"]] = backup
+        
+        self._backup_registry = list(registry_dict.values())
+        
+        with open(self.backup_registry_path, "w", encoding="UTF-8") as file:
+            json.dump(self._backup_registry, file, ensure_ascii=False, indent=4)

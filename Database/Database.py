@@ -43,14 +43,27 @@ class Database:
 
     def _prepare_for_export_(self):
         try:
-            with sqlite3.connect(self.db_path) as conn:
-                conn.execute("PRAGMA wal_checkpoint(TRUNCATE);")
-                conn.execute("VACUUM;")
+            conn = sqlite3.connect(self.db_path)
+            conn.execute("PRAGMA wal_checkpoint(TRUNCATE);")
+            conn.execute("VACUUM;")
+            conn.commit()
+            conn.close()
 
             return Path(self.db_path).read_bytes()
         except Exception as _ex:
             print(_ex)
 
+
+    def _prepare_for_import_(self):
+        try:
+            conn = sqlite3.connect(self.db_path)
+            conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+            conn.commit()
+            conn.close()
+
+            return Path(self.db_path).read_bytes()
+        except Exception as _ex:
+            print(_ex)
 
 
 
